@@ -1,0 +1,2 @@
+Assets/FireBase/firebase_unity_sdk_13.14.0.zip !text !filter !merge !diff
+Assets/FireBase/Plugins/x86_64/FirebaseCppApp-13_14_0.bundle filter=lfs diff=lfs merge=lfs -text
