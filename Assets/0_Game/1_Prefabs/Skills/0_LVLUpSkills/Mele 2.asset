@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f72c1460a967e54b8ae12a86ac9a309, type: 3}
+  m_Name: Mele 2
+  m_EditorClassIdentifier: 
+  skillDescription: Mele
+  physicsDamageDirectIncrease: 0
+  fireDamageDirectIncrease: 0
+  coldDamageDirectIncrease: 0
+  physicsPecrent: 1
+  firePecrent: 1
+  coldPecrent: 1
+  attackRange: 0
+  recuceSkillDuration: 1

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6704009707915900235}
   - component: {fileID: 2935735638678199417}
   - component: {fileID: 3911815731730849486}
+  - component: {fileID: -4715881785582291015}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 3911815731730849486}
+  - {fileID: -4715881785582291015}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0
@@ -75,3 +77,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroPrefab: {fileID: 5351574590332836233, guid: da56d1286c60c8541819a12bbe67efee, type: 3}
+--- !u!114 &-4715881785582291015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6139756864858560355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c02b5b508242549ab1e0f8af0362d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scenesManager: {fileID: 5210122678863424132, guid: 9ceb3754b603eed44822144f0bb649db, type: 3}

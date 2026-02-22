@@ -8,6 +8,9 @@ public class Locomotion : BaseState {
     public override void OnEnter() {
         base.OnEnter();
         controller.RefreshJumpTimer();
+
+        //Animations
+        animator.speed = 1; //Need set because I change in battleState animator speed
         animator.CrossFade(Locomotion, duration);
     }
 
@@ -21,5 +24,8 @@ public class Locomotion : BaseState {
 
     public override void OnUpdate() {
         controller.HandleMovement();
+
+        //Animations
+        animator.SetFloat("MoveSpeed", controller.InputDirection.sqrMagnitude);
     }
 }

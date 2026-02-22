@@ -1,29 +1,37 @@
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
-public class LevelManager: MonoBehaviour {
+public class LevelManager : MonoBehaviour {
+    [SerializeField] HeroStrategyData heroData;
     [Inject]
     public Hero hero;
+
     public HeroSpawner HeroSpawner;
+
+    public UnityEvent OnGamePause;
+    public UnityEvent OnGameResume;
     private void Awake() {
-       HeroSpawner = new HeroSpawner(hero);
+        HeroSpawner.hero = hero;
         ActivateScene();
+
+        //Events
+        OnGamePause.AddListener(hero.OnGamePaused);
+        OnGameResume.AddListener(hero.OnGameResume);
+
+        hero.OnLevelUp.AddListener(PauseGame);
+        hero.OnChooseLelvelUpCard.AddListener(ResumeGame);
     }
-    [ContextMenu("Activate Hero")]
     public void ActivateScene() {
         HeroSpawner.SpawnHero();
+        hero.Initialize(heroData);
     }
-}
 
-[System.Serializable]
-public class HeroSpawner {
-
-    Hero hero;
-    public HeroSpawner (Hero hero) {
-        this.hero = hero;
+    public void PauseGame() {
+        Time.timeScale = 0;
+        OnGamePause?.Invoke();
     }
-    public void SpawnHero() {
-        hero.transform.position = Vector3.zero;
-        hero.transform.rotation = Quaternion.identity;
-        hero.gameObject.SetActive(true);
+    public void ResumeGame() {
+        Time.timeScale = 1f;
+        OnGameResume?.Invoke();
     }
 }

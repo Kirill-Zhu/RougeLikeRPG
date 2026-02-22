@@ -9,9 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 736696872169888046}
-  - component: {fileID: 188053271316451199}
-  - component: {fileID: 8321713787746125681}
-  - component: {fileID: 7179293738107474850}
   - component: {fileID: 1165123451684780896}
   - component: {fileID: 6711658480283032022}
   - component: {fileID: 4156648375255528194}
@@ -20,9 +17,10 @@ GameObject:
   - component: {fileID: 1810165659982266039}
   - component: {fileID: 6816312815705134783}
   - component: {fileID: 6625523434085770362}
+  - component: {fileID: 3960794774759557692}
   m_Layer: 6
   m_Name: Hero
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,80 +41,6 @@ Transform:
   - {fileID: 6896231851703577476}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &188053271316451199
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5351574590332836233}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8321713787746125681
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5351574590332836233}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7179293738107474850
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5351574590332836233}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1165123451684780896
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -136,7 +60,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -156,6 +80,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e27431840049c458166a69ddba6620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHeroChange:
+    m_PersistentCalls:
+      m_Calls: []
+  heroData: {fileID: 11400000, guid: 6b109ffd083d9674e9583b1cca2b9899, type: 2}
+  healthData: {fileID: 11400000, guid: 4e4c4d9d376a95840bc50dd8c43e467f, type: 2}
   animator: {fileID: 6896231851695817816}
 --- !u!114 &4156648375255528194
 MonoBehaviour:
@@ -169,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e3c6653f3d38244fb9af3a98617c6a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 0}
   input: {fileID: 11400000, guid: 06e95bb839c0dbd4aa341f9bd5dc7629, type: 2}
   controller: {fileID: 6835492511921992349}
   speed: 4
@@ -185,7 +115,7 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -212,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 14225cbb546ee8f40936a9e167f90e06, type: 3}
   m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -242,12 +172,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea21f1574d748647bba968a322ba7e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthComponent: {fileID: 6625523434085770362}
   skillStrategy:
-  - {fileID: 11400000, guid: bf021e707a320f04ea87c5954018f8f5, type: 2}
-  - {fileID: 11400000, guid: bce3ea57f6f756c4699ae3e91eeb69c0, type: 2}
+  - {fileID: 11400000, guid: 3f3a31ead5c472e4185e006149b0861c, type: 2}
+  - {fileID: 11400000, guid: 3f3a31ead5c472e4185e006149b0861c, type: 2}
+  - {fileID: 11400000, guid: 3f3a31ead5c472e4185e006149b0861c, type: 2}
   inputs: {fileID: 11400000, guid: 06e95bb839c0dbd4aa341f9bd5dc7629, type: 2}
-  IsUsingSkill: 0
-  SkillDuaration: 0
+  InBattleState: 0
+  SkillDurationTimer: 0
   FitstInputIndex: 0
 --- !u!114 &6816312815705134783
 MonoBehaviour:
@@ -274,7 +206,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e581318c0a749c48b57580f887b0c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
   health: 100
+  physicsDefence: 2
+  fireDefence: 1
+  coldDefence: 1
+--- !u!114 &3960794774759557692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351574590332836233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c83a65c9f74a4e8438e9ae24428fc3bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  currentExp: 0
 --- !u!1001 &4835530116849110258
 PrefabInstance:
   m_ObjectHideFlags: 0
