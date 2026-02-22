@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3726ec522207d1541b440aac44602b5c, type: 3}
+  m_Name: Block
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 5085948505737263634, guid: 12785ab9909dfb34f9d76ede8a7c529b, type: 3}
+  PhysicsDamage: 11
+  FireDamage: 11
+  ColdDamage: 11
+  Icon: {fileID: 21300000, guid: b97c91e8b348f3f4ebdc11f5c82182cd, type: 3}
+  BackSprite: {fileID: 21300000, guid: c7bf45f0ef95bed4491c5809fc6bf484, type: 3}
+  DamageTypesEnum: -1
+  damageTypesArray: []
+  HealthComponent: {fileID: 0}
+  CoolDown: 3
+  AnimationName: EnergyShield
+  SkillDuration: 0
+  LiveDuration: 3

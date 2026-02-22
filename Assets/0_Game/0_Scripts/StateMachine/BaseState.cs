@@ -17,11 +17,11 @@ namespace MyStateMachine {
             this.heroBattleController = battleController;
         }
         public virtual void OnEnter() {
-            Debug.Log($"Enter : {this.GetType().Name} state");
+           // Debug.Log($"Enter : {this.GetType().Name} state");
         }
 
         public virtual void OnExit() {
-            Debug.Log($"Exit : {this.GetType().Name} state");
+           // Debug.Log($"Exit : {this.GetType().Name} state");
         }
 
         public virtual void OnFixedUpdate() {

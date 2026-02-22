@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1055e988f2a70cf40a525dfae7be30fc, type: 3}
+  m_Name: 0_EnemyTypes
+  m_EditorClassIdentifier: 
+  commonSkelet: {fileID: 11400000, guid: bcdc0335043353447ba399483d5da188, type: 2}
+  rareSkelet: {fileID: 11400000, guid: c5a55f005cd6a494884c5a06b7e8664b, type: 2}

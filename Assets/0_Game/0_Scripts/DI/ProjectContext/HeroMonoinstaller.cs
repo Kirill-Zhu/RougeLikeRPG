@@ -9,6 +9,6 @@ public class HeroMonoinstaller : MonoInstaller
 
         Hero hero = Container.InstantiatePrefabForComponent<Hero>(heroPrefab, Vector3.zero, Quaternion.identity, null);
         Container.Bind<Hero>().FromInstance(hero).AsSingle().NonLazy();
-        hero.gameObject.SetActive(false);
+        //hero.gameObject.SetActive(false);
     }
 }

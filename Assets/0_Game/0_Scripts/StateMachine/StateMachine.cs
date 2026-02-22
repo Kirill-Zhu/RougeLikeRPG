@@ -17,8 +17,11 @@ namespace MyStateMachine {
 
             current.State?.OnUpdate();
         }
+        public void FixedUpdate() {
+            current.State?.OnFixedUpdate();
+        }
         void ChangeState(IState state) {
-            if (state == null||state == current.State) return;
+            if (state == null || state == current.State) return;
 
             var previousState = current.State;
             var nextState = nodes[state.GetType()].State;

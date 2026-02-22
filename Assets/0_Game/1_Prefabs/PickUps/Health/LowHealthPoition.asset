@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720f6580255a0d84b9b5de6264adce1b, type: 3}
+  m_Name: LowHealthPoition
+  m_EditorClassIdentifier: 
+  ModelPrefab: {fileID: 5026541447367235291, guid: 522a88e60f1f7ba40a091e79f2dbd518, type: 3}
+  particle: {fileID: 7605971768039713050, guid: 001db25536c8b7e4e8f0acd4535b561c, type: 3}
+  health: 10
+  mana: 0

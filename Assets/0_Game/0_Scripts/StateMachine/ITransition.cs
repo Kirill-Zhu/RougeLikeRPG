@@ -3,7 +3,5 @@ namespace MyStateMachine {
         public IState To { get; set; }
 
         public IPredicate condition { get; set; }
-
-
     }
 }
