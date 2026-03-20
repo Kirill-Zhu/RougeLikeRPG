@@ -1,8 +1,10 @@
 using Cysharp.Threading.Tasks;
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Events;
 [CreateAssetMenu(menuName = "SkillStrategy/Shield", fileName = " Shield")]
 public class ShieldStartegy : SkillsStrategy, IVistor {
     public float LiveDuration = 5;
@@ -12,9 +14,15 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
     CancellationTokenSource cts = new CancellationTokenSource();
     CancellationToken token;
     public override int CurrentAnimationHash { get => Animator.StringToHash(AnimationName); set => throw new NotImplementedException(); }
+
+   
+
+    public override void Dispose() {
+       //Destroy all projectiles
+    }
     public override void Initialize(Transform origin) {
         Origin = origin;
-        damageTypesArray = GetDamageTypes();
+        damageTypesList = GetStartDamageTypes().ToList();
     }
     public override void OnUpdate(float deltaTime) {
         if (!onCoolDown) return;
@@ -25,7 +33,7 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
         if (coolDownTimer <= 0) onCoolDown = false;
     }
 
-    public override void TryUseSkill(Action<float> OnChangeSkillDuration, Action<int,float> OnAnimation) {
+    public override void TryUseSkill(Action<float> OnChangeSkillDuration, Action<int,float> OnAnimation, UnityAction<int> OnManaChange) {
 
         if (onCoolDown) {
             Debug.Log($"Skill {GetType().Name} on coolDown");
@@ -44,12 +52,15 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
         //Visitor
         Visit(HealthComponent);
 
+        //Change Mana
+        OnManaChange.Invoke(-ManaCost);
+
     }
 
     public override void UpdateValues() {
-        if (damageTypesArray != null) damageTypesArray = null;
 
-        damageTypesArray = GetDamageTypes();
+        Debug.Log($"{GetType().Name}  not implemented");
+       
     }
 
     //Visitor
@@ -65,14 +76,14 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
         cts = new CancellationTokenSource();
         token = cts.Token;
        
-        DamageType[] damageTypesTmp = GetDamageTypes(); //Copy damage types for non conflict with taking powerUp
+        DamageType[] damageTypesTmp = GetStartDamageTypes(); //Copy damage types for non conflict with taking powerUp
 
-        for (int i = 0; i < damageTypesArray.Length; i++) {
+        for (int i = 0; i < damageTypesList.Count; i++) {
             healthComponent.SetShieldProtection(damageTypesTmp[i]);
         }
         try {
             await UniTask.WaitForSeconds(LiveDuration, false, PlayerLoopTiming.Update, token);
-            for (int i = 0; i < damageTypesArray.Length; i++) {
+            for (int i = 0; i < damageTypesList.Count; i++) {
                 healthComponent.RemoveShieldProtection(damageTypesTmp[i]);
             }
         } finally {
@@ -81,7 +92,7 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
             cts = null;
         }
         
-        Debug.Log($"VIsited {healthComponent.GetType().Name} : damge types array count is : {damageTypesArray.Length}");
+        Debug.Log($"VIsited {healthComponent.GetType().Name} : damge types array count is : {damageTypesList.Count}");
     }
 
 

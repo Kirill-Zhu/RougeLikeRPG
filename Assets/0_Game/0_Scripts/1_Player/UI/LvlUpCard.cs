@@ -1,10 +1,10 @@
+using DG.Tweening;
+using System;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Reflection;
-using System;
-using DG.Tweening;
 using UnityEngine.Events;
+using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class LvlUpCard : MonoBehaviour, IVistor {
     [SerializeField] Image back;
@@ -12,13 +12,13 @@ public class LvlUpCard : MonoBehaviour, IVistor {
     [SerializeField] TextMeshProUGUI textMesh;
     SkillsStrategy skillStrategy;
     LevelUpStrategy skillLvlUp;
-    RectTransform rectTransform;
+
 
     Button button;
     UnityEvent OnChooseCard;
 
     private void Awake() {
-        rectTransform = GetComponent<RectTransform>();
+
         button = GetComponent<Button>();
         button.onClick.AddListener(Choose);
     }
@@ -26,21 +26,19 @@ public class LvlUpCard : MonoBehaviour, IVistor {
         OnChooseCard = OnCardsChooseEvent;
     }
 
-    private void OnEnable() {
-
-    }
     public void Rise(SkillsStrategy skillStrategy, LevelUpStrategy skillLvlUp) {
-
-        transform.rotation = Quaternion.Euler(0, 90,0); 
+        //Animation
+        transform.rotation = Quaternion.Euler(0, 90, 0);
         transform.DORotate(new Vector3(0, 0, 0), 1f, RotateMode.FastBeyond360)
                .SetEase(Ease.Linear)
                .SetUpdate(true);
+        //-------------------------
 
         this.skillStrategy = skillStrategy;
         this.icon.sprite = skillStrategy.Icon;
         back.sprite = skillStrategy.BackSprite;
 
-        this.skillLvlUp = skillLvlUp; 
+        this.skillLvlUp = skillLvlUp;
         textMesh.text = skillLvlUp.GetDescription();
 
     }
@@ -58,22 +56,19 @@ public class LvlUpCard : MonoBehaviour, IVistor {
     }
 
     public void Visit(MeleStrategy meleStrategy) {
-     
         var skill = skillLvlUp as MeleSkillLevleUp;
-
         meleStrategy = skill.UpgradeSkill(meleStrategy);
-
         meleStrategy.UpdateValues();
     }
     public void Visit(ShieldStartegy shieldStrategy) {
-
-       
+        //?????
+        var skill = skillLvlUp as ShieldSkillLelvelUp;
+        shieldStrategy = skill.UpgradeSkill(shieldStrategy);
         shieldStrategy.UpdateValues();
     }
     public void Visit(ShootStrategy shootStrategy) {
-      
-
+        var skill = skillLvlUp as ShootSkillLevelUp;
+        shootStrategy = skill.UpgradeSkill(shootStrategy);
         shootStrategy.UpdateValues();
-
     }
 }

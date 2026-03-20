@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f191653dafe49804e816837040f739f3, type: 3}
+  m_Name: PopUpHealthDamage
+  m_EditorClassIdentifier: 
+  canvasPrefab: {fileID: 3562284841861018522, guid: 205949d405b8a4349aef2d92c3df5ca3, type: 3}
+  textMeshPrefab: {fileID: 7396430730682879238, guid: 51bcb90916800934594a33c912b3a31c, type: 3}

@@ -3,7 +3,7 @@ using MyStateMachine;
 using UnityEngine;
 
 public class Locomotion : BaseState {
-    public Locomotion(SimpleCahracterController controller, Animator animator, HeroBattleController heroBattleController) : base(controller, animator, heroBattleController) {}
+    public Locomotion(SimpleCahracterController controller, Animator animator, HeroBattleController heroBattleController, HeroAutoSkillController heroAutoSkillController) : base(controller, animator, heroBattleController, heroAutoSkillController) {}
 
     public override void OnEnter() {
         base.OnEnter();
@@ -27,5 +27,8 @@ public class Locomotion : BaseState {
 
         //Animations
         animator.SetFloat("MoveSpeed", controller.InputDirection.sqrMagnitude);
+
+        //AutoBattle
+        heroAutoSkillController.OnUpdate();
     }
 }

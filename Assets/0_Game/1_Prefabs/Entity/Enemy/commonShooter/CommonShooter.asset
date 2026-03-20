@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26eff6f8e1950074c9c29ee91d958e9b, type: 3}
+  m_Name: CommonShooter
+  m_EditorClassIdentifier: 
+  TypeOfEnemy: Dummy
+  prefab: {fileID: 1571042049591659991, guid: befd3f1b66bada94b92668246adc55cf, type: 3}
+  Icon: {fileID: 21300000, guid: 4ca665255adc0204585931b317f67500, type: 3}
+  MoveSpeed: 1
+  AttackRange: 10
+  AttackDuration: 6
+  DamageDelay: 0.4
+  ProjectileSpeed: 15
+  ProjectilieLiveDureation: 2
+  ShootShape: 0
+  SpreadAngle: 70
+  ProjecitlesCountByShoot: 1
+  WeaponPrefab: {fileID: 7895568108609211647, guid: a2857b7e2d3856e438e0694ab0d4f9c1, type: 3}
+  WeaponType: 1
+  DropPfreabList:
+  - {fileID: 4897015921897156567, guid: 92a4812b8e5094e43901951be46ba7a6, type: 3}
+  damageTypesEnum: 4
+  physicsDamage: 0
+  fireDamage: 0
+  coldDamage: 3
+  HealtData: {fileID: 11400000, guid: 05fa038dea9bcae4aabb640299be4c39, type: 2}

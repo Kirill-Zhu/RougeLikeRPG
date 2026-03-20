@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Enemies.MyStateMachine{
+namespace Enemies.MyStateMachine {
     public class EnemyLocomotionState : EnemyBaseSate {
         public EnemyLocomotionState(Animator animator, Func<float> velocityEvent) : base(animator, velocityEvent) {
         }
@@ -11,15 +11,15 @@ namespace Enemies.MyStateMachine{
         }
 
         public override void OnExit() {
-          
+
         }
 
         public override void OnFixedUpdate() {
-            animator.SetFloat("Velocity",OnVelocityChange.Invoke());
+            animator.SetFloat("Velocity", OnVelocityChange.Invoke());
         }
 
         public override void OnUpdate() {
-            
+
         }
     }
 }

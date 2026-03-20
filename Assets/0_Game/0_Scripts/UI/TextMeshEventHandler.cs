@@ -8,7 +8,7 @@ public class TextMeshEventHandler : MonoBehaviour
     TextMeshProUGUI textMesh;
     private void Awake() {
         textMesh = GetComponent<TextMeshProUGUI>();
-        manaComponent.OnManaChange += x => { Mana = x; textMesh.text = Mana.ToString(); };
+        manaComponent.OnGetCurrentMana += x => { Mana = x; textMesh.text = Mana.ToString(); };
     }
 
 }

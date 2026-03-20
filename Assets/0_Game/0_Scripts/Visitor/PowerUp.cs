@@ -5,9 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Visitor/PowerUp", fileName = "New PowerUp")]
 public abstract class PowerUp : ScriptableObject, IVistor {
 
+    public Sprite Label;
+    public string Descritpion;
+
+
     public GameObject ModelPrefab;
     public GameObject particle;
-
+    
     public void Visit(object o) {
         MethodInfo visitMethod = GetType().GetMethod("Visit", new Type[] { o.GetType() });
         if (visitMethod != null && visitMethod != GetType().GetMethod("Visit", new Type[] { typeof(object) })) {

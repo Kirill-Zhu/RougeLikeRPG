@@ -22,6 +22,7 @@ namespace Enemies.MyStateMachine {
 
         public override void OnFixedUpdate() {
             battleContoller.OnFixedUpdate();
+            animator.SetFloat("Velocity", OnVelocityChange.Invoke());
         }
 
         public override void OnUpdate() {

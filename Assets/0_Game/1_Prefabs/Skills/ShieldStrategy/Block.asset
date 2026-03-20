@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: Block
   m_EditorClassIdentifier: 
   prefab: {fileID: 5085948505737263634, guid: 12785ab9909dfb34f9d76ede8a7c529b, type: 3}
-  PhysicsDamage: 11
-  FireDamage: 11
-  ColdDamage: 11
+  ParticlePrefabArray: []
+  ManaCost: 0
+  PhysicsDamage: 3
+  FireDamage: 3
+  ColdDamage: 3
   Icon: {fileID: 21300000, guid: b97c91e8b348f3f4ebdc11f5c82182cd, type: 3}
   BackSprite: {fileID: 21300000, guid: c7bf45f0ef95bed4491c5809fc6bf484, type: 3}
   DamageTypesEnum: -1
-  damageTypesArray: []
+  damageTypesList: []
   HealthComponent: {fileID: 0}
-  CoolDown: 3
+  CoolDown: 5
   AnimationName: EnergyShield
   SkillDuration: 0
   LiveDuration: 3

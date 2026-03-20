@@ -10,6 +10,7 @@ namespace Enemies.MyStateMachine {
         protected readonly float duration = 0.1f;
         protected readonly int locomotionHash = Animator.StringToHash("Locomotion");
         protected readonly int battleHash = Animator.StringToHash("Battle");
+        protected readonly int dieHash = Animator.StringToHash("Die");
         public EnemyBaseSate(Animator animator, Func<float> velocityEvent) { this.animator = animator; this.OnVelocityChange = velocityEvent; }
         public virtual void OnEnter() { }
         public virtual void OnUpdate() { }

@@ -85,10 +85,14 @@ public class HealthAndManaGlobesUI : MonoBehaviour {
         UpdateHealthGlobe();
     }
 
-    public void ChangeHealth(int value) {
+    public void SetCurrentHealth(int value) {
         healthPoint = value;
         UpdateHealthGlobe();
 
+    }
+    public void SetCurrentMana(int value) {
+        manaPoint = value;
+        UpdateManaGlobe();
     }
     private void UpdateHealthBar() {
         float ratio = healthPoint / maxHealthPoint;
@@ -128,6 +132,11 @@ public class HealthAndManaGlobesUI : MonoBehaviour {
     //==============================================================
     // Mana Logic
     //==============================================================
+    public void InitializeMana(int value) {
+        maxManaPoint = (float)value;
+        manaPoint = (float)maxManaPoint;
+        UpdateManaGlobe();
+    }
     private void UpdateManaBar() {
         float ratio = manaPoint / maxManaPoint;
         currentManaBar.rectTransform.localPosition = new Vector3(currentManaBar.rectTransform.rect.width * ratio - currentManaBar.rectTransform.rect.width, 0, 0);

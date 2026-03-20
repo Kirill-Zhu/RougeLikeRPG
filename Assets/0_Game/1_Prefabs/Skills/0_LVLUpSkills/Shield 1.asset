@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99dac3ad8257dac46aad088e2964fe4c, type: 3}
   m_Name: Shield 1
   m_EditorClassIdentifier: 
+  damageTypes: 0
   skillDescription: 
-  physicsDamage: 1
+  physicsDamage: 0
   fireDamage: 0
-  coldDamage: 0
+  coldDamage: 3

@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f72c1460a967e54b8ae12a86ac9a309, type: 3}
   m_Name: Mele 1
   m_EditorClassIdentifier: 
-  skillDescription: Mele
-  physicsDamageDirectIncrease: 1111
-  fireDamageDirectIncrease: 1111
-  coldDamageDirectIncrease: 1111
-  physicsPecrent: 1
-  firePecrent: 1
-  coldPecrent: 1
+  damageTypes: 0
+  skillDescription: 'Increas Physics damage by 5
+
+    Reduse skill duraition by 0.1
+    s'
+  physicsDamageDirectIncrease: 5
+  fireDamageDirectIncrease: 5
+  coldDamageDirectIncrease: 0
+  physicsPecrent: 0
+  firePecrent: 0
+  coldPecrent: 0
   attackRange: 0
-  recuceSkillDuration: 0
+  recuceSkillDuration: 0.1

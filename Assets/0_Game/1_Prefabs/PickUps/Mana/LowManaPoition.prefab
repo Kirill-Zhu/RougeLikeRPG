@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2412338205698158374}
   - component: {fileID: 7090490727524385677}
   - component: {fileID: 1911130039996037644}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LowManaPoition
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: 6592b916f86b19e428db6f6847c7b6dd, type: 3}

@@ -5,45 +5,56 @@ using UnityEngine.Events;
 public class Hero : MonoBehaviour {
 
     //Initialize
-    public UnityEvent OnHeroChange;                                                                                         ///Invokes Every time when need change UI
-    public UnityEvent OnLevelUp;
+    public UnityEvent OnHeroChange;///Invokes Every time when need change UI
+    public UnityEvent<int, int> OnGetExp;
+    public UnityEvent<Sprite, string> OnPickUppowerUp;
+    public UnityEvent<int> OnLevelUp;
     public UnityEvent OnChooseLelvelUpCard;
     HeroStrategyData heroData;
 
     SimpleCahracterController moveController;
-    
+
     //Battle
     public HeroBattleController HeroBattleController => battleContorller;
     HeroBattleController battleContorller;
-    
+
+    public HeroAutoSkillController HeroAutoSkillContorller => heroAutoSkillController;
+    HeroAutoSkillController heroAutoSkillController;
     //Health
     public HealthComponent HealthComponent => healthComponent;
     [SerializeField] HealtComponentData healthData;
     HealthComponent healthComponent;
-    
+
+    //Mana
+    public ManaComponent ManaComponent => manaComponent;
+    [SerializeField] ManaComponent manaComponent;
     //Expiriance
+    public ExpComponent ExpComponent => expComponent;
     ExpComponent expComponent;
+    //Power Up 
     
     //State Machine
     StateMachine stateMachine = new StateMachine();
     [SerializeField] Animator animator;
+    PausedState pausedState;
     Locomotion locomotion;
     JumpState jumpState;
     LandingState landingState;
     SkillState skillState;
-    bool gameOnPause = false;
+    public bool Paused => paused;
+    bool paused = false;
 
     public void Initialize(HeroStrategyData data) {
         heroData = data;
 
         //Health
         healthComponent.Initialize(heroData.HealtComponentData);
-        
+
         //Battle
-        battleContorller.Initialize(heroData.SkillStrategyData);
-        
+        battleContorller.Initialize(manaComponent, heroData.SkillStrategyData, OnPickUppowerUp);
+
         //Exp
-        expComponent.Initialize(OnLevelUp);
+        expComponent.Initialize(OnLevelUp, OnGetExp);
 
         OnHeroChange?.Invoke();
     }
@@ -51,14 +62,19 @@ public class Hero : MonoBehaviour {
     private void Awake() {
         moveController = GetComponent<SimpleCahracterController>();
         battleContorller = GetComponent<HeroBattleController>();
+        heroAutoSkillController = GetComponent<HeroAutoSkillController>();
         healthComponent = GetComponent<HealthComponent>();
+        manaComponent = GetComponent<ManaComponent>();
         expComponent = GetComponent<ExpComponent>();
 
         //StateMachine
-        locomotion = new Locomotion(moveController, animator, battleContorller);
-        jumpState = new JumpState(moveController, animator, battleContorller);
-        landingState = new LandingState(moveController, animator, battleContorller);
-        skillState = new SkillState(moveController, animator, battleContorller);
+        pausedState = new PausedState(moveController, animator, battleContorller, heroAutoSkillController);
+        locomotion = new Locomotion(moveController, animator, battleContorller, heroAutoSkillController);
+        jumpState = new JumpState(moveController, animator, battleContorller, heroAutoSkillController);
+        landingState = new LandingState(moveController, animator, battleContorller, heroAutoSkillController);
+        skillState = new SkillState(moveController, animator, battleContorller,heroAutoSkillController);
+
+
 
         //Movement
         At(locomotion, jumpState, new FuncPredicate(() => moveController.IsJumping));
@@ -68,13 +84,15 @@ public class Hero : MonoBehaviour {
         //Skills
         At(locomotion, skillState, new FuncPredicate(() => moveController.Grounded() && battleContorller.InBattleState));
 
+        //Any
+        Any(pausedState, new FuncPredicate(() => paused));
         Any(locomotion, new FuncPredicate(() => !moveController.IsJumping && moveController.Grounded() && !battleContorller.InBattleState));
         Any(landingState, new FuncPredicate(() => !moveController.IsJumping && !moveController.Grounded()));
-        stateMachine.SetState(locomotion);       
+        stateMachine.SetState(locomotion);
     }
 
     private void Update() {
-        if (gameOnPause) return;
+     
         stateMachine?.Update();
     }
 
@@ -82,9 +100,11 @@ public class Hero : MonoBehaviour {
     void Any(IState to, IPredicate condition) => stateMachine.AddAny(to, condition);
 
     public void OnGamePaused() {
-        gameOnPause = true;
+        paused = true;
+       
     }
     public void OnGameResume() {
-        gameOnPause = false;
+        paused = false;
+        stateMachine.SetState(locomotion);
     }
 }

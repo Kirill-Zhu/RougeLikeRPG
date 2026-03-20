@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f72c1460a967e54b8ae12a86ac9a309, type: 3}
   m_Name: Mele 2
   m_EditorClassIdentifier: 
-  skillDescription: Mele
+  damageTypes: 2
+  skillDescription: 'Gives fire Damage by 3
+
+    Increase Attack Range by 0.1'
   physicsDamageDirectIncrease: 0
-  fireDamageDirectIncrease: 0
+  fireDamageDirectIncrease: 3
   coldDamageDirectIncrease: 0
-  physicsPecrent: 1
-  firePecrent: 1
-  coldPecrent: 1
-  attackRange: 0
-  recuceSkillDuration: 1
+  physicsPecrent: 0
+  firePecrent: 0
+  coldPecrent: 0
+  attackRange: 0.1
+  recuceSkillDuration: 0

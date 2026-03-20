@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f72c1460a967e54b8ae12a86ac9a309, type: 3}
   m_Name: Mele 3
   m_EditorClassIdentifier: 
-  skillDescription: 
+  damageTypes: 0
+  skillDescription: Increase all damage types by 15%
   physicsDamageDirectIncrease: 0
   fireDamageDirectIncrease: 0
   coldDamageDirectIncrease: 0
-  physicsPecrent: 1
-  firePecrent: 1
-  coldPecrent: 1
+  physicsPecrent: 15
+  firePecrent: 15
+  coldPecrent: 15
   attackRange: 0
-  recuceSkillDuration: 1
+  recuceSkillDuration: 0
