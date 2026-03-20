@@ -1,0 +1,49 @@
+.Button:focus {
+    scale: 1.1 1.1;
+    background-image: url("project://database/Assets/1_Packeges/0_UI/GUI_Parts/Gui_parts/button_ready_on.png?fileID=21300000&guid=c9006339b2156b142934eac2999ef67c&type=3#button_ready_on");
+    background-color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    transition-duration: 0.2s;
+    transition-property: scale;
+    color: rgb(255, 255, 255);
+}
+
+.Button:hover {
+    scale: 1 1;
+    background-image: url("project://database/Assets/1_Packeges/0_UI/GUI_Parts/Gui_parts/button_ready_on.png?fileID=21300000&guid=c9006339b2156b142934eac2999ef67c&type=3#button_ready_on");
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgba(181, 190, 219, 0);
+    background-position-y: center 0;
+    background-position-x: center 0;
+}
+
+.Button {
+    background-image: url("project://database/Assets/1_Packeges/0_UI/GUI_Parts/Gui_parts/button_ready_off.png?fileID=2800000&guid=a2e2a83536d4eef45ace93d156eab562&type=3#button_ready_off");
+    background-color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    transition-property: background-image;
+    transition-duration: 0s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    background-size: 100% 100%;
+    background-repeat: space space;
+    border-left-color: rgb(0, 0, 0);
+    border-left-width: 0;
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    transform-origin: top;
+    translate: 27px 74px;
+    top: -850px;
+    justify-content: center;
+    -unity-text-align: upper-center;
+    scale: 1 1;
+    width: 260px;
+    align-self: center;
+    color: rgb(195, 190, 190);
+    -unity-font-definition: url("project://database/Assets/1_Packeges/PixelBattleText/Fonts/Alphapix.ttf?fileID=12800000&guid=9ca52623ee8001b4ca7c29dc2ff6317d&type=3#Alphapix");
+    font-size: 38px;
+}

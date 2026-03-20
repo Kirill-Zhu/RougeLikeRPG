@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6816312815705134783}
   - component: {fileID: 6625523434085770362}
   - component: {fileID: 3960794774759557692}
+  - component: {fileID: -4851204089305757902}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Player
@@ -83,7 +84,12 @@ MonoBehaviour:
   OnHeroChange:
     m_PersistentCalls:
       m_Calls: []
-  heroData: {fileID: 11400000, guid: 6b109ffd083d9674e9583b1cca2b9899, type: 2}
+  OnLevelUp:
+    m_PersistentCalls:
+      m_Calls: []
+  OnChooseLelvelUpCard:
+    m_PersistentCalls:
+      m_Calls: []
   healthData: {fileID: 11400000, guid: 4e4c4d9d376a95840bc50dd8c43e467f, type: 2}
   animator: {fileID: 6896231851695817816}
 --- !u!114 &4156648375255528194
@@ -123,13 +129,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1
-  m_Radius: 0.5
+  m_Height: 1.5
+  m_Radius: 0.65
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &9192786432875887901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e581318c0a749c48b57580f887b0c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popUpStrategy: {fileID: 11400000, guid: a92e35349c7924548b8af946aab035cd, type: 2}
   maxHealth: 100
   health: 100
   physicsDefence: 2
@@ -223,8 +230,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c83a65c9f74a4e8438e9ae24428fc3bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnLelveUp:
+    m_PersistentCalls:
+      m_Calls: []
   level: 1
   currentExp: 0
+  OverallExp: 0
+--- !u!114 &-4851204089305757902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351574590332836233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a630a75e0adab4687d269c1a69308d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillStrategyList: []
 --- !u!1001 &4835530116849110258
 PrefabInstance:
   m_ObjectHideFlags: 0

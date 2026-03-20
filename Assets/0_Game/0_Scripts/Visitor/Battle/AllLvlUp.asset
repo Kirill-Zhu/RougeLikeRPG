@@ -12,14 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b566fb3f4d327b14f812fba1f89c11e7, type: 3}
   m_Name: AllLvlUp
   m_EditorClassIdentifier: 
+  Label: {fileID: 21300000, guid: d4f5634edede200468fc1ccf30e6f3a1, type: 3}
+  Descritpion: Test
   ModelPrefab: {fileID: 919132149155446097, guid: b38622e4502cf314b87945fae9c11885, type: 3}
   particle: {fileID: 7671860363676289284, guid: a7c111b73cef9f9419100bf050c8226f, type: 3}
-  MelePhysicsDamage: 0
-  MeleFireDamage: 0
-  MeleColdDamage: 0
+  DamageTypesEnum: -1
+  damageTypesArray: []
+  MelePhysicsDamage: 1
+  MeleFireDamage: 1
+  MeleColdDamage: 1
   ShieldPhysicsDamage: 1
   ShieldFireDamage: 1
   ShieldColdDamage: 1
-  ShootPhysicsDamage: 1
-  ShootFireDamage: 1
-  ShootColdDamage: 1
+  ShootPhysicsDamage: 1111
+  ShootFireDamage: 1111
+  ShootColdDamage: 1111

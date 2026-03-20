@@ -3,7 +3,7 @@ using MyStateMachine;
 using UnityEngine;
 
 public class LandingState : BaseState {
-    public LandingState(SimpleCahracterController controller, Animator animator, HeroBattleController heroBattleController) : base(controller, animator, heroBattleController) {}
+    public LandingState(SimpleCahracterController controller, Animator animator, HeroBattleController heroBattleController, HeroAutoSkillController heroAutoSkillController) : base(controller, animator, heroBattleController, heroAutoSkillController) {}
 
     public override void OnEnter() {
         base.OnEnter();
@@ -19,5 +19,8 @@ public class LandingState : BaseState {
 
     public override void OnUpdate() {
         controller.HandleLanding();
+
+        //AutoBattle
+        heroAutoSkillController.OnUpdate();
     }
 }

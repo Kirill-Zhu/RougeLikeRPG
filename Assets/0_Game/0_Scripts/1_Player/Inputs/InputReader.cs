@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Zenject;
 using static PlayerInput;
 
 public interface IInputReader {
@@ -10,6 +11,8 @@ public interface IInputReader {
 }
 [CreateAssetMenu(menuName = "InputSystem", fileName = "InputReader")]
 public class InputReader : ScriptableObject, IPlayerActions, IInputReader {
+    [Inject] Hero hero;
+
     public event UnityAction<Vector2> Move = delegate { };
     public event UnityAction<bool> Jump = delegate { };
     public event UnityAction<int> UseSkill = delegate { };
@@ -40,6 +43,8 @@ public class InputReader : ScriptableObject, IPlayerActions, IInputReader {
 
     public void OnButtonWest(InputAction.CallbackContext context) {
 
+       
+
         if (context.phase == InputActionPhase.Started) {
             IsUsingSkill?.Invoke(true);
             UseSkill?.Invoke(1);
@@ -48,12 +53,18 @@ public class InputReader : ScriptableObject, IPlayerActions, IInputReader {
     }
 
     public void OnButtonNorth(InputAction.CallbackContext context) {
+
+       
+
         if (context.phase == InputActionPhase.Started)
             IsUsingSkill.Invoke(true);
         UseSkill?.Invoke(0);
     }
 
     public void OnButtonEast(InputAction.CallbackContext context) {
+        
+        
+
         if (context.phase == InputActionPhase.Started) {
             IsUsingSkill.Invoke(true);
             UseSkill?.Invoke(2);

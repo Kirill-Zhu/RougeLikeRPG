@@ -5,15 +5,21 @@ using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Jobs;
+using UnityEngine.UIElements;
 using Zenject;
-
+using Random = UnityEngine.Random;
 
 public class EnemiesManager : MonoBehaviour {
+    
     [Inject]
-    public Hero Hero;
+    Hero Hero;
+
+    //SpawnStrategy
+    [SerializeField]List<SpawnStrategy> spawnStrategyList;
+
     public EnemyStrategyhandler enemyTypes;
     public List<Entity> enemiesOnScene = new List<Entity>();
-    [SerializeField] List<Vector3> spawnPosList;
+    [SerializeField] List<Transform> spawnPosList;
     public float NearToHeroDistance = 5;
     public float NearHeroSpeedModifier = 0.8f;
     public string interactionTagName = "Player";
@@ -28,19 +34,23 @@ public class EnemiesManager : MonoBehaviour {
     NativeArray<float> returnVelocityNativeArray;
     NativeArray<bool> returnBattleStatus;
     JobHandle jobHandle;
-    private void Awake() {
-        //InitializeSpawnPoints
-        for (int i = 1; i < 400; i++) {
-            spawnPosList.Add(new Vector3(i, 0, 0));
-        }
-    }
+
     private void Start() {
+      
         //--------------Spawn Enemies------------///
-        for (int i = 0; i < spawnPosList.Count; i++) {
-            CreateByType(typeof(Dummy), enemyTypes.commonSkelet, spawnPosList[i]);
-        }
+        foreach (var spawnStrategy in spawnStrategyList)
+            spawnStrategy.Initialize(CreateByType);
+
+
+        //For test spawn
+        //for (int i = 0; i < 100; i++) {
+        //    spawnStrategyList[1].OnSpawnEntity.Invoke(spawnStrategyList[1].enemyStrategy);
+        //}
     }
-    public void CreateByType(Type type, EnemyStrategy strategy, Vector3 pos) {
+
+
+    public void CreateByType(EnemyStrategy strategy) {
+        Type type = Type.GetType(strategy.TypeOfEnemy); //Create instance Of Type
 
         var obj = new Entity.TypeBuilder(strategy.prefab, strategy.HealtData)
            .WithIcon(strategy.Icon)
@@ -51,14 +61,21 @@ public class EnemiesManager : MonoBehaviour {
            .WithWeaponPrefab(strategy.WeaponPrefab)
            .WithWeaponType(strategy.WeaponType)
            .WithDamageTypes(strategy.GetDamageTypes())
+           .WithProjecitlieSPeed(strategy.ProjectileSpeed)
+           .WithProjectileLiveDuration(strategy.ProjectilieLiveDureation)
+           .WithShootShape((int)strategy.ShootShape)
+           .WithSpreadAngle(strategy.SpreadAngle)
+           .ProjectilesCountByShoot(strategy.ProjecitlesCountByShoot)
+           .SelfDirecredProjectile(strategy.SelfDirecrtedProjectile)
+           .SetProjectileAim(Hero.transform)
            .WithInteractionTag(interactionTagName)
-           .WithDropObject(strategy.DropPrefab)
+           .WithDropObject(strategy.DropPfreabList)
            .Build(type);
 
         var component = obj.GetComponent(type);
 
         //Set pos
-        obj.transform.position = pos;
+        obj.transform.position = spawnPosList[Random.Range(0, spawnPosList.Count)].position;
 
 
         if (component is Entity) {
@@ -127,6 +144,13 @@ public class EnemiesManager : MonoBehaviour {
         attackRangeNativeArray = new NativeArray<float>(attackRangeList.ToArray(), Allocator.Persistent);
     }
     private void Update() {
+        //Spawn Strategy
+        if (enemiesOnScene.Count > 150) return;  //Set limit enemies on scene
+
+        foreach (var spawnStrategy in spawnStrategyList)
+            spawnStrategy.OnUpdate(Time.deltaTime);
+
+
         //Move Job
         if (enemiesOnScene.Count <= 0) return;
 
@@ -231,6 +255,7 @@ public struct MoveEnemyJob : IJobParallelForTransform {
 
         if (Vector3.Distance(MovePoint.WithY(0), transform.position.WithY(0)) < 0.2f) {                                                                       //Dont Rotate entity if its to close
             ReturnBattleStatusArray[index] = true;                                                                                           //Set InBattleStatus true 
+            VelocityNativeArray[index] = 0;
             return;                                                                                                                          //Return if entity in attack range
         }
 
@@ -238,11 +263,12 @@ public struct MoveEnemyJob : IJobParallelForTransform {
         Quaternion currentRotation = transform.rotation;
 
         if (Vector3.Distance(MovePoint, transform.position) < AttackRangeArray[index]) {
-
             ReturnBattleStatusArray[index] = true;                                                                                           //Set InBattleStatus true
+            VelocityNativeArray[index] = 0;
             return;                                                                                                                          //Return if entity in attack range
         }
         ReturnBattleStatusArray[index] = false;
+
         // Calculate the local forward direction in world space
         // This is the equivalent of transform.forward in a regular MonoBehaviour
         Vector3 forwardDirection = currentRotation * Vector3.forward;
@@ -253,10 +279,10 @@ public struct MoveEnemyJob : IJobParallelForTransform {
             speedModifier = NearHeroSpeedModifier;
 
         transform.position += forwardDirection * DeltaTime * SpeedArray[index] * speedModifier;
+
+
         //find Velocity
         float velocity = Mathf.Lerp(PrevoiusVelocityArray[index], speedModifier, DeltaTime);
         VelocityNativeArray[index] = velocity;
-
-
     }
 }

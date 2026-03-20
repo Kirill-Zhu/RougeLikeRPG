@@ -18,14 +18,15 @@ public class LevelManager : MonoBehaviour {
         OnGamePause.AddListener(hero.OnGamePaused);
         OnGameResume.AddListener(hero.OnGameResume);
 
-        hero.OnLevelUp.AddListener(PauseGame);
+        hero.OnLevelUp.AddListener(_ => PauseGame());
         hero.OnChooseLelvelUpCard.AddListener(ResumeGame);
+
+        hero.OnPickUppowerUp.AddListener((_, _) => PauseGame());
     }
     public void ActivateScene() {
         HeroSpawner.SpawnHero();
         hero.Initialize(heroData);
     }
-
     public void PauseGame() {
         Time.timeScale = 0;
         OnGamePause?.Invoke();

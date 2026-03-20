@@ -2,7 +2,7 @@ using MyStateMachine;
 using UnityEngine;
 
 public class SkillState : BaseState {
-    public SkillState(SimpleCahracterController controller, Animator animator, HeroBattleController heroBattleController) : base(controller, animator, heroBattleController) {
+    public SkillState(SimpleCahracterController controller, Animator animator, HeroBattleController heroBattleController, HeroAutoSkillController heroAutoSkillController) : base(controller, animator, heroBattleController, heroAutoSkillController) {
     }
 
     public override void OnEnter() {
@@ -26,7 +26,7 @@ public class SkillState : BaseState {
 
     public override void OnUpdate() {
         heroBattleController.HandleUpdateStatus();
-
+        heroAutoSkillController.OnUpdate();
     }
 
     private void HandleAnimationsAndDirection(int animationHash, float animationDuration = 1) {

@@ -8,18 +8,30 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
     float attackDuration;
     float damageDelay;
     WeaponTypeEnum weaponType;
+
+    //SHooter
+    [SerializeField] ShootShape shootShape = ShootShape.Spread;
+    float spreadAngle = 75;
+    int projectilesCountByShoot = 3;
+    bool selfDirected = false;
+    Transform aimTransform;
+    float angleStep;
     string interacitonTag;
     float attackRange;
+
     public List<WeaponType> weaponPoolList = new List<WeaponType>();
 
+    //For Porjectiles
+    public List<Projectile> projectileList = new List<Projectile>();
+    float liveDuration = 1;
     public event Action OnAttack;
     event Action OnExitBattleState;
     //-------------------
 
-    float skillDurationCooldown;
+    [SerializeField] float skillDurationCooldown;
     public event Action<int> OnAnimationStart;
     public event Action<float> OnChangeDurationSkill;
-   
+
 
     //Animations
     int animationHash = Animator.StringToHash("Battle");
@@ -27,12 +39,17 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
     //UniTask
     CancellationTokenSource cts;
 
-    public void Initialize(float attackDuration, WeaponTypeEnum weaponType, float attackRange, float damageDelay, DamageType[] damageTypes, GameObject prefab, string interactionTag = null, float projectileSpeed = 2, float ProjectileliveDuration = 2) {
+    public void Initialize(float attackDuration, WeaponTypeEnum weaponType, float attackRange, float damageDelay, DamageType[] damageTypes, GameObject prefab, string interactionTag = null, float projectileSpeed = 2, float ProjectileliveDuration = 2, int shootShape = 0, float spreadAngle = 70, int projectilesCount = 1, bool isProjectileSelfDirected = false, Transform aimTransform = null) {
         this.attackDuration = attackDuration;
         this.weaponType = weaponType;
         this.attackRange = attackRange;
         this.damageDelay = damageDelay;
         this.interacitonTag = interactionTag;
+        this.shootShape = (ShootShape)shootShape;
+        this.spreadAngle = spreadAngle;
+        this.projectilesCountByShoot = projectilesCount;
+        this.selfDirected = isProjectileSelfDirected;
+        this.aimTransform = aimTransform;
         //Mele
         if (weaponType == WeaponTypeEnum.mele) {
             var mele = new Mele.MeleBuilder(prefab)
@@ -45,32 +62,39 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
             mele.gameObject.SetActive(false);
             //Events
             OnAttack += MeleAttack;
-            OnExitBattleState +=()=> { 
-               foreach(var mele in weaponPoolList) {
+            OnExitBattleState += () => {
+                foreach (var mele in weaponPoolList) {
                     mele.gameObject.SetActive(false);
-               }
+                }
             };
         }
 
         //Projectile
+        angleStep = this.spreadAngle / projectilesCountByShoot;
         if (weaponType == WeaponTypeEnum.projectile) {
-            weaponPoolList = new List<WeaponType>(5);
-            for (int i = 0; i < weaponPoolList.Count; i++) {
+            weaponPoolList = new List<WeaponType>();
+            for (int i = 0; i < 5; i++) {
                 var projecitle = new Projectile.ProjectileBuilder(prefab)
-                .WithLiveDuration(attackDuration)
-                .WithLiveDuration(ProjectileliveDuration)
-                .WithDamageTypes(damageTypes)
-                .WithInteractionTag(interacitonTag)
-                .WithSpeed(projectileSpeed)
-                .Build();
+                    .FromOrigin(transform)
+                    .WithLiveDuration(attackDuration)
+                    .WithLiveDuration(ProjectileliveDuration)
+                    .WithDamageTypes(damageTypes)
+                    .WithInteractionTag(interacitonTag)
+                    .WithSpeed(projectileSpeed)
+                    .SelfDirected(selfDirected)
+                    .Build();
 
-                weaponPoolList.Add(projecitle);
+                projectileList.Add(projecitle);
                 projecitle.gameObject.SetActive(false);
+                this.liveDuration = ProjectileliveDuration;
             }
 
             //Events
             OnAttack += ShootProjectile;
         }
+    }
+    public void OnDie() {
+        cts?.Cancel();
     }
     private void Awake() {
         OnChangeDurationSkill += skillDuration => skillDurationCooldown = skillDuration;
@@ -81,6 +105,25 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         if (skillDurationCooldown <= 0)
             skillDurationCooldown = 0;
 
+
+        //Move Porjectiles
+        if (projectileList.Count > 0) {
+            foreach (var projectile in projectileList)
+                if (projectile.gameObject.activeInHierarchy) {
+                    if (projectile.SelfDirected)
+                        projectile.transform.Translate((aimTransform.position - projectile.transform.position).normalized * Time.deltaTime * projectile.Speed, Space.World);
+                    else
+                        projectile.transform.Translate(projectile.transform.forward * Time.deltaTime * projectile.Speed, Space.World);
+
+
+                    projectile.LiveDuration -= Time.deltaTime;
+                    if (projectile.LiveDuration <= 0) projectile.gameObject.SetActive(false);
+                }
+        }
+    }
+    private void OnDestroy() {
+        foreach (var projectile in projectileList)
+            Destroy(projectile.gameObject);
     }
 
     public void TryAttack() {
@@ -93,7 +136,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         TryAttack();
     }
     public void ExitBalltle() {
-        OnExitBattleState.Invoke(); 
+        OnExitBattleState?.Invoke();
         cts?.Cancel();
     }
     async void MeleAttack() {
@@ -109,7 +152,6 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
             foreach (var mele in weaponPoolList) {
                 mele.gameObject.SetActive(true);
                 OnChangeDurationSkill?.Invoke(attackDuration);         //if attack was done, set coolDown
-
             }
 
             await UniTask.WaitForSeconds(0.05f, false, PlayerLoopTiming.Update, token, true);
@@ -125,13 +167,98 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
             cts = null;
         }
     }
-    void ShootProjectile() {
-        foreach (var weapon in weaponPoolList) {
-            if (!weapon.gameObject.activeSelf) {
-                weapon.gameObject.SetActive(true);
-                break;
+    async void ShootProjectile() {
+        //UniTask
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = new CancellationTokenSource();
+        CancellationToken token = cts.Token;
+        try {
+            await UniTask.WaitForSeconds(damageDelay, false, PlayerLoopTiming.Update, token, true);
+            OnChangeDurationSkill?.Invoke(attackDuration);
+
+            //Old Vers
+            //foreach (var projectile in projectileList) {  
+            //    if (projectile.gameObject.activeSelf) continue;
+
+            //    projectile.gameObject.SetActive(true);
+            //    projectile.LiveDuration = liveDuration;
+            //    projectile.gameObject.transform.rotation = transform.rotation;
+            //    projectile.gameObject.transform.position = transform.position;
+
+            //    break;
+            //}
+
+            switch (shootShape) {
+                case ShootShape.Forward: {
+                        for (int i = 0; i < projectilesCountByShoot; i++) {
+
+                            foreach (var projectile in projectileList) {
+
+                                if (!projectile.gameObject.activeSelf) {
+                                    projectile.gameObject.SetActive(true);
+                                    projectile.transform.position = transform.position + Vector3.up;
+                                    projectile.transform.rotation = transform.rotation;
+                                    projectile.LiveDuration = liveDuration;
+                                    return;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                case ShootShape.Around: {
+
+                        for (int i = 0; i < projectilesCountByShoot; i++) {
+
+                            float angle = 0 + i * angleStep;
+                            Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), 0, Mathf.Cos(Mathf.Deg2Rad * angle));
+                            foreach (var projectile in projectileList) {
+
+                                if (!projectile.gameObject.activeSelf) {
+                                    projectile.gameObject.SetActive(true);
+                                    projectile.transform.position = transform.position + Vector3.up;
+                                    projectile.transform.forward = direction;
+                                    projectile.LiveDuration = liveDuration;
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    }
+
+                case ShootShape.Spread: {
+                        for (int i = 0; i < projectilesCountByShoot; i++) {
+
+                            float angle = 0 + i * angleStep;
+                            Vector3 direction;
+                            if (i % 2 == 0)
+                                direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), 0, Mathf.Cos(Mathf.Deg2Rad * angle));
+                            else
+                                direction = new Vector3(-Mathf.Sin(Mathf.Deg2Rad * angle), 0, Mathf.Cos(Mathf.Deg2Rad * angle));
+
+                            direction = transform.TransformDirection(direction);
+                            foreach (var projectile in projectileList) {
+
+                                if (!projectile.gameObject.activeSelf) {
+                                    projectile.gameObject.SetActive(true);
+                                    projectile.transform.position = transform.position + Vector3.up;
+                                    projectile.transform.forward = direction;
+                                    projectile.LiveDuration = liveDuration;
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    }
             }
+        } catch (OperationCanceledException) {
+
+        } finally {
+            cts?.Cancel();
+            cts = null;
         }
-        
+
     }
+
+
 }

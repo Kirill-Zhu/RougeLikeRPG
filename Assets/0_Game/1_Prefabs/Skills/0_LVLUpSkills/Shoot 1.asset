@@ -12,7 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6295c2afdea05ae47b74ac2b98500213, type: 3}
   m_Name: Shoot 1
   m_EditorClassIdentifier: 
-  skillDescription: 
-  physicsDamage: 1
-  fireDamage: 0
-  coldDamage: 0
+  damageTypes: 0
+  skillDescription: +2 projectiles but -20% damage
+  needChangeShape: 1
+  newShootShape: 1
+  plusProjectilesCount: 2
+  speedUpProjectile: 0
+  physicsDamageDirectIncrease: 0
+  fireDamageDirectIncrease: 0
+  coldDamageDirectIncrease: 0
+  physicsPecrent: -20
+  firePecrent: -20
+  coldPecrent: -20
+  recuceSkillDuration: 0

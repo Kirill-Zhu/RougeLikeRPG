@@ -21,7 +21,7 @@ public class LevelUpMenu : MonoBehaviour {
         this.hero = hero;
 
         OnChooseCard = hero.OnChooseLelvelUpCard;
-        OnChooseCard.AddListener(HideCards);    
+        OnChooseCard.AddListener(HideCards);
 
         leftCard.Initialize(OnChooseCard);
         middleCard.Initialize(OnChooseCard);
@@ -34,14 +34,14 @@ public class LevelUpMenu : MonoBehaviour {
         rightCard.gameObject.SetActive(false);
     }
     public void RiseLevelUp() {
-    
+
         powerUpsToRise.Clear();
 
         var SkillStrategyArray = hero.HeroBattleController.SkillsStrategy;
 
-        foreach (var skillStrategy in SkillStrategyArray) 
+        foreach (var skillStrategy in SkillStrategyArray)
             GetRandomPowerUp(skillStrategy);
-        
+
 
         leftCard.gameObject.SetActive(true);
         middleCard.gameObject.SetActive(true);
@@ -50,10 +50,8 @@ public class LevelUpMenu : MonoBehaviour {
         leftCard.Rise(SkillStrategyArray[0], powerUpsToRise[0]);
         middleCard.Rise(SkillStrategyArray[1], powerUpsToRise[1]);
         rightCard.Rise(SkillStrategyArray[2], powerUpsToRise[2]);
-
-     
     }
-    public void GetRandomPowerUp(object o) {
+    void GetRandomPowerUp(object o) {
         MethodInfo visitMethod = GetType().GetMethod("GetRandomPowerUp", new Type[] { o.GetType() });
         if (visitMethod != null && visitMethod != GetType().GetMethod("GetRandomPowerUp", new Type[] { typeof(object) })) {
             visitMethod.Invoke(this, new object[] { o });

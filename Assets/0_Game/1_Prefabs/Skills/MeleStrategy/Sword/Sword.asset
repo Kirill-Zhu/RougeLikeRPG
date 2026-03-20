@@ -13,13 +13,19 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   prefab: {fileID: 85160145095999677, guid: 167aced04fbc1ee469408960d2027184, type: 3}
-  PhysicsDamage: 44
+  ParticlePrefabArray:
+  - {fileID: 8307060409358143758, guid: 3692d1f7075d1eb4a8f9dd434f4948e6, type: 3}
+  - {fileID: 8307060409358143758, guid: 9daadfaadf688754dbe513b837955bf5, type: 3}
+  - {fileID: 8307060409358143758, guid: 0c0bac369c4ab564aad3079dabc46511, type: 3}
+  - {fileID: 8307060409358143758, guid: 718052adff27eca46960843f294312f2, type: 3}
+  - {fileID: 8307060409358143758, guid: 2a1f989aa7c7fb9489a8db5b58564c2d, type: 3}
+  PhysicsDamage: 8
   FireDamage: 0
   ColdDamage: 0
   Icon: {fileID: 21300000, guid: 0e1ab67eb67874542b1606233616c377, type: 3}
   BackSprite: {fileID: 21300000, guid: c7bf45f0ef95bed4491c5809fc6bf484, type: 3}
   DamageTypesEnum: 1
-  damageTypesArray: []
+  damageTypesList: []
   HealthComponent: {fileID: 0}
   CoolDown: 0
   AnimationName: Attack1

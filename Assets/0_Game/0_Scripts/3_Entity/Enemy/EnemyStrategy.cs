@@ -1,21 +1,30 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(menuName = "Strategy/Enemy/NewEnemyType", fileName = "NewEnemyType")]
 public class EnemyStrategy : ScriptableObject {
-
+    public string TypeOfEnemy;
     public GameObject prefab;
     public Sprite Icon;
     public float MoveSpeed;
     public float AttackRange;
     public float AttackDuration;
     public float DamageDelay;
+
+    [Header("For Projectiles")]
+    public float ProjectileSpeed = 1;
+    public float ProjectilieLiveDureation = 1;
+    public ShootShape ShootShape = ShootShape.Forward;
+    public float SpreadAngle = 70;
+    public int ProjecitlesCountByShoot = 1;
+    public bool SelfDirecrtedProjectile = false;  
     public GameObject WeaponPrefab;
     public WeaponTypeEnum WeaponType;
-    public GameObject DropPrefab;
+    public List<GameObject> DropPfreabList;
     [SerializeField] DamageTypesEnum damageTypesEnum;
     [SerializeField] int physicsDamage;
     [SerializeField] int fireDamage;
-    [SerializeField] int coldDamage;   
+    [SerializeField] int coldDamage;
     public HealtComponentData HealtData;
 
     //Here  I can manipulate with types like Cold and Fire may be Steam or something else

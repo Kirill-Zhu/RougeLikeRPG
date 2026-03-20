@@ -13,7 +13,7 @@ public class HealthComponentUI : MonoBehaviour {
     [SerializeField] RectTransform ancorTransform;
     [SerializeField] TextMeshProUGUI TakeDamageTextMeshPrfab;
     List<TextMeshProUGUI> valuesList = new List<TextMeshProUGUI>();
-
+    int recievedDamage;
 
     Sequence sequence;
 
@@ -31,8 +31,8 @@ public class HealthComponentUI : MonoBehaviour {
         }
     }
    
-    public void PopUpDamagePoints(DamageType damageType) {
-
+    public void PopUpDamagePoints(DamageType damageType, int recievedDamage) {
+        this.recievedDamage = recievedDamage;
         HandleDamageAnimation(damageType);
         AnimateBloodBoundries();
         
@@ -60,7 +60,7 @@ public class HealthComponentUI : MonoBehaviour {
             if (text.isActiveAndEnabled) continue;
 
             text.gameObject.SetActive(true);
-            text.text = damageType.Value.ToString();
+            text.text = recievedDamage.ToString();
             //Color
             VertexGradient gradient = new VertexGradient(physicsGradientColors[0], physicsGradientColors[1], physicsGradientColors[2], physicsGradientColors[3]);
             text.colorGradient = gradient;
@@ -80,7 +80,7 @@ public class HealthComponentUI : MonoBehaviour {
             if (text.isActiveAndEnabled) continue;
 
             text.gameObject.SetActive(true);
-            text.text = damageType.Value.ToString();
+            text.text = recievedDamage.ToString();
 
             //Color
             VertexGradient gradient = new VertexGradient(fireGradientColors[0], fireGradientColors[1], fireGradientColors[2], fireGradientColors[3]);
@@ -100,7 +100,7 @@ public class HealthComponentUI : MonoBehaviour {
             if (text.isActiveAndEnabled) continue;
 
             text.gameObject.SetActive(true);
-            text.text = damageType.Value.ToString();
+            text.text = recievedDamage.ToString();
 
             //Color
             VertexGradient gradient = new VertexGradient(coldGradientColors[0], coldGradientColors[1], coldGradientColors[2], coldGradientColors[3]);

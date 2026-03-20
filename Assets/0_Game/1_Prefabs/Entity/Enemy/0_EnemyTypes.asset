@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: 0_EnemyTypes
   m_EditorClassIdentifier: 
   commonSkelet: {fileID: 11400000, guid: bcdc0335043353447ba399483d5da188, type: 2}
+  commonShooter: {fileID: 11400000, guid: 4855fab7942a9d14ab49d8d0de8b7b29, type: 2}
   rareSkelet: {fileID: 11400000, guid: c5a55f005cd6a494884c5a06b7e8664b, type: 2}
+  ElCactus: {fileID: 11400000, guid: 4915b1930e80ed146a4d875ef0437e2d, type: 2}
+  Lich: {fileID: 11400000, guid: a94e2b3beee705d49985a3f857dbb790, type: 2}

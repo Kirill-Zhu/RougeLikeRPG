@@ -12,17 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26eff6f8e1950074c9c29ee91d958e9b, type: 3}
   m_Name: commonSkelton
   m_EditorClassIdentifier: 
+  TypeOfEnemy: Dummy
   prefab: {fileID: 1571042049591659991, guid: 5b3e000a611913c4fa677e0c2912fecc, type: 3}
   Icon: {fileID: 21300000, guid: 4ca665255adc0204585931b317f67500, type: 3}
   MoveSpeed: 2.5
   AttackRange: 2
   AttackDuration: 4
   DamageDelay: 0.4
+  ProjectileSpeed: 1
+  ProjectilieLiveDureation: 1
+  ShootShape: 0
+  SpreadAngle: 70
+  ProjecitlesCountByShoot: 1
   WeaponPrefab: {fileID: 2714323086112425801, guid: 836a4dd0823f2de40ae53c4603dcd741, type: 3}
   WeaponType: 0
-  DropPrefab: {fileID: 4897015921897156567, guid: 92a4812b8e5094e43901951be46ba7a6, type: 3}
+  DropPfreabList: []
   damageTypesEnum: 4
-  physicsDamage: 1
-  fireDamage: 1
-  coldDamage: 1
+  physicsDamage: 3
+  fireDamage: 0
+  coldDamage: 0
   HealtData: {fileID: 11400000, guid: f71b348ac2520fc4188db92aa52e2d41, type: 2}

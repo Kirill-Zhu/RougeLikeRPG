@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7740aec0b8bc601469f4030db66b4ee9, type: 3}
+  m_Name: Explosion
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3137097503443173940, guid: 09da3c117604e784e83be1ef3d512fd3, type: 3}
+  icon: {fileID: 21300000, guid: b8c27d98f6ad133479c6f5a30c5861de, type: 3}
+  parentToHero: 0
+  ParticlePrefabArray:
+  - {fileID: 4593184484909914552, guid: 1681e69152e731f4e8476c941b1e03a0, type: 3}
+  DamageTypesEnum: 3
+  PhysicsDamage: 5
+  FireDamage: 11
+  ColdDamage: 0
+  coolDown: 12

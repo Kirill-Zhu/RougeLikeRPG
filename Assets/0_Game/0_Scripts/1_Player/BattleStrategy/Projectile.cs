@@ -1,8 +1,9 @@
 using UnityEngine;
 
-class Projectile : WeaponType {
+public class Projectile : WeaponType {
     public float Speed;
     public float LiveDuration;
+    public bool SelfDirected = false;
 
     protected override void OnTriggerEnter(Collider other) {
 
@@ -25,16 +26,15 @@ class Projectile : WeaponType {
         readonly GameObject prefab;
         Transform origin;
         float speed = 1;
-        int damage = 1;
         DamageType[] damageTypes;
         string interactionTagName;
         float liveDuration = 5;
+        bool seifDirected = false;
         public ProjectileBuilder(GameObject prefab) {
             this.prefab = prefab;
         }
         public ProjectileBuilder FromOrigin(Transform origin) { this.origin = origin; return this; }
         public ProjectileBuilder WithSpeed(float speed) { this.speed = speed; return this; }
-        public ProjectileBuilder WithDamage(int damage) { this.damage = damage; return this; } //Test
         public ProjectileBuilder WithDamageTypes(params DamageType[] damageTypes) {
             this.damageTypes = damageTypes;
             return this;
@@ -43,16 +43,17 @@ class Projectile : WeaponType {
         public ProjectileBuilder WithLiveDuration(float duration) {
             liveDuration = duration; return this;
         }
+        public ProjectileBuilder SelfDirected(bool isSetlfDirected) { this.seifDirected = isSetlfDirected; return this; }
         public Projectile Build() {
             var obj = Instantiate(prefab, origin.position, origin.rotation, null);
 
             var projectile = obj.AddComponent<Projectile>();
             projectile.enabled = true;
             projectile.Speed = speed;
-            projectile.damage = damage;
             projectile.damageTypes = damageTypes;
             projectile.interactionTagName = interactionTagName;
             projectile.LiveDuration = liveDuration;
+            projectile.SelfDirected = seifDirected;
             return projectile;
         }
 
