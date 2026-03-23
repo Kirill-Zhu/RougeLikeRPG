@@ -24,10 +24,11 @@ MonoBehaviour:
   ShootShape: 0
   SpreadAngle: 70
   ProjecitlesCountByShoot: 1
+  SelfDirecrtedProjectile: 0
   WeaponPrefab: {fileID: 2714323086112425801, guid: 836a4dd0823f2de40ae53c4603dcd741, type: 3}
   WeaponType: 0
   DropPfreabList: []
-  damageTypesEnum: 4
+  damageTypesEnum: 5
   physicsDamage: 3
   fireDamage: 0
   coldDamage: 0

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
@@ -22,6 +23,10 @@ public class LevelManager : MonoBehaviour {
         hero.OnChooseLelvelUpCard.AddListener(ResumeGame);
 
         hero.OnPickUppowerUp.AddListener((_, _) => PauseGame());
+    }
+    private async void Start() {
+        await UniTask.Delay(1000);
+        ActivateScene();
     }
     public void ActivateScene() {
         HeroSpawner.SpawnHero();

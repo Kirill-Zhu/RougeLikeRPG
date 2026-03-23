@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DruidHealthComponent
   m_EditorClassIdentifier: 
   popUpDamageValuesHandler: {fileID: 11400000, guid: a92e35349c7924548b8af946aab035cd, type: 2}
-  MaxHealth: 21
-  PhysicsDefence: 2
-  FireDefence: -5
-  ColdDefence: 6
+  MaxHealth: 15
+  PhysicsDefence: 5
+  FireDefence: 5
+  ColdDefence: 5

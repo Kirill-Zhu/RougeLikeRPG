@@ -25,7 +25,7 @@ public class FirsButtonSelecedHandler : MonoBehaviour
 
     private async void Start() {
 
-        await UniTask.Delay(1000);
+        await UniTask.Delay(100);
         EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
     }
 

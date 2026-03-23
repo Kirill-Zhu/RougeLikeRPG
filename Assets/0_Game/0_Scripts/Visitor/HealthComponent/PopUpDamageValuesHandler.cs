@@ -4,6 +4,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Microsoft.Win32.SafeHandles;
 
 [CreateAssetMenu(menuName = "Strategy/HealthPopUpDamge", fileName = "PopUpHealthDamage")]
 public class PopUpDamageValuesHandler : ScriptableObject {
@@ -41,8 +42,9 @@ public class PopUpDamageValuesHandler : ScriptableObject {
                 textMesh.gameObject.SetActive(true);
                 textMesh.text = recievedDamage.ToString();
                 textMesh.color = damageType;
-                
-                UniTask task = textMesh.transform.DOMoveY(origin.up.y *2, 1).Play().ToUniTask(TweenCancelBehaviour.Kill, token);
+
+                Vector3 endPos = origin.up * damageType;
+                UniTask task = textMesh.transform.DOMoveY(endPos.y, 1).Play().ToUniTask(TweenCancelBehaviour.Kill, token);
                 await task;
                 
                 if (token.IsCancellationRequested)
@@ -67,7 +69,7 @@ public class PopUpDamageValuesHandler : ScriptableObject {
                 textMesh.text = "Block!";
                 textMesh.color = damgeType;
 
-                UniTask task = textMesh.transform.DOMoveY(origin.up.y * 2, 1).Play().ToUniTask(TweenCancelBehaviour.Kill, token);
+                UniTask task = textMesh.transform.DOMoveY(origin.up.y, 1).Play().ToUniTask(TweenCancelBehaviour.Kill, token);
                 await task;
 
                 if (token.IsCancellationRequested)

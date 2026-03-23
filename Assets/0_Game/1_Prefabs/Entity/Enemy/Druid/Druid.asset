@@ -18,19 +18,19 @@ MonoBehaviour:
   MoveSpeed: 1
   AttackRange: 9
   AttackDuration: 6
-  DamageDelay: 0.4
+  DamageDelay: 1.2
   ProjectileSpeed: 2
   ProjectilieLiveDureation: 4
   ShootShape: 0
   SpreadAngle: 0
   ProjecitlesCountByShoot: 1
-  SelfDirecrtedProjectile: 0
-  WeaponPrefab: {fileID: 5766454499432765695, guid: 6be430e3fd5a6e44cbfcaa29e1e05072, type: 3}
+  SelfDirecrtedProjectile: 1
+  WeaponPrefab: {fileID: 4230533699123781479, guid: aaac9b2a5e6b0e6418d4da52efb4be44, type: 3}
   WeaponType: 1
   DropPfreabList:
   - {fileID: 4897015921897156567, guid: ba23fb9f3c545b14e855f55556f5c092, type: 3}
-  damageTypesEnum: 4
-  physicsDamage: 0
+  damageTypesEnum: 1
+  physicsDamage: 11
   fireDamage: 0
-  coldDamage: 5
+  coldDamage: 0
   HealtData: {fileID: 11400000, guid: f82da5d204a66d241838586975e85a5e, type: 2}
