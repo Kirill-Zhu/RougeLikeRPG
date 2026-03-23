@@ -5,17 +5,16 @@ using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Jobs;
-using UnityEngine.UIElements;
 using Zenject;
 using Random = UnityEngine.Random;
 
 public class EnemiesManager : MonoBehaviour {
-    
+
     [Inject]
     Hero Hero;
 
     //SpawnStrategy
-    [SerializeField]List<SpawnStrategy> spawnStrategyList;
+    [SerializeField] List<SpawnStrategy> spawnStrategyList;
 
     public EnemyStrategyhandler enemyTypes;
     public List<Entity> enemiesOnScene = new List<Entity>();
@@ -36,7 +35,7 @@ public class EnemiesManager : MonoBehaviour {
     JobHandle jobHandle;
 
     private void Start() {
-      
+
         //--------------Spawn Enemies------------///
         foreach (var spawnStrategy in spawnStrategyList)
             spawnStrategy.Initialize(CreateByType);
@@ -144,12 +143,13 @@ public class EnemiesManager : MonoBehaviour {
         attackRangeNativeArray = new NativeArray<float>(attackRangeList.ToArray(), Allocator.Persistent);
     }
     private void Update() {
+
         //Spawn Strategy
-        if (enemiesOnScene.Count > 150) return;  //Set limit enemies on scene
+        if (enemiesOnScene.Count < 150) {  //Set limit enemies on scene
+            foreach (var spawnStrategy in spawnStrategyList)
+                spawnStrategy.OnUpdate(Time.deltaTime);
 
-        foreach (var spawnStrategy in spawnStrategyList)
-            spawnStrategy.OnUpdate(Time.deltaTime);
-
+        }
 
         //Move Job
         if (enemiesOnScene.Count <= 0) return;

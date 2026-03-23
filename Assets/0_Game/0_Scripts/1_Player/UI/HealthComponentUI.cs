@@ -26,22 +26,22 @@ public class HealthComponentUI : MonoBehaviour {
             var obj = Instantiate(TakeDamageTextMeshPrfab, ancorTransform);
             valuesList.Add(obj.GetComponent<TextMeshProUGUI>());
             var rectTransform = obj.GetComponent<RectTransform>();
-            rectTransform.localPosition += new Vector3(UnityEngine.Random.Range(-40 , 70), UnityEngine.Random.Range(-50, 50));
+            rectTransform.localPosition += new Vector3(UnityEngine.Random.Range(-40, 70), UnityEngine.Random.Range(-50, 50));
             obj.gameObject.SetActive(false);
         }
     }
-   
+
     public void PopUpDamagePoints(DamageType damageType, int recievedDamage) {
         this.recievedDamage = recievedDamage;
         HandleDamageAnimation(damageType);
         AnimateBloodBoundries();
-        
+
     }
     void AnimateBloodBoundries() {
-      
+
         if (bloodBoundriesCanvasGroup.alpha == 0) {
             bloodBoundriesCanvasGroup.alpha = 1;
-            DOTween.To(() => bloodBoundriesCanvasGroup.alpha, x => bloodBoundriesCanvasGroup.alpha = x,0,0.5f).OnComplete(()=> bloodBoundriesCanvasGroup.alpha = 0);
+            DOTween.To(() => bloodBoundriesCanvasGroup.alpha, x => bloodBoundriesCanvasGroup.alpha = x, 0, 0.5f).OnComplete(() => bloodBoundriesCanvasGroup.alpha = 0);
         }
     }
     void HandleDamageAnimation(object o) {
@@ -72,7 +72,7 @@ public class HealthComponentUI : MonoBehaviour {
         }
 
 
-        Debug.Log($"handle UI animation {this.GetType().Name} by Type {damageType}");
+      //  Debug.Log($"handle UI animation {this.GetType().Name} by Type {damageType}");
     }
     void HandleDamageAnimation(FireDamageType damageType) {
 
@@ -88,11 +88,12 @@ public class HealthComponentUI : MonoBehaviour {
 
             //Animation
             Vector3 startPos = text.GetComponent<RectTransform>().localPosition;
-            text.rectTransform.DOMoveY(400, 1).SetEase(Ease.InCirc).OnComplete(() => { text.gameObject.SetActive(false); text.rectTransform.localPosition = startPos; });
+          
+            text.rectTransform.DOMoveY(400 + startPos.y, 1).SetEase(Ease.InCirc).OnComplete(() => { text.gameObject.SetActive(false); text.rectTransform.localPosition = startPos; });
             break;
         }
 
-        Debug.Log($"handle UI animation {this.GetType().Name} by Type {damageType}");
+       // Debug.Log($"handle UI animation {this.GetType().Name} by Type {damageType}");
     }
 
     void HandleDamageAnimation(ColdDamageType damageType) {
@@ -108,10 +109,10 @@ public class HealthComponentUI : MonoBehaviour {
 
             //Animation
             Vector3 startPos = text.GetComponent<RectTransform>().localPosition;
-            text.rectTransform.DOMoveY(400, 1).SetEase(Ease.InCirc).OnComplete(() => { text.gameObject.SetActive(false); text.rectTransform.localPosition = startPos; });
+            text.rectTransform.DOMoveY(400 , 1).SetEase(Ease.InCirc).OnComplete(() => { text.gameObject.SetActive(false); text.rectTransform.localPosition = startPos; });
             break;
         }
 
-       // Debug.Log($"handle UI animation {this.GetType().Name} by Type {damageType}");
+         //Debug.Log($"handle UI animation {this.GetType().Name} by Type {damageType}");
     }
 }

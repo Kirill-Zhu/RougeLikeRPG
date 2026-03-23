@@ -21,6 +21,18 @@ public class DamageType {
         }
         return Color.white;
     }
+    public static implicit operator float(DamageType damageType) {
+        if (damageType.GetType() == typeof(PhysicsDamageType)) {
+            return 2;
+        }
+        if (damageType.GetType() == typeof(FireDamageType)) {
+            return 3;
+        }
+        if (damageType.GetType() == typeof(ColdDamageType)) {
+            return 4;
+        }
+        return 0;
+    }
 }
 [Flags]
 public enum DamageTypesEnum {

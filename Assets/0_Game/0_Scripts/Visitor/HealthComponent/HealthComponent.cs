@@ -96,7 +96,7 @@ public class HealthComponent : MonoBehaviour, IVisitable {
         var damage = damageType.Value - physicsDefence;
         ChangeHealth(-damage);
         OnTakeDamage?.Invoke(damageType, damage);
-         Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-physicsDefence} ");
+         //Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-physicsDefence} ");
     }
     public void EarnDamageByType(FireDamageType damageType) {
         if (damageType.Value <= fireDefence) {
