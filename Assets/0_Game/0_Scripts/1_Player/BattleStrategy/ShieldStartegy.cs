@@ -23,6 +23,9 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
     public override void Initialize(Transform origin) {
         Origin = origin;
         damageTypesList = GetStartDamageTypes().ToList();
+
+        foreach (var damageType in damageTypesList) 
+            SetOrAddDamageTypeWithValues(damageType);
     }
     public override void OnUpdate(float deltaTime) {
         if (!onCoolDown) return;

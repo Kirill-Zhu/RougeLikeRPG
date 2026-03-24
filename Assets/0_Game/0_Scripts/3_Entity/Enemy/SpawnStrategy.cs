@@ -13,12 +13,12 @@ public class SpawnStrategy : ScriptableObject {
     }
 
     public void OnUpdate(float deltaTime) {
-        
-        if(timer < spawnRate) {
+
+        if (timer < spawnRate) {
             timer += deltaTime;
             return;
         }
-           
+
         timer = 0;
         OnSpawnEntity.Invoke(enemyStrategy);
     }

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf65bce54a276d947b13a5ae14c20b85, type: 3}
   m_Name: ExplosionPowerUp
   m_EditorClassIdentifier: 
-  ModelPrefab: {fileID: 5593487346574028920, guid: 00eca1ae772d7234486d971362d0842a, type: 3}
+  Label: {fileID: 0}
+  Descritpion: 
+  ModelPrefab: {fileID: 7702758211444969477, guid: 24f7ce2ec705ad04d8a1d58421027437, type: 3}
   particle: {fileID: 4593184484909914552, guid: 1681e69152e731f4e8476c941b1e03a0, type: 3}
   autoSkill: {fileID: 11400000, guid: a86302a963bc55745b09699d30268a24, type: 2}

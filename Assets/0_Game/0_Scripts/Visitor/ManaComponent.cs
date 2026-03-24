@@ -11,6 +11,7 @@ public class ManaComponent : MonoBehaviour, IVisitable {
     }
 
     public void ChangeMana(int value) {
+        Debug.Log($"Change Mana by  { value}");
         CurrentMana += value;
         OnGetCurrentMana?.Invoke(CurrentMana);
 

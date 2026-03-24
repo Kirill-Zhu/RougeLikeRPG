@@ -35,9 +35,9 @@ public class ShootStrategy : SkillsStrategy {
         initialization = true;
         //Add Damage Types it deals(set the values at definitons)
         damageTypesList = GetStartDamageTypes().ToList();
-      
+
         foreach (var damageType in damageTypesList)
-            damageTypeBuffer.Add(damageType.GetType(), damageType.Value);
+            SetOrAddDamageTypeWithValues(damageType);
 
         BuildNewProjectiles(origin);
     }
@@ -169,6 +169,7 @@ public class ShootStrategy : SkillsStrategy {
 
     public override void TryUseSkill(Action<float> OnChangeSkillDuration, Action<int, float> OnAnimation, UnityAction<int> OnManaChange) {
 
+        Debug.Log("shoot");
         OnChangeSkillDuration.Invoke(SkillDuration);
 
         if (coolDownTimer > 0) return;

@@ -14,7 +14,7 @@ public class MeleSkillLevleUp : LevelUpStrategy {
     [SerializeField] float recuceSkillDuration = 0;
 
     private void Awake() {
-       
+
     }
     public override string GetDescription() {
         string skills = "";
@@ -25,7 +25,7 @@ public class MeleSkillLevleUp : LevelUpStrategy {
 
     public MeleStrategy UpgradeSkill(MeleStrategy mele) {
 
-        damageTypesArray = GetDamageTypes(physicsDamageDirectIncrease + (mele.PhysicsDamage / 100 * physicsPecrent), fireDamageDirectIncrease+ (mele.FireDamage / 100 * firePecrent), coldDamageDirectIncrease + (mele.ColdDamage / 100 * coldPecrent));
+        damageTypesArray = GetDamageTypes(physicsDamageDirectIncrease + (int)(mele.PhysicsDamage / 100 * physicsPecrent), fireDamageDirectIncrease + (int)(mele.FireDamage / 100 * firePecrent), coldDamageDirectIncrease + (int)(mele.ColdDamage / 100 * coldPecrent));
         mele.AttackRange += attackRange;
         mele.SkillDuration -= recuceSkillDuration;
 

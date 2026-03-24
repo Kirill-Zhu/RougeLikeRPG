@@ -32,7 +32,7 @@ public class Hero : MonoBehaviour {
     public ExpComponent ExpComponent => expComponent;
     ExpComponent expComponent;
     //Power Up 
-    
+
     //State Machine
     StateMachine stateMachine = new StateMachine();
     [SerializeField] Animator animator;
@@ -72,7 +72,7 @@ public class Hero : MonoBehaviour {
         locomotion = new Locomotion(moveController, animator, battleContorller, heroAutoSkillController);
         jumpState = new JumpState(moveController, animator, battleContorller, heroAutoSkillController);
         landingState = new LandingState(moveController, animator, battleContorller, heroAutoSkillController);
-        skillState = new SkillState(moveController, animator, battleContorller,heroAutoSkillController);
+        skillState = new SkillState(moveController, animator, battleContorller, heroAutoSkillController);
 
 
 
@@ -80,6 +80,7 @@ public class Hero : MonoBehaviour {
         At(locomotion, jumpState, new FuncPredicate(() => moveController.IsJumping));
         At(landingState, locomotion, new FuncPredicate(() => !moveController.IsJumping && moveController.Grounded()));
         At(skillState, jumpState, new FuncPredicate(() => moveController.IsJumping && !battleContorller.InBattleState));
+        At(pausedState, locomotion, new FuncPredicate(() => true));
 
         //Skills
         At(locomotion, skillState, new FuncPredicate(() => moveController.Grounded() && battleContorller.InBattleState));
@@ -92,7 +93,7 @@ public class Hero : MonoBehaviour {
     }
 
     private void Update() {
-     
+
         stateMachine?.Update();
     }
 
@@ -101,7 +102,7 @@ public class Hero : MonoBehaviour {
 
     public void OnGamePaused() {
         paused = true;
-       
+
     }
     public void OnGameResume() {
         paused = false;

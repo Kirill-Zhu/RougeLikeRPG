@@ -24,6 +24,7 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
 
         //Initialize Events
         OnPickUpPowerUp = @OnPickUpPowerUpEvent;
+        OnManaChange = null;
         OnManaChange += manaComponent.ChangeMana;
         //Debug.Log($"Initialize : {GetType().Name}");
 
@@ -44,35 +45,25 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
 
         AddSkillDependecies();
         //Events
+       
+      
+
+    }
+    private void Awake() {
         inputs.IsUsingSkill += usingSkill => {
             if (usingSkill == true) {
                 InBattleState = true;
                 cancelTimer = 0.3f;                                                                            //Reset eqnque TImer
             }
         };
+
         inputs.UseSkill += index => FitstInputIndex = index;
         OnSkillDurationChange += duration => SkillDurationTimer = duration;
-
-    }
-    private void Awake() {
-        //foreach (var skillStrategy in skillStrategy)                                              //initializeAll strategies
-        //    skillStrategy.Initialize(this.transform);
-
-        //AddSkillDependecies();
-        ////Events
-        //inputs.IsUsingSkill += usingSkill => {
-        //    if (usingSkill == true) {
-        //        InBattleState = true;
-        //        cancelTimer = 0.3f;                                                                            //Reset eqnque TImer
-        //    }
-        //};
-        //inputs.UseSkill += index => FitstInputIndex = index;
-        //OnSkillDurationChange += duration => SkillDurationTimer = duration;
     }
 
     private void Update() {
         if ((cancelTimer > 0)) cancelTimer -= Time.deltaTime;
-        if (cancelTimer <= 0 && SkillDurationTimer <= 0) InBattleState = false;                                 // reset rnque battle state if state machine conditions doesent match requerements
+        if (cancelTimer <= 0 && SkillDurationTimer <= 0) InBattleState = false;                                 // reset enque battle state if state machine conditions doesent match requerements
 
         OnUpdate();
     }
@@ -88,6 +79,7 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
             InBattleState = false;
     }
     public void UseSkill(int index) {
+    
         if (SkillDurationTimer > enqueTime || manaComponent.CurrentMana - skillStrategy[index].ManaCost < 0) return;
         SkillDurationTimer = 1;//Wait unitl ohter skill complete
 
@@ -114,6 +106,7 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
     private void OnDestroy() {
         UnSubscribeInputs();
         OnSkillDurationChange -= duration => SkillDurationTimer = duration;
+        OnManaChange = null;
     }
 
     //Visitor
