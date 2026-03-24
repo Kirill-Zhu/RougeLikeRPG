@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf65bce54a276d947b13a5ae14c20b85, type: 3}
   m_Name: GreenBlowPowerUp
   m_EditorClassIdentifier: 
-  ModelPrefab: {fileID: 5593487346574028920, guid: 00eca1ae772d7234486d971362d0842a, type: 3}
+  Label: {fileID: 0}
+  Descritpion: 
+  ModelPrefab: {fileID: 7702758211444969477, guid: 24f7ce2ec705ad04d8a1d58421027437, type: 3}
   particle: {fileID: 6361997728236094490, guid: fd25cbdb7c54fa4478d443fd2bea4ef1, type: 3}
   autoSkill: {fileID: 11400000, guid: 8a4153792f27e454d9d4fd58706707e4, type: 2}

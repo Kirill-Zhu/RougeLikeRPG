@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99dac3ad8257dac46aad088e2964fe4c, type: 3}
   m_Name: Shield 2
   m_EditorClassIdentifier: 
-  skillDescription: 
-  physicsDamage: 0
-  fireDamage: 1
-  coldDamage: 0
+  damageTypes: 0
+  skillDescription: Reduce coodown by 0.2
+  physicsDamageDirectIncrease: 0
+  fireDamageDirectIncrease: 0
+  coldDamageDirectIncrease: 0
+  physicsPecrent: 0
+  firePecrent: 0
+  coldPecrent: 0
+  recuceLiveDuration: 0
+  increaseLiveDuration: 0
+  reduceCoolDown: 0.2
+  increaseCoolDown: 0

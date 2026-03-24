@@ -3,8 +3,9 @@ using UnityEngine;
 public class SkillPowerUp : PowerUp {
     [Header("Additional Damage Types")]
     [SerializeField] DamageTypesEnum DamageTypesEnum;
-    [SerializeField] DamageType[] damageTypesArray;
-
+    DamageType[] meleDamageTypesArray = new DamageType[3];
+    DamageType[] shieldDamageTypesArray = new DamageType[3];
+    DamageType[] shootDamageTypesArray = new DamageType[3];
 
     [Header("Mele strategy settings")]
     public int MelePhysicsDamage;
@@ -23,21 +24,24 @@ public class SkillPowerUp : PowerUp {
 
 
     private void Awake() {
-        damageTypesArray = GetDamageTypes(MelePhysicsDamage, MeleFireDamage, MeleColdDamage);
+        meleDamageTypesArray = GetDamageTypes(MelePhysicsDamage, MeleFireDamage, MeleColdDamage);
+        shieldDamageTypesArray = GetDamageTypes(ShieldPhysicsDamage, ShieldFireDamage, ShieldColdDamage);
+        shootDamageTypesArray = GetDamageTypes(ShootPhysicsDamage, ShootFireDamage, ShootColdDamage);
+        Debug.Log($" shoot damage is  {shootDamageTypesArray[0].Value}");
     }
     public void Visit(HeroBattleController battleController) {
         battleController.PickUpPowerUp(Label, Descritpion);
     }
     public void Visit(MeleStrategy meleStrategy) {
-        meleStrategy.AddOrModifyDamageType(damageTypesArray);
+        meleStrategy.AddOrModifyDamageType(meleDamageTypesArray);
         meleStrategy.UpdateValues();
     }
     public void Visit(ShieldStartegy shieldStrategy) {
-        shieldStrategy.AddOrModifyDamageType(damageTypesArray);
+        shieldStrategy.AddOrModifyDamageType(shieldDamageTypesArray);
         shieldStrategy.UpdateValues();
     }
     public void Visit(ShootStrategy shootStrategy) {
-        shootStrategy.AddOrModifyDamageType(damageTypesArray);
+        shootStrategy.AddOrModifyDamageType(shootDamageTypesArray);
         shootStrategy.UpdateValues();
     }
 

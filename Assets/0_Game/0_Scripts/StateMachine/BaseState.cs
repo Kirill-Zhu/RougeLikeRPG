@@ -19,7 +19,7 @@ namespace MyStateMachine {
             this.heroAutoSkillController = heroAutoSkillController;
         }
         public virtual void OnEnter() {
-          // Debug.Log($"Enter : {this.GetType().Name} state");
+           Debug.Log($"Enter : {this.GetType().Name} state");
         }
 
         public virtual void OnExit() {

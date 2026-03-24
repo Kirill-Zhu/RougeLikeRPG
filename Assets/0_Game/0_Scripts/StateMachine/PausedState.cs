@@ -6,5 +6,7 @@ public class PausedState : BaseState {
     }
     public override void OnEnter() {
         base.OnEnter();
+        heroBattleController.SkillDurationTimer = 0.5f;
     }
+   
 }

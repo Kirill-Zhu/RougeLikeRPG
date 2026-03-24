@@ -42,11 +42,7 @@ public abstract class SkillsStrategy : ScriptableObject, IVisitable {
 
         damageTypesList.Clear();
 
-        if (damageTypeBuffer.TryGetValue(typeof(PhysicsDamageType), out var physics)) {
-            Debug.Log($"Physics Damage in buffer is {physics}");
-            damageTypesList.Add(new PhysicsDamageType(physics)); 
-        
-        }
+        if (damageTypeBuffer.TryGetValue(typeof(PhysicsDamageType), out var physics)) damageTypesList.Add(new PhysicsDamageType(physics));
         if (damageTypeBuffer.TryGetValue(typeof(FireDamageType), out var fire)) damageTypesList.Add(new FireDamageType(fire));
         if (damageTypeBuffer.TryGetValue(typeof(ColdDamageType), out var cold)) damageTypesList.Add(new ColdDamageType(cold));
     }
@@ -58,8 +54,7 @@ public abstract class SkillsStrategy : ScriptableObject, IVisitable {
             damageTypeBuffer[inType.GetType()] = outDamage + inType.Value;
             Debug.Log($"now damage buffer damage is {damageTypeBuffer[inType.GetType()]}");
 
-        }
-        else {
+        } else {
             Debug.Log($"Add damage type {inType}");
             damageTypeBuffer.Add(inType.GetType(), inType.Value);
         }

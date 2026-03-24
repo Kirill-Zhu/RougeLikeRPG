@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Lvll2Wave -Druid
   m_EditorClassIdentifier: 
   enemyStrategy: {fileID: 11400000, guid: 75e5efae4a113f747ab21c56a5911796, type: 2}
-  spawnRate: 5
+  spawnRate: 150

@@ -38,8 +38,10 @@ public class MeleStrategy : SkillsStrategy {
 
         //Initialize Dmaage Types
         damageTypesList = GetStartDamageTypes().ToList(); //Take initialized on inspectror enum values
-
-
+        
+        foreach(var damageType in damageTypesList) {
+            SetOrAddDamageTypeWithValues(damageType);
+        }
         //-----------------------------
 
         BuildNewWeapon();
