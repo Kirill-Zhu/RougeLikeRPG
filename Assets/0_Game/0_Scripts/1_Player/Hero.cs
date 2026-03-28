@@ -1,15 +1,16 @@
 using MyStateMachine;
 using UnityEngine;
 using UnityEngine.Events;
-
+using Zenject;
 public class Hero : MonoBehaviour {
 
     //Initialize
     public UnityEvent OnHeroChange;///Invokes Every time when need change UI
     public UnityEvent<int, int> OnGetExp;
-    public UnityEvent<Sprite, string> OnPickUppowerUp;
+    public UnityEvent<Sprite, string, string> OnPickUppowerUp;
     public UnityEvent<int> OnLevelUp;
     public UnityEvent OnChooseLelvelUpCard;
+    public UnityEvent OnDie;
     HeroStrategyData heroData;
 
     SimpleCahracterController moveController;
@@ -49,6 +50,7 @@ public class Hero : MonoBehaviour {
 
         //Health
         healthComponent.Initialize(heroData.HealtComponentData);
+        healthComponent.OnDie += Die;
 
         //Battle
         battleContorller.Initialize(manaComponent, heroData.SkillStrategyData, OnPickUppowerUp);
@@ -95,6 +97,9 @@ public class Hero : MonoBehaviour {
     private void Update() {
 
         stateMachine?.Update();
+    }
+    void Die() {
+        OnDie?.Invoke();
     }
 
     void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);

@@ -10,9 +10,9 @@ using Random = UnityEngine.Random;
 
 public class EnemiesManager : MonoBehaviour {
 
-    [Inject]
+    
     Hero Hero;
-
+    LevelStatistics LevelStatistics;
     //SpawnStrategy
     [SerializeField] List<SpawnStrategy> spawnStrategyList;
 
@@ -34,6 +34,11 @@ public class EnemiesManager : MonoBehaviour {
     NativeArray<bool> returnBattleStatus;
     JobHandle jobHandle;
 
+    [Inject]
+    public void Construct(Hero hero, LevelStatistics stats) {
+        this.Hero = hero;
+        this.LevelStatistics = stats;
+    }
     private void Start() {
 
         //--------------Spawn Enemies------------///
@@ -51,7 +56,7 @@ public class EnemiesManager : MonoBehaviour {
     public void CreateByType(EnemyStrategy strategy) {
         Type type = Type.GetType(strategy.TypeOfEnemy); //Create instance Of Type
 
-        var obj = new Entity.TypeBuilder(strategy.prefab, strategy.HealtData)
+        var obj = new Entity.TypeBuilder(strategy.prefab, strategy.HealtData, LevelStatistics)
            .WithIcon(strategy.Icon)
            .WithMoveSpeed(strategy.MoveSpeed)
            .WithAttackRange(strategy.AttackRange)

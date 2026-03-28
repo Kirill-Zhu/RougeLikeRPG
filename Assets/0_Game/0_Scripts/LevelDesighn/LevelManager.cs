@@ -21,8 +21,8 @@ public class LevelManager : MonoBehaviour {
 
         hero.OnLevelUp.AddListener(_ => PauseGame());
         hero.OnChooseLelvelUpCard.AddListener(ResumeGame);
-
-        hero.OnPickUppowerUp.AddListener((_, _) => PauseGame());
+        hero.OnPickUppowerUp.AddListener((_, _, _) => PauseGame());
+        hero.OnDie.AddListener(() => PauseGame());
     }
     private async void Start() {
         await UniTask.Delay(1000);

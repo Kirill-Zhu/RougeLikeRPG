@@ -10,9 +10,9 @@ public class PowerUpMenu : MonoBehaviour {
         OnChooseCard = hero.OnChooseLelvelUpCard;
     }
 
-    void RiseUpPowerUpCard(Sprite label, string description) {
+    void RiseUpPowerUpCard(Sprite label, string description, string name) {
         powerUpCard.gameObject.SetActive(true);
-        powerUpCard?.RiseUpCard(label, description);
+        powerUpCard.RiseUpCard(label, description, name);
     }
     public void OnCloseCardMenu() {
         OnChooseCard?.Invoke();

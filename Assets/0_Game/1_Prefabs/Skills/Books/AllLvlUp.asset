@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Label: {fileID: 21300000, guid: d4f5634edede200468fc1ccf30e6f3a1, type: 3}
   Descritpion: 'Adds 1 of all damage types to all skills '
-  ModelPrefab: {fileID: 2303205409579412723, guid: 45d0e5beb74d39e43b36f27d1290fdb2, type: 3}
+  ModelPrefab: {fileID: 7702758211444969477, guid: 24f7ce2ec705ad04d8a1d58421027437, type: 3}
   particle: {fileID: 7671860363676289284, guid: a7c111b73cef9f9419100bf050c8226f, type: 3}
+  itemName: Gloves Of power
   DamageTypesEnum: -1
   MelePhysicsDamage: 1
   MeleFireDamage: 1

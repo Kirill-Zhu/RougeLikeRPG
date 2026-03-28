@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ab22d1e6c4de343a3fd9ba50451074, type: 3}
-  m_Name: Lvll2Wave -1 Skeletons
+  m_Script: {fileID: 11500000, guid: 1ffe95f6cf08d5e4391eda74335242f9, type: 3}
+  m_Name: LevelData
   m_EditorClassIdentifier: 
-  enemyStrategy: {fileID: 11400000, guid: bcdc0335043353447ba399483d5da188, type: 2}
-  spawnRate: 1
+  PhysicsDamageTake: 0
+  FireDamageTake: 0
+  ColdDamageTake: 0
+  PhysicsDamageDone: 0
+  FireDamageDone: 0
+  ColdDamageDone: 0
