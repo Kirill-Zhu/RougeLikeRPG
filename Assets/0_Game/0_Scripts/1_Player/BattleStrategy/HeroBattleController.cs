@@ -5,7 +5,7 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
     [SerializeField] HealthComponent healthComponent;
     public SkillsStrategy[] SkillsStrategy => skillStrategy;
     [SerializeField] SkillsStrategy[] skillStrategy = new SkillsStrategy[3];
-    public UnityEvent<Sprite, string> OnPickUpPowerUp;
+    public UnityEvent<Sprite, string, string> OnPickUpPowerUp;
 
 
     [SerializeField] InputReader inputs;
@@ -19,7 +19,7 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
     private float cancelTimer = default;
     ManaComponent manaComponent;
 
-    public void Initialize(ManaComponent manaComponent, SkillsStrategy[] skillsStrategy, UnityEvent<Sprite, string> @OnPickUpPowerUpEvent) {
+    public void Initialize(ManaComponent manaComponent, SkillsStrategy[] skillsStrategy, UnityEvent<Sprite, string, string> @OnPickUpPowerUpEvent) {
         this.manaComponent = manaComponent;
 
         //Initialize Events
@@ -46,8 +46,6 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
         AddSkillDependecies();
         //Events
        
-      
-
     }
     private void Awake() {
         inputs.IsUsingSkill += usingSkill => {
@@ -57,8 +55,9 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
             }
         };
 
-        inputs.UseSkill += index => FitstInputIndex = index;
+        inputs.UseSkill += SetSkillIndex;
         OnSkillDurationChange += duration => SkillDurationTimer = duration;
+
     }
 
     private void Update() {
@@ -79,13 +78,13 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
             InBattleState = false;
     }
     public void UseSkill(int index) {
-    
+
         if (SkillDurationTimer > enqueTime || manaComponent.CurrentMana - skillStrategy[index].ManaCost < 0) return;
         SkillDurationTimer = 1;//Wait unitl ohter skill complete
 
         skillStrategy[index].TryUseSkill(OnSkillDurationChange, OnAnimationStart, OnManaChange);
     }
-
+    void SetSkillIndex(int index) => FitstInputIndex = index;
     void AddSkillDependecies() {
         foreach (var strategy in skillStrategy) {
             strategy.HealthComponent = healthComponent;
@@ -110,8 +109,8 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
     }
 
     //Visitor
-    public void PickUpPowerUp(Sprite label, string description) {
-        OnPickUpPowerUp.Invoke(label, description);
+    public void PickUpPowerUp(Sprite label, string description, string name) {
+        OnPickUpPowerUp.Invoke(label, description, name);
     }
     public void Accept(IVistor visitor) {
         visitor.Visit(this);

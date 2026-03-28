@@ -1,6 +1,7 @@
 using UnityEngine;
 [CreateAssetMenu(menuName = "Visitor/SkillLVlUp", fileName = "New Skill Lvl Up")]
 public class SkillPowerUp : PowerUp {
+    [SerializeField] string itemName;
     [Header("Additional Damage Types")]
     [SerializeField] DamageTypesEnum DamageTypesEnum;
     DamageType[] meleDamageTypesArray = new DamageType[3];
@@ -30,7 +31,7 @@ public class SkillPowerUp : PowerUp {
         Debug.Log($" shoot damage is  {shootDamageTypesArray[0].Value}");
     }
     public void Visit(HeroBattleController battleController) {
-        battleController.PickUpPowerUp(Label, Descritpion);
+        battleController.PickUpPowerUp(Label, Descritpion, itemName);
     }
     public void Visit(MeleStrategy meleStrategy) {
         meleStrategy.AddOrModifyDamageType(meleDamageTypesArray);

@@ -7,10 +7,12 @@ using UnityEngine;
 public class Entity : MonoBehaviour, IDamagable {
     //Dorps
     public List<GameObject> DropObjectsList;  // Simple Drop On Die
-
+    
+    //General 
     protected Rigidbody rb;  //Still dont use it directly
     protected Collider colider; // one "l" because Component has its own collider field
     public Sprite Icon;
+    public LevelStatistics LevelStatistics;
     //Move
     public float MoveSpeed = 0;
     public float VelocityMagnitude;
@@ -38,6 +40,7 @@ public class Entity : MonoBehaviour, IDamagable {
     //Health
     public HealtComponentData healthData;
     HealthComponent healthComponent;
+  
     Action<Entity> OnDieEvent = delegate { };
 
     protected bool isDead = false;
@@ -50,11 +53,16 @@ public class Entity : MonoBehaviour, IDamagable {
 
         battleContorller = GetComponent<SimpleEnemyBattleContorller>();
 
+        
         //Events
         healthComponent.OnDie += Die;
+      
+
     }
     private void Start() {
         battleContorller.Initialize(AttackDuration, WeaponType, AttackRange, DamageDelay, DamageTypes, WeaponPrefab, InteractionTagName, ProjectilieSpeed, ProjectileLiveDuration, ShootShape, SpreadAngle, ProjectilesCountByShoot, SelfDirectedProjectile, AimTransform);
+        
+        healthComponent.OnTakeDamage += LevelStatistics.PlayerDealtDamage;
     }
 
     public virtual void Die() {
@@ -74,7 +82,7 @@ public class Entity : MonoBehaviour, IDamagable {
         Destroy(this.gameObject, 2);
     }
     public virtual void TakeDamage(int damage) {
-        Debug.Log($"{GetType().Name} took damage {damage}");
+       // Debug.Log($"{GetType().Name} took damage {damage}");
     }
     public virtual void InitializeEvents(Action<Entity> OnDestroEvent) {
         OnDieEvent += OnDestroEvent;
@@ -116,7 +124,7 @@ public class Entity : MonoBehaviour, IDamagable {
     public class TypeBuilder {
         readonly GameObject prefab;
         readonly HealtComponentData healthData;
-
+        readonly LevelStatistics levelStatistics;
         Sprite icon;
 
         float moveSpeed;
@@ -137,9 +145,10 @@ public class Entity : MonoBehaviour, IDamagable {
         Transform aimTransform;
         string interactionTagName;
         List<GameObject> dropObjectsList;
-        public TypeBuilder(GameObject prefab, HealtComponentData healthData) {
+        public TypeBuilder(GameObject prefab, HealtComponentData healthData, LevelStatistics stats) {
             this.prefab = prefab;
             this.healthData = healthData;
+            this.levelStatistics = stats;
         }
         public TypeBuilder WithIcon(Sprite icon) { this.icon = icon; return this; }
         public TypeBuilder WithMoveSpeed(float moveSpeed) { this.moveSpeed = moveSpeed; return this; }
@@ -171,6 +180,12 @@ public class Entity : MonoBehaviour, IDamagable {
             FieldInfo field = component.GetType().GetField("Icon");
             if (field != null) {
                 field.SetValue(component, icon);
+
+            }
+            //Set levelStatiscics
+            field = component.GetType().GetField("LevelStatistics");
+            if (field != null) {
+                field.SetValue(component, levelStatistics);
 
             }
             //Set Move Speed
