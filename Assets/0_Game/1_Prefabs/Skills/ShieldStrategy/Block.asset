@@ -26,4 +26,11 @@ MonoBehaviour:
   CoolDown: 5
   AnimationName: EnergyShield
   SkillDuration: 0
+  SkillSound:
+    Guid:
+      Data1: 1691908804
+      Data2: 1154790008
+      Data3: 421148824
+      Data4: 1518471013
+    Path: event:/Skills/Shield/Block
   LiveDuration: 3

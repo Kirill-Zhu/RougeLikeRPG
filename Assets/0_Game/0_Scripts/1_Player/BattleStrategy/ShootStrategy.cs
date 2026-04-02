@@ -31,7 +31,7 @@ public class ShootStrategy : SkillsStrategy {
     bool[] activeObjectsArray = new bool[0];
     NativeArray<bool> activeProjectilisNativeArray = new NativeArray<bool>();
     JobHandle jobHandle;
-    public override void Initialize(Transform origin) {
+    public override void Initialize(Transform origin, AudioManager audioManager) {
         initialization = true;
         //Add Damage Types it deals(set the values at definitons)
         damageTypesList = GetStartDamageTypes().ToList();
@@ -40,6 +40,9 @@ public class ShootStrategy : SkillsStrategy {
             SetOrAddDamageTypeWithValues(damageType);
 
         BuildNewProjectiles(origin);
+
+        //Audio
+        this.audioManager = audioManager;
     }
     public async override void Dispose() {
         foreach (var projectile in projectiles) {
@@ -180,8 +183,10 @@ public class ShootStrategy : SkillsStrategy {
 
 
     void ShootProjectile() {
-
-
+        //Audio
+        audioManager.PlayOneShot(SkillSound, Origin.position);
+        
+        //Shape
         switch (shootShape) {
             case ShootShape.Forward: {
                     for (int i = 0; i < projectilesCountByShoot; i++) {

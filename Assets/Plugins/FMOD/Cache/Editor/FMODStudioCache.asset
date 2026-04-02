@@ -1,0 +1,228 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7635505193068765887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Mele/Sword/Sword
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Mele/Sword/Sword
+  Guid:
+    Data1: 1296037400
+    Data2: 1236132670
+    Data3: -1479891288
+    Data4: 1986270958
+  Banks:
+  - {fileID: -6215193183086441864}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 90
+  Length: 400
+--- !u!114 &-7544809293241347934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../RougeLikeRPGFMOD/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 639106134693322117
+  FileSizes:
+  - Name: Desktop
+    Value: 1596064
+  Exists: 1
+--- !u!114 &-7451629439594978040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../RougeLikeRPGFMOD/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 639106134693332144
+  FileSizes:
+  - Name: Desktop
+    Value: 1030
+  Exists: 1
+--- !u!114 &-6215193183086441864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Hero.bank
+  m_EditorClassIdentifier: 
+  Path: ../RougeLikeRPGFMOD/Build/Desktop/Hero.bank
+  Name: Hero
+  StudioPath: bank:/Hero
+  lastModified: 639106095696819548
+  FileSizes:
+  - Name: Desktop
+    Value: 226976
+  Exists: 1
+--- !u!114 &-5939161106805506477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Test.bank
+  m_EditorClassIdentifier: 
+  Path: ../RougeLikeRPGFMOD/Build/Desktop/Test.bank
+  Name: Test
+  StudioPath: bank:/Test
+  lastModified: 639105601533759950
+  FileSizes:
+  - Name: Desktop
+    Value: 506
+  Exists: 1
+--- !u!114 &-246318636062924440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Shoot/IceShard
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Shoot/IceShard
+  Guid:
+    Data1: -710669308
+    Data2: 1076691716
+    Data3: 420571067
+    Data4: -66294814
+  Banks:
+  - {fileID: -6215193183086441864}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 800
+--- !u!114 &-213876979278109255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Music
+  Guid:
+    Data1: 84386561
+    Data2: 1269832328
+    Data3: -383146351
+    Data4: 1327130309
+  Banks:
+  - {fileID: -7544809293241347934}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 126171
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: -7451629439594978040}
+  - {fileID: -7544809293241347934}
+  - {fileID: -5939161106805506477}
+  - {fileID: -6215193183086441864}
+  EditorEvents:
+  - {fileID: -7635505193068765887}
+  - {fileID: -246318636062924440}
+  - {fileID: 5448216651622119384}
+  - {fileID: -213876979278109255}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -7544809293241347934}
+  StringsBanks:
+  - {fileID: -7451629439594978040}
+  cacheVersion: 131858
+  cacheTime: 639106134693332144
+  SerializableEventsDict:
+  - key: event:/Skills/Mele/Sword/Sword
+    index: 0
+  - key: event:/Skills/Shoot/IceShard
+    index: 1
+  - key: event:/Skills/Shield/Block
+    index: 2
+  - key: event:/Music/Music
+    index: 3
+--- !u!114 &5448216651622119384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Shield/Block
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Shield/Block
+  Guid:
+    Data1: 1691908804
+    Data2: 1154790008
+    Data3: 421148824
+    Data4: 1518471013
+  Banks:
+  - {fileID: -6215193183086441864}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 450

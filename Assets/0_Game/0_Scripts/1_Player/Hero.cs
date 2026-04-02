@@ -42,6 +42,9 @@ public class Hero : MonoBehaviour {
     JumpState jumpState;
     LandingState landingState;
     SkillState skillState;
+
+    //Audio
+    [SerializeField] AudioManager audioManager;
     public bool Paused => paused;
     bool paused = false;
 
@@ -53,7 +56,7 @@ public class Hero : MonoBehaviour {
         healthComponent.OnDie += Die;
 
         //Battle
-        battleContorller.Initialize(manaComponent, heroData.SkillStrategyData, OnPickUppowerUp);
+        battleContorller.Initialize(manaComponent, heroData.SkillStrategyData, OnPickUppowerUp, audioManager);
 
         //Exp
         expComponent.Initialize(OnLevelUp, OnGetExp);
