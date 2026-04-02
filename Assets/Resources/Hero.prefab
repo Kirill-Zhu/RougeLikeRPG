@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 6625523434085770362}
   - component: {fileID: 3960794774759557692}
   - component: {fileID: -4851204089305757902}
+  - component: {fileID: 8760122471330487146}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Player
@@ -184,9 +185,13 @@ MonoBehaviour:
   OnChooseLelvelUpCard:
     m_PersistentCalls:
       m_Calls: []
+  OnDie:
+    m_PersistentCalls:
+      m_Calls: []
   healthData: {fileID: 11400000, guid: 4e4c4d9d376a95840bc50dd8c43e467f, type: 2}
   manaComponent: {fileID: 0}
   animator: {fileID: 6896231851695817816}
+  audioManager: {fileID: 8760122471330487146}
 --- !u!114 &4156648375255528194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +351,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillStrategyList: []
+--- !u!114 &8760122471330487146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351574590332836233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d72b525aedb19459fd8eda0baece3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1001 &4835530116849110258
 PrefabInstance:
   m_ObjectHideFlags: 0

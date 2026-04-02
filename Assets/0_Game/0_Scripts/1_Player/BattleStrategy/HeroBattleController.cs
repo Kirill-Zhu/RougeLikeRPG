@@ -18,8 +18,9 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
     private float enqueTime = 0.2f;                                                                            //Wait this time to set Battle State after Input and then cancel if conditions are not approach
     private float cancelTimer = default;
     ManaComponent manaComponent;
-
-    public void Initialize(ManaComponent manaComponent, SkillsStrategy[] skillsStrategy, UnityEvent<Sprite, string, string> @OnPickUpPowerUpEvent) {
+    //Audio
+    AudioManager audioManager;
+    public void Initialize(ManaComponent manaComponent, SkillsStrategy[] skillsStrategy, UnityEvent<Sprite, string, string> @OnPickUpPowerUpEvent, AudioManager audioManager) {
         this.manaComponent = manaComponent;
 
         //Initialize Events
@@ -41,11 +42,13 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
 
         //--------------initialize it
         foreach (var skillStrategy in skillStrategy)                                              //initializeAll strategies
-            skillStrategy.Initialize(this.transform);
+            skillStrategy.Initialize(this.transform, audioManager);
 
         AddSkillDependecies();
         //Events
        
+        //Audio
+        audioManager = this.audioManager;
     }
     private void Awake() {
         inputs.IsUsingSkill += usingSkill => {
@@ -106,6 +109,7 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
         UnSubscribeInputs();
         OnSkillDurationChange -= duration => SkillDurationTimer = duration;
         OnManaChange = null;
+
     }
 
     //Visitor

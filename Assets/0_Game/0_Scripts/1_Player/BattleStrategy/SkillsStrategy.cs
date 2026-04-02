@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,13 +28,16 @@ public abstract class SkillsStrategy : ScriptableObject, IVisitable {
     public string AnimationName;
     public abstract int CurrentAnimationHash { get; set; }
     public float SkillDuration;
+    [Header("Audio")]
+    protected AudioManager audioManager;
+    public EventReference SkillSound;
 
     protected void InvokeOnCoolDownCall(float value) {
         OnCoolDownFillAmountValue?.Invoke(value);
     }
     public abstract void TryUseSkill(Action<float> OnChangeSkillDuration, Action<int, float> OnAnimation, UnityAction<int> OnManaChangEvent);
     public abstract void OnUpdate(float deltaTime);
-    public abstract void Initialize(Transform origin);
+    public abstract void Initialize(Transform origin, AudioManager audioManager);
     public abstract void Dispose();
     public void AddOrModifyDamageType(DamageType[] damageType) {
         foreach (var damage in damageType) {

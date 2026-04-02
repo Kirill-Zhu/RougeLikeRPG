@@ -20,12 +20,16 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
     public override void Dispose() {
        //Destroy all projectiles
     }
-    public override void Initialize(Transform origin) {
+    public override void Initialize(Transform origin, AudioManager audioManager) {
         Origin = origin;
         damageTypesList = GetStartDamageTypes().ToList();
 
+
         foreach (var damageType in damageTypesList) 
             SetOrAddDamageTypeWithValues(damageType);
+
+        //Audio 
+        this.audioManager = audioManager;
     }
     public override void OnUpdate(float deltaTime) {
         if (!onCoolDown) return;
@@ -57,6 +61,9 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
 
         //Change Mana
         OnManaChange.Invoke(-ManaCost);
+
+        //Audio
+        audioManager.PlayOneShot(SkillSound, Origin.position);
 
     }
 

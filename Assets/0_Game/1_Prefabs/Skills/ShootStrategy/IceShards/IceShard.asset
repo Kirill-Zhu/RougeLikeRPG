@@ -26,6 +26,13 @@ MonoBehaviour:
   CoolDown: 1
   AnimationName: Shoot
   SkillDuration: 0.05
+  SkillSound:
+    Guid:
+      Data1: -710669308
+      Data2: 1076691716
+      Data3: 420571067
+      Data4: -66294814
+    Path: event:/Skills/Shoot/IceShard
   shootShape: 1
   spreadAngle: 73.1
   projectilesCountByShoot: 3

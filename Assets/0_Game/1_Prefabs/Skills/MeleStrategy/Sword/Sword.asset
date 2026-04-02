@@ -19,6 +19,7 @@ MonoBehaviour:
   - {fileID: 8307060409358143758, guid: 0c0bac369c4ab564aad3079dabc46511, type: 3}
   - {fileID: 8307060409358143758, guid: 718052adff27eca46960843f294312f2, type: 3}
   - {fileID: 8307060409358143758, guid: 2a1f989aa7c7fb9489a8db5b58564c2d, type: 3}
+  ManaCost: 0
   PhysicsDamage: 8
   FireDamage: 0
   ColdDamage: 0
@@ -30,6 +31,13 @@ MonoBehaviour:
   CoolDown: 0
   AnimationName: Attack1
   SkillDuration: 1
+  SkillSound:
+    Guid:
+      Data1: 1296037400
+      Data2: 1236132670
+      Data3: -1479891288
+      Data4: 1986270958
+    Path: event:/Skills/Mele/Sword/Sword
   AttackRange: 1
   maxAttackSeries: 4
   maxQueueAttackCount: 1

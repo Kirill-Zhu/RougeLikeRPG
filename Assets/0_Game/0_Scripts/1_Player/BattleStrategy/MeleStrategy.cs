@@ -28,8 +28,9 @@ public class MeleStrategy : SkillsStrategy {
     public List<string> AnimationNames;
     List<int> animationHash = new List<int>();
     public override int CurrentAnimationHash { get => animationHash[attackSeries]; set => throw new System.NotImplementedException(); }
+   
 
-    public override void Initialize(Transform origin) {
+    public override void Initialize(Transform origin, AudioManager audioManager) {
         Origin = origin;
 
         //Conditions
@@ -55,6 +56,8 @@ public class MeleStrategy : SkillsStrategy {
 
         //-----------------------------
 
+        //Audio
+        this.audioManager = audioManager;
     }
     public override void Dispose() {
         if (weapon != null) Destroy(weapon.gameObject);
@@ -150,17 +153,16 @@ public class MeleStrategy : SkillsStrategy {
         coolDownTimer = SkillDuration;
         OnAnimation.Invoke(CurrentAnimationHash, SkillDuration);
         OnSkillDuration.Invoke(SkillDuration);
+        audioManager.PlayOneShot(SkillSound, Origin.position);
         //Async do damage 
         attackSeries++;
 
         await UniTask.WaitForSeconds(SkillDuration * 0.4f);                                                                                                          //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Need for every attack type define delay!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         weapon.gameObject.SetActive(true);
         if (particleSystemArray != null) particleSystemArray[attackSeries - 1].Play();
-
+        
         await UniTask.WaitForSeconds(0.1f);
         weapon.gameObject.SetActive(false);
-
-
     }
 
 
