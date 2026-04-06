@@ -25,7 +25,14 @@ MonoBehaviour:
   HealthComponent: {fileID: 0}
   CoolDown: 5
   AnimationName: Shoot
-  SkillDuration: 0
+  SkillDuration: 0.3
+  SkillSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   shootShape: 0
   spreadAngle: 0
   projectilesCountByShoot: 1

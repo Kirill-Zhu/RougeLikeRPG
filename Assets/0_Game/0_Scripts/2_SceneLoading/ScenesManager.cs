@@ -12,7 +12,7 @@ public class ScenesManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(mainMenuSceneID);
     }
 
-    public void TestStarGame() {
+    public void StartGame() {
         UnityEngine.SceneManagement.SceneManager.LoadScene(TestLevleSceneID);
         UnityEngine.SceneManagement.SceneManager.LoadScene(InGameUISceneID, UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 public class LevelManager : MonoBehaviour {
+    [SerializeField] ChoseHeroStrategy heroStrategy;
     [SerializeField] HeroStrategyData heroData;
     [Inject]
     public Hero hero;
@@ -30,6 +31,7 @@ public class LevelManager : MonoBehaviour {
     }
     public void ActivateScene() {
         HeroSpawner.SpawnHero();
+        heroData = heroStrategy.HeroStrategyData;
         hero.Initialize(heroData);
     }
     public void PauseGame() {
