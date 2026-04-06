@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 849e9b78b70f8da478f3ed84845c808f, type: 3}
+  m_Name: Mage
+  m_EditorClassIdentifier: 
+  ModelPrefab: {fileID: 1248815240492774, guid: 96e49a7c7c10f954394af56028ee0b46, type: 3}
+  HealtComponentData: {fileID: 11400000, guid: a38fb2b52b0a8944cb05fddf881730a8, type: 2}
+  SkillStrategyData:
+  - {fileID: 11400000, guid: 08b78708637744e4897bd370eff46edf, type: 2}
+  - {fileID: 11400000, guid: bf021e707a320f04ea87c5954018f8f5, type: 2}
+  - {fileID: 11400000, guid: 4777043a0a2715943aca3c56db4e5560, type: 2}

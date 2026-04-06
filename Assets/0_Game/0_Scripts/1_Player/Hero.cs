@@ -1,10 +1,12 @@
 using MyStateMachine;
 using UnityEngine;
 using UnityEngine.Events;
-using Zenject;
 public class Hero : MonoBehaviour {
 
     //Initialize
+    public GameObject Model => model;
+    GameObject model;
+
     public UnityEvent OnHeroChange;///Invokes Every time when need change UI
     public UnityEvent<int, int> OnGetExp;
     public UnityEvent<Sprite, string, string> OnPickUppowerUp;
@@ -35,8 +37,8 @@ public class Hero : MonoBehaviour {
     //Power Up 
 
     //State Machine
-    StateMachine stateMachine = new StateMachine();
     [SerializeField] Animator animator;
+    StateMachine stateMachine;
     PausedState pausedState;
     Locomotion locomotion;
     JumpState jumpState;
@@ -48,9 +50,16 @@ public class Hero : MonoBehaviour {
     public bool Paused => paused;
     bool paused = false;
 
+
     public void Initialize(HeroStrategyData data) {
+        //Data
         heroData = data;
 
+        if (model != null) Destroy(model.gameObject);
+
+        model = Instantiate(heroData.ModelPrefab, transform);
+        model.transform.localPosition = Vector3.zero;
+        animator = model.GetComponent<Animator>();
         //Health
         healthComponent.Initialize(heroData.HealtComponentData);
         healthComponent.OnDie += Die;
@@ -62,17 +71,8 @@ public class Hero : MonoBehaviour {
         expComponent.Initialize(OnLevelUp, OnGetExp);
 
         OnHeroChange?.Invoke();
-    }
-
-    private void Awake() {
-        moveController = GetComponent<SimpleCahracterController>();
-        battleContorller = GetComponent<HeroBattleController>();
-        heroAutoSkillController = GetComponent<HeroAutoSkillController>();
-        healthComponent = GetComponent<HealthComponent>();
-        manaComponent = GetComponent<ManaComponent>();
-        expComponent = GetComponent<ExpComponent>();
-
         //StateMachine
+        stateMachine = new StateMachine();
         pausedState = new PausedState(moveController, animator, battleContorller, heroAutoSkillController);
         locomotion = new Locomotion(moveController, animator, battleContorller, heroAutoSkillController);
         jumpState = new JumpState(moveController, animator, battleContorller, heroAutoSkillController);
@@ -97,9 +97,18 @@ public class Hero : MonoBehaviour {
         stateMachine.SetState(locomotion);
     }
 
-    private void Update() {
+    private void Awake() {
+        moveController = GetComponent<SimpleCahracterController>();
+        battleContorller = GetComponent<HeroBattleController>();
+        heroAutoSkillController = GetComponent<HeroAutoSkillController>();
+        healthComponent = GetComponent<HealthComponent>();
+        manaComponent = GetComponent<ManaComponent>();
+        expComponent = GetComponent<ExpComponent>();
+    }
 
-        stateMachine?.Update();
+    private void Update() {
+        if (stateMachine != null)
+            stateMachine?.Update();
     }
     void Die() {
         OnDie?.Invoke();

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849e9b78b70f8da478f3ed84845c808f, type: 3}
   m_Name: Foxy
   m_EditorClassIdentifier: 
+  ModelPrefab: {fileID: 4662497438346200923, guid: 114522a01cb086e4a848755264794f98, type: 3}
   HealtComponentData: {fileID: 11400000, guid: 0b82d097f63dc0347a074cd435ba143b, type: 2}
   SkillStrategyData:
   - {fileID: 11400000, guid: 3f3a31ead5c472e4185e006149b0861c, type: 2}
