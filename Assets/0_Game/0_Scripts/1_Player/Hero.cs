@@ -15,7 +15,13 @@ public class Hero : MonoBehaviour {
     public UnityEvent OnDie;
     HeroStrategyData heroData;
 
+    //Movement
     SimpleCahracterController moveController;
+    #region ANDROID
+    public void SetJoystick(DynamicJoystick joystick) {
+        moveController.SetUpAndoridJoystick(joystick);
+    }
+    #endregion
 
     //Battle
     public HeroBattleController HeroBattleController => battleContorller;

@@ -20,16 +20,26 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
     public override void Dispose() {
        //Destroy all projectiles
     }
-    public override void Initialize(Transform origin, AudioManager audioManager) {
+
+    public override bool Evauate(float distanceToHero) {
+        throw new NotImplementedException();
+    }
+
+    public override void Initialize(Transform origin, AudioManager audioManager, string interactionTagName) {
+        //Tag
+        this.interactionTagName = interactionTagName;
+
         Origin = origin;
         damageTypesList = GetStartDamageTypes().ToList();
-
+        
+    
 
         foreach (var damageType in damageTypesList) 
             SetOrAddDamageTypeWithValues(damageType);
 
         //Audio 
         this.audioManager = audioManager;
+      
     }
     public override void OnUpdate(float deltaTime) {
         if (!onCoolDown) return;
@@ -65,6 +75,10 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
         //Audio
         audioManager.PlayOneShot(SkillSound, Origin.position);
 
+    }
+
+    public override bool TryUseSkill(Action<int, float> OnAnimation) {
+        return false;
     }
 
     public override void UpdateValues() {

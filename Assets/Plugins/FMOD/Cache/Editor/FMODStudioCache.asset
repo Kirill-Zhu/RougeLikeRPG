@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: ../RougeLikeRPGFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639106134693322117
+  lastModified: 639116203454145890
   FileSizes:
   - Name: Desktop
-    Value: 1596064
+    Value: 9725280
   Exists: 1
 --- !u!114 &-7451629439594978040
 MonoBehaviour:
@@ -62,10 +62,10 @@ MonoBehaviour:
   Path: ../RougeLikeRPGFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639106134693332144
+  lastModified: 639116203454155817
   FileSizes:
   - Name: Desktop
-    Value: 1030
+    Value: 1088
   Exists: 1
 --- !u!114 &-6215193183086441864
 MonoBehaviour:
@@ -82,7 +82,7 @@ MonoBehaviour:
   Path: ../RougeLikeRPGFMOD/Build/Desktop/Hero.bank
   Name: Hero
   StudioPath: bank:/Hero
-  lastModified: 639106095696819548
+  lastModified: 639116044063210969
   FileSizes:
   - Name: Desktop
     Value: 226976
@@ -156,11 +156,11 @@ MonoBehaviour:
   - {fileID: -7544809293241347934}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 126171
+  Length: 113000
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,13 +183,14 @@ MonoBehaviour:
   - {fileID: -246318636062924440}
   - {fileID: 5448216651622119384}
   - {fileID: -213876979278109255}
+  - {fileID: 6955235857895379550}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7544809293241347934}
   StringsBanks:
   - {fileID: -7451629439594978040}
   cacheVersion: 131858
-  cacheTime: 639106134693332144
+  cacheTime: 639116203454155817
   SerializableEventsDict:
   - key: event:/Skills/Mele/Sword/Sword
     index: 0
@@ -199,6 +200,8 @@ MonoBehaviour:
     index: 2
   - key: event:/Music/Music
     index: 3
+  - key: event:/Music/BossFightMusic
+    index: 4
 --- !u!114 &5448216651622119384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,3 +229,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 45
   Length: 450
+--- !u!114 &6955235857895379550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/BossFightMusic
+  m_EditorClassIdentifier: 
+  Path: event:/Music/BossFightMusic
+  Guid:
+    Data1: -125383015
+    Data2: 1172970603
+    Data3: 937912508
+    Data4: -1796317669
+  Banks:
+  - {fileID: -7544809293241347934}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 59200

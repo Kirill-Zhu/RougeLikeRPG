@@ -22,8 +22,8 @@ MonoBehaviour:
   ProjectileSpeed: 10.1
   ProjectilieLiveDureation: 3
   ShootShape: 1
-  SpreadAngle: 73.7
-  ProjecitlesCountByShoot: 5
+  SpreadAngle: 45
+  ProjecitlesCountByShoot: 3
   SelfDirecrtedProjectile: 0
   WeaponPrefab: {fileID: 5766454499432765695, guid: 9852de15adb32534f9eec53a5e735c7d, type: 3}
   WeaponType: 1

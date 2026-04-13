@@ -6,7 +6,7 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
     public SkillsStrategy[] SkillsStrategy => skillStrategy;
     [SerializeField] SkillsStrategy[] skillStrategy = new SkillsStrategy[3];
     public UnityEvent<Sprite, string, string> OnPickUpPowerUp;
-
+    const string interactionTagName = "Enemy";
 
     [SerializeField] InputReader inputs;
     public event Action<int, float> OnAnimationStart;
@@ -20,6 +20,7 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
     ManaComponent manaComponent;
     //Audio
     AudioManager audioManager;
+
     public void Initialize(ManaComponent manaComponent, SkillsStrategy[] skillsStrategy, UnityEvent<Sprite, string, string> @OnPickUpPowerUpEvent, AudioManager audioManager) {
         this.manaComponent = manaComponent;
 
@@ -29,10 +30,10 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
         OnManaChange += manaComponent.ChangeMana;
         //Debug.Log($"Initialize : {GetType().Name}");
 
-        //--Remove Previous Startefies
-        if (skillStrategy != null)
-            foreach (var skill in skillsStrategy)
-                skill.Dispose();
+        //--Remove Previous Startfies
+        //if (skillStrategy != null)
+        //    foreach (var skill in skillsStrategy)
+        //        skill.Dispose();
 
         //--------------Create new Sctiptable Objects
 
@@ -42,7 +43,7 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
 
         //--------------initialize it
         foreach (var skillStrategy in skillStrategy)                                              //initializeAll strategies
-            skillStrategy.Initialize(this.transform, audioManager);
+            skillStrategy.Initialize(this.transform, audioManager, interactionTagName);
 
         AddSkillDependecies();
         //Events

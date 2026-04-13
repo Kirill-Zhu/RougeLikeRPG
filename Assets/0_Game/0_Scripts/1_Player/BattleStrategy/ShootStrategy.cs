@@ -8,7 +8,6 @@ using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Jobs;
-using static UnityEngine.UI.Image;
 [CreateAssetMenu(menuName = "SkillStrategy/Shoot", fileName = "Shoot")]
 public class ShootStrategy : SkillsStrategy {
 
@@ -22,7 +21,6 @@ public class ShootStrategy : SkillsStrategy {
     public int damage;
     public float speed;
     public string animationName;
-    public const string interactionTagName = "Enemy";
     public float LiveDuration = 10;
     bool initialization;
     List<Projectile> projectiles = new List<Projectile>();
@@ -31,11 +29,12 @@ public class ShootStrategy : SkillsStrategy {
     bool[] activeObjectsArray = new bool[0];
     NativeArray<bool> activeProjectilisNativeArray = new NativeArray<bool>();
     JobHandle jobHandle;
-    public override void Initialize(Transform origin, AudioManager audioManager) {
+    public override void Initialize(Transform origin, AudioManager audioManager, string interactionTagName) {
         initialization = true;
         //Add Damage Types it deals(set the values at definitons)
         damageTypesList = GetStartDamageTypes().ToList();
-
+        //Tag
+        this.interactionTagName = interactionTagName;
         foreach (var damageType in damageTypesList)
             SetOrAddDamageTypeWithValues(damageType);
 
@@ -43,6 +42,7 @@ public class ShootStrategy : SkillsStrategy {
 
         //Audio
         this.audioManager = audioManager;
+
     }
     public async override void Dispose() {
         foreach (var projectile in projectiles) {
@@ -62,7 +62,7 @@ public class ShootStrategy : SkillsStrategy {
 
     }
 
-   
+
     public async override void UpdateValues() {
         initialization = true;
         //Dispose 
@@ -70,7 +70,7 @@ public class ShootStrategy : SkillsStrategy {
             Destroy(projectile.gameObject);
             await UniTask.WaitForFixedUpdate();
         }
-           
+
         projectiles.Clear();
         objectsToMove.Clear();
         // Dispose of the TransformAccessArray to prevent memory leaks
@@ -185,7 +185,7 @@ public class ShootStrategy : SkillsStrategy {
     void ShootProjectile() {
         //Audio
         audioManager.PlayOneShot(SkillSound, Origin.position);
-        
+
         //Shape
         switch (shootShape) {
             case ShootShape.Forward: {
@@ -260,6 +260,19 @@ public class ShootStrategy : SkillsStrategy {
 
     }
 
+    public override bool TryUseSkill(Action<int, float> OnAnimation) {
+        Debug.Log("shoot");
+        if (coolDownTimer > 0) return false;
+        OnAnimation?.Invoke(CurrentAnimationHash, SkillDuration);
+        ShootProjectile();
+        return true;
+    }
+
+    public override bool Evauate(float distanceToHero) {
+        if (distanceToHero <= AttackRange && coolDownTimer <= 0) return true;
+
+        return false;
+    }
 
     [BurstCompile]
     public struct MoveJob : IJobParallelForTransform {

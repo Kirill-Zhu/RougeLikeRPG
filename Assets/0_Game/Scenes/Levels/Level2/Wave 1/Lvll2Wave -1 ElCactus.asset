@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Lvll2Wave -1 ElCactus
   m_EditorClassIdentifier: 
   enemyStrategy: {fileID: 11400000, guid: 4915b1930e80ed146a4d875ef0437e2d, type: 2}
-  spawnRate: 15
+  spawnRate: 20
