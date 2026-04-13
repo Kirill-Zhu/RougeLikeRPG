@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(CharacterController))]
 public class SimpleCahracterController : MonoBehaviour {
@@ -14,12 +15,20 @@ public class SimpleCahracterController : MonoBehaviour {
     [SerializeField] float jumpForce = 10;
     [SerializeField] float landingSpeed = -3f;
     public bool IsJumping { get; private set; }
-    public Vector3 InputDirection=>moveDirection;
+    public Vector3 InputDirection => moveDirection;
     Vector2 moveDirection;
     Camera mainCamera;
-
-    public void Initialize(CharacterControllerData  data) {
+    #region ANDROID
+    DynamicJoystick joystick;
+    public void SetUpAndoridJoystick(DynamicJoystick joystick) {
+        this.joystick = joystick;
+    }
+    #endregion
+    public void Initialize(CharacterControllerData data) {
         this.data = data;
+    }
+    void SubscribeAndroidInputs(PointerEventData eventData) {
+        moveDirection = joystick.Direction;
     }
     private void Awake() {
         mainCamera = Camera.main;
@@ -32,8 +41,21 @@ public class SimpleCahracterController : MonoBehaviour {
         input.Move += SubscribeMoveInputs;
         input.Jump += SubscribeJumpingButton;
         input.EnablePlayerActions();
+
+
+        //Android
+        joystick.OnMoveJoystick.AddListener((dir) => moveDirection = dir);
+        joystick.OnMoveJoystick.AddListener((_) => HandleMovement());
+        joystick.OnPointerUpEvent.AddListener(() => moveDirection = Vector2.zero);
     }
-    void SubscribeJumpingButton(bool isJumpButtonPressd ) {
+
+
+    //TestUpdate
+    private void Update() {
+        if (input.Direction == Vector3.zero)
+            moveDirection = joystick.Direction;
+    }
+    void SubscribeJumpingButton(bool isJumpButtonPressd) {
         switch (isJumpButtonPressd) {
             case true:
                 HandleJumping();
@@ -43,6 +65,7 @@ public class SimpleCahracterController : MonoBehaviour {
                 break;
         }
     }
+
     void SubscribeMoveInputs(Vector2 moveInput) {
         moveDirection = moveInput;
     }
@@ -67,7 +90,7 @@ public class SimpleCahracterController : MonoBehaviour {
         }
     }
     private Vector3 CalculateDirection() {
-        if(mainCamera == null) {mainCamera = Camera.main; } 
+        if (mainCamera == null) { mainCamera = Camera.main; }
         Vector3 cameraForward = mainCamera.transform.forward.WithY(0);
         Vector3 cameraRight = mainCamera.transform.right.WithY(0);
         Vector3 dir = cameraForward * moveDirection.y + cameraRight * moveDirection.x;
@@ -99,9 +122,10 @@ public class SimpleCahracterController : MonoBehaviour {
         //Ground Check
         if (Grounded()) {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(transform.position + new Vector3(0,-0.5f, 0), 0.1f);
+            Gizmos.DrawSphere(transform.position + new Vector3(0, -0.5f, 0), 0.1f);
         }
     }
+
     private void OnDestroy() {
         input.Move -= SubscribeMoveInputs;
         input.Jump -= SubscribeJumpingButton;

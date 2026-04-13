@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 2935735638678199417}
   - component: {fileID: 3911815731730849486}
   - component: {fileID: -4715881785582291015}
+  - component: {fileID: -6578151355579188375}
   - component: {fileID: -3075959230902871102}
   - component: {fileID: -5830595435489282641}
+  - component: {fileID: -3651260952689156332}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -53,6 +55,7 @@ MonoBehaviour:
   - {fileID: 3911815731730849486}
   - {fileID: -4715881785582291015}
   - {fileID: -5830595435489282641}
+  - {fileID: -6578151355579188375}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0
@@ -93,6 +96,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenesManager: {fileID: 5210122678863424132, guid: 9ceb3754b603eed44822144f0bb649db, type: 3}
+--- !u!114 &-6578151355579188375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6139756864858560355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed8652445c9f2f4babdcdd9a7276ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventManager: {fileID: -3651260952689156332}
 --- !u!114 &-3075959230902871102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,4 +133,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52e32ae296d23974ea8ba117e9121435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioManager: {fileID: -8208323148478958360, guid: c19e784ce2829034d82fe4d1e16531eb, type: 3}
+  audioManager: {fileID: -8789856439769944563, guid: c19e784ce2829034d82fe4d1e16531eb, type: 3}
+  eventManager: {fileID: -3651260952689156332}
+--- !u!114 &-3651260952689156332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6139756864858560355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf4f186961cd544ea55e2f1a106710c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnBossCreate:
+    m_PersistentCalls:
+      m_Calls: []

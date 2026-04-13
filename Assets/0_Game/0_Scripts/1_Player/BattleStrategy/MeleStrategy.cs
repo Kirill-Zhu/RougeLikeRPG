@@ -10,11 +10,11 @@ public class MeleStrategy : SkillsStrategy {
 
     WeaponType weapon;
 
-    public float AttackRange = 1;
+
     float enqueTime = 0.3f;
     public int maxAttackSeries = 4;
     int attackSeries = 0;
-    public const string interactionTagName = "Enemy";
+
 
     Queue<int> attackQueueDamage = new Queue<int>();                                                                                                                  //Store inputs in Queue with additional damage(Still dont add additional Damage)
     public int maxQueueAttackCount = 1;
@@ -28,9 +28,9 @@ public class MeleStrategy : SkillsStrategy {
     public List<string> AnimationNames;
     List<int> animationHash = new List<int>();
     public override int CurrentAnimationHash { get => animationHash[attackSeries]; set => throw new System.NotImplementedException(); }
-   
 
-    public override void Initialize(Transform origin, AudioManager audioManager) {
+
+    public override void Initialize(Transform origin, AudioManager audioManager, string interactionTagName) {
         Origin = origin;
 
         //Conditions
@@ -39,13 +39,12 @@ public class MeleStrategy : SkillsStrategy {
 
         //Initialize Dmaage Types
         damageTypesList = GetStartDamageTypes().ToList(); //Take initialized on inspectror enum values
-        
-        foreach(var damageType in damageTypesList) {
+
+        foreach (var damageType in damageTypesList) {
             SetOrAddDamageTypeWithValues(damageType);
         }
         //-----------------------------
 
-        BuildNewWeapon();
 
         //Animations ------
         //->Initialize Animation Hashes
@@ -58,6 +57,12 @@ public class MeleStrategy : SkillsStrategy {
 
         //Audio
         this.audioManager = audioManager;
+
+        //Tag
+        this.interactionTagName = interactionTagName;
+
+        BuildNewWeapon();
+
     }
     public override void Dispose() {
         if (weapon != null) Destroy(weapon.gameObject);
@@ -70,7 +75,7 @@ public class MeleStrategy : SkillsStrategy {
         foreach (var vfxObject in particleGameObjectsArray)
             Destroy(vfxObject.gameObject);
     }
-   
+
 
     public override void UpdateValues() {
         BuildNewWeapon();
@@ -119,9 +124,9 @@ public class MeleStrategy : SkillsStrategy {
 
     }
 
-    public override void TryUseSkill(Action<float> OnChangeSkillDuration, Action<int, float> OnAnimation,UnityAction<int> OnManaChange) {
+    public override void TryUseSkill(Action<float> OnChangeSkillDuration, Action<int, float> OnAnimation, UnityAction<int> OnManaChange) {
         OnSkillDuration = OnChangeSkillDuration;
-        
+
         foreach (Node node in nodes) {
             if (node.Evaluate()) {
                 attackQueueDamage.Enqueue(attackQueueDamage.Count);
@@ -130,7 +135,18 @@ public class MeleStrategy : SkillsStrategy {
                 return;
             }
         }
-      
+
+    }
+    //For Brain
+    public override bool TryUseSkill(Action<int, float> OnAnimation) {
+        foreach (Node node in nodes) {
+            if (node.Evaluate()) {
+                attackQueueDamage.Enqueue(attackQueueDamage.Count);
+                this.OnAnimation = OnAnimation;
+                return true;
+            }
+        }
+        return false;
     }
     public override void OnUpdate(float deltaTime) {
         if (coolDownTimer > 0) {
@@ -150,7 +166,10 @@ public class MeleStrategy : SkillsStrategy {
         if (attackSeries >= maxAttackSeries)
             attackSeries = 0;
 
-        coolDownTimer = SkillDuration;
+        if (WithCooldown)
+            coolDownTimer = CoolDown;
+        else
+            coolDownTimer = SkillDuration;
         OnAnimation.Invoke(CurrentAnimationHash, SkillDuration);
         OnSkillDuration.Invoke(SkillDuration);
         audioManager.PlayOneShot(SkillSound, Origin.position);
@@ -160,12 +179,19 @@ public class MeleStrategy : SkillsStrategy {
         await UniTask.WaitForSeconds(SkillDuration * 0.4f);                                                                                                          //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Need for every attack type define delay!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         weapon.gameObject.SetActive(true);
         if (particleSystemArray != null) particleSystemArray[attackSeries - 1].Play();
-        
+
         await UniTask.WaitForSeconds(0.1f);
         weapon.gameObject.SetActive(false);
     }
 
 
+
+    //Use for AutoAttack on CoolDown(For boses)
+    public override bool Evauate(float distanceToHero) {
+        if (coolDownTimer <= 0 && distanceToHero <= AttackRange) return true;
+
+        return false;
+    }
 
     class Node {
         IPredicate condition;

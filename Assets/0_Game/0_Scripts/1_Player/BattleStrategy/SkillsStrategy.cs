@@ -9,6 +9,8 @@ public abstract class SkillsStrategy : ScriptableObject, IVisitable {
     public GameObject[] ParticlePrefabArray;
     protected ParticleSystem[] particleSystemArray = new ParticleSystem[0];
     protected GameObject[] particleGameObjectsArray = new GameObject[0];
+    protected string interactionTagName = "Enemy";
+    public float AttackRange = 1;
     public int ManaCost = 0;
     public int PhysicsDamage;
     public int FireDamage;
@@ -23,6 +25,7 @@ public abstract class SkillsStrategy : ScriptableObject, IVisitable {
 
     public event UnityAction<float> OnCoolDownFillAmountValue;
     public event UnityAction<int> OnManaChange;
+    public bool WithCooldown = true;
     public float CoolDown;
     protected float coolDownTimer;
     public string AnimationName;
@@ -35,10 +38,12 @@ public abstract class SkillsStrategy : ScriptableObject, IVisitable {
     protected void InvokeOnCoolDownCall(float value) {
         OnCoolDownFillAmountValue?.Invoke(value);
     }
+    public abstract bool TryUseSkill(Action<int, float> OnAnimation);
     public abstract void TryUseSkill(Action<float> OnChangeSkillDuration, Action<int, float> OnAnimation, UnityAction<int> OnManaChangEvent);
     public abstract void OnUpdate(float deltaTime);
-    public abstract void Initialize(Transform origin, AudioManager audioManager);
+    public abstract void Initialize(Transform origin, AudioManager audioManager, string interactionTagName);
     public abstract void Dispose();
+    public abstract bool Evauate(float distanceToHero);
     public void AddOrModifyDamageType(DamageType[] damageType) {
         foreach (var damage in damageType) {
             SetOrAddDamageTypeWithValues(damage);

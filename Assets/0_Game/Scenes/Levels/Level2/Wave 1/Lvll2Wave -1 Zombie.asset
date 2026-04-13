@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Lvll2Wave -1 Zombie
   m_EditorClassIdentifier: 
   enemyStrategy: {fileID: 11400000, guid: 2a8a3f84c6d598c48b4f69764033d641, type: 2}
-  spawnRate: 20
+  spawnRate: 40

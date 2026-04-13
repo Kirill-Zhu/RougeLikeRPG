@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Strategy/EntitySpawner/SpawnerStratygy", fileName = "New Spawner Strategy")]
 public class SpawnStrategy : ScriptableObject {
     [SerializeField] public EnemyStrategy enemyStrategy;
-    public float spawnRate = 1;
+    public float spawnRate = 2;
     float timer = 0;
     public Action<EnemyStrategy> OnSpawnEntity;
 

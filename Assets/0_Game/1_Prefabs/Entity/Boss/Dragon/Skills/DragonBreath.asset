@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ae6ef31d71946543ab47a1216d4f13d, type: 3}
+  m_Name: DragonBreath
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8588091497747562103, guid: 8328d32ce9abb8c4f86b181fc53af6af, type: 3}
+  ParticlePrefabArray:
+  - {fileID: 8764043878647920493, guid: 4f058f3a9aa96bb408c4bf7359d83b17, type: 3}
+  - {fileID: 8764043878647920493, guid: 4f058f3a9aa96bb408c4bf7359d83b17, type: 3}
+  - {fileID: 8764043878647920493, guid: 4f058f3a9aa96bb408c4bf7359d83b17, type: 3}
+  - {fileID: 8764043878647920493, guid: 4f058f3a9aa96bb408c4bf7359d83b17, type: 3}
+  - {fileID: 8764043878647920493, guid: 4f058f3a9aa96bb408c4bf7359d83b17, type: 3}
+  AttackRange: 2
+  ManaCost: -1
+  PhysicsDamage: 8
+  FireDamage: 0
+  ColdDamage: 0
+  Icon: {fileID: 21300000, guid: 0e1ab67eb67874542b1606233616c377, type: 3}
+  BackSprite: {fileID: 21300000, guid: c7bf45f0ef95bed4491c5809fc6bf484, type: 3}
+  DamageTypesEnum: 1
+  damageTypesList: []
+  HealthComponent: {fileID: 0}
+  WithCooldown: 1
+  CoolDown: 10
+  AnimationName: "\u0421ontinuous"
+  SkillDuration: 2
+  SkillSound:
+    Guid:
+      Data1: 1296037400
+      Data2: 1236132670
+      Data3: -1479891288
+      Data4: 1986270958
+    Path: event:/Skills/Mele/Sword/Sword
+  maxAttackSeries: 1
+  maxQueueAttackCount: 1
+  AnimationNames:
+  - "\u0421ontinuous"
+  - "\u0421ontinuous"
+  - "\u0421ontinuous"
+  - "\u0421ontinuous"
+  - "\u0421ontinuous"

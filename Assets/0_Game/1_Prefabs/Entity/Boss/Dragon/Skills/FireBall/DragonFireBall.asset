@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eaac55a81fb2ff4a934213c3a5c441c, type: 3}
+  m_Name: DragonFireBall
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2411410708391911317, guid: 520974a43ea1fd44d975da6e7a2cb05a, type: 3}
+  ParticlePrefabArray: []
+  AttackRange: 11
+  ManaCost: 0
+  PhysicsDamage: 0
+  FireDamage: 5
+  ColdDamage: 0
+  Icon: {fileID: 21300000, guid: 04841b8a9cae96b42aa2a2689b689515, type: 3}
+  BackSprite: {fileID: 21300000, guid: 5915cdc174101e540b3349e21ee2cd74, type: 3}
+  DamageTypesEnum: 3
+  damageTypesList: []
+  HealthComponent: {fileID: 0}
+  WithCooldown: 1
+  CoolDown: 5
+  AnimationName: Shoot
+  SkillDuration: 1
+  SkillSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  shootShape: 1
+  spreadAngle: 120
+  projectilesCountByShoot: 15
+  damage: 1
+  speed: 3
+  animationName: Shoot
+  LiveDuration: 5

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1931694588739526134, guid: 45050c79404988944a25404f054f250e, type: 3}
   ParticlePrefabArray: []
+  AttackRange: 11
   ManaCost: 10
   PhysicsDamage: 0
   FireDamage: 5
@@ -23,6 +24,7 @@ MonoBehaviour:
   DamageTypesEnum: 3
   damageTypesList: []
   HealthComponent: {fileID: 0}
+  WithCooldown: 1
   CoolDown: 5
   AnimationName: Shoot
   SkillDuration: 0.3
