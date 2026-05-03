@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d72b525aedb19459fd8eda0baece3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reference:
+  standartMusic:
     Guid:
       Data1: 84386561
       Data2: 1269832328
@@ -73,4 +73,11 @@ MonoBehaviour:
       Data3: 937912508
       Data4: -1796317669
     Path: event:/Music/BossFightMusic
+  dieMenu:
+    Guid:
+      Data1: -659095058
+      Data2: 1151288227
+      Data3: 1267204535
+      Data4: 679059494
+    Path: event:/Music/DieMusic
   eventManager: {fileID: 0}

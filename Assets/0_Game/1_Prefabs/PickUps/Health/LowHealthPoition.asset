@@ -12,7 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 720f6580255a0d84b9b5de6264adce1b, type: 3}
   m_Name: LowHealthPoition
   m_EditorClassIdentifier: 
+  Label: {fileID: 0}
+  Descritpion: 
   ModelPrefab: {fileID: 5026541447367235291, guid: 522a88e60f1f7ba40a091e79f2dbd518, type: 3}
   particle: {fileID: 7605971768039713050, guid: 001db25536c8b7e4e8f0acd4535b561c, type: 3}
+  PickUpSound:
+    Guid:
+      Data1: -21651453
+      Data2: 1217910788
+      Data3: -19453263
+      Data4: -1591061462
+    Path: event:/PickUps/HealthMana
   health: 10
   mana: 0

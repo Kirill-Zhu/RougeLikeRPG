@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 85327a803bcfa7a48b5045443d44d482
+ShaderIncludeImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310764
+  packageName: Spells Pack 2 - Free Version
+  packageVersion: 1.0
+  assetPath: Assets/Spells Pack 2 Free Version/Demo/Environment/Shaders/HLSL/CustomFunctionNodes.hlsl
+  uploadId: 731870

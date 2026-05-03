@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -25,7 +26,8 @@ public abstract class AutoSkillStrategy : ScriptableObject {
     public const string interactionTagName = "Enemy";
     protected float coolDownTimer = 0;
     protected Transform Origin;
-
+    [Header("Sound")]
+    [SerializeField] protected EventReference OnCastSound;
     //Events
     public UnityAction<float> OnCoolDownFillAmountValue;
     public abstract void Initialize(Transform origin);
@@ -43,7 +45,7 @@ public abstract class AutoSkillStrategy : ScriptableObject {
         _ => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(FireDamage), new ColdDamageType(ColdDamage) },
     };
     protected abstract void UseSKill();
-
+    protected abstract void PlayOnCastSound();
     private void OnDestroy() {
         OnCoolDownFillAmountValue = null;   
     }

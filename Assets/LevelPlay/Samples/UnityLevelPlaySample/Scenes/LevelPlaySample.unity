@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lpLogo: {fileID: 2800000, guid: 6ac5a1452d9d94ba783cb9aa2ceb9c7e, type: 3}
+  isAdsEnabled: 0
 --- !u!114 &144620212
 MonoBehaviour:
   m_ObjectHideFlags: 0

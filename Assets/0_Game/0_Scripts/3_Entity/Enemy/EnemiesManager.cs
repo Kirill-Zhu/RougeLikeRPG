@@ -74,6 +74,7 @@ public class EnemiesManager : MonoBehaviour {
            .SetProjectileAim(Hero.transform)
            .WithInteractionTag(interactionTagName)
            .WithDropObject(strategy.DropPfreabList)
+           .WithSounds(strategy.OnAttack, strategy.OnDie)
            .Build(type);
 
         var component = obj.GetComponent(type);

@@ -36033,7 +36033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d72b525aedb19459fd8eda0baece3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reference:
+  standartMusic:
     Guid:
       Data1: 0
       Data2: 0
@@ -36047,7 +36047,15 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
+  dieMenu:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   eventManager: {fileID: 0}
+  scenesManager: {fileID: 0}
 --- !u!1001 &564093443
 PrefabInstance:
   m_ObjectHideFlags: 0

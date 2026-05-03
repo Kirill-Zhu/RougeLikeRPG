@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroPrefab: {fileID: 5351574590332836233, guid: da56d1286c60c8541819a12bbe67efee, type: 3}
+  eventManager: {fileID: -3651260952689156332}
 --- !u!114 &-4715881785582291015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenesManager: {fileID: 5210122678863424132, guid: 9ceb3754b603eed44822144f0bb649db, type: 3}
+  eventManager: {fileID: -3651260952689156332}
 --- !u!114 &-6578151355579188375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +137,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioManager: {fileID: -8789856439769944563, guid: c19e784ce2829034d82fe4d1e16531eb, type: 3}
   eventManager: {fileID: -3651260952689156332}
+  heroMoninstaller: {fileID: 3911815731730849486}
+  scenesManagerMonoinstaller: {fileID: -4715881785582291015}
 --- !u!114 &-3651260952689156332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,5 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnBossCreate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLoadMainMenu:
     m_PersistentCalls:
       m_Calls: []

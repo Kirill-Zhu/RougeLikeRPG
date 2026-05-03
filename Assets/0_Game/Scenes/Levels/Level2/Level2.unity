@@ -2179,7 +2179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d72b525aedb19459fd8eda0baece3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reference:
+  standartMusic:
     Guid:
       Data1: 0
       Data2: 0
@@ -2193,7 +2193,15 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
+  dieMenu:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   eventManager: {fileID: 0}
+  scenesManager: {fileID: 0}
 --- !u!1001 &564093443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7572,6 +7580,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1741547764
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4897015921897156567, guid: 75049e970366d1c4f821e7b4f7b5ea50, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: d6032d13c4ee8c441b8173423b65deb2, type: 3}
+    - target: {fileID: 4897015921897156567, guid: 75049e970366d1c4f821e7b4f7b5ea50, type: 3}
+      propertyPath: m_Name
+      value: CoinPickUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234790976916786114, guid: 75049e970366d1c4f821e7b4f7b5ea50, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 35.178
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234790976916786114, guid: 75049e970366d1c4f821e7b4f7b5ea50, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234790976916786114, guid: 75049e970366d1c4f821e7b4f7b5ea50, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 62.785
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234790976916786114, guid: 75049e970366d1c4f821e7b4f7b5ea50, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234790976916786114, guid: 75049e970366d1c4f821e7b4f7b5ea50, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234790976916786114, guid: 75049e970366d1c4f821e7b4f7b5ea50, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234790976916786114, guid: 75049e970366d1c4f821e7b4f7b5ea50, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234790976916786114, guid: 75049e970366d1c4f821e7b4f7b5ea50, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234790976916786114, guid: 75049e970366d1c4f821e7b4f7b5ea50, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234790976916786114, guid: 75049e970366d1c4f821e7b4f7b5ea50, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 75049e970366d1c4f821e7b4f7b5ea50, type: 3}
 --- !u!1001 &1754124140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8386,10 +8455,10 @@ Transform:
   m_Children:
   - {fileID: 276894650}
   - {fileID: 1335311913}
+  - {fileID: 2131899096}
   - {fileID: 161825170}
   - {fileID: 1907165953}
   - {fileID: 504671517}
-  - {fileID: 2131899096}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1862921880
@@ -9736,7 +9805,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131899095}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9757,7 +9826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventManager: {fileID: 0}
   hero: {fileID: 0}
-  timeToBoss: 120
+  timeToBoss: 135
   TestBoss: {fileID: 7160750073294024954, guid: a188c61611b11c9479c0af369d48f30d, type: 3}
 --- !u!1001 &2142324973
 PrefabInstance:
@@ -10100,3 +10169,4 @@ SceneRoots:
   - {fileID: 1802260655}
   - {fileID: 1476094451}
   - {fileID: 361801210}
+  - {fileID: 1741547764}

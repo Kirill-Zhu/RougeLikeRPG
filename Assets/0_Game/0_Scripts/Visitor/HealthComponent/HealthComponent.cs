@@ -1,13 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
-public class HealthComponent : MonoBehaviour, IVisitable {
+public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
 
     [Header("Initialize Properties")]
     [SerializeField] PopUpDamageValuesHandler popUpStrategy;
-     PopUpDamageValuesHandler popUpHandler;
+    PopUpDamageValuesHandler popUpHandler;
+    int startMaxHealth;
     public int MaxHealth => maxHealth;
     [SerializeField] int maxHealth = 100;
     public int Health => health;
@@ -17,10 +19,15 @@ public class HealthComponent : MonoBehaviour, IVisitable {
     [SerializeField] int coldDefence = 1;
     public event UnityAction<int> OnGetCurrentHealth;   // For health globes
     public event UnityAction<DamageType, int> OnTakeDamage;
+    public event Action<DamageType> OnTakeDamageBus;
     public event UnityAction<DamageType> OnBlockDamage;
     public event UnityAction OnDie;
     CancellationTokenSource cts; //Use on destroy to kill dotween animations in popUpStrategy
     CancellationToken token;
+
+    //Upgrades
+    List<Item> itemsList = new List<Item>();
+   
     public void Initialize(HealtComponentData healtData) {
         //CTS
         cts = new CancellationTokenSource();
@@ -28,6 +35,7 @@ public class HealthComponent : MonoBehaviour, IVisitable {
 
         popUpStrategy = healtData.popUpDamageValuesHandler;
         maxHealth = healtData.MaxHealth;
+        startMaxHealth = maxHealth;
         health = maxHealth;
         physicsDefence = healtData.PhysicsDefence;
         fireDefence = healtData.FireDefence;
@@ -96,7 +104,8 @@ public class HealthComponent : MonoBehaviour, IVisitable {
         var damage = damageType.Value - physicsDefence;
         ChangeHealth(-damage);
         OnTakeDamage?.Invoke(damageType, damage);
-         //Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-physicsDefence} ");
+        OnTakeDamageBus?.Invoke(damageType);
+        //Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-physicsDefence} ");
     }
     public void EarnDamageByType(FireDamageType damageType) {
         if (damageType.Value <= fireDefence) {
@@ -107,6 +116,7 @@ public class HealthComponent : MonoBehaviour, IVisitable {
         var damage = damageType.Value - fireDefence;
         ChangeHealth(-damage);
         OnTakeDamage?.Invoke(damageType, damage);
+        OnTakeDamageBus?.Invoke(damageType);
         // Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-fireDefence}");
     }
     public void EarnDamageByType(ColdDamageType damageType) {
@@ -118,6 +128,7 @@ public class HealthComponent : MonoBehaviour, IVisitable {
         var damage = damageType.Value - coldDefence;
         ChangeHealth(-damage);
         OnTakeDamage?.Invoke(damageType, damage);
+        OnTakeDamageBus?.Invoke(damageType);
         // Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-coldDefence} ");
     }
 
@@ -169,5 +180,22 @@ public class HealthComponent : MonoBehaviour, IVisitable {
         coldDefence -= type.Value;
     }
     #endregion
+    #region UPGRADE STRATEGY
+    public void AddItem(Item item) {
+        if (item is HeatlhItem)
+            itemsList.Add(item as HeatlhItem);
+    }
 
+    public void ClearItems() {
+        itemsList.Clear();
+    }
+
+    public void RefreshItemUpgrades() {
+        maxHealth = startMaxHealth;
+        foreach (HeatlhItem item in itemsList) {
+            maxHealth += item.AddMaxHealth;
+        }
+        health = maxHealth;
+    }
+    #endregion
 }

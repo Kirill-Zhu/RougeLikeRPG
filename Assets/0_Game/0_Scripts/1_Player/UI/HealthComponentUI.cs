@@ -15,11 +15,11 @@ public class HealthComponentUI : MonoBehaviour {
     List<TextMeshProUGUI> valuesList = new List<TextMeshProUGUI>();
     int recievedDamage;
 
-    Sequence sequence;
-
     private void Awake() {
         Initialize();
+       
     }
+
     void Initialize() {
 
         for (int i = 0; i < 16; i++) {

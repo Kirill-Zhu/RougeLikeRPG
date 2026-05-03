@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -42,7 +43,9 @@ public class Entity : MonoBehaviour, IDamagable {
     HealthComponent healthComponent;
   
     Action<Entity> OnDieEvent = delegate { };
-
+    [Header("Audio")]
+    public EventReference OnAttackSound;
+    public EventReference OnDieSound;
     protected bool isDead = false;
     protected virtual void Awake() {
         rb = GetComponent<Rigidbody>();
@@ -52,17 +55,13 @@ public class Entity : MonoBehaviour, IDamagable {
 
 
         battleContorller = GetComponent<SimpleEnemyBattleContorller>();
-
-        
-        //Events
-        healthComponent.OnDie += Die;
-      
-
     }
     private void Start() {
         battleContorller.Initialize(AttackDuration, WeaponType, AttackRange, DamageDelay, DamageTypes, WeaponPrefab, InteractionTagName, ProjectilieSpeed, ProjectileLiveDuration, ShootShape, SpreadAngle, ProjectilesCountByShoot, SelfDirectedProjectile, AimTransform);
         
+        //Events
         healthComponent.OnTakeDamage += LevelStatistics.PlayerDealtDamage;
+        healthComponent.OnDie += Die;
     }
 
     public virtual void Die() {
@@ -79,17 +78,23 @@ public class Entity : MonoBehaviour, IDamagable {
             }
         }
 
+
+        //Sound
+        RuntimeManager.PlayOneShot(OnDieSound, this.gameObject.transform.position);
+      
         Destroy(this.gameObject, 2);
     }
     public virtual void TakeDamage(int damage) {
        // Debug.Log($"{GetType().Name} took damage {damage}");
     }
+    
     public virtual void InitializeEvents(Action<Entity> OnDestroEvent) {
         OnDieEvent += OnDestroEvent;
     }
     private void OnDestroy() {
         OnDieEvent = null;
         healthComponent.OnDie -= Die;
+        healthComponent.OnTakeDamage -= LevelStatistics.PlayerDealtDamage;
     }
     //public class EnemyBuilder {
     //    GameObject prefab;
@@ -143,6 +148,11 @@ public class Entity : MonoBehaviour, IDamagable {
         int projectilesCountByShoot = 1;
         bool selfDirectedProjectile = false;
         Transform aimTransform;
+
+        //Sound 
+        EventReference OnAttackSound;
+        EventReference OnTakeDamageSound;
+        EventReference OnDieSound;
         string interactionTagName;
         List<GameObject> dropObjectsList;
         public TypeBuilder(GameObject prefab, HealtComponentData healthData, LevelStatistics stats) {
@@ -167,7 +177,7 @@ public class Entity : MonoBehaviour, IDamagable {
         public TypeBuilder SelfDirecredProjectile(bool isSeldDirected) { this.selfDirectedProjectile = isSeldDirected; return this; }
         public TypeBuilder SetProjectileAim(Transform aimTransform) { this.aimTransform = aimTransform; return this; }
         public TypeBuilder WithDropObject(List<GameObject> dropPrefabList) { this.dropObjectsList = dropPrefabList; return this; }
-
+        public TypeBuilder WithSounds(EventReference OnAttackSound, EventReference OnDieSound) { this.OnAttackSound = OnAttackSound; this.OnDieSound = OnDieSound; return this; }
         public GameObject Build(Type type) {
 
             var obj = Instantiate(prefab);
@@ -238,6 +248,7 @@ public class Entity : MonoBehaviour, IDamagable {
                 field.SetValue(component, interactionTagName);
 
             }
+            #region Projectile
             //Set projectileLiveDuration
             field = component.GetType().GetField("ProjectilieSpeed");
             if (field != null) {
@@ -282,11 +293,23 @@ public class Entity : MonoBehaviour, IDamagable {
                 field.SetValue(component, aimTransform);
 
             }
+            #endregion
             //Set Drop Object
             field = component.GetType().GetField("DropObjectsList");
             if (field != null) {
                 field.SetValue(component, dropObjectsList);
             }
+            #region Sound
+            field = component.GetType().GetField("OnAttackSound");
+            if (field != null) {
+                field.SetValue(component, OnAttackSound);
+            }
+
+            field = component.GetType().GetField("OnDieSound");
+            if (field != null) {
+                field.SetValue(component, OnDieSound);
+            }
+            #endregion
             return obj;
         }
     }

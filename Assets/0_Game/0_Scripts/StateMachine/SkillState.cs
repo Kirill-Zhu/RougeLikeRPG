@@ -10,11 +10,12 @@ public class SkillState : BaseState {
         heroBattleController.SubscribeInputs();
 
         heroBattleController.OnAnimationStart += HandleAnimationsAndDirection;
-        heroBattleController.UseSkill(heroBattleController.FitstInputIndex);                //Use skill was approved for the first time
+        heroBattleController.UseSkill(heroBattleController.FitstInputIndex);
     }
 
     public override void OnExit() {
         base.OnExit();
+
         heroBattleController.UnSubscribeInputs();
         animator.StopPlayback();
         heroBattleController.OnAnimationStart -= HandleAnimationsAndDirection;
@@ -30,16 +31,19 @@ public class SkillState : BaseState {
     }
 
     private void HandleAnimationsAndDirection(int animationHash, float animationDuration = 1) {
-        animator.StopPlayback();
 
-        if (animationDuration > 0) {
-            var clip = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
-            float aniamtionSpeed = clip.length / animationDuration;
-            animator.speed = aniamtionSpeed;
-            animator.Play(animationHash);
-        } else {
-            animator.speed = 1;
-        }
+        Debug.Log("handle animation");
+            animator.StopPlayback();
+
+            if (animationDuration > 0) {
+                var clip = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
+                float aniamtionSpeed = clip.length / animationDuration;
+                animator.speed = aniamtionSpeed;
+                animator.Play(animationHash);
+            } else {
+                animator.speed = 1;
+            }
             controller.HandleInFightMovement();//Attack In Move Direction 
+        
     }
 }

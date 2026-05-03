@@ -4,5 +4,6 @@ using UnityEngine;
 public class HeroStrategyData : ScriptableObject {
     public GameObject ModelPrefab;
     public HealtComponentData HealtComponentData;
+    public ManaConponentData ManaConponentData;
     public SkillsStrategy[] SkillStrategyData;
 }

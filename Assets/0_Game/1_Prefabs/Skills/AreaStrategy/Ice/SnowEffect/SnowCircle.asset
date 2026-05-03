@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dace00eaa12df147bc38da9f3686089, type: 3}
+  m_Name: SnowCircle
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2040362746659309798, guid: b13ec9faaf58c214daa2c0aeff591584, type: 3}
+  OnCastParticlePrefabArray: []
+  ParticlePrefabArray:
+  - {fileID: 1538599107982412, guid: db3c2f546ca2ab94c8f72d6560b45d0a, type: 3}
+  AttackRange: 0
+  ManaCost: 7
+  PhysicsDamage: 0
+  FireDamage: 0
+  ColdDamage: 7
+  Icon: {fileID: 21300000, guid: 1666fb24b220d2242b4e75e7057d249a, type: 3}
+  BackSprite: {fileID: 21300000, guid: 5915cdc174101e540b3349e21ee2cd74, type: 3}
+  DamageTypesEnum: 4
+  damageTypesList: []
+  HealthComponent: {fileID: 0}
+  WithCooldown: 1
+  CoolDown: 5
+  AnimationName: Shoot
+  SkillDuration: 1
+  SkillSound:
+    Guid:
+      Data1: 1326933623
+      Data2: 1164652441
+      Data3: -2034542181
+      Data4: 182520102
+    Path: event:/Skills/Area/SnowCircle
+  Radius: 11
+  LiveDuration: 7
+  FollowHero: 1
+  VFXPosOffset: {x: 0, y: 0.3, z: 0}

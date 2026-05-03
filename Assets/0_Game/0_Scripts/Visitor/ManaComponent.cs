@@ -6,6 +6,11 @@ public class ManaComponent : MonoBehaviour, IVisitable {
     public event Action<int> OnGetCurrentMana;
     public int MaxMana = 100;
     public int CurrentMana = 100;
+    
+    public void Initialize(ManaConponentData manaData) {
+        MaxMana = manaData.MaxMana;
+        CurrentMana = MaxMana;
+    }
     public void Accept(IVistor visitor) {
         visitor.Visit(this);
     }

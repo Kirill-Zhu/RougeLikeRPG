@@ -1,5 +1,6 @@
-using UnityEngine;
+using FMODUnity;
 using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "Strategy/Enemy/NewEnemyType", fileName = "NewEnemyType")]
 public class EnemyStrategy : ScriptableObject {
@@ -17,7 +18,7 @@ public class EnemyStrategy : ScriptableObject {
     public ShootShape ShootShape = ShootShape.Forward;
     public float SpreadAngle = 70;
     public int ProjecitlesCountByShoot = 1;
-    public bool SelfDirecrtedProjectile = false;  
+    public bool SelfDirecrtedProjectile = false;
     public GameObject WeaponPrefab;
     public WeaponTypeEnum WeaponType;
     public List<GameObject> DropPfreabList;
@@ -27,6 +28,9 @@ public class EnemyStrategy : ScriptableObject {
     [SerializeField] int coldDamage;
     public HealtComponentData HealtData;
 
+    [Header("Sound")]
+    public EventReference OnAttack;
+    public EventReference OnDie;
     //Here  I can manipulate with types like Cold and Fire may be Steam or something else
     public DamageType[] GetDamageTypes() => damageTypesEnum switch {
         DamageTypesEnum.Physics => new DamageType[] { new PhysicsDamageType(physicsDamage) },

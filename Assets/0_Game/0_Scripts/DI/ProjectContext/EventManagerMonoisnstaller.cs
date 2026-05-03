@@ -6,6 +6,8 @@ public class EventManagerMonoisnstaller : MonoInstaller
     [SerializeField] EventManager eventManager;
     public override void InstallBindings()
     {
-        Container.Bind<EventManager>().FromInstance(eventManager).NonLazy();
+         Container.Bind<EventManager>().FromInstance(eventManager).NonLazy();
     }
+
+   
 }

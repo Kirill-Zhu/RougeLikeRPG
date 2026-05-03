@@ -5,8 +5,7 @@ public class EventManager : MonoBehaviour
 {
     
     public UnityEvent<Boss> OnBossCreate;
-
-
+    public UnityEvent OnLoadMainMenu;
     public void RaiseOnBossCreate(Boss boss) {
         Debug.Log($"Raise OnBossCreate {boss.GetType().Name}");
         OnBossCreate?.Invoke(boss);

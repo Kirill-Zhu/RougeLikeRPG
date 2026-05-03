@@ -11,7 +11,7 @@ public class Locomotion : BaseState {
 
         //Animations
         animator.speed = 1; //Need set because I change in battleState animator speed
-        animator.CrossFade(Locomotion, duration);
+        animator.CrossFade(Locomotion, crossFadeAnimationDuration);
     }
 
     public override void OnExit() {
