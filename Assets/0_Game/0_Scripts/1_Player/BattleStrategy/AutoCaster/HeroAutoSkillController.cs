@@ -13,7 +13,9 @@ public class HeroAutoSkillController : MonoBehaviour, IVisitable {
 
         OnChangelSkillList?.Invoke(skillStrategyList);
     }
-  
+    private void OnEnable() {
+        Dispose();
+    }
     public void Accept(IVistor visitor) {
         visitor.Visit(this);
     }
@@ -29,6 +31,10 @@ public class HeroAutoSkillController : MonoBehaviour, IVisitable {
     }
     public void RemoveSKill() {
 
+    }
+    void Dispose() {
+        OnChangelSkillList = null;  
+        skillStrategyList.Clear();
     }
     public void OnUpdate() {
 

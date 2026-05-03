@@ -6,9 +6,15 @@ using UnityEngine.Events;
 
 public abstract class SkillsStrategy : ScriptableObject, IVisitable {
     public GameObject prefab;
+    [Header("On Cast VFX")]
+    public GameObject[] OnCastParticlePrefabArray;
+    protected ParticleSystem[] onCastParticleSystemArray = new ParticleSystem[0];
+    protected GameObject[] onCastParticleGameObjectsArray = new GameObject[0];
+    [Header("On Attack VFX")]
     public GameObject[] ParticlePrefabArray;
     protected ParticleSystem[] particleSystemArray = new ParticleSystem[0];
     protected GameObject[] particleGameObjectsArray = new GameObject[0];
+    [Header("Attack Options")]
     protected string interactionTagName = "Enemy";
     public float AttackRange = 1;
     public int ManaCost = 0;
@@ -31,6 +37,11 @@ public abstract class SkillsStrategy : ScriptableObject, IVisitable {
     public string AnimationName;
     public abstract int CurrentAnimationHash { get; set; }
     public float SkillDuration;
+
+    protected bool initialization = true;
+    public  virtual bool Initialized() {
+        return !initialization;
+    }
     [Header("Audio")]
     protected AudioManager audioManager;
     public EventReference SkillSound;
@@ -39,7 +50,7 @@ public abstract class SkillsStrategy : ScriptableObject, IVisitable {
         OnCoolDownFillAmountValue?.Invoke(value);
     }
     public abstract bool TryUseSkill(Action<int, float> OnAnimation);
-    public abstract void TryUseSkill(Action<float> OnChangeSkillDuration, Action<int, float> OnAnimation, UnityAction<int> OnManaChangEvent);
+    public abstract void TryUseSkill(Action<float> OnChangeSkillDuration, Action<int, float> OnAnimation, UnityAction<int> OnManaChangeEvent);
     public abstract void OnUpdate(float deltaTime);
     public abstract void Initialize(Transform origin, AudioManager audioManager, string interactionTagName);
     public abstract void Dispose();
@@ -90,6 +101,10 @@ public abstract class SkillsStrategy : ScriptableObject, IVisitable {
         _ => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(FireDamage), new ColdDamageType(ColdDamage) },
     };
 
+    protected abstract void BuildNewVFX();
+    protected abstract void PlayOnCastVFX();
+    protected abstract void PlayOnAttackVFX();
+    protected abstract void PlayCastSound();
     public abstract void UpdateValues();
     public void Accept(IVistor visitor) {
         visitor.Visit(this);

@@ -25,16 +25,16 @@ MonoBehaviour:
   damageTypesList: []
   HealthComponent: {fileID: 0}
   WithCooldown: 1
-  CoolDown: 5
+  CoolDown: 10
   AnimationName: Shoot
-  SkillDuration: 1
+  SkillDuration: 2
   SkillSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 994017596
+      Data2: 1340480313
+      Data3: 106881208
+      Data4: -509949092
+    Path: event:/Boss/DragonBoss/DragonSkill
   shootShape: 1
   spreadAngle: 120
   projectilesCountByShoot: 15

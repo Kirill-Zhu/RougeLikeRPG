@@ -1,5 +1,86 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8847076740422069139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PickUps/Exp
+  m_EditorClassIdentifier: 
+  Path: event:/PickUps/Exp
+  Guid:
+    Data1: -328464975
+    Data2: 1116584204
+    Data3: -970787410
+    Data4: 1072290412
+  Banks:
+  - {fileID: -6215193183086441864}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 400
+--- !u!114 &-8310724012963701556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Autocaster/Explosion
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Autocaster/Explosion
+  Guid:
+    Data1: -404480080
+    Data2: 1331067407
+    Data3: -639711101
+    Data4: -914520554
+  Banks:
+  - {fileID: -6215193183086441864}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 1450
+--- !u!114 &-7965261075288842985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Area/IceBlizzard
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Area/IceBlizzard
+  Guid:
+    Data1: 321714253
+    Data2: 1184592473
+    Data3: 1151664010
+    Data4: 1198755988
+  Banks:
+  - {fileID: -6215193183086441864}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 2700
 --- !u!114 &-7635505193068765887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,10 +123,10 @@ MonoBehaviour:
   Path: ../RougeLikeRPGFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639116203454145890
+  lastModified: 639130665007245865
   FileSizes:
   - Name: Desktop
-    Value: 9725280
+    Value: 11254976
   Exists: 1
 --- !u!114 &-7451629439594978040
 MonoBehaviour:
@@ -62,10 +143,10 @@ MonoBehaviour:
   Path: ../RougeLikeRPGFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639116203454155817
+  lastModified: 639130665007255885
   FileSizes:
   - Name: Desktop
-    Value: 1088
+    Value: 1664
   Exists: 1
 --- !u!114 &-6215193183086441864
 MonoBehaviour:
@@ -82,10 +163,10 @@ MonoBehaviour:
   Path: ../RougeLikeRPGFMOD/Build/Desktop/Hero.bank
   Name: Hero
   StudioPath: bank:/Hero
-  lastModified: 639116044063210969
+  lastModified: 639130670247740980
   FileSizes:
   - Name: Desktop
-    Value: 226976
+    Value: 567008
   Exists: 1
 --- !u!114 &-5939161106805506477
 MonoBehaviour:
@@ -107,6 +188,154 @@ MonoBehaviour:
   - Name: Desktop
     Value: 506
   Exists: 1
+--- !u!114 &-5238655733063600798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/CommonSkelet/OnAttack
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/CommonSkelet/OnAttack
+  Guid:
+    Data1: 236452331
+    Data2: 1222147945
+    Data3: 623673480
+    Data4: -603854117
+  Banks:
+  - {fileID: -1645460023097917388}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 55
+  Length: 1128
+--- !u!114 &-5152637425667540518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Boss/DragonBoss/DragonFire
+  m_EditorClassIdentifier: 
+  Path: event:/Boss/DragonBoss/DragonFire
+  Guid:
+    Data1: -2047319909
+    Data2: 1272052819
+    Data3: -742978422
+    Data4: -248372177
+  Banks:
+  - {fileID: -1964061294146819055}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 3448
+--- !u!114 &-4548932980764984191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Boss/DragonBoss/DragonSkill
+  m_EditorClassIdentifier: 
+  Path: event:/Boss/DragonBoss/DragonSkill
+  Guid:
+    Data1: 994017596
+    Data2: 1340480313
+    Data3: 106881208
+    Data4: -509949092
+  Banks:
+  - {fileID: -1964061294146819055}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 1097
+--- !u!114 &-1964061294146819055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Boss.bank
+  m_EditorClassIdentifier: 
+  Path: ../RougeLikeRPGFMOD/Build/Desktop/Boss.bank
+  Name: Boss
+  StudioPath: bank:/Boss
+  lastModified: 639116956951698177
+  FileSizes:
+  - Name: Desktop
+    Value: 46176
+  Exists: 1
+--- !u!114 &-1645460023097917388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Enemy.bank
+  m_EditorClassIdentifier: 
+  Path: ../RougeLikeRPGFMOD/Build/Desktop/Enemy.bank
+  Name: Enemy
+  StudioPath: bank:/Enemy
+  lastModified: 639129806108446948
+  FileSizes:
+  - Name: Desktop
+    Value: 245664
+  Exists: 1
+--- !u!114 &-1233399418336292197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PickUps/HealthMana
+  m_EditorClassIdentifier: 
+  Path: event:/PickUps/HealthMana
+  Guid:
+    Data1: -21651453
+    Data2: 1217910788
+    Data3: -19453263
+    Data4: -1591061462
+  Banks:
+  - {fileID: -6215193183086441864}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1600
 --- !u!114 &-246318636062924440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,19 +407,31 @@ MonoBehaviour:
   - {fileID: -7544809293241347934}
   - {fileID: -5939161106805506477}
   - {fileID: -6215193183086441864}
+  - {fileID: -1964061294146819055}
+  - {fileID: -1645460023097917388}
   EditorEvents:
   - {fileID: -7635505193068765887}
   - {fileID: -246318636062924440}
   - {fileID: 5448216651622119384}
   - {fileID: -213876979278109255}
   - {fileID: 6955235857895379550}
+  - {fileID: -5152637425667540518}
+  - {fileID: -4548932980764984191}
+  - {fileID: 3036498801363787001}
+  - {fileID: -1233399418336292197}
+  - {fileID: -8847076740422069139}
+  - {fileID: 1417652368019973933}
+  - {fileID: -5238655733063600798}
+  - {fileID: 1245516555079756537}
+  - {fileID: -7965261075288842985}
+  - {fileID: -8310724012963701556}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7544809293241347934}
   StringsBanks:
   - {fileID: -7451629439594978040}
   cacheVersion: 131858
-  cacheTime: 639116203454155817
+  cacheTime: 639130670247740980
   SerializableEventsDict:
   - key: event:/Skills/Mele/Sword/Sword
     index: 0
@@ -202,6 +443,107 @@ MonoBehaviour:
     index: 3
   - key: event:/Music/BossFightMusic
     index: 4
+  - key: event:/Boss/DragonBoss/DragonFire
+    index: 5
+  - key: event:/Boss/DragonBoss/DragonSkill
+    index: 6
+  - key: event:/Music/DieMusic
+    index: 7
+  - key: event:/PickUps/HealthMana
+    index: 8
+  - key: event:/PickUps/Exp
+    index: 9
+  - key: event:/Enemy/CommonSkelet/OnDie
+    index: 10
+  - key: event:/Enemy/CommonSkelet/OnAttack
+    index: 11
+  - key: event:/Skills/Area/SnowCircle
+    index: 12
+  - key: event:/Skills/Area/IceBlizzard
+    index: 13
+  - key: event:/Skills/Autocaster/Explosion
+    index: 14
+--- !u!114 &1245516555079756537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Area/SnowCircle
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Area/SnowCircle
+  Guid:
+    Data1: 1326933623
+    Data2: 1164652441
+    Data3: -2034542181
+    Data4: 182520102
+  Banks:
+  - {fileID: -1645460023097917388}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 4000
+--- !u!114 &1417652368019973933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/CommonSkelet/OnDie
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/CommonSkelet/OnDie
+  Guid:
+    Data1: -123436492
+    Data2: 1148021207
+    Data3: -1445979495
+    Data4: 1906022811
+  Banks:
+  - {fileID: -1645460023097917388}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 2000
+--- !u!114 &3036498801363787001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/DieMusic
+  m_EditorClassIdentifier: 
+  Path: event:/Music/DieMusic
+  Guid:
+    Data1: -659095058
+    Data2: 1151288227
+    Data3: 1267204535
+    Data4: 679059494
+  Banks:
+  - {fileID: -7544809293241347934}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 116610
 --- !u!114 &5448216651622119384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,4 +597,4 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 59200
+  Length: 50500

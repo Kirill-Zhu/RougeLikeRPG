@@ -1,13 +1,20 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(CharacterController))]
-public class SimpleCahracterController : MonoBehaviour {
+public interface IUpgradable {
+    public void ClearItems();
+    public void AddItem(Item item);
+    public void RefreshItemUpgrades();
+}
+[RequireComponent(typeof(SimpleCahracterController))]
+public class SimpleCahracterController : MonoBehaviour, IVisitable, IUpgradable {
 
     [SerializeField] CharacterControllerData data;
     [SerializeField] InputReader input;
     [SerializeField] CharacterController controller;
     [Header("Move Settings")]
+    float startSpeed;
     [SerializeField] float speed = 4;
     [Header("Jumping settings")]
     [SerializeField] float jumpTime = 1;
@@ -20,6 +27,9 @@ public class SimpleCahracterController : MonoBehaviour {
     Camera mainCamera;
     #region ANDROID
     DynamicJoystick joystick;
+
+    //Upgrades 
+    List<MoveItem> itemsList = new List<MoveItem>();
     public void SetUpAndoridJoystick(DynamicJoystick joystick) {
         this.joystick = joystick;
     }
@@ -34,7 +44,7 @@ public class SimpleCahracterController : MonoBehaviour {
         mainCamera = Camera.main;
         controller = GetComponent<CharacterController>();
 
-        //Initialize!!!!
+        startSpeed = speed;
     }
     private void Start() {
         //Listen Events
@@ -48,8 +58,6 @@ public class SimpleCahracterController : MonoBehaviour {
         joystick.OnMoveJoystick.AddListener((_) => HandleMovement());
         joystick.OnPointerUpEvent.AddListener(() => moveDirection = Vector2.zero);
     }
-
-
     //TestUpdate
     private void Update() {
         if (input.Direction == Vector3.zero)
@@ -129,5 +137,26 @@ public class SimpleCahracterController : MonoBehaviour {
     private void OnDestroy() {
         input.Move -= SubscribeMoveInputs;
         input.Jump -= SubscribeJumpingButton;
+    }
+    #region UPGRADE STRATEGY
+
+    public void ClearItems() {
+        itemsList.Clear();
+    }
+    public void AddItem(Item item) {
+        if(item is MoveItem)
+            itemsList.Add(item as MoveItem);    
+
+    }
+    public void RefreshItemUpgrades() {
+        speed = startSpeed;
+        foreach (MoveItem item in itemsList) {
+            speed += item.AddMoveSpeed;
+        }
+    }
+    
+    #endregion
+    public void Accept(IVistor visitor) {
+        visitor.Visit(this);
     }
 }

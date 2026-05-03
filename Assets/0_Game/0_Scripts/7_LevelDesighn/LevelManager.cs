@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
@@ -24,10 +23,18 @@ public class LevelManager : MonoBehaviour {
         hero.OnChooseLelvelUpCard.AddListener(ResumeGame);
         hero.OnPickUppowerUp.AddListener((_, _, _) => PauseGame());
         hero.OnDie.AddListener(() => PauseGame());
+
+        OnGameResume.Invoke();
     }
-    private async void Start() {
-        await UniTask.Delay(1000);
-        ActivateScene();
+    private void OnDestroy() {
+        //Events
+        OnGamePause.RemoveAllListeners();
+        OnGameResume.RemoveAllListeners();
+
+        hero.OnLevelUp.RemoveAllListeners();
+        hero.OnChooseLelvelUpCard.RemoveAllListeners();
+        hero.OnPickUppowerUp.RemoveAllListeners();
+        hero.OnDie.RemoveAllListeners();
     }
     public void ActivateScene() {
         HeroSpawner.SpawnHero();

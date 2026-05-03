@@ -122,10 +122,12 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         }
     }
     private void OnDestroy() {
-        foreach (var projectile in projectileList)
-            Destroy(projectile.gameObject);
-    }
+        cts?.Cancel();   
+            foreach (var projectile in projectileList)
+                    Destroy(projectile.gameObject);     
 
+    }
+    
     public void TryAttack() {
         if (skillDurationCooldown > 0) { return; }
         OnAttack?.Invoke();

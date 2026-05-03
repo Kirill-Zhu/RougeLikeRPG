@@ -9,6 +9,7 @@ public class LevelUpMenu : MonoBehaviour {
     [SerializeField] List<MeleSkillLevleUp> meleLevelUpList;
     [SerializeField] List<ShieldSkillLelvelUp> shieldLevelUpList;
     [SerializeField] List<ShootSkillLevelUp> shootLevelUpList;
+    [SerializeField] List<AreaSkillLevelUp> areaLevelUpList;
 
     List<LevelUpStrategy> powerUpsToRise = new List<LevelUpStrategy>();
 
@@ -70,5 +71,9 @@ public class LevelUpMenu : MonoBehaviour {
     public void GetRandomPowerUp(ShootStrategy strategy) {
         int ranodm = UnityEngine.Random.Range(0, shootLevelUpList.Count);
         powerUpsToRise.Add(shootLevelUpList[ranodm]);
+    }
+    public void GetRandomPowerUp(AreaStrategy strategy) {
+        int ranodm = UnityEngine.Random.Range(0, areaLevelUpList.Count);
+        powerUpsToRise.Add(areaLevelUpList[ranodm]);
     }
 }

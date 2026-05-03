@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 public class HeroBattleController : MonoBehaviour, IVisitable {
@@ -21,13 +22,13 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
     //Audio
     AudioManager audioManager;
 
+
+
     public void Initialize(ManaComponent manaComponent, SkillsStrategy[] skillsStrategy, UnityEvent<Sprite, string, string> @OnPickUpPowerUpEvent, AudioManager audioManager) {
+
         this.manaComponent = manaComponent;
 
-        //Initialize Events
         OnPickUpPowerUp = @OnPickUpPowerUpEvent;
-        OnManaChange = null;
-        OnManaChange += manaComponent.ChangeMana;
         //Debug.Log($"Initialize : {GetType().Name}");
 
         //--Remove Previous Startfies
@@ -47,11 +48,20 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
 
         AddSkillDependecies();
         //Events
-       
+
         //Audio
         audioManager = this.audioManager;
+
+
+        StartCoroutine(CheckForInitialization());
     }
-    private void Awake() {
+    IEnumerator CheckForInitialization() {
+        foreach (var skill in skillStrategy) {
+            if (!skill.Initialized()) {
+                yield return null;
+            }
+        }
+        //Initialize Events
         inputs.IsUsingSkill += usingSkill => {
             if (usingSkill == true) {
                 InBattleState = true;
@@ -59,12 +69,19 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
             }
         };
 
+
+        OnManaChange = null;
+        OnManaChange += manaComponent.ChangeMana;
         inputs.UseSkill += SetSkillIndex;
         OnSkillDurationChange += duration => SkillDurationTimer = duration;
 
+        Debug.Log($"{GetType().Name} is initialized");
+
+        yield break;
     }
 
     private void Update() {
+
         if ((cancelTimer > 0)) cancelTimer -= Time.deltaTime;
         if (cancelTimer <= 0 && SkillDurationTimer <= 0) InBattleState = false;                                 // reset enque battle state if state machine conditions doesent match requerements
 
@@ -88,7 +105,10 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
 
         skillStrategy[index].TryUseSkill(OnSkillDurationChange, OnAnimationStart, OnManaChange);
     }
-    void SetSkillIndex(int index) => FitstInputIndex = index;
+    void SetSkillIndex(int index) {
+        Debug.Log("Set index");
+        FitstInputIndex = index;
+    }
     void AddSkillDependecies() {
         foreach (var strategy in skillStrategy) {
             strategy.HealthComponent = healthComponent;
@@ -107,12 +127,22 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
     }
 
     private void OnDestroy() {
+        Dispose();
+    }
+    private void OnDisable() {
+        Dispose();
+    }
+    public void Dispose() {
         UnSubscribeInputs();
         OnSkillDurationChange -= duration => SkillDurationTimer = duration;
+        OnAnimationStart = null;
         OnManaChange = null;
+        inputs.UseSkill -= SetSkillIndex;
 
+        foreach (var strategy in skillStrategy) {
+            strategy.Dispose();
+        }
     }
-
     //Visitor
     public void PickUpPowerUp(Sprite label, string description, string name) {
         OnPickUpPowerUp.Invoke(label, description, name);

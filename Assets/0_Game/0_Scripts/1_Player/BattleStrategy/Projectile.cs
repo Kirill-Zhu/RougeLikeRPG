@@ -9,15 +9,29 @@ public class Projectile : WeaponType {
 
         if (interactionTagName == null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
-                foreach (var damageType in damageTypes)
-                    health.TakeDamage(damageType);
+                for (int i = 0; i < damageTypes.Length; i++) {
+                    totalDamage[i].ResetToZero();
+                    totalDamage[i].AddDamage(damageTypes[i].Value + bonusDamageTypes[i].Value);
+                }
+                //Do total Damage
+                foreach (var damage in totalDamage) {
+                    health.TakeDamage(damage);
+                }
             }
         }
 
         if (interactionTagName != null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health) && other.CompareTag(interactionTagName)) {
-                foreach (var damageType in damageTypes)
-                    health.TakeDamage(damageType);
+                //Set total damage
+                for (int i = 0; i < damageTypes.Length; i++) {
+                    totalDamage[i].ResetToZero();
+                    totalDamage[i].AddDamage(damageTypes[i].Value + bonusDamageTypes[i].Value);
+                }
+
+                //Do TOtal damage
+                foreach (var damage in totalDamage) {
+                    health.TakeDamage(damage);
+                }
 
             }
         }

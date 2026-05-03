@@ -9,13 +9,14 @@ using UnityEngine.Events;
 public class ShieldStartegy : SkillsStrategy, IVistor {
     public float LiveDuration = 5;
     private bool onCoolDown = false;
-
     //Visitor
     CancellationTokenSource cts = new CancellationTokenSource();
     CancellationToken token;
     public override int CurrentAnimationHash { get => Animator.StringToHash(AnimationName); set => throw new NotImplementedException(); }
 
-   
+    public override bool Initialized() {
+        return true;
+    }
 
     public override void Dispose() {
        //Destroy all projectiles
@@ -73,7 +74,8 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
         OnManaChange.Invoke(-ManaCost);
 
         //Audio
-        audioManager.PlayOneShot(SkillSound, Origin.position);
+        PlayCastSound();
+      
 
     }
 
@@ -119,5 +121,19 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
         Debug.Log($"VIsited {healthComponent.GetType().Name} : damge types array count is : {damageTypesList.Count}");
     }
 
+    protected override void BuildNewVFX() {
+        throw new NotImplementedException();
+    }
 
+    protected override void PlayOnCastVFX() {
+        throw new NotImplementedException();
+    }
+
+    protected override void PlayOnAttackVFX() {
+        throw new NotImplementedException();
+    }
+
+    protected override void PlayCastSound() {
+        audioManager.PlayOneShot(SkillSound, Origin.position);
+    }
 }

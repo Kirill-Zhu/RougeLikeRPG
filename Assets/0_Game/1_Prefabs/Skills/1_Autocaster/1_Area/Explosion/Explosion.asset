@@ -21,4 +21,12 @@ MonoBehaviour:
   PhysicsDamage: 5
   FireDamage: 11
   ColdDamage: 0
+  PushPower: 0
   coolDown: 12
+  OnCastSound:
+    Guid:
+      Data1: -404480080
+      Data2: 1331067407
+      Data3: -639711101
+      Data4: -914520554
+    Path: event:/Skills/Autocaster/Explosion

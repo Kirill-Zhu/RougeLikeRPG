@@ -11,6 +11,7 @@ public class InGameUIManager : MonoBehaviour {
     [SerializeField] SkillStrategyUIController skillStrategyUIController;
     [SerializeField] LevelUpMenu levelUpMenu;
     [SerializeField] ExpBarUIContorller expBarUIContorller;
+    [SerializeField] CoinControllerUI coinControllerUI;
     [SerializeField] AutoSkillUIController autoSkillController;
     [SerializeField] PowerUpMenu powerUpMenu;
     private void Awake() {
@@ -20,6 +21,7 @@ public class InGameUIManager : MonoBehaviour {
         healthComponentUI = GetComponent<HealthComponentUI>();
         autoSkillController = GetComponent<AutoSkillUIController>();
         expBarUIContorller = GetComponent<ExpBarUIContorller>();
+        coinControllerUI = GetComponent<CoinControllerUI>();
         powerUpMenu = GetComponent<PowerUpMenu>();
 
         //Events
@@ -28,9 +30,11 @@ public class InGameUIManager : MonoBehaviour {
         hero.HealthComponent.OnGetCurrentHealth += globes.SetCurrentHealth;
         hero.ManaComponent.OnGetCurrentMana += globes.SetCurrentMana;
         hero.OnLevelUp.AddListener(RiseLevelUpMenu);
+
         //Initialize 
         autoSkillController.Initialize(hero.HeroAutoSkillContorller);
         expBarUIContorller.Initialize(hero);
+        coinControllerUI.Initialaize(hero);
         powerUpMenu.Initialize(hero);
 
         //Destroy Start Screen Ojbects

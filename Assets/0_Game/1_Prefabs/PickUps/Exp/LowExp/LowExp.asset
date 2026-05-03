@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac380af3e9ad24f4b89a330e8f30c90f, type: 3}
   m_Name: LowExp
   m_EditorClassIdentifier: 
+  Label: {fileID: 0}
+  Descritpion: 
   ModelPrefab: {fileID: 3580850165668990844, guid: 67036ea8fe3894d4482fdd3b0e425a23, type: 3}
   particle: {fileID: 0}
+  PickUpSound:
+    Guid:
+      Data1: -328464975
+      Data2: 1116584204
+      Data3: -970787410
+      Data4: 1072290412
+    Path: event:/PickUps/Exp
   expValue: 1

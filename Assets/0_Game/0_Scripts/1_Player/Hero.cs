@@ -2,7 +2,8 @@ using MyStateMachine;
 using UnityEngine;
 using UnityEngine.Events;
 public class Hero : MonoBehaviour {
-
+    //Test
+    public bool Initialaized = false;
     //Initialize
     public GameObject Model => model;
     GameObject model;
@@ -12,6 +13,7 @@ public class Hero : MonoBehaviour {
     public UnityEvent<Sprite, string, string> OnPickUppowerUp;
     public UnityEvent<int> OnLevelUp;
     public UnityEvent OnChooseLelvelUpCard;
+    //Event Bus
     public UnityEvent OnDie;
     HeroStrategyData heroData;
 
@@ -36,12 +38,20 @@ public class Hero : MonoBehaviour {
 
     //Mana
     public ManaComponent ManaComponent => manaComponent;
-    [SerializeField] ManaComponent manaComponent;
+    ManaComponent manaComponent;
+
+
     //Expiriance
     public ExpComponent ExpComponent => expComponent;
     ExpComponent expComponent;
-    //Power Up 
 
+    //Upgrade
+    HeroUpgradeContorller upgradeContorller;
+    //Power Up 
+    public CoinsComponent CoinsComponent => coinsComponent;
+    CoinsComponent coinsComponent;
+    //-> Shop
+    Item[] shopItems;
     //State Machine
     [SerializeField] Animator animator;
     StateMachine stateMachine;
@@ -53,11 +63,46 @@ public class Hero : MonoBehaviour {
 
     //Audio
     [SerializeField] AudioManager audioManager;
+
+    #region EVENTS
+    //-> EventBus
+    EventBinding<OnUpgradeItemInShop> onUpgradeItemInShop;
+    //<-EventBus
     public bool Paused => paused;
     bool paused = false;
+    EventManager eventManager;
+    #endregion
+    public bool initialization = true;
 
 
+    private void Awake() {
+        moveController = GetComponent<SimpleCahracterController>();
+        battleContorller = GetComponent<HeroBattleController>();
+        heroAutoSkillController = GetComponent<HeroAutoSkillController>();
+        healthComponent = GetComponent<HealthComponent>();
+        manaComponent = GetComponent<ManaComponent>();
+        expComponent = GetComponent<ExpComponent>();
+        upgradeContorller = GetComponent<HeroUpgradeContorller>();
+        coinsComponent = GetComponent<CoinsComponent>();
+    }
+    private void OnEnable() {
+        //Event Bus
+
+        onUpgradeItemInShop = new EventBinding<OnUpgradeItemInShop>(GetItemsFromShop);
+        EventBus<OnUpgradeItemInShop>.Register(onUpgradeItemInShop);
+    }
+    private void OnDisable() {
+        Initialaized = false;
+
+        //EventBus
+        EventBus<OnUpgradeItemInShop>.Deregister(onUpgradeItemInShop);
+    }
+    //EventBus
+    void GetItemsFromShop(OnUpgradeItemInShop items) {
+        Debug.Log($"Hero get call from {items.GetType().Name}");
+    }
     public void Initialize(HeroStrategyData data) {
+
         //Data
         heroData = data;
 
@@ -65,18 +110,28 @@ public class Hero : MonoBehaviour {
 
         model = Instantiate(heroData.ModelPrefab, transform);
         model.transform.localPosition = Vector3.zero;
+
         animator = model.GetComponent<Animator>();
         //Health
         healthComponent.Initialize(heroData.HealtComponentData);
         healthComponent.OnDie += Die;
-
+        //Mana
+        manaComponent.Initialize(heroData.ManaConponentData);
         //Battle
+
         battleContorller.Initialize(manaComponent, heroData.SkillStrategyData, OnPickUppowerUp, audioManager);
 
         //Exp
         expComponent.Initialize(OnLevelUp, OnGetExp);
 
+        //Upgrade   
+        upgradeContorller.Initialize(healthComponent, manaComponent, moveController, battleContorller);
+
+        //Pick Up
+        coinsComponent.Initialaize(this);
+
         OnHeroChange?.Invoke();
+
         //StateMachine
         stateMachine = new StateMachine();
         pausedState = new PausedState(moveController, animator, battleContorller, heroAutoSkillController);
@@ -84,7 +139,6 @@ public class Hero : MonoBehaviour {
         jumpState = new JumpState(moveController, animator, battleContorller, heroAutoSkillController);
         landingState = new LandingState(moveController, animator, battleContorller, heroAutoSkillController);
         skillState = new SkillState(moveController, animator, battleContorller, heroAutoSkillController);
-
 
 
         //Movement
@@ -101,20 +155,14 @@ public class Hero : MonoBehaviour {
         Any(locomotion, new FuncPredicate(() => !moveController.IsJumping && moveController.Grounded() && !battleContorller.InBattleState));
         Any(landingState, new FuncPredicate(() => !moveController.IsJumping && !moveController.Grounded()));
         stateMachine.SetState(locomotion);
+        Initialaized = true;
+
     }
 
-    private void Awake() {
-        moveController = GetComponent<SimpleCahracterController>();
-        battleContorller = GetComponent<HeroBattleController>();
-        heroAutoSkillController = GetComponent<HeroAutoSkillController>();
-        healthComponent = GetComponent<HealthComponent>();
-        manaComponent = GetComponent<ManaComponent>();
-        expComponent = GetComponent<ExpComponent>();
-    }
 
     private void Update() {
-        if (stateMachine != null)
-            stateMachine?.Update();
+        if (!Initialaized) return;
+        stateMachine?.Update();
     }
     void Die() {
         OnDie?.Invoke();
@@ -131,4 +179,12 @@ public class Hero : MonoBehaviour {
         paused = false;
         stateMachine.SetState(locomotion);
     }
+
+    //Events 
+    public void SetEventManager(EventManager eventManager) {
+        this.eventManager = eventManager;
+        eventManager.OnLoadMainMenu.AddListener(() => gameObject.SetActive(false));
+
+    }
+
 }

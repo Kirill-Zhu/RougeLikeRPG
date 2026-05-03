@@ -1,4 +1,7 @@
+using Cysharp.Threading.Tasks;
 using System;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -11,14 +14,16 @@ namespace BossEntity {
         public float animationDuration = 0;
         const string interactionTagName = "Player";
         Transform target;
-        float rotationSpeed = 15;
+        float rotationSpeed = 1;
+   
 
         public void Initialize(Transform target) {
             this.target = target;
+           
         }
-        void Start() {
+        void OnEnable() {
+           
             manager = GetComponent<AudioManager>();
-
             //--Remove Previous Startefies
             //if (skillStrategy != null)
             //    foreach (var skill in skillStrategy)
@@ -31,9 +36,13 @@ namespace BossEntity {
             }
             foreach (var skill in skillStrategy) {
                 skill.Initialize(transform, manager, interactionTagName);
-            }
-
+            }  
+            //Animation
             OnAnimation += UpdateAnimationDuration;
+        }
+        private void OnDisable() {
+            //Animation
+            OnAnimation -= UpdateAnimationDuration;
         }
         public void OnUpdate() {
             //Rotate to target

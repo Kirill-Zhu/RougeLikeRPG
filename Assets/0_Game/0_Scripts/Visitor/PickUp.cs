@@ -1,7 +1,9 @@
+using FMODUnity;
 using UnityEngine;
 
 public class PickUp : MonoBehaviour {
     public PowerUp powerup;
+    EventReference pickUpSound;
     GameObject particle;
     const string tagInteractionName = "Player";
     private void Awake() {
@@ -12,6 +14,9 @@ public class PickUp : MonoBehaviour {
             particle.transform.position = this.transform.position;
             particle.gameObject.SetActive(false);
         }
+
+        //Sound 
+        pickUpSound = powerup.PickUpSound;
     }
     private void OnTriggerEnter(Collider other) {
 
@@ -26,7 +31,8 @@ public class PickUp : MonoBehaviour {
                 particle.gameObject.SetActive(true);
                 Destroy(this.particle, 2);
             }
-
+            //Sound 
+            RuntimeManager.PlayOneShot(pickUpSound);
             Destroy(this.gameObject);
         }
     }

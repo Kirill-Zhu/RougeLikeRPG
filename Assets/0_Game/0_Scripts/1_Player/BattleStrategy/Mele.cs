@@ -5,16 +5,43 @@ class Mele : WeaponType {
     protected override void OnTriggerEnter(Collider other) {
 
         if (interactionTagName == null) {
-            if (other.TryGetComponent<HealthComponent>(out HealthComponent health))
-                foreach (var damageType in damageTypes)
-                    health.TakeDamage(damageType);
+            if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
+                //Set total damage
+                for (int i = 0; i < damageTypes.Length; i++) {
+                    totalDamage[i].ResetToZero();
+                    totalDamage[i].AddDamage(damageTypes[i].Value + bonusDamageTypes[i].Value);
+                }
+                //Do total Damage
+                foreach (var damage in totalDamage) {
+                    health.TakeDamage(damage);
+                }
+            }
         }
 
         if (interactionTagName != null && other.CompareTag(interactionTagName)) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
-                foreach (var damageType in damageTypes)
-                    health.TakeDamage(damageType);
+                
+                //Set total damage
+                for (int i = 0; i < damageTypes.Length; i++) {
+                    totalDamage[i].ResetToZero();
+                    totalDamage[i].AddDamage(damageTypes[i].Value + bonusDamageTypes[i].Value);
+                }
+                
+                //Do TOtal damage
+                foreach (var damage in totalDamage) {
+                    health.TakeDamage(damage);
+                }
             }
+            //if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
+            //    foreach (var damageType in damageTypes)
+            //        health.TakeDamage(damageType);
+
+            //    //Bonus damage
+            //    foreach (var bonusDamage in bonusDamageTypes) {
+            //        health.TakeDamage(bonusDamage);
+            //        Debug.Log($"Bonus damage is {bonusDamage.Value}");
+            //    }
+            //}
             if (pushPower != 0 && other.TryGetComponent<Rigidbody>(out var rb))
                 rb.linearVelocity = (rb.transform.position - transform.position) * pushPower;
         }

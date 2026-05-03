@@ -30,16 +30,16 @@ MonoBehaviour:
   damageTypesList: []
   HealthComponent: {fileID: 0}
   WithCooldown: 1
-  CoolDown: 10
+  CoolDown: 13
   AnimationName: "\u0421ontinuous"
   SkillDuration: 2
   SkillSound:
     Guid:
-      Data1: 1296037400
-      Data2: 1236132670
-      Data3: -1479891288
-      Data4: 1986270958
-    Path: event:/Skills/Mele/Sword/Sword
+      Data1: -2047319909
+      Data2: 1272052819
+      Data3: -742978422
+      Data4: -248372177
+    Path: event:/Boss/DragonBoss/DragonFire
   maxAttackSeries: 1
   maxQueueAttackCount: 1
   AnimationNames:

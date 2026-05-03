@@ -159,8 +159,10 @@ GameObject:
   - component: {fileID: 6816312815705134783}
   - component: {fileID: 6625523434085770362}
   - component: {fileID: 3960794774759557692}
+  - component: {fileID: -2682059877837970256}
   - component: {fileID: -4851204089305757902}
   - component: {fileID: 8760122471330487146}
+  - component: {fileID: 622142874731739280}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Player
@@ -224,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e27431840049c458166a69ddba6620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ModelPrefab: {fileID: 0}
+  Initialaized: 1
   OnHeroChange:
     m_PersistentCalls:
       m_Calls: []
@@ -244,9 +246,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   healthData: {fileID: 11400000, guid: 4e4c4d9d376a95840bc50dd8c43e467f, type: 2}
-  manaComponent: {fileID: 0}
   animator: {fileID: 4656518056047123800}
   audioManager: {fileID: 8760122471330487146}
+  initialization: 1
 --- !u!114 &4156648375255528194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,6 +395,18 @@ MonoBehaviour:
   currentExp: 0
   MaxExp: 4
   OverallExp: 0
+--- !u!114 &-2682059877837970256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351574590332836233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac9429b6193a0040a7c1c619fa20e7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-4851204089305757902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,10 +432,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d72b525aedb19459fd8eda0baece3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reference:
+  standartMusic:
     Guid:
       Data1: 0
       Data2: 0
       Data3: 0
       Data4: 0
     Path: 
+  bossFightMusic:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  dieMenu:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  coinSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  eventManager: {fileID: 0}
+  scenesManager: {fileID: 0}
+--- !u!114 &622142874731739280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351574590332836233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1634180f1f391b4099879d2ca6bfbd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemStrategyArray:
+  - {fileID: 11400000, guid: 5c393b5c104eb9744a1252e2fe7a8737, type: 2}
+  - {fileID: 11400000, guid: f62fc9d07296cdd4887897a7f1c78a44, type: 2}

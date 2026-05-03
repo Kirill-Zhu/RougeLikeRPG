@@ -4,6 +4,7 @@ using Zenject;
 
 public class LevelStatisticsUIMenu : MonoBehaviour {
     [Inject] Hero hero;
+    [Inject] EventManager eventManager;
     [SerializeField] LevelStatisticsData dataStats;
     [SerializeField] GameObject statisticsMenu;
     [SerializeField] TextMeshProUGUI physicsDamageTakenTextMesh;
@@ -43,5 +44,9 @@ public class LevelStatisticsUIMenu : MonoBehaviour {
 
         coldDamageTakenTextMesh.color = new ColdDamageType(0);
         coldDamageDoneTextMesh.color = new ColdDamageType(0);
+    }
+
+    public void Confim() {
+        eventManager.OnLoadMainMenu.Invoke();
     }
 }

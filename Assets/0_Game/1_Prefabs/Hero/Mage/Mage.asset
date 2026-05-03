@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModelPrefab: {fileID: 1248815240492774, guid: 96e49a7c7c10f954394af56028ee0b46, type: 3}
   HealtComponentData: {fileID: 11400000, guid: a38fb2b52b0a8944cb05fddf881730a8, type: 2}
+  ManaConponentData: {fileID: 11400000, guid: b0aed8747cbb657419ea71ce5aa5c615, type: 2}
   SkillStrategyData:
-  - {fileID: 11400000, guid: 08b78708637744e4897bd370eff46edf, type: 2}
-  - {fileID: 11400000, guid: bf021e707a320f04ea87c5954018f8f5, type: 2}
   - {fileID: 11400000, guid: 4777043a0a2715943aca3c56db4e5560, type: 2}
+  - {fileID: 11400000, guid: bf021e707a320f04ea87c5954018f8f5, type: 2}
+  - {fileID: 11400000, guid: 260ea8db0ef2d36419c0575779918027, type: 2}

@@ -3,12 +3,16 @@ using UnityEngine;
 
 [System.Serializable]
 public class DamageType {
-    public readonly int Value;
-
+    public int Value => value;
+    int value;
     public DamageType(int value) {
-        this.Value = value;
+        this.value = value;
     }
-
+    public void AddDamage(int value) => this.value += value;
+    public void RemoveBonus(int value) => this.value -= value;
+    public void ResetToZero() {
+        value = 0;
+    }
     public static implicit operator Color(DamageType damageType) {
         if (damageType.GetType() == typeof(PhysicsDamageType)) {
             return Color.white;

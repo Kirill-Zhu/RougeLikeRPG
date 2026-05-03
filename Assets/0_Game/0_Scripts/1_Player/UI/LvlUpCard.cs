@@ -71,4 +71,9 @@ public class LvlUpCard : MonoBehaviour, IVistor {
         shootStrategy = skill.UpgradeSkill(shootStrategy);
         shootStrategy.UpdateValues();
     }
+    public void Visit(AreaStrategy areaStrategy) { 
+    var skill = skillLvlUp as AreaSkillLevelUp;
+        areaStrategy = skill.UpgradeSkill(areaStrategy);
+        areaStrategy.UpdateValues();
+    }
 }

@@ -3,6 +3,7 @@ using MyStateMachine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
 [CreateAssetMenu(menuName = "SkillStrategy/Mele", fileName = "Mele")]
@@ -10,9 +11,11 @@ public class MeleStrategy : SkillsStrategy {
 
     WeaponType weapon;
 
-
+    [Header("Mele Specifics")]
     float enqueTime = 0.3f;
     public int maxAttackSeries = 4;
+    [Range(0, 1)]
+    public float DelayToActivateDamageDeal = 0.4f;
     int attackSeries = 0;
 
 
@@ -27,12 +30,20 @@ public class MeleStrategy : SkillsStrategy {
     //Animations
     public List<string> AnimationNames;
     List<int> animationHash = new List<int>();
+
+    //UniTask
+    CancellationTokenSource cts;
+    CancellationToken token;
+
+
     public override int CurrentAnimationHash { get => animationHash[attackSeries]; set => throw new System.NotImplementedException(); }
 
 
     public override void Initialize(Transform origin, AudioManager audioManager, string interactionTagName) {
+        initialization = true;
         Origin = origin;
-
+        cts = new CancellationTokenSource();
+        token = cts.Token;
         //Conditions
         nodes.Add(new Node(new FuncPredicate(() => coolDownTimer <= 0)));                                                                              //First attack condition
         nodes.Add(new Node(new FuncPredicate(() => coolDownTimer > 0 && coolDownTimer < enqueTime && attackQueueDamage.Count < maxQueueAttackCount))); //Series Attack condition
@@ -94,37 +105,27 @@ public class MeleStrategy : SkillsStrategy {
 
         weapon.gameObject.SetActive(false);
 
+        BuildNewVFX();
 
-        particleSystemArray = new ParticleSystem[ParticlePrefabArray.Length];
-        particleGameObjectsArray = new GameObject[ParticlePrefabArray.Length];
-
-        for (int i = 0; i < ParticlePrefabArray.Length; i++) {
-            //Instantiate prefabs
-            var vfx = Instantiate(ParticlePrefabArray[i], Origin);
-            vfx.SetActive(true);
-            vfx.transform.rotation = Origin.rotation;
-
-
-            particleGameObjectsArray[i] = vfx;
-
-            //handle particle system
-            particleSystemArray[i] = vfx.GetComponent<ParticleSystem>();
-        }
 
 
         //Set minimum Skill Duration
         if (SkillDuration <= 0.1f)
             SkillDuration = 0.1f;
+
+        initialization = false;
     }
 
     private void OnDestroy() {
         nodes.Clear();
         animationHash.Clear();
+        cts.Cancel();
         //handle game objects
 
     }
 
     public override void TryUseSkill(Action<float> OnChangeSkillDuration, Action<int, float> OnAnimation, UnityAction<int> OnManaChange) {
+
         OnSkillDuration = OnChangeSkillDuration;
 
         foreach (Node node in nodes) {
@@ -163,25 +164,47 @@ public class MeleStrategy : SkillsStrategy {
         }
     }
     private async UniTask Attack(float attackBonus) {
-        if (attackSeries >= maxAttackSeries)
-            attackSeries = 0;
 
-        if (WithCooldown)
-            coolDownTimer = CoolDown;
-        else
-            coolDownTimer = SkillDuration;
-        OnAnimation.Invoke(CurrentAnimationHash, SkillDuration);
-        OnSkillDuration.Invoke(SkillDuration);
-        audioManager.PlayOneShot(SkillSound, Origin.position);
-        //Async do damage 
-        attackSeries++;
+        try {
 
-        await UniTask.WaitForSeconds(SkillDuration * 0.4f);                                                                                                          //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Need for every attack type define delay!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        weapon.gameObject.SetActive(true);
-        if (particleSystemArray != null) particleSystemArray[attackSeries - 1].Play();
+            if (attackSeries >= maxAttackSeries)
+                attackSeries = 0;
 
-        await UniTask.WaitForSeconds(0.1f);
-        weapon.gameObject.SetActive(false);
+            if (WithCooldown)
+                coolDownTimer = CoolDown;
+            else
+                coolDownTimer = SkillDuration;
+            OnAnimation?.Invoke(CurrentAnimationHash, SkillDuration);
+            OnSkillDuration?.Invoke(SkillDuration);
+
+            PlayCastSound();
+          
+
+            //Async do damage 
+            attackSeries++;
+
+            //Add Bous Damage Physics Damage
+            weapon.AddBonusDamage(new PhysicsDamageType(attackSeries));
+
+            //VFX
+            PlayOnCastVFX();
+         
+            await UniTask.WaitForSeconds(SkillDuration * DelayToActivateDamageDeal, false, PlayerLoopTiming.Update, token);                                                                                                          //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Need for every attack type define delay!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+            weapon.gameObject.SetActive(true);
+
+            //VFX
+            PlayOnAttackVFX();
+
+            await UniTask.WaitForSeconds(0.1f, false, PlayerLoopTiming.Update, token);
+
+            //Remove bonus Damage
+
+            weapon.RemoveBonusDamage(new PhysicsDamageType(attackSeries));
+            weapon.gameObject.SetActive(false);
+        } catch (System.OperationCanceledException) {
+            Debug.Log("Task was successfully stopped.");
+        }
     }
 
 
@@ -191,6 +214,54 @@ public class MeleStrategy : SkillsStrategy {
         if (coolDownTimer <= 0 && distanceToHero <= AttackRange) return true;
 
         return false;
+    }
+
+    protected override void BuildNewVFX() {
+        //On Cast
+        onCastParticleSystemArray = new ParticleSystem[OnCastParticlePrefabArray.Length];
+        onCastParticleGameObjectsArray = new GameObject[OnCastParticlePrefabArray.Length];
+
+        for (int i = 0; i < OnCastParticlePrefabArray.Length; i++) {
+            //Instantiate prefabs
+            var vfx = Instantiate(OnCastParticlePrefabArray[i], Origin);
+            vfx.SetActive(true);
+            vfx.transform.rotation = Origin.rotation;
+
+
+            onCastParticleGameObjectsArray[i] = vfx;
+
+            //handle particle system
+            onCastParticleSystemArray[i] = vfx.GetComponent<ParticleSystem>();
+        }
+
+        //On Attack
+        particleSystemArray = new ParticleSystem[ParticlePrefabArray.Length];
+        particleGameObjectsArray = new GameObject[ParticlePrefabArray.Length];
+
+        for (int i = 0; i < ParticlePrefabArray.Length; i++) {
+            //Instantiate prefabs
+            var vfx = Instantiate(ParticlePrefabArray[i], Origin);
+            vfx.SetActive(true);
+            vfx.transform.rotation = Origin.rotation;
+
+
+            particleGameObjectsArray[i] = vfx;
+
+            //handle particle system
+            particleSystemArray[i] = vfx.GetComponent<ParticleSystem>();
+        }
+    }
+
+    protected override void PlayOnCastVFX() {
+        if (onCastParticleSystemArray.Length > 0) onCastParticleSystemArray[attackSeries - 1].Play();
+    }
+
+    protected override void PlayOnAttackVFX() {
+        if (particleSystemArray != null) particleSystemArray[attackSeries - 1].Play();
+    }
+
+    protected override void PlayCastSound() {
+        audioManager?.PlayOneShot(SkillSound, Origin.position);
     }
 
     class Node {
