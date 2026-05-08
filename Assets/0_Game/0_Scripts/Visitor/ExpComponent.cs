@@ -5,10 +5,14 @@ public class ExpComponent : MonoBehaviour, IVisitable {
     UnityEvent<int, int> OnGetExp;
     public int level = 1;
     public int currentExp = 0;
-    public int MaxExp = 4;
+    public int MaxExp = 2;
     public int OverallExp;
 
     public void Initialize(UnityEvent<int> OnLevelUp, UnityEvent<int, int> OnGetExp) {
+        level = 1;
+        currentExp = 0;
+        MaxExp = 2;
+        OverallExp = 0;
         OnLvlUp = OnLevelUp;
         this.OnGetExp = OnGetExp;
     }
@@ -27,7 +31,7 @@ public class ExpComponent : MonoBehaviour, IVisitable {
     void LevelUp() {
         level++;
         currentExp = 0;
-        MaxExp = (int)Mathf.Pow((int)4, level);
+        MaxExp = (int)Mathf.Pow((int)level, 2);
         OnLvlUp.Invoke(MaxExp);
     }
 }

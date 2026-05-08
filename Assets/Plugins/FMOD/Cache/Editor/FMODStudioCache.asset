@@ -54,6 +54,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 50
   Length: 1450
+--- !u!114 &-8054073681822408823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/EarthGolem/EarthGolemOnAttack
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/EarthGolem/EarthGolemOnAttack
+  Guid:
+    Data1: -1853001066
+    Data2: 1327384814
+    Data3: 1406626999
+    Data4: 1451949360
+  Banks:
+  - {fileID: -1645460023097917388}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 2000
 --- !u!114 &-7965261075288842985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,10 +150,10 @@ MonoBehaviour:
   Path: ../RougeLikeRPGFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639130665007245865
+  lastModified: 639138607599285634
   FileSizes:
   - Name: Desktop
-    Value: 11254976
+    Value: 11272832
   Exists: 1
 --- !u!114 &-7451629439594978040
 MonoBehaviour:
@@ -143,11 +170,65 @@ MonoBehaviour:
   Path: ../RougeLikeRPGFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639130665007255885
+  lastModified: 639138607599301603
   FileSizes:
   - Name: Desktop
-    Value: 1664
+    Value: 2440
   Exists: 1
+--- !u!114 &-7375976537799106707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Lich/Lich Attack
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Lich/Lich Attack
+  Guid:
+    Data1: -757387681
+    Data2: 1106342484
+    Data3: 1510137015
+    Data4: -2130334132
+  Banks:
+  - {fileID: -1645460023097917388}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 4704
+--- !u!114 &-6857638461543228778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/EarthGolem/EarthGolemOnDie
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/EarthGolem/EarthGolemOnDie
+  Guid:
+    Data1: -676365903
+    Data2: 1169352628
+    Data3: -1167280964
+    Data4: 1524495623
+  Banks:
+  - {fileID: -1645460023097917388}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 1100
 --- !u!114 &-6215193183086441864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,10 +244,10 @@ MonoBehaviour:
   Path: ../RougeLikeRPGFMOD/Build/Desktop/Hero.bank
   Name: Hero
   StudioPath: bank:/Hero
-  lastModified: 639130670247740980
+  lastModified: 639136027117363542
   FileSizes:
   - Name: Desktop
-    Value: 567008
+    Value: 944960
   Exists: 1
 --- !u!114 &-5939161106805506477
 MonoBehaviour:
@@ -188,6 +269,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 506
   Exists: 1
+--- !u!114 &-5384788468936186809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Zombie/ZombieDie
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Zombie/ZombieDie
+  Guid:
+    Data1: 494962349
+    Data2: 1194889059
+    Data3: 1118791051
+    Data4: -1653982547
+  Banks:
+  - {fileID: -1645460023097917388}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 1500
 --- !u!114 &-5238655733063600798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +377,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 50
   Length: 1097
+--- !u!114 &-4080329709309512340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Autocaster/Red Energy/Red Pick Up
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Autocaster/Red Energy/Red Pick Up
+  Guid:
+    Data1: -1560099698
+    Data2: 1161122923
+    Data3: 936491941
+    Data4: 2070568993
+  Banks:
+  - {fileID: -6215193183086441864}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 1700
+--- !u!114 &-3331180100504291894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Autocaster/Green Blow
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Autocaster/Green Blow
+  Guid:
+    Data1: 1637162704
+    Data2: 1103498194
+    Data3: 461189253
+    Data4: 913665740
+  Banks:
+  - {fileID: -6215193183086441864}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 900
 --- !u!114 &-1964061294146819055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,11 +466,38 @@ MonoBehaviour:
   Path: ../RougeLikeRPGFMOD/Build/Desktop/Enemy.bank
   Name: Enemy
   StudioPath: bank:/Enemy
-  lastModified: 639129806108446948
+  lastModified: 639138607598478963
   FileSizes:
   - Name: Desktop
-    Value: 245664
+    Value: 778976
   Exists: 1
+--- !u!114 &-1437333472146409566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Zombie/ZombieAttack
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Zombie/ZombieAttack
+  Guid:
+    Data1: 339235173
+    Data2: 1086912080
+    Data3: -1600498779
+    Data4: -1999780148
+  Banks:
+  - {fileID: -1645460023097917388}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 1500
 --- !u!114 &-1233399418336292197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +525,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1600
+--- !u!114 &-475849070569069016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Autocaster/Red Energy/Red Energy
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Autocaster/Red Energy/Red Energy
+  Guid:
+    Data1: 127502053
+    Data2: 1331178302
+    Data3: -718793070
+    Data4: 593587768
+  Banks:
+  - {fileID: -6215193183086441864}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 1000
 --- !u!114 &-246318636062924440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,13 +641,28 @@ MonoBehaviour:
   - {fileID: 1245516555079756537}
   - {fileID: -7965261075288842985}
   - {fileID: -8310724012963701556}
+  - {fileID: 8615934971255797616}
+  - {fileID: 805326507946413279}
+  - {fileID: 5092221701898084662}
+  - {fileID: -1437333472146409566}
+  - {fileID: -5384788468936186809}
+  - {fileID: 6932785408941909417}
+  - {fileID: 8551004590118367656}
+  - {fileID: -7375976537799106707}
+  - {fileID: -4080329709309512340}
+  - {fileID: -475849070569069016}
+  - {fileID: -3331180100504291894}
+  - {fileID: 4616269895872740838}
+  - {fileID: 1289949840411068825}
+  - {fileID: -8054073681822408823}
+  - {fileID: -6857638461543228778}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7544809293241347934}
   StringsBanks:
   - {fileID: -7451629439594978040}
   cacheVersion: 131858
-  cacheTime: 639130670247740980
+  cacheTime: 639138607599301603
   SerializableEventsDict:
   - key: event:/Skills/Mele/Sword/Sword
     index: 0
@@ -463,6 +694,63 @@ MonoBehaviour:
     index: 13
   - key: event:/Skills/Autocaster/Explosion
     index: 14
+  - key: event:/Enemy/ElCactus/ElCactusAttack
+    index: 15
+  - key: event:/Enemy/ElCactus/ElCactusDie
+    index: 16
+  - key: event:/Shop/SpendCoins
+    index: 17
+  - key: event:/Enemy/Zombie/ZombieAttack
+    index: 18
+  - key: event:/Enemy/Zombie/ZombieDie
+    index: 19
+  - key: event:/Skills/Shoot/FireBall
+    index: 20
+  - key: event:/Enemy/Lich/LichDie
+    index: 21
+  - key: event:/Enemy/Lich/Lich Attack
+    index: 22
+  - key: event:/Skills/Autocaster/Red Energy/Red Pick Up
+    index: 23
+  - key: event:/Skills/Autocaster/Red Energy/Red Energy
+    index: 24
+  - key: event:/Skills/Autocaster/Green Blow
+    index: 25
+  - key: event:/Enemy/Druid/Druid Die
+    index: 26
+  - key: event:/Enemy/Druid/Druid Attack
+    index: 27
+  - key: event:/Enemy/EarthGolem/EarthGolemOnAttack
+    index: 28
+  - key: event:/Enemy/EarthGolem/EarthGolemOnDie
+    index: 29
+--- !u!114 &805326507946413279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/ElCactus/ElCactusDie
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/ElCactus/ElCactusDie
+  Guid:
+    Data1: 409975811
+    Data2: 1081322157
+    Data3: 1069423778
+    Data4: 1439232318
+  Banks:
+  - {fileID: -1645460023097917388}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 1848
 --- !u!114 &1245516555079756537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,6 +778,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 50
   Length: 4000
+--- !u!114 &1289949840411068825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Druid/Druid Attack
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Druid/Druid Attack
+  Guid:
+    Data1: -1236208845
+    Data2: 1204004085
+    Data3: 734057373
+    Data4: 1115294858
+  Banks:
+  - {fileID: -1645460023097917388}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 1933
 --- !u!114 &1417652368019973933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,6 +859,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 116610
+--- !u!114 &4616269895872740838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Druid/Druid Die
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Druid/Druid Die
+  Guid:
+    Data1: 1691391007
+    Data2: 1118781488
+    Data3: -2011444053
+    Data4: -1982484364
+  Banks:
+  - {fileID: -1645460023097917388}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 1200
+--- !u!114 &5092221701898084662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Shop/SpendCoins
+  m_EditorClassIdentifier: 
+  Path: event:/Shop/SpendCoins
+  Guid:
+    Data1: -2030902845
+    Data2: 1117069891
+    Data3: 1803114127
+    Data4: 1701972823
+  Banks:
+  - {fileID: -7544809293241347934}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &5448216651622119384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,6 +940,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 45
   Length: 450
+--- !u!114 &6932785408941909417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Skills/Shoot/FireBall
+  m_EditorClassIdentifier: 
+  Path: event:/Skills/Shoot/FireBall
+  Guid:
+    Data1: -1086670638
+    Data2: 1307545207
+    Data3: -1065622376
+    Data4: -333665370
+  Banks:
+  - {fileID: -6215193183086441864}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 1100
 --- !u!114 &6955235857895379550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,3 +994,57 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 50500
+--- !u!114 &8551004590118367656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Lich/LichDie
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Lich/LichDie
+  Guid:
+    Data1: 852890915
+    Data2: 1179512673
+    Data3: 800442046
+    Data4: -905335065
+  Banks:
+  - {fileID: -1645460023097917388}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 2000
+--- !u!114 &8615934971255797616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/ElCactus/ElCactusAttack
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/ElCactus/ElCactusAttack
+  Guid:
+    Data1: -1878332770
+    Data2: 1309136397
+    Data3: -1571023725
+    Data4: -2005180865
+  Banks:
+  - {fileID: -1645460023097917388}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 1500

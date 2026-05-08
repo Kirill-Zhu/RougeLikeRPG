@@ -28,6 +28,9 @@ public class EnemyStrategy : ScriptableObject {
     [SerializeField] int coldDamage;
     public HealtComponentData HealtData;
 
+    [Header("VFX")]
+    public GameObject OnAttackParticelPrefab;
+
     [Header("Sound")]
     public EventReference OnAttack;
     public EventReference OnDie;

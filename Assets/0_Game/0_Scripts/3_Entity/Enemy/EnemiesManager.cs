@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 
 public class EnemiesManager : MonoBehaviour {
 
-    
+
     Hero Hero;
     LevelStatistics LevelStatistics;
     //SpawnStrategy
@@ -74,13 +74,14 @@ public class EnemiesManager : MonoBehaviour {
            .SetProjectileAim(Hero.transform)
            .WithInteractionTag(interactionTagName)
            .WithDropObject(strategy.DropPfreabList)
+           .WithOnAttackParticle(strategy.OnAttackParticelPrefab)
            .WithSounds(strategy.OnAttack, strategy.OnDie)
            .Build(type);
 
         var component = obj.GetComponent(type);
 
         //Set pos
-        obj.transform.position = spawnPosList[Random.Range(0, spawnPosList.Count)].position;
+        obj.transform.position = spawnPosList[Random.Range(0, spawnPosList.Count)].position.WithY(0);
 
 
         if (component is Entity) {
@@ -273,7 +274,9 @@ public struct MoveEnemyJob : IJobParallelForTransform {
             VelocityNativeArray[index] = 0;
             return;                                                                                                                          //Return if entity in attack range
         }
-        ReturnBattleStatusArray[index] = false;
+        if (Vector3.Distance(MovePoint, transform.position) > AttackRangeArray[index] + 1f) {                                                //To not evenry time reset attack status need this threshold of 1f
+            ReturnBattleStatusArray[index] = false;
+        }
 
         // Calculate the local forward direction in world space
         // This is the equivalent of transform.forward in a regular MonoBehaviour

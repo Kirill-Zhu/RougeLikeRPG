@@ -105,7 +105,7 @@ public class AreaStrategy : SkillsStrategy {
            .FromOrigin(Origin)
            .WithInteractionTag(interactionTagName)
            .WithDamageTypes(damageTypesList.ToArray())
-           .FollowHero(FollowHero)
+           .FollowCaster(FollowHero)
            .WithLiveDuration(LiveDuration)
            .Build();
 

@@ -34,6 +34,7 @@ MonoBehaviour:
   fireDamage: 0
   coldDamage: 0
   HealtData: {fileID: 11400000, guid: f71b348ac2520fc4188db92aa52e2d41, type: 2}
+  OnAttackParticelPrefab: {fileID: 8307060409358143758, guid: 35cc801dc72b1a34ea0e07422fe9a63b, type: 3}
   OnAttack:
     Guid:
       Data1: 236452331

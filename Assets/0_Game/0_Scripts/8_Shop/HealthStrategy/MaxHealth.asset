@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7b01b19106abf4fa864cf078e9d03f, type: 3}
   m_Name: MaxHealth
   m_EditorClassIdentifier: 
-  Level: 3
+  Level: 0
   itemsArray:
   - {fileID: 11400000, guid: 4639bb66b5931fe448e97a2d32dcc569, type: 2}
   - {fileID: 11400000, guid: 57bd3737b55ba4547873cc3a8ffebcb5, type: 2}

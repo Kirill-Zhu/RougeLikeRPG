@@ -5,7 +5,7 @@ public class AreaWeaponType : WeaponType {
     public Transform Origin;
     public bool DestroyAfterUse = true;
     public float LiveDuration;
-    public bool FollowHero;
+    public bool FollowCaster;
     float liveTimer;
     float tickTimer;
     HashSet<HealthComponent> victimsList = new HashSet<HealthComponent>();
@@ -45,6 +45,9 @@ public class AreaWeaponType : WeaponType {
         liveTimer = LiveDuration;
         if (Origin != null)
             transform.position = Origin.position;
+    }
+    private void OnDisable() {
+        victimsList.Clear();
     }
 
     private void Update() {
@@ -91,7 +94,7 @@ public class AreaWeaponType : WeaponType {
         public Builder WithLiveDuration(float duration) {
             liveDuration = duration; return this;
         }
-        public Builder FollowHero(bool value) { this.followHero = value; return this; }
+        public Builder FollowCaster(bool value) { this.followHero = value; return this; }
         public Builder DestroyAfterUse(bool destroy) {
             this.destroyAfterUse = destroy; return this;
         }
@@ -105,7 +108,7 @@ public class AreaWeaponType : WeaponType {
             areaWepon.damageTypes = damageTypes;
             areaWepon.interactionTagName = interactionTagName;
             areaWepon.LiveDuration = liveDuration;
-            areaWepon.FollowHero = followHero;
+            areaWepon.FollowCaster = followHero;
             areaWepon.DestroyAfterUse = destroyAfterUse;
             return areaWepon;
         }

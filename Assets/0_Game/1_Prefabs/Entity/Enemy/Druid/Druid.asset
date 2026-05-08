@@ -34,3 +34,17 @@ MonoBehaviour:
   fireDamage: 0
   coldDamage: 0
   HealtData: {fileID: 11400000, guid: f82da5d204a66d241838586975e85a5e, type: 2}
+  OnAttack:
+    Guid:
+      Data1: -1236208845
+      Data2: 1204004085
+      Data3: 734057373
+      Data4: 1115294858
+    Path: event:/Enemy/Druid/Druid Attack
+  OnDie:
+    Guid:
+      Data1: 1691391007
+      Data2: 1118781488
+      Data3: -2011444053
+      Data4: -1982484364
+    Path: event:/Enemy/Druid/Druid Die

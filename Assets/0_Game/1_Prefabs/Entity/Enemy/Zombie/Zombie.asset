@@ -24,6 +24,7 @@ MonoBehaviour:
   ShootShape: 0
   SpreadAngle: 0
   ProjecitlesCountByShoot: 0
+  SelfDirecrtedProjectile: 0
   WeaponPrefab: {fileID: 2714323086112425801, guid: 906c42f36cdfc5d4483ad698e1fd1ea0, type: 3}
   WeaponType: 0
   DropPfreabList:
@@ -34,3 +35,17 @@ MonoBehaviour:
   fireDamage: 0
   coldDamage: 0
   HealtData: {fileID: 11400000, guid: 16ec866530b899045ae2c5ce05914d0b, type: 2}
+  OnAttack:
+    Guid:
+      Data1: 339235173
+      Data2: 1086912080
+      Data3: -1600498779
+      Data4: -1999780148
+    Path: event:/Enemy/Zombie/ZombieAttack
+  OnDie:
+    Guid:
+      Data1: 494962349
+      Data2: 1194889059
+      Data3: 1118791051
+      Data4: -1653982547
+    Path: event:/Enemy/Zombie/ZombieDie

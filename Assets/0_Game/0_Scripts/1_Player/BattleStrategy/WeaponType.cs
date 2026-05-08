@@ -47,6 +47,7 @@ public abstract class WeaponType : MonoBehaviour {
     }
 }
 public enum WeaponTypeEnum {
-    mele,
-    projectile
+    mele
+    , projectile
+    , area
 }

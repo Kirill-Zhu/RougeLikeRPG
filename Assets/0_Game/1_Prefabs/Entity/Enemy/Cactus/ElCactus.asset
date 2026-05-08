@@ -34,3 +34,17 @@ MonoBehaviour:
   fireDamage: 0
   coldDamage: 0
   HealtData: {fileID: 11400000, guid: 16ec866530b899045ae2c5ce05914d0b, type: 2}
+  OnAttack:
+    Guid:
+      Data1: -1878332770
+      Data2: 1309136397
+      Data3: -1571023725
+      Data4: -2005180865
+    Path: event:/Enemy/ElCactus/ElCactusAttack
+  OnDie:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 

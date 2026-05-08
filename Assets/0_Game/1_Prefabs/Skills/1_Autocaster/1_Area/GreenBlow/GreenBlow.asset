@@ -23,3 +23,10 @@ MonoBehaviour:
   ColdDamage: 0
   PushPower: 5
   coolDown: 5
+  OnCastSound:
+    Guid:
+      Data1: 1637162704
+      Data2: 1103498194
+      Data3: 461189253
+      Data4: 913665740
+    Path: event:/Skills/Autocaster/Green Blow

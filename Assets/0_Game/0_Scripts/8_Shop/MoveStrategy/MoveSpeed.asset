@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7b01b19106abf4fa864cf078e9d03f, type: 3}
   m_Name: MoveSpeed
   m_EditorClassIdentifier: 
-  Level: 3
+  Level: 0
   itemsArray:
   - {fileID: 11400000, guid: 6c4258da298245346a8b24d00fb07bea, type: 2}
   - {fileID: 11400000, guid: 68254b0d4ac845d4d8752cf014300664, type: 2}

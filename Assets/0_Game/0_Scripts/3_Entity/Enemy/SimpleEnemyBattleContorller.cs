@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using FMODUnity;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -26,8 +27,19 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
     float liveDuration = 1;
     public event Action OnAttack;
     event Action OnExitBattleState;
+
+    //For Area
+    public List<AreaWeaponType> areaWeaponList = new List<AreaWeaponType>();
+    float areaLiveDuration = 3;
+
     //-------------------
 
+    //VFX
+    [SerializeField] GameObject onAttackParticlePrefab;
+    [SerializeField] ParticleSystem onAttackVFX;
+
+    //Sound
+    EventReference onAttackSound;
     [SerializeField] float skillDurationCooldown;
     public event Action<int> OnAnimationStart;
     public event Action<float> OnChangeDurationSkill;
@@ -39,7 +51,23 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
     //UniTask
     CancellationTokenSource cts;
 
-    public void Initialize(float attackDuration, WeaponTypeEnum weaponType, float attackRange, float damageDelay, DamageType[] damageTypes, GameObject prefab, string interactionTag = null, float projectileSpeed = 2, float ProjectileliveDuration = 2, int shootShape = 0, float spreadAngle = 70, int projectilesCount = 1, bool isProjectileSelfDirected = false, Transform aimTransform = null) {
+    public void Initialize(float attackDuration
+        , WeaponTypeEnum weaponType
+        , float attackRange
+        , float damageDelay
+        , DamageType[] damageTypes
+        , GameObject prefab
+        , string interactionTag = null
+        , float projectileSpeed = 2
+        , float ProjectileliveDuration = 2,
+        int shootShape = 0
+        , float spreadAngle = 70
+        , int projectilesCount = 1
+        , bool isProjectileSelfDirected = false
+        , Transform aimTransform = null
+        , GameObject onAttackParticlePrefab = null
+        , EventReference onAttackSound = new EventReference()) {
+
         this.attackDuration = attackDuration;
         this.weaponType = weaponType;
         this.attackRange = attackRange;
@@ -50,6 +78,9 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         this.projectilesCountByShoot = projectilesCount;
         this.selfDirected = isProjectileSelfDirected;
         this.aimTransform = aimTransform;
+        this.onAttackParticlePrefab = onAttackParticlePrefab;
+        this.onAttackSound = onAttackSound;
+
         //Mele
         if (weaponType == WeaponTypeEnum.mele) {
             var mele = new Mele.MeleBuilder(prefab)
@@ -88,10 +119,32 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
                 projecitle.gameObject.SetActive(false);
                 this.liveDuration = ProjectileliveDuration;
             }
-
             //Events
             OnAttack += ShootProjectile;
         }
+        if(weaponType == WeaponTypeEnum.area) {
+            weaponPoolList = new List<WeaponType>();
+            
+            var area = new AreaWeaponType.Builder(prefab)
+                .FromOrigin(transform)
+                .WithDamageTypes (damageTypes)
+                .WithLiveDuration(areaLiveDuration)
+                .WithInteractionTag(interactionTag)
+                .FollowCaster(false)
+                .DestroyAfterUse(false)
+                .Build();   
+
+            areaWeaponList.Add(area);
+            area.gameObject.SetActive(false);
+
+            //Events
+            OnAttack += CastArea;
+        }
+
+        //VFX
+        var vfxObj = Instantiate(this.onAttackParticlePrefab, null);
+        vfxObj.TryGetComponent<ParticleSystem>(out ParticleSystem particle);
+        onAttackVFX = particle;
     }
     public void OnDie() {
         cts?.Cancel();
@@ -122,17 +175,21 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         }
     }
     private void OnDestroy() {
-        cts?.Cancel();   
-            foreach (var projectile in projectileList)
-                    Destroy(projectile.gameObject);     
+        cts?.Cancel();
+        foreach (var projectile in projectileList)
+            Destroy(projectile.gameObject);
 
+        //VFX
+        Destroy(onAttackVFX.gameObject);
     }
-    
+
     public void TryAttack() {
         if (skillDurationCooldown > 0) { return; }
         OnAttack?.Invoke();
         OnAnimationStart?.Invoke(animationHash);
         OnChangeDurationSkill?.Invoke(damageDelay); //Here need give him time to start his attack
+
+      
     }
     public void OnFixedUpdate() {
         TryAttack();
@@ -168,6 +225,15 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
             cts.Dispose();
             cts = null;
         }
+
+        //VFX
+        if (onAttackVFX != null) {
+            onAttackVFX.gameObject.transform.position = transform.position;
+            onAttackVFX.Play();
+        }
+
+        //Sound 
+        RuntimeManager.PlayOneShot(onAttackSound, transform.position);
     }
     async void ShootProjectile() {
         //UniTask
@@ -179,17 +245,14 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
             await UniTask.WaitForSeconds(damageDelay, false, PlayerLoopTiming.Update, token, true);
             OnChangeDurationSkill?.Invoke(attackDuration);
 
-            //Old Vers
-            //foreach (var projectile in projectileList) {  
-            //    if (projectile.gameObject.activeSelf) continue;
+            //VFX
+            if (onAttackVFX != null) {
+                onAttackVFX.gameObject.transform.position = transform.position;
+                onAttackVFX.Play();
+            }
 
-            //    projectile.gameObject.SetActive(true);
-            //    projectile.LiveDuration = liveDuration;
-            //    projectile.gameObject.transform.rotation = transform.rotation;
-            //    projectile.gameObject.transform.position = transform.position;
-
-            //    break;
-            //}
+            //Sound 
+            RuntimeManager.PlayOneShot(onAttackSound, transform.position);
 
             switch (shootShape) {
                 case ShootShape.Forward: {
@@ -260,7 +323,48 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
             cts = null;
         }
 
+       
     }
+    async void CastArea() {
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = new CancellationTokenSource();
+        CancellationToken token = cts.Token;
+        Vector3 castPos = aimTransform.position.WithY(0);
+        //Sound 
+        RuntimeManager.PlayOneShot(onAttackSound, transform.position);
+
+        //VFX (First Cast VFX)
+        if (onAttackVFX != null) {
+            onAttackVFX.gameObject.transform.position = castPos;
+            onAttackVFX.Play();
+        }
+
+        //Sound 
+        RuntimeManager.PlayOneShot(onAttackSound, transform.position);
+
+        try {
+
+            await UniTask.WaitForSeconds(damageDelay, false, PlayerLoopTiming.Update, token, true);
+            foreach (var area in areaWeaponList) {
+                area.gameObject.SetActive(true);
+                area.transform.position = castPos;
+                OnChangeDurationSkill?.Invoke(attackDuration);         //if attack was done, set coolDown
+            }
+
+            await UniTask.WaitForSeconds(areaLiveDuration, false, PlayerLoopTiming.Update, token, true);
+            foreach (var area in areaWeaponList) {
+                area.gameObject.SetActive(false);
+            }
+
+        } catch (OperationCanceledException) {
 
 
+        } finally {
+            cts.Dispose();
+            cts = null;
+        }
+
+        
+    }
 }
