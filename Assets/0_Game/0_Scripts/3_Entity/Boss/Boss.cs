@@ -6,6 +6,9 @@ using Zenject;
 namespace BossEntity {
     [RequireComponent(typeof(BattleController), typeof(MoveController))]
     public class Boss : MonoBehaviour {
+        public string Name;
+        public string Description;
+        public Texture Label;
         //Properties
         Hero hero;
         Animator animator;

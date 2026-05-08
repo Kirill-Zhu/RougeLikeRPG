@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FireBall
   m_EditorClassIdentifier: 
   prefab: {fileID: 1931694588739526134, guid: 45050c79404988944a25404f054f250e, type: 3}
+  OnCastParticlePrefabArray: []
   ParticlePrefabArray: []
   AttackRange: 11
   ManaCost: 10
@@ -30,15 +31,14 @@ MonoBehaviour:
   SkillDuration: 0.3
   SkillSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1086670638
+      Data2: 1307545207
+      Data3: -1065622376
+      Data4: -333665370
+    Path: event:/Skills/Shoot/FireBall
   shootShape: 0
   spreadAngle: 0
   projectilesCountByShoot: 1
   damage: 1
   speed: 7
-  animationName: Shoot
   LiveDuration: 5

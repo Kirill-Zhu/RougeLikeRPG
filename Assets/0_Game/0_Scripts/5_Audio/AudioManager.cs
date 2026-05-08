@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
     HeroMonoinstaller heroMonoinstaller;
     //->Event Bus
     EventBinding<OnUpgradeItemInShop> onUpgradeItemInShop;
+    EventBinding<OnSpawnBoss> onSpawnBoss;
     //Hero
     Hero hero;
     //ScenesManager
@@ -29,18 +30,20 @@ public class AudioManager : MonoBehaviour
     private void Start() {
         try {
             OnLoadAppPlay();
-        }
-        catch { 
-        
+        } catch {
+
         }
 
-    }
-    private void OnEnable() {
+        //Shop
         onUpgradeItemInShop = new EventBinding<OnUpgradeItemInShop>(PlayCoinSound);
         EventBus<OnUpgradeItemInShop>.Register(onUpgradeItemInShop);
+        //Boss
+        onSpawnBoss = new EventBinding<OnSpawnBoss>(StartBossFightMusic);
+        EventBus<OnSpawnBoss>.Register(onSpawnBoss);
     }
-    private void OnDisable() {
+    private void OnDestroy() {
         EventBus<OnUpgradeItemInShop>.Deregister(onUpgradeItemInShop);
+        EventBus<OnSpawnBoss>.Deregister(onSpawnBoss);
     }
 
     void OnLoadAppPlay() {
@@ -59,7 +62,7 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(reference, pos);
     }
  //Boss
-    public void StartBossFightMusic() {
+    public void StartBossFightMusic(OnSpawnBoss @event) {
         music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         music.release();
         music = RuntimeManager.CreateInstance(bossFightMusic);
@@ -85,7 +88,7 @@ public class AudioManager : MonoBehaviour
     //Events
     public void SetEventManager(EventManager eventManager) { 
        this.eventManager = eventManager;
-        eventManager.OnBossCreate.AddListener(StartBossFightMusic);
+       
     }
 
     //-> Event Bus

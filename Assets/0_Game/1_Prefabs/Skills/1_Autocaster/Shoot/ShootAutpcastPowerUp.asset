@@ -16,4 +16,11 @@ MonoBehaviour:
   Descritpion: 
   ModelPrefab: {fileID: 2303205409579412723, guid: 45d0e5beb74d39e43b36f27d1290fdb2, type: 3}
   particle: {fileID: 1901902437216624, guid: a6d69c96115d7424aa8c2c4b3400607b, type: 3}
+  PickUpSound:
+    Guid:
+      Data1: -1560099698
+      Data2: 1161122923
+      Data3: 936491941
+      Data4: 2070568993
+    Path: event:/Skills/Autocaster/Red Energy/Red Pick Up
   autoSkill: {fileID: 11400000, guid: 754dc578065a978449da4917a5e33a40, type: 2}

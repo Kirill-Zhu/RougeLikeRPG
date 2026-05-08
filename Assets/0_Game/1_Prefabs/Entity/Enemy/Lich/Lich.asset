@@ -24,6 +24,7 @@ MonoBehaviour:
   ShootShape: 0
   SpreadAngle: 0
   ProjecitlesCountByShoot: 1
+  SelfDirecrtedProjectile: 0
   WeaponPrefab: {fileID: 5766454499432765695, guid: 6be430e3fd5a6e44cbfcaa29e1e05072, type: 3}
   WeaponType: 1
   DropPfreabList:
@@ -33,3 +34,18 @@ MonoBehaviour:
   fireDamage: 0
   coldDamage: 5
   HealtData: {fileID: 11400000, guid: 3f6a27632abbc3e41b5800c53b47785a, type: 2}
+  OnAttackParticelPrefab: {fileID: 8974203713140315807, guid: bcfa32db22bb6e748a78b8d32a466ea7, type: 3}
+  OnAttack:
+    Guid:
+      Data1: -757387681
+      Data2: 1106342484
+      Data3: 1510137015
+      Data4: -2130334132
+    Path: event:/Enemy/Lich/Lich Attack
+  OnDie:
+    Guid:
+      Data1: 852890915
+      Data2: 1179512673
+      Data3: 800442046
+      Data4: -905335065
+    Path: event:/Enemy/Lich/LichDie

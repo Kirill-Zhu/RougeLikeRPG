@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26eff6f8e1950074c9c29ee91d958e9b, type: 3}
+  m_Name: EarthGolem
+  m_EditorClassIdentifier: 
+  TypeOfEnemy: Dummy
+  prefab: {fileID: 9137032837993464747, guid: 6b55454e0f7280246a9f4b48b029fe80, type: 3}
+  Icon: {fileID: 21300000, guid: 4ca665255adc0204585931b317f67500, type: 3}
+  MoveSpeed: 1
+  AttackRange: 10
+  AttackDuration: 6
+  DamageDelay: 1
+  ProjectileSpeed: 15
+  ProjectilieLiveDureation: 2
+  ShootShape: 0
+  SpreadAngle: 70
+  ProjecitlesCountByShoot: 1
+  SelfDirecrtedProjectile: 0
+  WeaponPrefab: {fileID: 2714323086112425801, guid: d83373cff43fe064ea5e8690418f006d, type: 3}
+  WeaponType: 2
+  DropPfreabList:
+  - {fileID: 4897015921897156567, guid: 92a4812b8e5094e43901951be46ba7a6, type: 3}
+  damageTypesEnum: 1
+  physicsDamage: 5
+  fireDamage: 0
+  coldDamage: 0
+  HealtData: {fileID: 11400000, guid: 05fa038dea9bcae4aabb640299be4c39, type: 2}
+  OnAttackParticelPrefab: {fileID: 6030746854783829907, guid: 885c12f2f11197f48868aa462cc02b71, type: 3}
+  OnAttack:
+    Guid:
+      Data1: -1853001066
+      Data2: 1327384814
+      Data3: 1406626999
+      Data4: 1451949360
+    Path: event:/Enemy/EarthGolem/EarthGolemOnAttack
+  OnDie:
+    Guid:
+      Data1: -676365903
+      Data2: 1169352628
+      Data3: -1167280964
+      Data4: 1524495623
+    Path: event:/Enemy/EarthGolem/EarthGolemOnDie

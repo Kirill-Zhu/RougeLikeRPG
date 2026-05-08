@@ -16,4 +16,11 @@ MonoBehaviour:
   Descritpion: 
   ModelPrefab: {fileID: 2303205409579412723, guid: 45d0e5beb74d39e43b36f27d1290fdb2, type: 3}
   particle: {fileID: 6361997728236094490, guid: fd25cbdb7c54fa4478d443fd2bea4ef1, type: 3}
+  PickUpSound:
+    Guid:
+      Data1: 1637162704
+      Data2: 1103498194
+      Data3: 461189253
+      Data4: 913665740
+    Path: event:/Skills/Autocaster/Green Blow
   autoSkill: {fileID: 11400000, guid: 8a4153792f27e454d9d4fd58706707e4, type: 2}

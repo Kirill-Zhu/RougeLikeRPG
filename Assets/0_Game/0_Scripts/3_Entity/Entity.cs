@@ -6,7 +6,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(HealthComponent), typeof(SimpleEnemyBattleContorller))]
 public class Entity : MonoBehaviour, IDamagable {
-    //Dorps
+    //Drops
     public List<GameObject> DropObjectsList;  // Simple Drop On Die
     
     //General 
@@ -41,8 +41,14 @@ public class Entity : MonoBehaviour, IDamagable {
     //Health
     public HealtComponentData healthData;
     HealthComponent healthComponent;
-  
+
+    //VFX
+    public GameObject OnAttackParticlePrefab;
+
+    //Eevents
     Action<Entity> OnDieEvent = delegate { };
+
+    //Sound
     [Header("Audio")]
     public EventReference OnAttackSound;
     public EventReference OnDieSound;
@@ -57,8 +63,23 @@ public class Entity : MonoBehaviour, IDamagable {
         battleContorller = GetComponent<SimpleEnemyBattleContorller>();
     }
     private void Start() {
-        battleContorller.Initialize(AttackDuration, WeaponType, AttackRange, DamageDelay, DamageTypes, WeaponPrefab, InteractionTagName, ProjectilieSpeed, ProjectileLiveDuration, ShootShape, SpreadAngle, ProjectilesCountByShoot, SelfDirectedProjectile, AimTransform);
-        
+        battleContorller.Initialize(AttackDuration
+            , WeaponType
+            , AttackRange
+            , DamageDelay
+            , DamageTypes
+            , WeaponPrefab
+            , InteractionTagName
+            , ProjectilieSpeed
+            , ProjectileLiveDuration
+            , ShootShape
+            , SpreadAngle
+            , ProjectilesCountByShoot
+            , SelfDirectedProjectile
+            , AimTransform
+            , OnAttackParticlePrefab 
+            ,OnAttackSound);
+        //-----------------------------
         //Events
         healthComponent.OnTakeDamage += LevelStatistics.PlayerDealtDamage;
         healthComponent.OnDie += Die;
@@ -148,10 +169,10 @@ public class Entity : MonoBehaviour, IDamagable {
         int projectilesCountByShoot = 1;
         bool selfDirectedProjectile = false;
         Transform aimTransform;
-
+        //VFX
+        GameObject onAttackParticlePrefab;
         //Sound 
         EventReference OnAttackSound;
-        EventReference OnTakeDamageSound;
         EventReference OnDieSound;
         string interactionTagName;
         List<GameObject> dropObjectsList;
@@ -177,6 +198,7 @@ public class Entity : MonoBehaviour, IDamagable {
         public TypeBuilder SelfDirecredProjectile(bool isSeldDirected) { this.selfDirectedProjectile = isSeldDirected; return this; }
         public TypeBuilder SetProjectileAim(Transform aimTransform) { this.aimTransform = aimTransform; return this; }
         public TypeBuilder WithDropObject(List<GameObject> dropPrefabList) { this.dropObjectsList = dropPrefabList; return this; }
+        public TypeBuilder WithOnAttackParticle(GameObject onAttackParticlePrefab) { this.onAttackParticlePrefab = onAttackParticlePrefab; return this; }    
         public TypeBuilder WithSounds(EventReference OnAttackSound, EventReference OnDieSound) { this.OnAttackSound = OnAttackSound; this.OnDieSound = OnDieSound; return this; }
         public GameObject Build(Type type) {
 
@@ -298,6 +320,12 @@ public class Entity : MonoBehaviour, IDamagable {
             field = component.GetType().GetField("DropObjectsList");
             if (field != null) {
                 field.SetValue(component, dropObjectsList);
+            }
+
+            //VFX
+            field = component.GetType().GetField("OnAttackParticlePrefab");
+            if (field != null) {
+                field.SetValue(component, onAttackParticlePrefab);
             }
             #region Sound
             field = component.GetType().GetField("OnAttackSound");

@@ -80,4 +80,12 @@ MonoBehaviour:
       Data3: 1267204535
       Data4: 679059494
     Path: event:/Music/DieMusic
+  coinSound:
+    Guid:
+      Data1: -2030902845
+      Data2: 1117069891
+      Data3: 1803114127
+      Data4: 1701972823
+    Path: event:/Shop/SpendCoins
   eventManager: {fileID: 0}
+  scenesManager: {fileID: 0}
