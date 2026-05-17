@@ -1,8 +1,8 @@
 #**RogueLikeRPG**
 ---------------
 <img width="1024" height="1024" alt="Icon" src="https://github.com/user-attachments/assets/c996910e-05e4-4a96-bf7a-2e990c5afd43" />
-##Описание
-----------------------
+## Описание
+-----------------
 Стек : Zenject, R3, Addressables, DoTween, UnitTask, IronSource/LevelPlay, UnityCloud, FMOD
 
 Это классический Rogue like RPG основанный на перепрохождении и прокачке персонажа после смертри. В игре реализованы несколько механик прокачки
@@ -25,7 +25,7 @@
 Внизу есть UI показывающий кулдауны каждого из автокастеров
 <img width="323" height="91" alt="Auocaster UI" src="https://github.com/user-attachments/assets/12bbd958-3000-4b9f-9f6e-60d371358d1f" />
 
-##**Механики урона**
+## **Механики урона**
 
 В игре реализованы 3 типа урона 
 **Физический** - белый
