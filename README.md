@@ -1,8 +1,14 @@
-RogueLikeRPG
+#**RogueLikeRPG**
+---------------
 <img width="1024" height="1024" alt="Icon" src="https://github.com/user-attachments/assets/c996910e-05e4-4a96-bf7a-2e990c5afd43" />
+##Описание
+----------------------
+Стек : Zenject, R3, Addressables, DoTween, UnitTask, IronSource/LevelPlay, UnityCloud, FMOD
 
 Это классический Rogue like RPG основанный на перепрохождении и прокачке персонажа после смертри. В игре реализованы несколько механик прокачки
+
 1: Выбор персонажа который имеет свои особоенности(Рыцарь, маг и.т.д)
+
 <img width="632" height="578" alt="Mage" src="https://github.com/user-attachments/assets/0d167754-56e8-487b-92e5-acb1b3adf382" />
 <img width="699" height="596" alt="Foxy" src="https://github.com/user-attachments/assets/31c4fca5-1942-4997-81bf-1014827406ca" />
 
@@ -19,20 +25,27 @@ RogueLikeRPG
 Внизу есть UI показывающий кулдауны каждого из автокастеров
 <img width="323" height="91" alt="Auocaster UI" src="https://github.com/user-attachments/assets/12bbd958-3000-4b9f-9f6e-60d371358d1f" />
 
-Механики урона
+##**Механики урона**
+
 В игре реализованы 3 типа урона 
-Физический - белый
-Огненный - оранжевый
-Ледяной - синий
+**Физический** - белый
+**Огненный** - оранжевый
+**Ледяной** - синий
+
 <img width="601" height="348" alt="Damage" src="https://github.com/user-attachments/assets/d60ffdb0-5e96-4923-8d58-ff8a06be9480" />
+
 Каждое оружие может быть прокачано определенным типо урона либо ящиков c экипировкой на карте либо в магазине.
-Ящик
+**Ящик**
 <img width="307" height="187" alt="Chest" src="https://github.com/user-attachments/assets/fdd9e7e4-436f-4485-b576-d667c9109108" />
-Итем из ящика
+**Итем из ящика**
+
 <img width="534" height="630" alt="ChestCard" src="https://github.com/user-attachments/assets/baf1ba51-b722-4ed0-98f9-55a2763e5b12" />
+
 Каждый персонаж и кадая сущность имеет свои типы урона и свою защиту или уязывимость к кажому типу урон.
-Мгазин
+**Мгазин**
+
 После каждой сессии игрок получает валюту в виде монет, которую он может потратить в магазине улучшив (Скорость бега, здоровье, ману, тип урона, сопротивления к урону).
+
 <img width="1063" height="578" alt="Shop" src="https://github.com/user-attachments/assets/11ece1a7-89f4-48c4-81f5-ce5a7fb9d2fa" />
 
 
