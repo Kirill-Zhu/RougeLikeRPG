@@ -4,6 +4,7 @@ using UnityEngine;
 public class ChoseHeroController : MonoBehaviour {
     [SerializeField] ChoseHeroStrategy choseHeroStrategy;
     [SerializeField] List<HeroStrategyData> heroesList;
+    public HeroStrategyData CurrentHeroStrategyData;
     int currentIndex = 0;
 
     GameObject currentModel;
@@ -13,10 +14,11 @@ public class ChoseHeroController : MonoBehaviour {
     private void Awake() {
         InstantiateModel();
         SetData();
+        CurrentHeroStrategyData = heroesList[currentIndex];
     }
 
     void InstantiateModel() {
-        if(currentModel != null) Destroy(currentModel.gameObject);
+        if (currentModel != null) Destroy(currentModel.gameObject);
         currentModel = Instantiate(heroesList[currentIndex].ModelPrefab);
         currentModel.transform.position = heroModelPos;
         currentModel.transform.rotation = Quaternion.Euler(heroRotation);
@@ -34,6 +36,8 @@ public class ChoseHeroController : MonoBehaviour {
             InstantiateModel();
             SetData();
         }
+
+        CurrentHeroStrategyData = heroesList[currentIndex];
     }
     public void PreviousModel() {
 
@@ -46,6 +50,8 @@ public class ChoseHeroController : MonoBehaviour {
             InstantiateModel();
             SetData();
         }
+
+        CurrentHeroStrategyData = heroesList[currentIndex];
     }
 
 

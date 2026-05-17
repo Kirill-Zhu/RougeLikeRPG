@@ -1254,7 +1254,7 @@ GameObject:
   - component: {fileID: 7252779358007054794}
   - component: {fileID: 764522405626962633}
   - component: {fileID: 1594278479246869851}
-  - component: {fileID: 1724992321895002621}
+  - component: {fileID: 7290665214114476855}
   m_Layer: 0
   m_Name: AnusDragon
   m_TagString: Untagged
@@ -1350,7 +1350,7 @@ MonoBehaviour:
   Description: Test
   Label: {fileID: 2800000, guid: af88e637281e9a548aa31d1cb76a0486, type: 3}
   inBattle: 0
---- !u!114 &1724992321895002621
+--- !u!114 &7290665214114476855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1359,39 +1359,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7160750073294024954}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d72b525aedb19459fd8eda0baece3e, type: 3}
+  m_Script: {fileID: 11500000, guid: e5241381a7ff7134db63afd12657e47f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standartMusic:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  bossFightMusic:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  dieMenu:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  coinSound:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  eventManager: {fileID: 0}
-  scenesManager: {fileID: 0}
 --- !u!1 &7606656608569520720
 GameObject:
   m_ObjectHideFlags: 0

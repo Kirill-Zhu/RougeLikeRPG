@@ -17,8 +17,15 @@ public class LevelStatisticsUIMenu : MonoBehaviour {
 
     [SerializeField] TextMeshProUGUI totalTimeTextMesh;
 
-    private void Awake() {
-        hero.OnDie.AddListener(() => ShowStatsMenu());
+
+    //Event bus
+    EventBinding<OnPlayerDied> onPlayerDied;
+    private void OnEnable() {
+        onPlayerDied = new EventBinding<OnPlayerDied>(ShowStatsMenu);
+        EventBus<OnPlayerDied>.Register(onPlayerDied);
+    }
+    private void OnDisable() {
+        EventBus<OnPlayerDied>.Deregister(onPlayerDied);
     }
     public void ShowStatsMenu() {
         statisticsMenu.SetActive(true);

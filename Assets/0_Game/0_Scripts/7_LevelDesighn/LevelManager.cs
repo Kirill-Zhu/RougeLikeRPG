@@ -11,6 +11,10 @@ public class LevelManager : MonoBehaviour {
 
     public UnityEvent OnGamePause;
     public UnityEvent OnGameResume;
+
+    //Event Bus 
+    EventBinding<OnPlayerDied> onPlayerDied;
+
     private void Awake() {
         HeroSpawner.hero = hero;
         ActivateScene();
@@ -22,9 +26,16 @@ public class LevelManager : MonoBehaviour {
         hero.OnLevelUp.AddListener(_ => PauseGame());
         hero.OnChooseLelvelUpCard.AddListener(ResumeGame);
         hero.OnPickUppowerUp.AddListener((_, _, _) => PauseGame());
-        hero.OnDie.AddListener(() => PauseGame());
-
         OnGameResume.Invoke();
+    }
+
+    private void OnEnable() {
+        onPlayerDied = new EventBinding<OnPlayerDied>(PauseGame);
+        EventBus<OnPlayerDied>.Register(onPlayerDied);
+    }
+
+    private void OnDisable() {
+        EventBus<OnPlayerDied>.Deregister(onPlayerDied);
     }
     private void OnDestroy() {
         //Events
@@ -34,7 +45,6 @@ public class LevelManager : MonoBehaviour {
         hero.OnLevelUp.RemoveAllListeners();
         hero.OnChooseLelvelUpCard.RemoveAllListeners();
         hero.OnPickUppowerUp.RemoveAllListeners();
-        hero.OnDie.RemoveAllListeners();
     }
     public void ActivateScene() {
         HeroSpawner.SpawnHero();

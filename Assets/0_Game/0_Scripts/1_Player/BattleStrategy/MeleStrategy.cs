@@ -39,7 +39,7 @@ public class MeleStrategy : SkillsStrategy {
     public override int CurrentAnimationHash { get => animationHash[attackSeries]; set => throw new System.NotImplementedException(); }
 
 
-    public override void Initialize(Transform origin, AudioManager audioManager, string interactionTagName) {
+    public override void Initialize(Transform origin, HeroAudioManager audioManager, string interactionTagName) {
         initialization = true;
         Origin = origin;
         cts = new CancellationTokenSource();

@@ -26,7 +26,7 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
         throw new NotImplementedException();
     }
 
-    public override void Initialize(Transform origin, AudioManager audioManager, string interactionTagName) {
+    public override void Initialize(Transform origin, HeroAudioManager audioManager, string interactionTagName) {
         //Tag
         this.interactionTagName = interactionTagName;
 

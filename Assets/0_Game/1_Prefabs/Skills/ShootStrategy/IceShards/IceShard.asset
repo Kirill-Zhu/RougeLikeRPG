@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: IceShard
   m_EditorClassIdentifier: 
   prefab: {fileID: 7895568108609211647, guid: a2857b7e2d3856e438e0694ab0d4f9c1, type: 3}
+  Description: shoots ice shards in a spread way
+  OnCastParticlePrefabArray: []
   ParticlePrefabArray: []
+  AttackRange: 1
   ManaCost: 5
   PhysicsDamage: 1
   FireDamage: 0
@@ -23,6 +26,7 @@ MonoBehaviour:
   DamageTypesEnum: 4
   damageTypesList: []
   HealthComponent: {fileID: 0}
+  WithCooldown: 1
   CoolDown: 1
   AnimationName: Shoot
   SkillDuration: 0.05
@@ -38,5 +42,4 @@ MonoBehaviour:
   projectilesCountByShoot: 3
   damage: 0
   speed: 5
-  animationName: Shoot
   LiveDuration: 3

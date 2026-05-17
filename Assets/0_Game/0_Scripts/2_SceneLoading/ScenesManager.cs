@@ -2,13 +2,14 @@ using UnityEngine;
 
 
 public class ScenesManager : MonoBehaviour {
-    [SerializeField] int mainMenuSceneID = 1;
-    [SerializeField] int InGameUISceneID = 2;
-    [SerializeField] int TestLevleSceneID = 3;
+    [SerializeField] int storyTaleSceneID = 1;
+    [SerializeField] int mainMenuSceneID = 2;
+    [SerializeField] int InGameUISceneID = 3;
+    [SerializeField] int TestLevleSceneID = 4;
 
     EventManager eventManager;
     private void Awake() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(mainMenuSceneID);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(storyTaleSceneID);
 
         eventManager.OnLoadMainMenu.AddListener(LoadMainMenu);
     }

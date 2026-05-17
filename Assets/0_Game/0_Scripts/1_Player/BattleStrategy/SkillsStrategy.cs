@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public abstract class SkillsStrategy : ScriptableObject, IVisitable {
     public GameObject prefab;
+    public string Description;
     [Header("On Cast VFX")]
     public GameObject[] OnCastParticlePrefabArray;
     protected ParticleSystem[] onCastParticleSystemArray = new ParticleSystem[0];
@@ -43,7 +44,7 @@ public abstract class SkillsStrategy : ScriptableObject, IVisitable {
         return !initialization;
     }
     [Header("Audio")]
-    protected AudioManager audioManager;
+    protected HeroAudioManager audioManager;
     public EventReference SkillSound;
 
     protected void InvokeOnCoolDownCall(float value) {
@@ -52,7 +53,7 @@ public abstract class SkillsStrategy : ScriptableObject, IVisitable {
     public abstract bool TryUseSkill(Action<int, float> OnAnimation);
     public abstract void TryUseSkill(Action<float> OnChangeSkillDuration, Action<int, float> OnAnimation, UnityAction<int> OnManaChangeEvent);
     public abstract void OnUpdate(float deltaTime);
-    public abstract void Initialize(Transform origin, AudioManager audioManager, string interactionTagName);
+    public abstract void Initialize(Transform origin, HeroAudioManager audioManager, string interactionTagName);
     public abstract void Dispose();
     public abstract bool Evauate(float distanceToHero);
     public void AddOrModifyDamageType(DamageType[] damageType) {

@@ -10,7 +10,7 @@ namespace BossEntity {
 
         public SkillsStrategy[] skillStrategy;
         public Action<int, float> OnAnimation;
-        AudioManager manager;
+        HeroAudioManager audioManager;
         public float animationDuration = 0;
         const string interactionTagName = "Player";
         Transform target;
@@ -23,7 +23,7 @@ namespace BossEntity {
         }
         void OnEnable() {
            
-            manager = GetComponent<AudioManager>();
+            audioManager = GetComponent<HeroAudioManager>();
             //--Remove Previous Startefies
             //if (skillStrategy != null)
             //    foreach (var skill in skillStrategy)
@@ -35,7 +35,7 @@ namespace BossEntity {
                 this.skillStrategy[i] = Instantiate(skillStrategy[i]);
             }
             foreach (var skill in skillStrategy) {
-                skill.Initialize(transform, manager, interactionTagName);
+                skill.Initialize(transform, audioManager, interactionTagName);
             }  
             //Animation
             OnAnimation += UpdateAnimationDuration;

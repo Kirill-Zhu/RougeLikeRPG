@@ -21,6 +21,7 @@ public class AudioManager : MonoBehaviour
     //->Event Bus
     EventBinding<OnUpgradeItemInShop> onUpgradeItemInShop;
     EventBinding<OnSpawnBoss> onSpawnBoss;
+    EventBinding<OnPlayerDied> onPlayerDied;
     //Hero
     Hero hero;
     //ScenesManager
@@ -28,26 +29,35 @@ public class AudioManager : MonoBehaviour
     [SerializeField] ScenesManager scenesManager;
 
     private void Start() {
-        try {
-            OnLoadAppPlay();
-        } catch {
+       
+    }
 
-        }
-
+    private void OnEnable() {
         //Shop
         onUpgradeItemInShop = new EventBinding<OnUpgradeItemInShop>(PlayCoinSound);
         EventBus<OnUpgradeItemInShop>.Register(onUpgradeItemInShop);
         //Boss
         onSpawnBoss = new EventBinding<OnSpawnBoss>(StartBossFightMusic);
         EventBus<OnSpawnBoss>.Register(onSpawnBoss);
+
+        // Player Die
+        onPlayerDied = new EventBinding<OnPlayerDied>(StartDieMenuMusic);
+        EventBus<OnPlayerDied>.Register(onPlayerDied);
     }
-    private void OnDestroy() {
+    private void OnDisable() {
         EventBus<OnUpgradeItemInShop>.Deregister(onUpgradeItemInShop);
         EventBus<OnSpawnBoss>.Deregister(onSpawnBoss);
+        EventBus<OnPlayerDied>.Deregister(onPlayerDied);
     }
 
     void OnLoadAppPlay() {
         music = RuntimeManager.CreateInstance(standartMusic);
+        music.start();
+    }
+    public void PlayMusic(EventReference eventReference) {
+        music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        music.release();
+        music = RuntimeManager.CreateInstance(eventReference);
         music.start();
     }
     public void StartPlayStandartMusic() {
@@ -103,7 +113,6 @@ public class AudioManager : MonoBehaviour
     public void GetHeroReference() {
         if (eventManager == null) return;
         hero = heroMonoinstaller.GetHero();
-        hero.OnDie.AddListener(StartDieMenuMusic);
     }
 
     //Scenes

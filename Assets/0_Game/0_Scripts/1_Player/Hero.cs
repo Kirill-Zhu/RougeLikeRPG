@@ -14,7 +14,7 @@ public class Hero : MonoBehaviour {
     public UnityEvent<int> OnLevelUp;
     public UnityEvent OnChooseLelvelUpCard;
     //Event Bus
-    public UnityEvent OnDie;
+
     HeroStrategyData heroData;
 
     //Movement
@@ -62,7 +62,7 @@ public class Hero : MonoBehaviour {
     SkillState skillState;
 
     //Audio
-    [SerializeField] AudioManager audioManager;
+    [SerializeField] HeroAudioManager audioManager;
 
     #region EVENTS
     //-> EventBus
@@ -84,6 +84,7 @@ public class Hero : MonoBehaviour {
         expComponent = GetComponent<ExpComponent>();
         upgradeContorller = GetComponent<HeroUpgradeContorller>();
         coinsComponent = GetComponent<CoinsComponent>();
+        audioManager = GetComponent<HeroAudioManager>();
     }
     private void OnEnable() {
         //Event Bus
@@ -165,7 +166,7 @@ public class Hero : MonoBehaviour {
         stateMachine?.Update();
     }
     void Die() {
-        OnDie?.Invoke();
+       EventBus<OnPlayerDied>.Raise(new OnPlayerDied { hero = this });  
     }
 
     void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);

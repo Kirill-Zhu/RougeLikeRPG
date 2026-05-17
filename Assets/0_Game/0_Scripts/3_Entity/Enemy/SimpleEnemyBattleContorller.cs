@@ -122,17 +122,17 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
             //Events
             OnAttack += ShootProjectile;
         }
-        if(weaponType == WeaponTypeEnum.area) {
+        if (weaponType == WeaponTypeEnum.area) {
             weaponPoolList = new List<WeaponType>();
-            
+
             var area = new AreaWeaponType.Builder(prefab)
                 .FromOrigin(transform)
-                .WithDamageTypes (damageTypes)
+                .WithDamageTypes(damageTypes)
                 .WithLiveDuration(areaLiveDuration)
                 .WithInteractionTag(interactionTag)
                 .FollowCaster(false)
                 .DestroyAfterUse(false)
-                .Build();   
+                .Build();
 
             areaWeaponList.Add(area);
             area.gameObject.SetActive(false);
@@ -176,11 +176,14 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
     }
     private void OnDestroy() {
         cts?.Cancel();
-        foreach (var projectile in projectileList)
-            Destroy(projectile.gameObject);
+        foreach (var projectile in projectileList) {
+            if (projectile != null)
+                Destroy(projectile.gameObject);
+        }
 
         //VFX
-        Destroy(onAttackVFX.gameObject);
+        if (onAttackVFX != null)
+            Destroy(onAttackVFX.gameObject);
     }
 
     public void TryAttack() {
@@ -189,7 +192,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         OnAnimationStart?.Invoke(animationHash);
         OnChangeDurationSkill?.Invoke(damageDelay); //Here need give him time to start his attack
 
-      
+
     }
     public void OnFixedUpdate() {
         TryAttack();
@@ -213,6 +216,17 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
                 OnChangeDurationSkill?.Invoke(attackDuration);         //if attack was done, set coolDown
             }
 
+            //VFX
+            if (onAttackVFX != null) {
+                onAttackVFX.gameObject.transform.position = transform.position;
+                onAttackVFX.gameObject.transform.rotation = Quaternion.LookRotation(aimTransform.position.WithY(0) - transform.position.WithY(0));
+                onAttackVFX.Play();
+            }
+
+            //Sound 
+            RuntimeManager.PlayOneShot(onAttackSound, transform.position);
+
+
             await UniTask.WaitForSeconds(0.05f, false, PlayerLoopTiming.Update, token, true);
             foreach (var mele in weaponPoolList) {
                 mele.gameObject.SetActive(false);
@@ -226,14 +240,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
             cts = null;
         }
 
-        //VFX
-        if (onAttackVFX != null) {
-            onAttackVFX.gameObject.transform.position = transform.position;
-            onAttackVFX.Play();
-        }
 
-        //Sound 
-        RuntimeManager.PlayOneShot(onAttackSound, transform.position);
     }
     async void ShootProjectile() {
         //UniTask
@@ -323,7 +330,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
             cts = null;
         }
 
-       
+
     }
     async void CastArea() {
         cts?.Cancel();
@@ -365,6 +372,6 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
             cts = null;
         }
 
-        
+
     }
 }

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/0_Game/Scenes/0_InitializeScene.unity
     guid: 59f8567357f0f444a865fc65460205f8
   - enabled: 1
+    path: Assets/0_Game/Scenes/StoryTaleScene.unity
+    guid: ab5a73bd4835f6d4284f012c4d75fced
+  - enabled: 1
     path: Assets/0_Game/Scenes/MainMenu.unity
     guid: a57b48053e997c74e8382e09c925bdd7
   - enabled: 1
@@ -18,5 +21,5 @@ EditorBuildSettings:
     path: Assets/0_Game/Scenes/Levels/Level2/Level2.unity
     guid: 7d6a138dfa649ca4a9ccade66a0765c5
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 14225cbb546ee8f40936a9e167f90e06, type: 3}
   m_UseUCBPForAssetBundles: 0

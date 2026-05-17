@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   prefab: {fileID: 85160145095999677, guid: 167aced04fbc1ee469408960d2027184, type: 3}
+  Description: Mele atack with 4 series attacks
+  OnCastParticlePrefabArray: []
   ParticlePrefabArray:
   - {fileID: 8307060409358143758, guid: 3692d1f7075d1eb4a8f9dd434f4948e6, type: 3}
   - {fileID: 8307060409358143758, guid: 9daadfaadf688754dbe513b837955bf5, type: 3}
@@ -41,6 +43,7 @@ MonoBehaviour:
       Data4: 1986270958
     Path: event:/Skills/Mele/Sword/Sword
   maxAttackSeries: 4
+  DelayToActivateDamageDeal: 0.4
   maxQueueAttackCount: 1
   AnimationNames:
   - Attack1

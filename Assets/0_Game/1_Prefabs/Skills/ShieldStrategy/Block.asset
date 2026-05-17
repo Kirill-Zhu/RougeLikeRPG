@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Block
   m_EditorClassIdentifier: 
   prefab: {fileID: 5085948505737263634, guid: 12785ab9909dfb34f9d76ede8a7c529b, type: 3}
+  Description: 'Blocks some physical damage '
+  OnCastParticlePrefabArray: []
   ParticlePrefabArray: []
+  AttackRange: 1
   ManaCost: 0
   PhysicsDamage: 3
   FireDamage: 3
@@ -23,6 +26,7 @@ MonoBehaviour:
   DamageTypesEnum: -1
   damageTypesList: []
   HealthComponent: {fileID: 0}
+  WithCooldown: 1
   CoolDown: 5
   AnimationName: EnergyShield
   SkillDuration: 0

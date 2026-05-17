@@ -24,7 +24,7 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
     public event UnityAction OnDie;
     CancellationTokenSource cts; //Use on destroy to kill dotween animations in popUpStrategy
     CancellationToken token;
-
+    bool isDead = false;
     //Upgrades
     List<Item> itemsList = new List<Item>();
    
@@ -47,6 +47,8 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
             OnTakeDamage += popUpHandler.PupUpDamage;
             OnBlockDamage += popUpHandler.PopUpBlock;
         }
+
+        isDead = false;
     }
     private void OnDestroy() {
         cts.Cancel();
@@ -55,13 +57,17 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
         Destroy(popUpHandler);
     }
     public void ChangeHealth(int value) {
+        if(isDead) return;
         health += value;
         if (health > maxHealth)
             health = maxHealth;
 
         // OnHealthChange?.Invoke(value);
         OnGetCurrentHealth?.Invoke(health);
-        if (health <= 0) OnDie?.Invoke();
+        if (health <= 0) {
+            isDead = true;
+            OnDie?.Invoke();
+        }
     }
 
     //Visitor
