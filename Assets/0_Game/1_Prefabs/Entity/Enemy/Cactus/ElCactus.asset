@@ -34,6 +34,7 @@ MonoBehaviour:
   fireDamage: 0
   coldDamage: 0
   HealtData: {fileID: 11400000, guid: 16ec866530b899045ae2c5ce05914d0b, type: 2}
+  OnAttackParticelPrefab: {fileID: 358637981425055526, guid: d9d77f2d6c8d5e44799994bf3e23826f, type: 3}
   OnAttack:
     Guid:
       Data1: -1878332770
@@ -43,8 +44,8 @@ MonoBehaviour:
     Path: event:/Enemy/ElCactus/ElCactusAttack
   OnDie:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 409975811
+      Data2: 1081322157
+      Data3: 1069423778
+      Data4: 1439232318
+    Path: event:/Enemy/ElCactus/ElCactusDie

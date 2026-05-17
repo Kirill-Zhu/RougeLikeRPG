@@ -30,7 +30,7 @@ public class ShootStrategy : SkillsStrategy {
     public override bool Initialized() {
         return !initialization;
     }
-    public override void Initialize(Transform origin, AudioManager audioManager, string interactionTagName) {
+    public override void Initialize(Transform origin, HeroAudioManager audioManager, string interactionTagName) {
         initialization = true;
         //Add Damage Types it deals(set the values at definitons)
         damageTypesList = GetStartDamageTypes().ToList();
@@ -47,7 +47,9 @@ public class ShootStrategy : SkillsStrategy {
     }
     public async override void Dispose() {
         foreach (var projectile in projectiles) {
-            Destroy(projectile.gameObject);
+            if (projectile != null)
+                Destroy(projectile.gameObject);
+
             await UniTask.WaitForFixedUpdate();
         }
         damageTypesList.Clear();
@@ -186,10 +188,10 @@ public class ShootStrategy : SkillsStrategy {
 
 
     void ShootProjectile() {
-      
+
         //Audio
         PlayCastSound();
-        
+
 
         //Shape
         switch (shootShape) {

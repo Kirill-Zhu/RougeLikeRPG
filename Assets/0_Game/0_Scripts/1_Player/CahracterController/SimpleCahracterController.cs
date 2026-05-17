@@ -54,13 +54,13 @@ public class SimpleCahracterController : MonoBehaviour, IVisitable, IUpgradable 
 
 
         //Android
-        joystick.OnMoveJoystick.AddListener((dir) => moveDirection = dir);
-        joystick.OnMoveJoystick.AddListener((_) => HandleMovement());
-        joystick.OnPointerUpEvent.AddListener(() => moveDirection = Vector2.zero);
+        //joystick.OnMoveJoystick.AddListener((dir) => moveDirection = dir);
+        //joystick.OnMoveJoystick.AddListener((_) => HandleMovement());
+        //joystick.OnPointerUpEvent.AddListener(() => moveDirection = Vector2.zero);
     }
     //TestUpdate
     private void Update() {
-        if (input.Direction == Vector3.zero)
+        if (input.Direction == Vector3.zero && joystick != null)
             moveDirection = joystick.Direction;
     }
     void SubscribeJumpingButton(bool isJumpButtonPressd) {
@@ -144,8 +144,8 @@ public class SimpleCahracterController : MonoBehaviour, IVisitable, IUpgradable 
         itemsList.Clear();
     }
     public void AddItem(Item item) {
-        if(item is MoveItem)
-            itemsList.Add(item as MoveItem);    
+        if (item is MoveItem)
+            itemsList.Add(item as MoveItem);
 
     }
     public void RefreshItemUpgrades() {
@@ -154,7 +154,7 @@ public class SimpleCahracterController : MonoBehaviour, IVisitable, IUpgradable 
             speed += item.AddMoveSpeed;
         }
     }
-    
+
     #endregion
     public void Accept(IVistor visitor) {
         visitor.Visit(this);

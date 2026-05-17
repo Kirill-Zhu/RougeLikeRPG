@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: IceBlizzard
   m_EditorClassIdentifier: 
   prefab: {fileID: 2040362746659309798, guid: 396c0651dea1224458a43715be046654, type: 3}
+  Description: Creates ice blizzard in area
   OnCastParticlePrefabArray: []
   ParticlePrefabArray:
   - {fileID: 7363791054907086598, guid: 358e8355dc089f6489dff09921e6a566, type: 3}

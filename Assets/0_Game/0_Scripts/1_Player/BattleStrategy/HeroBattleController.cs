@@ -19,12 +19,8 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
     private float enqueTime = 0.2f;                                                                            //Wait this time to set Battle State after Input and then cancel if conditions are not approach
     private float cancelTimer = default;
     ManaComponent manaComponent;
-    //Audio
-    AudioManager audioManager;
 
-
-
-    public void Initialize(ManaComponent manaComponent, SkillsStrategy[] skillsStrategy, UnityEvent<Sprite, string, string> @OnPickUpPowerUpEvent, AudioManager audioManager) {
+    public void Initialize(ManaComponent manaComponent, SkillsStrategy[] skillsStrategy, UnityEvent<Sprite, string, string> @OnPickUpPowerUpEvent, HeroAudioManager audioManager) {
 
         this.manaComponent = manaComponent;
 
@@ -48,10 +44,6 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
 
         AddSkillDependecies();
         //Events
-
-        //Audio
-        audioManager = this.audioManager;
-
 
         StartCoroutine(CheckForInitialization());
     }

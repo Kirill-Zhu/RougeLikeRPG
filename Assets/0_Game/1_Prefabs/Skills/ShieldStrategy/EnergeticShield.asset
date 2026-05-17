@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: EnergeticShield
   m_EditorClassIdentifier: 
   prefab: {fileID: 2317608168460046708, guid: 160f0ccad01b6a64b9ff1964e7326c14, type: 3}
+  Description: blocks some cold damage
   OnCastParticlePrefabArray: []
   ParticlePrefabArray: []
   AttackRange: 1

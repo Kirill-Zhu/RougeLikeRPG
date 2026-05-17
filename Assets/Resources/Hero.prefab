@@ -161,8 +161,8 @@ GameObject:
   - component: {fileID: 3960794774759557692}
   - component: {fileID: -2682059877837970256}
   - component: {fileID: -4851204089305757902}
-  - component: {fileID: 8760122471330487146}
   - component: {fileID: 622142874731739280}
+  - component: {fileID: 8763447173879935270}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Player
@@ -242,12 +242,9 @@ MonoBehaviour:
   OnChooseLelvelUpCard:
     m_PersistentCalls:
       m_Calls: []
-  OnDie:
-    m_PersistentCalls:
-      m_Calls: []
   healthData: {fileID: 11400000, guid: 4e4c4d9d376a95840bc50dd8c43e467f, type: 2}
   animator: {fileID: 4656518056047123800}
-  audioManager: {fileID: 8760122471330487146}
+  audioManager: {fileID: 8763447173879935270}
   initialization: 1
 --- !u!114 &4156648375255528194
 MonoBehaviour:
@@ -278,7 +275,7 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 247
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -420,48 +417,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillStrategyList: []
---- !u!114 &8760122471330487146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5351574590332836233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d72b525aedb19459fd8eda0baece3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  standartMusic:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  bossFightMusic:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  dieMenu:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  coinSound:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  eventManager: {fileID: 0}
-  scenesManager: {fileID: 0}
 --- !u!114 &622142874731739280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,3 +432,15 @@ MonoBehaviour:
   ItemStrategyArray:
   - {fileID: 11400000, guid: 5c393b5c104eb9744a1252e2fe7a8737, type: 2}
   - {fileID: 11400000, guid: f62fc9d07296cdd4887897a7f1c78a44, type: 2}
+--- !u!114 &8763447173879935270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351574590332836233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5241381a7ff7134db63afd12657e47f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

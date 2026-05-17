@@ -16,11 +16,20 @@ public class LevelStatistics : MonoBehaviour {
 
     [SerializeField] LevelStatisticsData data;
 
-
+    //Event Bus
+    EventBinding<OnPlayerDied> onPlayerDied;
     private void Awake() {
         data.ClearData();
         hero.HealthComponent.OnTakeDamage += PlayerTookDamage;
-        hero.OnDie.AddListener(() => UpdateData());
+    }
+
+    private void OnEnable() {
+        onPlayerDied = new EventBinding<OnPlayerDied>(UpdateData);
+        EventBus<OnPlayerDied>.Register(onPlayerDied);
+
+    }
+    private void OnDisable() {
+        EventBus<OnPlayerDied>.Deregister(onPlayerDied);
     }
     [ContextMenu("Update Data")]
 

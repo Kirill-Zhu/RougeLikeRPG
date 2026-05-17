@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FoxyHealthComponentData
   m_EditorClassIdentifier: 
   popUpDamageValuesHandler: {fileID: 11400000, guid: a92e35349c7924548b8af946aab035cd, type: 2}
-  MaxHealth: 40
-  PhysicsDefence: 1
-  FireDefence: 0
+  MaxHealth: 50
+  PhysicsDefence: 3
+  FireDefence: 1
   ColdDefence: 0

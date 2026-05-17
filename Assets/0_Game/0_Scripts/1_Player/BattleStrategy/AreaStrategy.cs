@@ -34,7 +34,7 @@ public class AreaStrategy : SkillsStrategy {
         throw new NotImplementedException();
     }
 
-    public override void Initialize(Transform origin, AudioManager audioManager, string interactionTagName) {
+    public override void Initialize(Transform origin, HeroAudioManager audioManager, string interactionTagName) {
         initialization = true;
         this.Origin = origin;
         //Initialize Dmaage Types

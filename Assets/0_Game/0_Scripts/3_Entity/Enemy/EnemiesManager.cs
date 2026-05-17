@@ -274,7 +274,7 @@ public struct MoveEnemyJob : IJobParallelForTransform {
             VelocityNativeArray[index] = 0;
             return;                                                                                                                          //Return if entity in attack range
         }
-        if (Vector3.Distance(MovePoint, transform.position) > AttackRangeArray[index] + 1f) {                                                //To not evenry time reset attack status need this threshold of 1f
+        if (Vector3.Distance(MovePoint, transform.position) < AttackRangeArray[index] + 1f) {                                                //To not evenry time reset attack status need this threshold of 1f
             ReturnBattleStatusArray[index] = false;
         }
 

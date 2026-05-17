@@ -150,10 +150,10 @@ MonoBehaviour:
   Path: ../RougeLikeRPGFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639138607599285634
+  lastModified: 639139859394635863
   FileSizes:
   - Name: Desktop
-    Value: 11272832
+    Value: 12590656
   Exists: 1
 --- !u!114 &-7451629439594978040
 MonoBehaviour:
@@ -170,10 +170,10 @@ MonoBehaviour:
   Path: ../RougeLikeRPGFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639138607599301603
+  lastModified: 639139859394655910
   FileSizes:
   - Name: Desktop
-    Value: 2440
+    Value: 2488
   Exists: 1
 --- !u!114 &-7375976537799106707
 MonoBehaviour:
@@ -656,13 +656,14 @@ MonoBehaviour:
   - {fileID: 1289949840411068825}
   - {fileID: -8054073681822408823}
   - {fileID: -6857638461543228778}
+  - {fileID: 8611112596747965549}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7544809293241347934}
   StringsBanks:
   - {fileID: -7451629439594978040}
   cacheVersion: 131858
-  cacheTime: 639138607599301603
+  cacheTime: 639139859394655910
   SerializableEventsDict:
   - key: event:/Skills/Mele/Sword/Sword
     index: 0
@@ -724,6 +725,8 @@ MonoBehaviour:
     index: 28
   - key: event:/Enemy/EarthGolem/EarthGolemOnDie
     index: 29
+  - key: event:/StoryTale/StoryTale
+    index: 30
 --- !u!114 &805326507946413279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1021,6 +1024,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 50
   Length: 2000
+--- !u!114 &8611112596747965549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/StoryTale/StoryTale
+  m_EditorClassIdentifier: 
+  Path: event:/StoryTale/StoryTale
+  Guid:
+    Data1: -1295273251
+    Data2: 1139254421
+    Data3: 173931680
+    Data4: 101224244
+  Banks:
+  - {fileID: -7544809293241347934}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 106187
 --- !u!114 &8615934971255797616
 MonoBehaviour:
   m_ObjectHideFlags: 0

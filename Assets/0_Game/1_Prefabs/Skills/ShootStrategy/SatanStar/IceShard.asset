@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: IceShard
   m_EditorClassIdentifier: 
   prefab: {fileID: 7895568108609211647, guid: 3d40ee6ece718d64f8ccfbcb44237a36, type: 3}
+  Description: Ice shards
   OnCastParticlePrefabArray: []
   ParticlePrefabArray: []
   AttackRange: 1

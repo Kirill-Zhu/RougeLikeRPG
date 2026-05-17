@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FireBall
   m_EditorClassIdentifier: 
   prefab: {fileID: 1931694588739526134, guid: 45050c79404988944a25404f054f250e, type: 3}
+  Description: throws fireball with fire damage
   OnCastParticlePrefabArray: []
   ParticlePrefabArray: []
   AttackRange: 11
