@@ -23,3 +23,10 @@ public class OnCoinCollected : IEvent {
         GameData.AddCoins(value);
     }
 }
+
+public class OnUserChangeName: IEvent {
+    public string newName;
+}
+public class OnPlayerSignIn: IEvent {
+    public string userName;
+}

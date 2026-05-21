@@ -192,7 +192,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.AABox, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"center":{"x":0.0,"y":0.47140252590179446,"z":0.0},"size":{"x":18.600000381469728,"y":6.299657821655273,"z":4.0}}'
+      m_SerializableObject: '{"center":{"x":0.0,"y":0.47140252590179446,"z":0.0},"size":{"x":3.0,"y":6.299657821655273,"z":4.0}}'
     m_Space: 0
   m_Property:
     name: bounds
@@ -445,7 +445,7 @@ MonoBehaviour:
   - {fileID: 114780028408030698}
   - {fileID: 114063133802684794}
   dataType: 0
-  capacity: 2500
+  capacity: 500
   stripCapacity: 16
   particlePerStripCount: 16
   needsComputeBounds: 0

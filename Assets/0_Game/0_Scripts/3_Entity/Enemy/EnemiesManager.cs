@@ -29,6 +29,7 @@ public class EnemiesManager : MonoBehaviour {
     TransformAccessArray transformAccessArray;
     NativeArray<float> speedNativeArray;
     NativeArray<float> attackRangeNativeArray;
+    NativeArray<bool> UninterruptedAttackArray;
     NativeArray<float> previousVolocityNativeArray;
     NativeArray<float> returnVelocityNativeArray;
     NativeArray<bool> returnBattleStatus;
@@ -48,7 +49,7 @@ public class EnemiesManager : MonoBehaviour {
 
         //For test spawn
         //for (int i = 0; i < 100; i++) {
-        //    spawnStrategyList[1].OnSpawnEntity.Invoke(spawnStrategyList[1].enemyStrategy);
+        //    spawnStrategyList[0].OnSpawnEntity.Invoke(spawnStrategyList[0].enemyStrategy);
         //}
     }
 
@@ -60,9 +61,10 @@ public class EnemiesManager : MonoBehaviour {
            .WithIcon(strategy.Icon)
            .WithMoveSpeed(strategy.MoveSpeed)
            .WithAttackRange(strategy.AttackRange)
-           .WithAttackDuration(strategy.AttackDuration)
+           .WithAttackDuration(strategy.AttackCooldown)
            .WithDamageDelay(strategy.DamageDelay)
            .WithWeaponPrefab(strategy.WeaponPrefab)
+           .WithUninterruptedAttack(strategy.UninterruptedAttack)
            .WithWeaponType(strategy.WeaponType)
            .WithDamageTypes(strategy.GetDamageTypes())
            .WithProjecitlieSPeed(strategy.ProjectileSpeed)
@@ -91,29 +93,7 @@ public class EnemiesManager : MonoBehaviour {
             entity.InitializeEvents(DestroyEnemy);
             transforms.Add(component.transform);
 
-            //Job
-            //Transforms
-            if (transformAccessArray.isCreated) transformAccessArray.Dispose();
-
-            transformAccessArray = new TransformAccessArray(transforms.ToArray());
-            //Speed
-            var speedList = new List<float>();
-            for (int i = 0; i < enemiesOnScene.Count; i++) {
-                speedList.Add(enemiesOnScene[i].MoveSpeed);
-            }
-            if (speedNativeArray.IsCreated) speedNativeArray.Dispose();
-
-            speedNativeArray = new NativeArray<float>(speedList.ToArray(), Allocator.Persistent);
-            //Attack Range
-            var attackRangeList = new List<float>();
-            for (int i = 0; i < enemiesOnScene.Count; i++) {
-                attackRangeList.Add(enemiesOnScene[i].AttackRange);
-            }
-
-            if (attackRangeNativeArray.IsCreated) attackRangeNativeArray.Dispose();
-
-            attackRangeNativeArray = new NativeArray<float>(attackRangeList.ToArray(), Allocator.Persistent);
-
+            RefreshAllocations();
         }
 
     }
@@ -124,31 +104,77 @@ public class EnemiesManager : MonoBehaviour {
         transforms.Remove(entity.transform);
         jobHandle.Complete();
 
+        if (enemiesOnScene.Count == 0) return;
+
+        RefreshAllocations();
+        //Dispose
+        //if (transformAccessArray.isCreated) transformAccessArray.Dispose();
+        //if (attackRangeNativeArray.IsCreated) attackRangeNativeArray.Dispose();
+        //if (speedNativeArray.IsCreated) speedNativeArray.Dispose();
+        //if (UninterruptedAttackArray.IsCreated) UninterruptedAttackArray.Dispose()
+      
+
+        //transformAccessArray = new TransformAccessArray(transforms.ToArray());
+
+        ////Speed
+        ////Speed
+        //var speedList = new List<float>();
+        //for (int i = 0; i < enemiesOnScene.Count; i++) {
+        //    speedList.Add(enemiesOnScene[i].MoveSpeed);
+        //}
+       
+        //speedNativeArray = new NativeArray<float>(speedList.ToArray(), Allocator.Persistent);
+
+        ////Attack 
+        ////->Unitrrupted Attack
+        //List<bool> uniterruptedList = new List<bool>();
+        //for (int i = 0; i < enemiesOnScene.Count; i++) {
+        //    uniterruptedList.Add(enemiesOnScene[i].UninterruptedAttack);
+        //}
+        //UninterruptedAttackArray = new NativeArray<bool>(uniterruptedList.ToArray(), Allocator.Persistent);
+
+        ////->Attack range
+        //var attackRangeList = new List<float>();
+
+        //for (int i = 0; i < enemiesOnScene.Count; i++)
+        //    attackRangeList.Add(enemiesOnScene[i].AttackRange);
+
+        //attackRangeNativeArray = new NativeArray<float>(attackRangeList.ToArray(), Allocator.Persistent);
+    }
+
+    void RefreshAllocations() {
         if (transformAccessArray.isCreated) transformAccessArray.Dispose();
         if (attackRangeNativeArray.IsCreated) attackRangeNativeArray.Dispose();
         if (speedNativeArray.IsCreated) speedNativeArray.Dispose();
-
-
-        if (enemiesOnScene.Count == 0) return;
-
-        transformAccessArray = new TransformAccessArray(transforms.ToArray());
+        if (UninterruptedAttackArray.IsCreated) UninterruptedAttackArray.Dispose();
 
         //Speed
         var speedList = new List<float>();
-
-        for (int i = 0; i < enemiesOnScene.Count; i++)
+        for (int i = 0; i < enemiesOnScene.Count; i++) {
             speedList.Add(enemiesOnScene[i].MoveSpeed);
+        }
 
-        speedNativeArray = new NativeArray<float>(speedList.ToArray(), Allocator.Persistent);
 
-        //Attack Range
+        //Attack 
+        //->Uniiterrupted Attack
+        List<bool> uniterruptedList = new List<bool>();
+        for (int i = 0; i < enemiesOnScene.Count; i++) {
+            uniterruptedList.Add(enemiesOnScene[i].UninterruptedAttack);
+        }
+
+        //->Attack Range
         var attackRangeList = new List<float>();
-
-        for (int i = 0; i < enemiesOnScene.Count; i++)
+        for (int i = 0; i < enemiesOnScene.Count; i++) {
             attackRangeList.Add(enemiesOnScene[i].AttackRange);
+        }
 
+        //Allocate NativeArrays
+        transformAccessArray = new TransformAccessArray(transforms.ToArray());
+        speedNativeArray = new NativeArray<float>(speedList.ToArray(), Allocator.Persistent);
+        UninterruptedAttackArray = new NativeArray<bool>(uniterruptedList.ToArray(), Allocator.Persistent);
         attackRangeNativeArray = new NativeArray<float>(attackRangeList.ToArray(), Allocator.Persistent);
     }
+   
     private void Update() {
 
         //Spawn Strategy
@@ -182,6 +208,7 @@ public class EnemiesManager : MonoBehaviour {
             NearToHeroDistance = NearToHeroDistance,
             NearHeroSpeedModifier = NearHeroSpeedModifier,
             AttackRangeArray = attackRangeNativeArray,
+            UniterruptedAttackArray = UninterruptedAttackArray,
             PrevoiusVelocityArray = previousVolocityNativeArray,
             VelocityNativeArray = returnVelocityNativeArray,
             ReturnBattleStatusArray = returnBattleStatus
@@ -252,11 +279,12 @@ public struct MoveEnemyJob : IJobParallelForTransform {
     [ReadOnly] public float NearToHeroDistance;
     [ReadOnly] public float NearHeroSpeedModifier;
     [ReadOnly] public NativeArray<float> AttackRangeArray;
+    [ReadOnly] public NativeArray<bool> UniterruptedAttackArray;
     [ReadOnly] public Vector3 MovePoint;
     [ReadOnly] public NativeArray<float> PrevoiusVelocityArray;
 
     [WriteOnly] public NativeArray<float> VelocityNativeArray;
-    [WriteOnly] public NativeArray<bool> ReturnBattleStatusArray;
+    public NativeArray<bool> ReturnBattleStatusArray;
 
     public void Execute(int index, TransformAccess transform) {
 
@@ -274,8 +302,12 @@ public struct MoveEnemyJob : IJobParallelForTransform {
             VelocityNativeArray[index] = 0;
             return;                                                                                                                          //Return if entity in attack range
         }
-        if (Vector3.Distance(MovePoint, transform.position) < AttackRangeArray[index] + 1f) {                                                //To not evenry time reset attack status need this threshold of 1f
-            ReturnBattleStatusArray[index] = false;
+        if (Vector3.Distance(MovePoint, transform.position) > AttackRangeArray[index]) {
+            //To not evenry time reset attack status need this threshold of 1f
+            if (ReturnBattleStatusArray[index] == true && UniterruptedAttackArray[index] == true) {
+                ReturnBattleStatusArray[index] = true;
+            } else
+                ReturnBattleStatusArray[index] = false;
         }
 
         // Calculate the local forward direction in world space

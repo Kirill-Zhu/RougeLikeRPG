@@ -46,3 +46,5 @@ public class TestHeroEvent : IEvent {
 public class TestEnemyEvent :IEvent {
     public int Points;
 }
+
+

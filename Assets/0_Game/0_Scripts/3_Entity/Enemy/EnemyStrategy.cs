@@ -9,9 +9,10 @@ public class EnemyStrategy : ScriptableObject {
     public Sprite Icon;
     public float MoveSpeed;
     public float AttackRange;
-    public float AttackDuration;
+    public float AttackCooldown;
     public float DamageDelay;
-
+    [Tooltip("Will remain attack if player is out of attack range")]
+    public bool UninterruptedAttack = false;
     [Header("For Projectiles")]
     public float ProjectileSpeed = 1;
     public float ProjectilieLiveDureation = 1;

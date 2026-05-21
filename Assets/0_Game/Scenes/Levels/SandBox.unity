@@ -5671,11 +5671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnStrategyList:
-  - {fileID: 11400000, guid: 52bb72de01c61604995f8ea427963fb4, type: 2}
   - {fileID: 11400000, guid: ed8e043b1dbf41d46940e2dd2739c61f, type: 2}
-  - {fileID: 11400000, guid: 2461bab082cee0b4bb20d7085d2e7ac3, type: 2}
-  - {fileID: 11400000, guid: 1b655f44e8ba53f4faa511eb18835955, type: 2}
-  - {fileID: 11400000, guid: a587352fca743704dbc6127010f18770, type: 2}
   enemyTypes: {fileID: 11400000, guid: 05ba190bc25a36843a22867c95fbd9e4, type: 2}
   enemiesOnScene: []
   spawnPosList:
@@ -36048,6 +36044,13 @@ MonoBehaviour:
       Data4: 0
     Path: 
   dieMenu:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  coinSound:
     Guid:
       Data1: 0
       Data2: 0
@@ -67457,7 +67460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1082365244
 Transform:
   m_ObjectHideFlags: 0

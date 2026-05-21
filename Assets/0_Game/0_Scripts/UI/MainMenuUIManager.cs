@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using Zenject;
 using Button = UnityEngine.UIElements.Button;
-public class FirsButtonSelecedHandler : MonoBehaviour {
+public class MainMenuUIManager : MonoBehaviour {
     [Inject] ScenesManager scenesManager;
     [SerializeField] List<UIDocument> UidocumentsList;
     [SerializeField] ChoseHeroController chooseHeroController;
@@ -25,7 +25,8 @@ public class FirsButtonSelecedHandler : MonoBehaviour {
     const string StartGame = "StartGame";
     const string Shop = "Shop";
     private void Awake() {
-        OpenMainMenu();
+        Initialize();
+       OpenMainMenu();
     }
 
     private async void Start() {
@@ -33,13 +34,35 @@ public class FirsButtonSelecedHandler : MonoBehaviour {
         await UniTask.Delay(100);
         EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
     }
+    void Initialize() {
+        //Main menu
+        var choseHeroButton = UidocumentsList[0].rootVisualElement.Q<Button>(ChooseHeroButton);
+        var shopButton = UidocumentsList[0].rootVisualElement.Q<Button>(Shop);
+        //Events
+        choseHeroButton.clicked += OpenChooseHeroMenu;
+        shopButton.clicked += OpenShop;
 
+        //Chose Hero Menu
+        var nextHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(NextHero);
+        var prevHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(PrevHero);
+        var startButton = UidocumentsList[1].rootVisualElement.Q<Button>(StartGame);
+
+        //Events
+        nextHeroButton.clicked += ChooseNextHero;
+        prevHeroButton.clicked += ChoosePrevHero;
+        startButton.clicked += ChoseHeroAndStartGame;
+
+    }
+    public void OpenAuthentificationMenu() {
+
+    }
+    //Main menu
     void OpenMainMenu() {
         //-----Main Menu
         var choseHeroButton = UidocumentsList[0].rootVisualElement.Q<Button>(ChooseHeroButton);
         choseHeroButton.Focus();
         EventSystem.current.SetSelectedGameObject(gameObject);
-        choseHeroButton.clicked += OpenChooseHeroMenu;
+   
 
         //-----Chose Hero Menu
         var choseHeroMenu = UidocumentsList[1].rootVisualElement.Q<VisualElement>(ChooseHeroMenu);
@@ -48,12 +71,8 @@ public class FirsButtonSelecedHandler : MonoBehaviour {
         choseHeroMenu.style.display = DisplayStyle.None;
         startGameMenu.style.display = DisplayStyle.None;
         heroDesk.style.display = DisplayStyle.None;
-
-        //Shop
-        var shopButton = UidocumentsList[0].rootVisualElement.Q<Button>(Shop);
-        shopButton.clicked += OpenShop;
-
     }
+    //Chose Hero menu
     void OpenChooseHeroMenu() {
         //Shop
         CloseShop();
@@ -67,22 +86,14 @@ public class FirsButtonSelecedHandler : MonoBehaviour {
         var startGameMenu = UidocumentsList[1].rootVisualElement.Q<VisualElement>(StartGameMenu);
         var heroDesk = UidocumentsList[1].rootVisualElement.Q<VisualElement>(HeroDesk);
         var nextHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(NextHero);
-        var prevHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(PrevHero);
-        var startButton = UidocumentsList[1].rootVisualElement.Q<Button>(StartGame);
-
-   
       
-
         //Visability
         choseHeroMenu.style.display = DisplayStyle.Flex;
         startGameMenu.style.display = DisplayStyle.Flex;
         heroDesk.style.display = DisplayStyle.Flex;
         nextHeroButton.Focus();
 
-        //Events
-        nextHeroButton.clicked += ChooseNextHero;
-        prevHeroButton.clicked += ChoosePrevHero;
-        startButton.clicked += ChoseHeroAndStartGame;
+        
 
         ChangeHeroDescriptionDesk();
     }
@@ -111,6 +122,7 @@ public class FirsButtonSelecedHandler : MonoBehaviour {
         //Focus
 
     }
+    //Shop
     void OpenShop() {
         CloseChooseHeroMenu();
         shopManager.OpenShop();

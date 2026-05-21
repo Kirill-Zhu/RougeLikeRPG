@@ -21,7 +21,9 @@ public class Entity : MonoBehaviour, IDamagable {
     //Battle
     protected SimpleEnemyBattleContorller battleContorller;
     public GameObject WeaponPrefab;           //(Collider for mele or graphics for projectile)
+    public bool UninterruptedAttack = false;
     public bool InBattle;
+    public bool IsAttackingNow;
     public float AttackRange = 1;
     public float AttackDuration = 1;
     public float DamageDelay;
@@ -69,6 +71,7 @@ public class Entity : MonoBehaviour, IDamagable {
             , DamageDelay
             , DamageTypes
             , WeaponPrefab
+            ,UninterruptedAttack
             , InteractionTagName
             , ProjectilieSpeed
             , ProjectileLiveDuration
@@ -159,6 +162,8 @@ public class Entity : MonoBehaviour, IDamagable {
         float attackDuration;
         float damageDelay;
         GameObject weaponPrefab;
+        public bool uninterruptedAttack = false;
+
         WeaponTypeEnum weaponType;
         DamageType[] damageTypes;
         //Projectile
@@ -187,6 +192,7 @@ public class Entity : MonoBehaviour, IDamagable {
         public TypeBuilder WithAttackDuration(float attackDuration) { this.attackDuration = attackDuration; return this; }
         public TypeBuilder WithDamageDelay(float damageDelay) { this.damageDelay = damageDelay; return this; }
         public TypeBuilder WithWeaponPrefab(GameObject weaponPrefb) { this.weaponPrefab = weaponPrefb; return this; }
+        public TypeBuilder WithUninterruptedAttack(bool value) { this.uninterruptedAttack = value; return this; }
         public TypeBuilder WithWeaponType(WeaponTypeEnum weaponType) { this.weaponType = weaponType; return this; }
         public TypeBuilder WithDamageTypes(DamageType[] damageTypes) { this.damageTypes = damageTypes; return this; }
         public TypeBuilder WithInteractionTag(string tagName) { this.interactionTagName = tagName; return this; }
@@ -255,6 +261,13 @@ public class Entity : MonoBehaviour, IDamagable {
             field = component.GetType().GetField("WeaponPrefab");
             if (field != null) {
                 field.SetValue(component, weaponPrefab);
+                // Debug.Log($"{component.GetType().Name} has field {field.GetValue(component)}");
+
+            }
+            //Set Uniterrupted attack
+            field = component.GetType().GetField("UninterruptedAttack");
+            if (field != null) {
+                field.SetValue(component, uninterruptedAttack);
                 // Debug.Log($"{component.GetType().Name} has field {field.GetValue(component)}");
 
             }

@@ -22,15 +22,13 @@ namespace Enemies {
         protected override void Awake() {
             base.Awake();
             animator = GetComponent<Animator>();
-
-
             //State Machine
             locomotion = new EnemyLocomotionState(animator, () => VelocityMagnitude);
             battle = new EnemyBattleState(animator, () => VelocityMagnitude, battleContorller);
             die = new EnemyDieState(animator, () => VelocityMagnitude, battleContorller);
             //State Conditions
             At(locomotion, battle, new FuncPredicate(() => InBattle));
-            At(battle, locomotion, new FuncPredicate(() => !InBattle));
+            At(battle, locomotion, new FuncPredicate(() => !InBattle&&!IsAttackingNow));
 
             Any(die, new FuncPredicate(() => isDead));
             stateMachine.SetState(locomotion);
@@ -40,6 +38,7 @@ namespace Enemies {
 
         }
         private void Update() {
+            IsAttackingNow = battleContorller.IsAttackingNow.Invoke();
             stateMachine?.Update();
         }
         private void FixedUpdate() {

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Lvl2Wave- 2 Golem
   m_EditorClassIdentifier: 
   enemyStrategy: {fileID: 11400000, guid: c9e5781815698c54bb85afb4d179e7e4, type: 2}
-  spawnRate: 40
+  spawnRate: 5

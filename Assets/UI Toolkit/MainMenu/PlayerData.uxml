@@ -1,0 +1,4 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenu/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=2043b5dbf64955b47bdad19ba104270c&amp;type=3#MainMenuStyle" />
+    <ui:Label text="User Name" name="UserName" class="Button" style="top: 90px; left: -691px; background-image: url(&quot;project://database/Assets/1_Packeges/0_UI/Dark_Brown_GUI_kit/button/rect/button1.png?fileID=2800000&amp;guid=19e0bc12554863e4d932f44fc7ca2cd6&amp;type=3#button1&quot;);" />
+</ui:UXML>

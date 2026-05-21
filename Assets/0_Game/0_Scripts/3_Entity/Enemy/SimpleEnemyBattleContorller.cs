@@ -6,7 +6,8 @@ using System.Threading;
 using UnityEngine;
 public class SimpleEnemyBattleContorller : MonoBehaviour {
     //Initialize Values
-    float attackDuration;
+    float attackCooldown;
+    bool uninterruptedAttack;
     float damageDelay;
     WeaponTypeEnum weaponType;
 
@@ -40,11 +41,11 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
 
     //Sound
     EventReference onAttackSound;
+
     [SerializeField] float skillDurationCooldown;
     public event Action<int> OnAnimationStart;
     public event Action<float> OnChangeDurationSkill;
-
-
+    public Func<bool> IsAttackingNow;
     //Animations
     int animationHash = Animator.StringToHash("Battle");
 
@@ -57,10 +58,11 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         , float damageDelay
         , DamageType[] damageTypes
         , GameObject prefab
+        , bool uninterruptedAttack
         , string interactionTag = null
         , float projectileSpeed = 2
-        , float ProjectileliveDuration = 2,
-        int shootShape = 0
+        , float ProjectileliveDuration = 2
+        , int shootShape = 0
         , float spreadAngle = 70
         , int projectilesCount = 1
         , bool isProjectileSelfDirected = false
@@ -68,10 +70,11 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         , GameObject onAttackParticlePrefab = null
         , EventReference onAttackSound = new EventReference()) {
 
-        this.attackDuration = attackDuration;
+        this.attackCooldown = attackDuration;
         this.weaponType = weaponType;
         this.attackRange = attackRange;
         this.damageDelay = damageDelay;
+        this.uninterruptedAttack = uninterruptedAttack;
         this.interacitonTag = interactionTag;
         this.shootShape = (ShootShape)shootShape;
         this.spreadAngle = spreadAngle;
@@ -80,6 +83,12 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         this.aimTransform = aimTransform;
         this.onAttackParticlePrefab = onAttackParticlePrefab;
         this.onAttackSound = onAttackSound;
+
+        //Is Attack now
+
+        IsAttackingNow = () => skillDurationCooldown > 0 && this.uninterruptedAttack;
+        //-------
+
 
         //Mele
         if (weaponType == WeaponTypeEnum.mele) {
@@ -153,6 +162,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         OnChangeDurationSkill += skillDuration => skillDurationCooldown = skillDuration;
     }
     private void Update() {
+
         if (skillDurationCooldown > 0) skillDurationCooldown -= Time.deltaTime;
 
         if (skillDurationCooldown <= 0)
@@ -213,7 +223,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
             await UniTask.WaitForSeconds(damageDelay, false, PlayerLoopTiming.Update, token, true);
             foreach (var mele in weaponPoolList) {
                 mele.gameObject.SetActive(true);
-                OnChangeDurationSkill?.Invoke(attackDuration);         //if attack was done, set coolDown
+                OnChangeDurationSkill?.Invoke(attackCooldown);         //if attack was done, set coolDown
             }
 
             //VFX
@@ -250,7 +260,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         CancellationToken token = cts.Token;
         try {
             await UniTask.WaitForSeconds(damageDelay, false, PlayerLoopTiming.Update, token, true);
-            OnChangeDurationSkill?.Invoke(attackDuration);
+            OnChangeDurationSkill?.Invoke(attackCooldown);
 
             //VFX
             if (onAttackVFX != null) {
@@ -356,7 +366,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
             foreach (var area in areaWeaponList) {
                 area.gameObject.SetActive(true);
                 area.transform.position = castPos;
-                OnChangeDurationSkill?.Invoke(attackDuration);         //if attack was done, set coolDown
+                OnChangeDurationSkill?.Invoke(attackCooldown);         //if attack was done, set coolDown
             }
 
             await UniTask.WaitForSeconds(areaLiveDuration, false, PlayerLoopTiming.Update, token, true);

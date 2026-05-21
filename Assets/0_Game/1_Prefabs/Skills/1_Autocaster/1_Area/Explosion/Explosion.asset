@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7740aec0b8bc601469f4030db66b4ee9, type: 3}
   m_Name: Explosion
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3137097503443173940, guid: 09da3c117604e784e83be1ef3d512fd3, type: 3}
+  prefab: {fileID: 3137097503443173940, guid: fc80b61c295085346ad060942151d999, type: 3}
   icon: {fileID: 21300000, guid: b8c27d98f6ad133479c6f5a30c5861de, type: 3}
   parentToHero: 0
   ParticlePrefabArray:
