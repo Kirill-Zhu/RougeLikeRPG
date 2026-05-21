@@ -1,12 +1,11 @@
-using UnityEngine;
-using Zenject;
-using UnityEngine.UI;
-using TMPro;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
 public class ExpBarUIContorller : MonoBehaviour {
 
     [SerializeField] List<TextMeshProUGUI> popUpExpTextMeshList;
@@ -32,8 +31,8 @@ public class ExpBarUIContorller : MonoBehaviour {
         slider.value = currentExp;
         PopUpExpValue(value);
     }
-    void ChangeMaxExp(int value) { 
-      slider.maxValue = value;
+    void ChangeMaxExp(int value) {
+        slider.maxValue = value;
     }
 
     async void PopUpExpValue(int value) {
@@ -46,14 +45,14 @@ public class ExpBarUIContorller : MonoBehaviour {
 
             textMesh.gameObject.SetActive(true);
             textMesh.text = value.ToString();
-            textMesh.rectTransform.position = startAnimationPos;    
-            task = textMesh.rectTransform.DOLocalMoveX(textMesh.rectTransform.localPosition.x +40, 1).ToUniTask();
-            
-            await task;   
+            textMesh.rectTransform.position = startAnimationPos;
+            task = textMesh.rectTransform.DOLocalMoveX(textMesh.rectTransform.localPosition.x + 40, 1).ToUniTask(TweenCancelBehaviour.Kill);
+
+            await task;
             textMesh.gameObject.SetActive(false);
             break;
         }
-     
+
 
     }
 }

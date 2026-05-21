@@ -44,7 +44,7 @@ public class PopUpDamageValuesHandler : ScriptableObject {
                 textMesh.color = damageType;
 
                 Vector3 endPos = origin.up * damageType;
-                UniTask task = textMesh.transform.DOMoveY(endPos.y, 1).Play().ToUniTask(TweenCancelBehaviour.Kill, token);
+                UniTask task = textMesh.transform.DOMoveY(endPos.y, 1).ToUniTask(cancellationToken: token);
                 await task;
                 
                 if (token.IsCancellationRequested)
@@ -69,7 +69,7 @@ public class PopUpDamageValuesHandler : ScriptableObject {
                 textMesh.text = "Block!";
                 textMesh.color = damgeType;
 
-                UniTask task = textMesh.transform.DOMoveY(origin.up.y, 1).Play().ToUniTask(TweenCancelBehaviour.Kill, token);
+                UniTask task = textMesh.transform.DOMoveY(origin.up.y, 1).ToUniTask(cancellationToken: token);
                 await task;
 
                 if (token.IsCancellationRequested)

@@ -26,8 +26,6 @@ public class ShopManager : MonoBehaviour {
 
     private void Awake() {
 
-        Debug.Log($"Coins now {GameData.GetConins()}");
-
         slotsArray = new Slot<ItemStrategy>[strategyArray.Length];
         cardArray = new ItemCard[strategyArray.Length];
 
