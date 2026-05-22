@@ -8,11 +8,13 @@ using System.Text.RegularExpressions;
 using UnityEngine.Windows;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using Zenject;
 
 public class AuthentificationManager : MonoBehaviour
 {
-    [SerializeField] AuthenticationUIController authenticateionUIcontroller;
+    [Inject, SerializeField] CloudSaveManager cloudsaveManager;
    
+    [SerializeField] AuthenticationUIController authenticateionUIcontroller;
     [SerializeField] string userName;
     [SerializeField] string password;
     private bool eventsInitialized = false;
@@ -25,8 +27,8 @@ public class AuthentificationManager : MonoBehaviour
     async void Awake() {
         Application.runInBackground = true;
         await StartClientService();
-        await CloudSaveManager.LoadData();
-       
+        Debug.Log("Client service is Run");
+        
     }
     private void OnEnable() {
         //Event Bus
@@ -58,6 +60,7 @@ public class AuthentificationManager : MonoBehaviour
 
     }
     public async UniTask StartClientService() {
+        Debug.Log("Start Client Service");
         try {
             if (UnityServices.State != ServicesInitializationState.Initialized) {
 
@@ -70,7 +73,7 @@ public class AuthentificationManager : MonoBehaviour
                 SetupEvents();
             }
             if (AuthenticationService.Instance.SessionTokenExists) {
-                SighnInAonymouslyAsync();
+               await SighnInAonymouslyAsync();
                 Debug.Log($"Session toke ins {AuthenticationService.Instance.SessionToken}");
             } else {
 
@@ -80,7 +83,13 @@ public class AuthentificationManager : MonoBehaviour
             Debug.LogError("Failed to connect");
             OnErrorMessage.Invoke("Failed to connect");
         }
+        //Load Player Cloud Data
+        cloudsaveManager.LoadData();
 
+        var playerInfo = await AuthenticationService.Instance.GetPlayerInfoAsync();
+        string registeredUsername = playerInfo.Username;
+        EventBus<OnPlayerSignIn>.Raise(new OnPlayerSignIn { userName = registeredUsername });
+        ////------
     }
     public async void SignInWithUsernameAndPaaswordAsycn(string username, string password) {
 
@@ -110,15 +119,13 @@ public class AuthentificationManager : MonoBehaviour
             Debug.LogError(ex);
         }
     }
-    public async void SighnInAonymouslyAsync() {
+    public async UniTask SighnInAonymouslyAsync() {
         try {
            
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-            var playerInfo = await AuthenticationService.Instance.GetPlayerInfoAsync();
-        
-            string registeredUsername = playerInfo.Username;
-            EventBus<OnPlayerSignIn>.Raise(new OnPlayerSignIn { userName = registeredUsername });
+           
+           
             Debug.Log($"Player : {AuthenticationService.Instance.PlayerName} is SignedIn");
         } catch {
 

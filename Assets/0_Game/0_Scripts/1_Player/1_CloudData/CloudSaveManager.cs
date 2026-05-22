@@ -4,20 +4,21 @@ using TMPro;
 using Unity.Services.CloudSave;
 using Unity.Services.Core;
 using UnityEngine;
-public static class CloudSaveManager {
+public class CloudSaveManager: MonoBehaviour {
 
-    public static int coins;
- 
+    public int Coins=>coins;
+    int coins;
      static ISet<string> keys = new HashSet<string>() { "Coins" };
 
 
     [ContextMenu("Save Data")]
-    public static void SaveData() {
+    public void SaveData() {
         var data = new Dictionary<string, object> { { "Coins", (int)coins } };
         CloudSaveService.Instance.Data.Player.SaveAsync(data);
     }
     [ContextMenu("Load Data")]
-    public static async UniTask LoadData() {
+    public async UniTask LoadData() {
+        Debug.Log("Load Cloud Data");
         await UnityServices.InitializeAsync();
         var laodedData = await CloudSaveService.Instance.Data.Player.LoadAsync(keys);
 
@@ -27,5 +28,11 @@ public static class CloudSaveManager {
         } else {
             coins = 0;  
         }
+
+        SetLocalData();
+    }
+
+    void SetLocalData() {
+        GameData.SetCoinsCount(coins);
     }
 }

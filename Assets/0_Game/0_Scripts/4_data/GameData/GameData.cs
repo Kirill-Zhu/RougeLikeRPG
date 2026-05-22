@@ -1,6 +1,10 @@
 using UnityEngine;
 public static class GameData {
 
+
+    public static void SetCoinsCount(int value) {
+        PlayerPrefs.SetInt("Coins", value);
+    }
     public static int GetConins() {
         return PlayerPrefs.GetInt("Coins");
     }

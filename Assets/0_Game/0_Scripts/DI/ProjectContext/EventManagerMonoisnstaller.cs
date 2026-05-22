@@ -9,5 +9,4 @@ public class EventManagerMonoisnstaller : MonoInstaller
          Container.Bind<EventManager>().FromInstance(eventManager).NonLazy();
     }
 
-   
 }

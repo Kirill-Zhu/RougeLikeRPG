@@ -1,4 +1,8 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd">
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainMenu/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=2043b5dbf64955b47bdad19ba104270c&amp;type=3#MainMenuStyle" />
     <ui:Label text="User Name" name="UserName" class="Button" style="top: 90px; left: -691px; background-image: url(&quot;project://database/Assets/1_Packeges/0_UI/Dark_Brown_GUI_kit/button/rect/button1.png?fileID=2800000&amp;guid=19e0bc12554863e4d932f44fc7ca2cd6&amp;type=3#button1&quot;);" />
+    <ui:Label text="Coins" name="CoinsElement" class="Button" style="top: 90px; left: -691px; background-image: url(&quot;project://database/Assets/1_Packeges/0_UI/Dark_Brown_GUI_kit/button/rect/button1.png?fileID=2800000&amp;guid=19e0bc12554863e4d932f44fc7ca2cd6&amp;type=3#button1&quot;); height: 49px; -unity-text-align: middle-left; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(248, 253, 32); -unity-paragraph-spacing: 1px; white-space: nowrap;">
+        <ui:VisualElement name="CoinImage" style="flex-grow: 1; position: absolute; background-image: url(&quot;project://database/Assets/1_Packeges/0_UI/Dark_Brown_GUI_kit/icon/other/coin/coin-bronze.png?fileID=2800000&amp;guid=d6032d13c4ee8c441b8173423b65deb2&amp;type=3#coin-bronze&quot;); height: 27px; top: 13px; width: 27px; left: 97px;" />
+        <ui:Label text="0000" name="Coins" style="-unity-text-align: middle-left; left: 125px; width: 116px;" />
+    </ui:Label>
 </ui:UXML>

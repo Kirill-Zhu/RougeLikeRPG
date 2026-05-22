@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.Events;
@@ -20,17 +22,18 @@ public class AuthenticationUIController : MonoBehaviour {
     [HideInInspector] public UnityEvent OnConfimButtonClikded = new UnityEvent();
     Label errorMessageLabel;
     //Event BUs
-  
+
 
     private void Awake() {
         Initialize();
     }
-    private void OnEnable() {
-        
-        if(AuthenticationService.Instance.IsSignedIn)
+    private async void OnEnable() {
+
+        await UniTask.WaitUntil(() => AuthenticationService.Instance.IsSignedIn);
+        if (AuthenticationService.Instance.IsSignedIn)
             ClosePage();
     }
-  
+
 
     void Initialize() {
         var signInButton = authenticationUIDocument.rootVisualElement.Q<Button>(SignIn);
@@ -70,11 +73,19 @@ public class AuthenticationUIController : MonoBehaviour {
         OnConfimButtonClikded.Invoke();
         Debug.Log("Confim");
     }
+    [ContextMenu("Open Page")]
     public void OpenPage() {
+        Debug.Log("Open Page");
         authenticationUIDocument.rootVisualElement.Q<VisualElement>(AuthenticationMenu).style.display = DisplayStyle.Flex;
     }
-    public void ClosePage() {
-        authenticationUIDocument.rootVisualElement.Q<VisualElement>(AuthenticationMenu).style.display = DisplayStyle.None;
+    [ContextMenu("Close page")]
+    public async Task ClosePage() {
+
+        var menu = authenticationUIDocument.rootVisualElement.Q<VisualElement>(AuthenticationMenu);
+
+        await UniTask.WaitUntil(()=> menu != null);
+            
+        menu.style.display = DisplayStyle.None;
     }
     public void ShowError(string errorMsg) {
         errorMessageLabel.text = errorMsg;

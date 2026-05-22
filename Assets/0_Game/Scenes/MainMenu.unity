@@ -787,51 +787,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!1 &275220762
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 275220763}
-  - component: {fileID: 275220764}
-  m_Layer: 0
-  m_Name: CloudSaveManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &275220763
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275220762}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 373313301}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &275220764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275220762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa0cb49ba2ed72b4fbe2e4ed9550f7b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coins: 0
 --- !u!1001 &280194659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1188,7 +1143,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1118134059}
-  - {fileID: 275220763}
   - {fileID: 788036540}
   - {fileID: 1426204572}
   - {fileID: 731443368}
@@ -2939,8 +2893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b3ea3d2928a6343a72df263edb76c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cloudsaveManager: {fileID: 0}
   authenticateionUIcontroller: {fileID: 788036541}
-  cloudSaveManager: {fileID: 275220764}
   userName: 
   password: 
   WarningMessage: 
@@ -5625,9 +5579,9 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1305207815}
   - {fileID: 1354819038}
   - {fileID: 373313301}
-  - {fileID: 1305207815}
   - {fileID: 1022911318}
   - {fileID: 2067051415}
   - {fileID: 159306525}
