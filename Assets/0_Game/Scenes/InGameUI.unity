@@ -1986,7 +1986,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -177.42, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &494162579
@@ -2556,7 +2556,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -212, y: 199}
+  m_AnchoredPosition: {x: -200, y: 200}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &662059878
@@ -3509,7 +3509,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 166, y: -97}
+  m_AnchoredPosition: {x: 150, y: -100}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &876067652
@@ -5327,6 +5327,7 @@ MonoBehaviour:
   image: {fileID: 103860350}
   textMeshItemName: {fileID: 1258265898}
   textMeshDescription: {fileID: 1242315870}
+  takeButton: {fileID: 2010030917}
 --- !u!222 &1248948254
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5950,7 +5951,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1280443281
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10000,10 +10001,10 @@ GameObject:
   - component: {fileID: 2042108580}
   - component: {fileID: 2042108585}
   - component: {fileID: 2042108579}
-  - component: {fileID: 2042108581}
-  - component: {fileID: 2042108582}
   - component: {fileID: 2042108583}
+  - component: {fileID: 2042108581}
   - component: {fileID: 2042108584}
+  - component: {fileID: 2042108582}
   m_Layer: 0
   m_Name: InGameUIManager
   m_TagString: Untagged
@@ -10024,17 +10025,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  startScreenObjects:
-  - {fileID: 1280443280}
-  - {fileID: 382108192}
   healthComponentUI: {fileID: 2042108576}
   globes: {fileID: 5510382441935964318}
   skillStrategyUIController: {fileID: 2042108577}
   levelUpMenu: {fileID: 2042108578}
-  expBarUIContorller: {fileID: 0}
+  expBarUIContorller: {fileID: 2042108580}
   coinControllerUI: {fileID: 2042108585}
-  autoSkillController: {fileID: 0}
-  powerUpMenu: {fileID: 0}
+  autoSkillController: {fileID: 2042108579}
+  startScreenAnimationController: {fileID: 2042108583}
+  powerUpMenu: {fileID: 2042108581}
 --- !u!4 &2042108575
 Transform:
   m_ObjectHideFlags: 0
@@ -10099,6 +10098,9 @@ MonoBehaviour:
   northFillImage: {fileID: 1286817215}
   westFillImage: {fileID: 1731296463}
   eastFillImage: {fileID: 969123277}
+  showPos: {x: -200, y: 200}
+  hidePos: {x: 0, y: -300}
+  transformToMove: {fileID: 662059877}
 --- !u!114 &2042108578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10144,6 +10146,9 @@ MonoBehaviour:
   fillSprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   skillObjectsList: []
   fillImageList: []
+  showPos: {x: 0, y: 100}
+  hidePos: {x: 0, y: -100}
+  transformToMove: {fileID: 1436973976}
 --- !u!114 &2042108580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10163,6 +10168,9 @@ MonoBehaviour:
   - {fileID: 1453148172}
   - {fileID: 1467982690}
   slider: {fileID: 1023039154}
+  showPos: {x: 0, y: 0}
+  hidePos: {x: 0, y: 150}
+  transformToMove: {fileID: 494162578}
 --- !u!114 &2042108581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10211,6 +10219,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startScreen: {fileID: 1280443280}
   heroModel: {fileID: 0}
+  startObjects:
+  - {fileID: 382108192}
+  - {fileID: 1280443280}
 --- !u!114 &2042108584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10239,6 +10250,9 @@ MonoBehaviour:
   textMexhCollectedCoin: {fileID: 247488395}
   textMexhCurrentCoins: {fileID: 772281758}
   coinImage: {fileID: 253512695}
+  showPos: {x: 150, y: -100}
+  hidePos: {x: -250, y: 0}
+  transformToMove: {fileID: 876067651}
 --- !u!1001 &2056693679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11558,7 +11572,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 333.36, y: 137}
+  m_AnchoredPosition: {x: 330, y: 140}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5510382441935964318
@@ -11587,6 +11601,9 @@ MonoBehaviour:
   regen: 0.1
   regenUpdateInterval: 1
   GodMode: 0
+  showPos: {x: 330, y: 140}
+  hidePos: {x: -50, y: -200}
+  transformToMove: {fileID: 5510382441935964317}
 --- !u!1 &5510382442022825074
 GameObject:
   m_ObjectHideFlags: 0

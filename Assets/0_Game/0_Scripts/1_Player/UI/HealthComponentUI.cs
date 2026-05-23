@@ -5,7 +5,7 @@ using System.Reflection;
 using TMPro;
 using UnityEngine;
 
-public class HealthComponentUI : MonoBehaviour {
+public class HealthComponentUI : MonoBehaviour, InGameUI {
     [SerializeField] CanvasGroup bloodBoundriesCanvasGroup;
     [SerializeField] List<Color> physicsGradientColors;
     [SerializeField] List<Color> fireGradientColors;
@@ -30,7 +30,14 @@ public class HealthComponentUI : MonoBehaviour {
             obj.gameObject.SetActive(false);
         }
     }
+    public void ShowUI() {
+        throw new NotImplementedException();
+    }
 
+    public void HideUI() {
+        throw new NotImplementedException();
+    }
+    #region DAMAGE
     public void PopUpDamagePoints(DamageType damageType, int recievedDamage) {
         this.recievedDamage = recievedDamage;
         HandleDamageAnimation(damageType);
@@ -44,6 +51,7 @@ public class HealthComponentUI : MonoBehaviour {
             DOTween.To(() => bloodBoundriesCanvasGroup.alpha, x => bloodBoundriesCanvasGroup.alpha = x, 0, 0.5f).OnComplete(() => bloodBoundriesCanvasGroup.alpha = 0);
         }
     }
+    
     void HandleDamageAnimation(object o) {
 
         MethodInfo visitMethodInfo = GetType().GetMethod("HandleDamageAnimation", BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { o.GetType() }, null);
@@ -53,7 +61,7 @@ public class HealthComponentUI : MonoBehaviour {
 
     }
 
-
+    
     void HandleDamageAnimation(PhysicsDamageType damageType) {
 
         foreach (var text in valuesList) {
@@ -115,4 +123,7 @@ public class HealthComponentUI : MonoBehaviour {
 
          //Debug.Log($"handle UI animation {this.GetType().Name} by Type {damageType}");
     }
+
+   
+    #endregion
 }

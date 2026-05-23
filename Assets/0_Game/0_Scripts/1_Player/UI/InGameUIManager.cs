@@ -1,11 +1,17 @@
+using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using System.Collections.Generic;
+
+public interface InGameUI {
+    public const int duration = 1;
+    public void ShowUI();
+    public void HideUI();
+}
 [RequireComponent(typeof(HealthComponentUI))]
 public class InGameUIManager : MonoBehaviour {
 
     [Inject, SerializeField] Hero hero;
-    [SerializeField] List<GameObject> startScreenObjects;
     [SerializeField] HealthComponentUI healthComponentUI;
     [SerializeField] HealthAndManaGlobesUI globes;
     [SerializeField] SkillStrategyUIController skillStrategyUIController;
@@ -13,10 +19,12 @@ public class InGameUIManager : MonoBehaviour {
     [SerializeField] ExpBarUIContorller expBarUIContorller;
     [SerializeField] CoinControllerUI coinControllerUI;
     [SerializeField] AutoSkillUIController autoSkillController;
+    [SerializeField] StartScreenAnimationController startScreenAnimationController;
+
+    List<InGameUI> UIList = new List<InGameUI>();
+
     [SerializeField] PowerUpMenu powerUpMenu;
     private void Awake() {
-
-
         //Get
         healthComponentUI = GetComponent<HealthComponentUI>();
         autoSkillController = GetComponent<AutoSkillUIController>();
@@ -37,9 +45,12 @@ public class InGameUIManager : MonoBehaviour {
         coinControllerUI.Initialaize(hero);
         powerUpMenu.Initialize(hero);
 
-        //Destroy Start Screen Ojbects
-        foreach(var obj in startScreenObjects) 
-            Destroy(obj, 3);
+        UIList.Add(globes);
+        UIList.Add(skillStrategyUIController);
+        UIList.Add(expBarUIContorller);
+        UIList.Add(coinControllerUI);
+        UIList.Add(autoSkillController);
+
     }
 
     private void Start() {
@@ -56,6 +67,8 @@ public class InGameUIManager : MonoBehaviour {
         hero.HeroBattleController.SkillsStrategy[2].OnCoolDownFillAmountValue += skillStrategyUIController.OnCoolDownCallEastSkill;
 
         //Additional Skills
+
+        OnStartNewGame();
     }
     private void OnDestroy() {
         hero.HealthComponent.OnTakeDamage -= healthComponentUI.PopUpDamagePoints;
@@ -67,6 +80,25 @@ public class InGameUIManager : MonoBehaviour {
         hero.HeroBattleController.SkillsStrategy[2].OnCoolDownFillAmountValue -= skillStrategyUIController.OnCoolDownCallEastSkill;
 
         //Additional Skills
+    }
+
+    async void OnStartNewGame(int startAnimDuration = 3) {
+        HideAllUI();
+        startScreenAnimationController.ShowStartAniamtion();
+        await UniTask.WaitForSeconds(startAnimDuration);
+        startScreenAnimationController.HideStartAniamtion();
+        ShowAllUI();
+    }
+
+    [ContextMenu("Show All UI")]
+    public void ShowAllUI() {
+        foreach (var ui in UIList)
+            ui.ShowUI();
+    }
+    [ContextMenu("Hide All UI")]
+    public void HideAllUI() {
+        foreach (var ui in UIList)
+            ui.HideUI();
     }
 
     void UpdateValues() {

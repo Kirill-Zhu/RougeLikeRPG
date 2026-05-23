@@ -1,8 +1,9 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-public class AutoSkillUIController : MonoBehaviour {
+public class AutoSkillUIController : MonoBehaviour, InGameUI {
 
     [SerializeField] Transform parentUi;
     [SerializeField] Sprite fillSprite;
@@ -18,7 +19,30 @@ public class AutoSkillUIController : MonoBehaviour {
         this.heroAutoSkillContorller = heroAutoSkillContorller;
         heroAutoSkillContorller.OnChangelSkillList += UpdateValues;
     }
+    #region InGameUI
+    [Header("Sho Hide Animaiton settings")]
+    [SerializeField] Vector2 showPos;
+    [SerializeField] Vector2 hidePos;
+    [SerializeField] RectTransform transformToMove;
+    Sequence sequence;
+    [ContextMenu("Show UI")]
+    public void ShowUI() {
+        if (sequence != null)
+            sequence.Kill();
 
+        sequence = DOTween.Sequence();
+        sequence.Append(transformToMove.DOAnchorPos(showPos, InGameUI.duration)).SetEase(Ease.InFlash);
+
+    }
+    [ContextMenu("hide Ui")]
+    public void HideUI() {
+        if (sequence != null)
+            sequence.Kill();
+
+        sequence = DOTween.Sequence();
+        sequence.Append(transformToMove.DOAnchorPos(hidePos, InGameUI.duration)).SetEase(Ease.InFlash);
+    }
+    #endregion
     public void UpdateValues(List<AutoSkillStrategy> skillList) {
 
         //Clear

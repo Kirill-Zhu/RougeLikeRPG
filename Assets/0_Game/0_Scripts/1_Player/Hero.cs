@@ -8,13 +8,12 @@ public class Hero : MonoBehaviour {
     public GameObject Model => model;
     GameObject model;
 
-    public UnityEvent OnHeroChange;///Invokes Every time when need change UI
-    public UnityEvent<int, int> OnGetExp;
-    public UnityEvent<Sprite, string, string> OnPickUppowerUp;
-    public UnityEvent<int> OnLevelUp;
-    public UnityEvent OnChooseLelvelUpCard;
-    //Event Bus
-
+   [HideInInspector] public UnityEvent OnHeroChange;///Invokes Every time when need change UI
+   [HideInInspector] public UnityEvent<int, int> OnGetExp;
+   [HideInInspector] public UnityEvent<Sprite, string, string> OnPickUppowerUp;
+   [HideInInspector] public UnityEvent<int> OnLevelUp;
+   [HideInInspector] public UnityEvent OnChooseLelvelUpCard;
+  
     HeroStrategyData heroData;
 
     //Movement
@@ -52,9 +51,14 @@ public class Hero : MonoBehaviour {
     CoinsComponent coinsComponent;
     //-> Shop
     Item[] shopItems;
+
+    //UI
+    InGameUIManager inGameUIManager;
+    //
     //State Machine
     [SerializeField] Animator animator;
     StateMachine stateMachine;
+    CutSceneState cutSceneState;
     PausedState pausedState;
     Locomotion locomotion;
     JumpState jumpState;
@@ -70,6 +74,8 @@ public class Hero : MonoBehaviour {
     //<-EventBus
     public bool Paused => paused;
     bool paused = false;
+    public bool CutScene => cutScene;
+    bool cutScene;
     EventManager eventManager;
     #endregion
     public bool initialization = true;
@@ -135,6 +141,7 @@ public class Hero : MonoBehaviour {
 
         //StateMachine
         stateMachine = new StateMachine();
+        cutSceneState = new CutSceneState(moveController, animator, battleContorller, heroAutoSkillController, inGameUIManager);
         pausedState = new PausedState(moveController, animator, battleContorller, heroAutoSkillController);
         locomotion = new Locomotion(moveController, animator, battleContorller, heroAutoSkillController);
         jumpState = new JumpState(moveController, animator, battleContorller, heroAutoSkillController);
@@ -153,6 +160,7 @@ public class Hero : MonoBehaviour {
 
         //Any
         Any(pausedState, new FuncPredicate(() => paused));
+        Any(cutSceneState, new FuncPredicate(() => cutScene && !paused));
         Any(locomotion, new FuncPredicate(() => !moveController.IsJumping && moveController.Grounded() && !battleContorller.InBattleState));
         Any(landingState, new FuncPredicate(() => !moveController.IsJumping && !moveController.Grounded()));
         stateMachine.SetState(locomotion);
@@ -187,5 +195,8 @@ public class Hero : MonoBehaviour {
         eventManager.OnLoadMainMenu.AddListener(() => gameObject.SetActive(false));
 
     }
-
+    //UI UI Manager set up it itself 
+    public void SetUpUI(InGameUIManager gameUIManager) { 
+        this.inGameUIManager = gameUIManager;
+    }
 }

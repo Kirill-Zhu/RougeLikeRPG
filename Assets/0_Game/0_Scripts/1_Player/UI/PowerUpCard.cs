@@ -8,7 +8,7 @@ public class PowerUpCard : MonoBehaviour {
     [SerializeField] Image image;
     [SerializeField] TextMeshProUGUI textMeshItemName;
     [SerializeField] TextMeshProUGUI textMeshDescription;
-
+    [SerializeField] GameObject takeButton;
     public void RiseUpCard(Sprite label, string desctiption, string name) {
         //Animation
         transform.rotation = Quaternion.Euler(0, 90, 0);
