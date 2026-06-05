@@ -11,7 +11,7 @@ public class ExpComponent : MonoBehaviour, IVisitable {
     public void Initialize(UnityEvent<int> OnLevelUp, UnityEvent<int, int> OnGetExp) {
         level = 1;
         currentExp = 0;
-        MaxExp = 2;
+        MaxExp = 4;
         OverallExp = 0;
         OnLvlUp = OnLevelUp;
         this.OnGetExp = OnGetExp;

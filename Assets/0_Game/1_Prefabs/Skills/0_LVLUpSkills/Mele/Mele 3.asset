@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Mele 3
   m_EditorClassIdentifier: 
   damageTypes: 0
-  skillDescription: Increase all damage types by 15%
+  skillDescription: Increase all damage types by 10%
   physicsDamageDirectIncrease: 0
   fireDamageDirectIncrease: 0
   coldDamageDirectIncrease: 0
-  physicsPecrent: 15
-  firePecrent: 15
-  coldPecrent: 15
+  physicsPecrent: 10
+  firePecrent: 10
+  coldPecrent: 10
   attackRange: 0
   recuceSkillDuration: 0

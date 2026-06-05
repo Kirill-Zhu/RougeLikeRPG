@@ -24,11 +24,11 @@ MonoBehaviour:
   AttackRange: 1
   ManaCost: 0
   PhysicsDamage: 8
-  FireDamage: 0
+  FireDamage: 8
   ColdDamage: 0
   Icon: {fileID: 21300000, guid: 0e1ab67eb67874542b1606233616c377, type: 3}
   BackSprite: {fileID: 21300000, guid: c7bf45f0ef95bed4491c5809fc6bf484, type: 3}
-  DamageTypesEnum: 1
+  DamageTypesEnum: 2
   damageTypesList: []
   HealthComponent: {fileID: 0}
   WithCooldown: 0

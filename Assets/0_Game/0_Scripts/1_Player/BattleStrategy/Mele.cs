@@ -3,34 +3,16 @@ using UnityEngine;
 
 class Mele : WeaponType {
     protected override void OnTriggerEnter(Collider other) {
-
+        totalDamage = new DamageType[] { new PhysicsDamageType(0), new FireDamageType(0), new ColdDamageType(0) };
         if (interactionTagName == null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
-                //Set total damage
-                for (int i = 0; i < damageTypes.Length; i++) {
-                    totalDamage[i].ResetToZero();
-                    totalDamage[i].AddDamage(damageTypes[i].Value + bonusDamageTypes[i].Value);
-                }
-                //Do total Damage
-                foreach (var damage in totalDamage) {
-                    health.TakeDamage(damage);
-                }
+               DoDamage(health);
             }
         }
 
         if (interactionTagName != null && other.CompareTag(interactionTagName)) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
-                
-                //Set total damage
-                for (int i = 0; i < damageTypes.Length; i++) {
-                    totalDamage[i].ResetToZero();
-                    totalDamage[i].AddDamage(damageTypes[i].Value + bonusDamageTypes[i].Value);
-                }
-                
-                //Do TOtal damage
-                foreach (var damage in totalDamage) {
-                    health.TakeDamage(damage);
-                }
+                DoDamage(health);
             }
             //if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
             //    foreach (var damageType in damageTypes)
@@ -72,7 +54,7 @@ class Mele : WeaponType {
             var obj = Instantiate(prefab, origin.position + offset, origin.rotation, origin);
             var mele = obj.AddComponent<Mele>();
             mele.enabled = true;
-            mele.damageTypes = damageTypes;
+            mele.baseDamage = damageTypes;
             mele.pushPower = pushPower;
             mele.interactionTagName = interactionTagName;
             // Debug.Log($"new weapom has physics Damage {damageTypes[0].Value}");

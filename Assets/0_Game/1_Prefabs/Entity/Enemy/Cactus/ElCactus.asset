@@ -17,7 +17,7 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 4ca665255adc0204585931b317f67500, type: 3}
   MoveSpeed: 1
   AttackRange: 10
-  AttackCooldown: 0
+  AttackCooldown: 9
   DamageDelay: 0.4
   UninterruptedAttack: 1
   ProjectileSpeed: 10.1
@@ -31,7 +31,7 @@ MonoBehaviour:
   DropPfreabList:
   - {fileID: 4897015921897156567, guid: 92a4812b8e5094e43901951be46ba7a6, type: 3}
   damageTypesEnum: 1
-  physicsDamage: 3
+  physicsDamage: 4
   fireDamage: 0
   coldDamage: 0
   HealtData: {fileID: 11400000, guid: 16ec866530b899045ae2c5ce05914d0b, type: 2}

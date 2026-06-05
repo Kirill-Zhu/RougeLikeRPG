@@ -103,7 +103,7 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 32
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: 50
     textureCompression: 1
     compressionQuality: 0

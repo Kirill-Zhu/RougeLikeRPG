@@ -228,7 +228,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
 
             //VFX
             if (onAttackVFX != null) {
-                onAttackVFX.gameObject.transform.position = transform.position;
+                onAttackVFX.gameObject.transform.position = transform.position + Vector3.up;
                 onAttackVFX.gameObject.transform.rotation = Quaternion.LookRotation(aimTransform.position.WithY(0) - transform.position.WithY(0));
                 onAttackVFX.Play();
             }
@@ -261,10 +261,10 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         try {
             await UniTask.WaitForSeconds(damageDelay, false, PlayerLoopTiming.Update, token, true);
             OnChangeDurationSkill?.Invoke(attackCooldown);
-
             //VFX
             if (onAttackVFX != null) {
                 onAttackVFX.gameObject.transform.position = transform.position;
+                onAttackVFX.gameObject.transform.rotation = Quaternion.LookRotation(aimTransform.position.WithY(0) - transform.position.WithY(0));
                 onAttackVFX.Play();
             }
 

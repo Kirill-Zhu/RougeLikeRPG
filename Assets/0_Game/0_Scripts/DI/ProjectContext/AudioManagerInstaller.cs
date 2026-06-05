@@ -14,16 +14,8 @@ public class AudioManagerInstaller : MonoInstaller
         var audioManagerInstance = audio.GetComponent<AudioManager>();
         
         //Set event manager
-        audioManagerInstance.SetEventManager(eventManager);
-        
-        //Set hero
-        audioManagerInstance.SetHeroMonoinstaller(heroMoninstaller);
-        audioManagerInstance.GetHeroReference();
-        //Set scenes manager
-        audioManagerInstance.SetScenesManagerMonoinstaller(scenesManagerMonoinstaller);
-        audioManagerInstance.GetScenesManagerReference();
-
         audio.gameObject.SetActive(true);
+        eventManager.SetUpAudioManager(audioManagerInstance);
     }
 }
 

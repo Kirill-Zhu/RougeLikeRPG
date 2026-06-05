@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Shield 1
   m_EditorClassIdentifier: 
   damageTypes: -1
-  skillDescription: Incerase all damage rediction by 4
-  physicsDamageDirectIncrease: 4
-  fireDamageDirectIncrease: 4
-  coldDamageDirectIncrease: 4
+  skillDescription: Incerase all damage rediction by 1
+  physicsDamageDirectIncrease: 1
+  fireDamageDirectIncrease: 1
+  coldDamageDirectIncrease: 1
   physicsPecrent: 0
   firePecrent: 0
   coldPecrent: 0

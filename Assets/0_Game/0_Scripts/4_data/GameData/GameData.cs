@@ -4,6 +4,7 @@ public static class GameData {
 
     public static void SetCoinsCount(int value) {
         PlayerPrefs.SetInt("Coins", value);
+        Debug.Log($"Coins now is {value}");
     }
     public static int GetConins() {
         return PlayerPrefs.GetInt("Coins");

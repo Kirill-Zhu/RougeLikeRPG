@@ -31,6 +31,9 @@ public class LevelStatisticsUIMenu : MonoBehaviour {
         statisticsMenu.SetActive(true);
         UpdateStats();
     }
+    public void HideStatsMenu() {
+        statisticsMenu.SetActive(false);
+    }
 
     [ContextMenu("Update stats menu")]
     public void UpdateStats() {
@@ -54,6 +57,6 @@ public class LevelStatisticsUIMenu : MonoBehaviour {
     }
 
     public void Confim() {
-        eventManager.OnLoadMainMenu.Invoke();
+        eventManager.LoadMainMenu();
     }
 }

@@ -58,7 +58,7 @@ public class PopUpDamageValuesHandler : ScriptableObject {
         }
     }
 
-    public async void PopUpBlock(DamageType damgeType) {
+    public async void PopUpBlock(DamageType damageType) {
         foreach (var textMesh in textMesh) {
             if (!textMesh.gameObject.activeInHierarchy) {
 
@@ -67,9 +67,10 @@ public class PopUpDamageValuesHandler : ScriptableObject {
                 textMesh.transform.rotation = Quaternion.identity;
                 textMesh.gameObject.SetActive(true);
                 textMesh.text = "Block!";
-                textMesh.color = damgeType;
+                textMesh.color = damageType;
 
-                UniTask task = textMesh.transform.DOMoveY(origin.up.y, 1).ToUniTask(cancellationToken: token);
+                Vector3 endPos = origin.up * damageType;
+                UniTask task = textMesh.transform.DOMoveY(endPos.y, 1).ToUniTask(cancellationToken: token);
                 await task;
 
                 if (token.IsCancellationRequested)

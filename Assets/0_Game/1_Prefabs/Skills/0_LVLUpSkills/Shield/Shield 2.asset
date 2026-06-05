@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shield 2
   m_EditorClassIdentifier: 
   damageTypes: 0
-  skillDescription: Reduce coodown by 0.2
+  skillDescription: Reduce coodown by 0.1
   physicsDamageDirectIncrease: 0
   fireDamageDirectIncrease: 0
   coldDamageDirectIncrease: 0
@@ -22,5 +22,5 @@ MonoBehaviour:
   coldPecrent: 0
   recuceLiveDuration: 0
   increaseLiveDuration: 0
-  reduceCoolDown: 0.2
+  reduceCoolDown: 0.1
   increaseCoolDown: 0

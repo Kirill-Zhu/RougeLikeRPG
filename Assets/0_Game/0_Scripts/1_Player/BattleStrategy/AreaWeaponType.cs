@@ -12,14 +12,14 @@ public class AreaWeaponType : WeaponType {
     protected override void OnTriggerEnter(Collider other) {
         if (interactionTagName == null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
-                foreach (var damageType in damageTypes)
+                foreach (var damageType in baseDamage)
                     victimsList.Add(health);
             }
         }
 
         if (interactionTagName != null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health) && other.CompareTag(interactionTagName)) {
-                foreach (var damageType in damageTypes)
+                foreach (var damageType in baseDamage)
                     victimsList.Add(health);
             }
         }
@@ -28,14 +28,14 @@ public class AreaWeaponType : WeaponType {
     private void OnTriggerExit(Collider other) {
         if (interactionTagName == null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
-                foreach (var damageType in damageTypes)
+                foreach (var damageType in baseDamage)
                     victimsList.Remove(health);
             }
         }
 
         if (interactionTagName != null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health) && other.CompareTag(interactionTagName)) {
-                foreach (var damageType in damageTypes)
+                foreach (var damageType in baseDamage)
                     victimsList.Remove(health);
             }
         }
@@ -67,7 +67,7 @@ public class AreaWeaponType : WeaponType {
         tickTimer = 0;
 
         foreach (var victim in victimsList) {
-            foreach (var damageType in damageTypes)
+            foreach (var damageType in baseDamage)
                 victim.TakeDamage(damageType);
             // Debug.Log($"{victim.name} tooke damae {damageTypes[0].GetType()} {damageTypes[0].Value} ");
         }
@@ -105,7 +105,7 @@ public class AreaWeaponType : WeaponType {
             var areaWepon = obj.AddComponent<AreaWeaponType>();
             areaWepon.enabled = true;
             areaWepon.Origin = origin;
-            areaWepon.damageTypes = damageTypes;
+            areaWepon.baseDamage = damageTypes;
             areaWepon.interactionTagName = interactionTagName;
             areaWepon.LiveDuration = liveDuration;
             areaWepon.FollowCaster = followHero;

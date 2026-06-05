@@ -16,8 +16,8 @@ MonoBehaviour:
   prefab: {fileID: 9137032837993464747, guid: 6b55454e0f7280246a9f4b48b029fe80, type: 3}
   Icon: {fileID: 21300000, guid: 4ca665255adc0204585931b317f67500, type: 3}
   MoveSpeed: 1
-  AttackRange: 10
-  AttackCooldown: 3
+  AttackRange: 8
+  AttackCooldown: 15
   DamageDelay: 1
   UninterruptedAttack: 1
   ProjectileSpeed: 15
@@ -29,12 +29,12 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 2714323086112425801, guid: d83373cff43fe064ea5e8690418f006d, type: 3}
   WeaponType: 2
   DropPfreabList:
-  - {fileID: 4897015921897156567, guid: 92a4812b8e5094e43901951be46ba7a6, type: 3}
+  - {fileID: 4897015921897156567, guid: ba23fb9f3c545b14e855f55556f5c092, type: 3}
   damageTypesEnum: 1
   physicsDamage: 5
   fireDamage: 0
   coldDamage: 0
-  HealtData: {fileID: 11400000, guid: 05fa038dea9bcae4aabb640299be4c39, type: 2}
+  HealtData: {fileID: 11400000, guid: cd4ecb57d1c101142a57c920060a15da, type: 2}
   OnAttackParticelPrefab: {fileID: 6030746854783829907, guid: 885c12f2f11197f48868aa462cc02b71, type: 3}
   OnAttack:
     Guid:

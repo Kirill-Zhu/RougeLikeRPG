@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7740aec0b8bc601469f4030db66b4ee9, type: 3}
+  m_Name: ExplosionLvl 8
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3137097503443173940, guid: f206873dc9dc64f4fbfd3783c61b26d1, type: 3}
+  icon: {fileID: 21300000, guid: b8c27d98f6ad133479c6f5a30c5861de, type: 3}
+  parentToHero: 0
+  ParticlePrefabArray:
+  - {fileID: 2538952908367699272, guid: 2b26e461df5468b418a85e02ed3d7d81, type: 3}
+  nextLevelStrategy: {fileID: 11400000}
+  DamageTypesEnum: 3
+  PhysicsDamage: 9
+  FireDamage: 17
+  ColdDamage: 0
+  PushPower: 0
+  coolDown: 9
+  OnCastSound:
+    Guid:
+      Data1: -404480080
+      Data2: 1331067407
+      Data3: -639711101
+      Data4: -914520554
+    Path: event:/Skills/Autocaster/Explosion

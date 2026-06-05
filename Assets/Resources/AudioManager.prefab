@@ -87,5 +87,11 @@ MonoBehaviour:
       Data3: 1803114127
       Data4: 1701972823
     Path: event:/Shop/SpendCoins
+  changeWaveSound:
+    Guid:
+      Data1: 1311905418
+      Data2: 1211438564
+      Data3: -2032258138
+      Data4: 244805292
+    Path: event:/UI/WaveChange
   eventManager: {fileID: 0}
-  scenesManager: {fileID: 0}

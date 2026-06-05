@@ -1,11 +1,10 @@
-using UnityEngine;
-using FMODUnity;
-using FMOD.Studio;
-using Zenject;
 using BossEntity;
+using Cysharp.Threading.Tasks;
+using FMOD.Studio;
+using FMODUnity;
+using UnityEngine;
 
-public class AudioManager : MonoBehaviour
-{
+public class AudioManager : MonoBehaviour {
     EventInstance music;
     [SerializeField] EventReference standartMusic;
     [SerializeField] EventReference bossFightMusic;
@@ -13,29 +12,26 @@ public class AudioManager : MonoBehaviour
 
     [Header("One shots")]
     [SerializeField] EventReference coinSound;
+    [SerializeField] EventReference changeWaveSound;
 
     //Dependencies
     [SerializeField] EventManager eventManager;
-    //Events
-    HeroMonoinstaller heroMonoinstaller;
+
     //->Event Bus
     EventBinding<OnUpgradeItemInShop> onUpgradeItemInShop;
+    EventBinding<OnChangeWave> onChangeWave;
     EventBinding<OnSpawnBoss> onSpawnBoss;
     EventBinding<OnPlayerDied> onPlayerDied;
-    //Hero
-    Hero hero;
-    //ScenesManager
-    ScenesManagerMonoinstaller scenesManagerMonoinstaller;
-    [SerializeField] ScenesManager scenesManager;
 
-    private void Start() {
-       
-    }
+
 
     private void OnEnable() {
         //Shop
         onUpgradeItemInShop = new EventBinding<OnUpgradeItemInShop>(PlayCoinSound);
         EventBus<OnUpgradeItemInShop>.Register(onUpgradeItemInShop);
+        //Wave
+        onChangeWave = new EventBinding<OnChangeWave>(PlayChangeWaveSound);
+        EventBus<OnChangeWave>.Register(onChangeWave);
         //Boss
         onSpawnBoss = new EventBinding<OnSpawnBoss>(StartBossFightMusic);
         EventBus<OnSpawnBoss>.Register(onSpawnBoss);
@@ -43,9 +39,12 @@ public class AudioManager : MonoBehaviour
         // Player Die
         onPlayerDied = new EventBinding<OnPlayerDied>(StartDieMenuMusic);
         EventBus<OnPlayerDied>.Register(onPlayerDied);
+
+
     }
     private void OnDisable() {
         EventBus<OnUpgradeItemInShop>.Deregister(onUpgradeItemInShop);
+        EventBus<OnChangeWave>.Deregister(onChangeWave);
         EventBus<OnSpawnBoss>.Deregister(onSpawnBoss);
         EventBus<OnPlayerDied>.Deregister(onPlayerDied);
     }
@@ -71,7 +70,7 @@ public class AudioManager : MonoBehaviour
     public void PlayOneShot(EventReference reference, Vector3 pos) {
         RuntimeManager.PlayOneShot(reference, pos);
     }
- //Boss
+    //Boss
     public void StartBossFightMusic(OnSpawnBoss @event) {
         music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         music.release();
@@ -96,34 +95,12 @@ public class AudioManager : MonoBehaviour
 
     }
     //Events
-    public void SetEventManager(EventManager eventManager) { 
-       this.eventManager = eventManager;
-       
-    }
-
     //-> Event Bus
-     public void PlayCoinSound(OnUpgradeItemInShop @event) {
+    public void PlayCoinSound() {
         RuntimeManager.PlayOneShot(coinSound);
     }
-    //
-    //Hero
-   public void SetHeroMonoinstaller(HeroMonoinstaller monoinstaller) {
-        this.heroMonoinstaller = monoinstaller; 
-    }
-    public void GetHeroReference() {
-        if (eventManager == null) return;
-        hero = heroMonoinstaller.GetHero();
-    }
-
-    //Scenes
-    public void SetScenesManagerMonoinstaller(ScenesManagerMonoinstaller scenesManagerMonoinstaller) { 
-        this.scenesManagerMonoinstaller = scenesManagerMonoinstaller;
-       
-    }
-
-    public void GetScenesManagerReference() {
-        if(scenesManagerMonoinstaller == null) return;  
-        scenesManager = scenesManagerMonoinstaller.GetScenesManager();
-        eventManager.OnLoadMainMenu.AddListener(StartPlayStandartMusic);
+    public async void PlayChangeWaveSound() {
+        await UniTask.Delay(1000);
+        RuntimeManager.PlayOneShot(changeWaveSound);
     }
 }

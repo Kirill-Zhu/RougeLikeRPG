@@ -40,7 +40,7 @@ public class ShootAutocaster : AutoSkillStrategy {
         //Add Damage Types it deals(set the values at definitons)
         damageTypesList = GetStartDamageTypes().ToList();
 
-        Debug.Log($"Shoot types list count is {damageTypesList.Count}");
+        Debug.Log($"Auitocaster damage type is  {damageTypesList[0].GetType().Name}");
         //Object pool
         for (int i = 0; i < 100; i++) {
 
@@ -104,19 +104,7 @@ public class ShootAutocaster : AutoSkillStrategy {
     }
 
     void OnDestroy() {
-        //Dispose 
-
-        foreach (var projectile in projectiles)
-            Destroy(projectile.gameObject);
-
-        projectiles.Clear();
-        objectsToMove.Clear();
-        // Dispose of the TransformAccessArray to prevent memory leaks
-        if (transformAccessArray.isCreated) {
-            transformAccessArray.Dispose();
-        }
-        if (activeProjectilisNativeArray.IsCreated)
-            activeProjectilisNativeArray.Dispose();
+        Dispose();
     }
 
 
@@ -204,6 +192,20 @@ public class ShootAutocaster : AutoSkillStrategy {
 
     protected override void PlayOnCastSound() {
         RuntimeManager.PlayOneShot(OnCastSound, Origin.position);
+    }
+
+    public override void Dispose() {
+        foreach (var projectile in projectiles)
+            Destroy(projectile.gameObject);
+
+        projectiles.Clear();
+        objectsToMove.Clear();
+        // Dispose of the TransformAccessArray to prevent memory leaks
+        if (transformAccessArray.isCreated) {
+            transformAccessArray.Dispose();
+        }
+        if (activeProjectilisNativeArray.IsCreated)
+            activeProjectilisNativeArray.Dispose();
     }
 
     //Move Job--------------------------------------------

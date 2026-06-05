@@ -1,4 +1,5 @@
 using MyStateMachine;
+using R3;
 using UnityEngine;
 using UnityEngine.Events;
 public class Hero : MonoBehaviour {
@@ -8,14 +9,18 @@ public class Hero : MonoBehaviour {
     public GameObject Model => model;
     GameObject model;
 
-   [HideInInspector] public UnityEvent OnHeroChange;///Invokes Every time when need change UI
-   [HideInInspector] public UnityEvent<int, int> OnGetExp;
-   [HideInInspector] public UnityEvent<Sprite, string, string> OnPickUppowerUp;
-   [HideInInspector] public UnityEvent<int> OnLevelUp;
-   [HideInInspector] public UnityEvent OnChooseLelvelUpCard;
-  
+    [HideInInspector] public UnityEvent OnHeroChange;///Invokes Every time when need change UI
+    [HideInInspector] public UnityEvent<int, int> OnGetExp;
+    [HideInInspector] public UnityEvent<Sprite, string, string> OnPickUppowerUp;
+    [HideInInspector] public UnityEvent<int> OnLevelUp;
+    [HideInInspector] public UnityEvent OnChooseLelvelUpCard;
+
     HeroStrategyData heroData;
 
+
+    //R3
+    public ReactiveProperty<bool> IsActive = new ReactiveProperty<bool>(false);
+    //
     //Movement
     SimpleCahracterController moveController;
     #region ANDROID
@@ -53,12 +58,14 @@ public class Hero : MonoBehaviour {
     Item[] shopItems;
 
     //UI
-    InGameUIManager inGameUIManager;
+    [Header("UI Properties")]
+    [SerializeField] PointerController pointerController;
+    Vector2 missionTarget = new Vector3(30, 0, 40);
     //
     //State Machine
     [SerializeField] Animator animator;
     StateMachine stateMachine;
-    CutSceneState cutSceneState;
+    SafeZoneState safeZoneState;
     PausedState pausedState;
     Locomotion locomotion;
     JumpState jumpState;
@@ -70,12 +77,13 @@ public class Hero : MonoBehaviour {
 
     #region EVENTS
     //-> EventBus
-    EventBinding<OnUpgradeItemInShop> onUpgradeItemInShop;
+    EventBinding<OnUpgradeItemInShop> onUpgradeItemInShopBinding;
+    EventBinding<OnSafeZone> OnSafeZoneBinding;
     //<-EventBus
     public bool Paused => paused;
     bool paused = false;
-    public bool CutScene => cutScene;
-    bool cutScene;
+    public bool CutScene => safeZone;
+    bool safeZone;
     EventManager eventManager;
     #endregion
     public bool initialization = true;
@@ -91,18 +99,28 @@ public class Hero : MonoBehaviour {
         upgradeContorller = GetComponent<HeroUpgradeContorller>();
         coinsComponent = GetComponent<CoinsComponent>();
         audioManager = GetComponent<HeroAudioManager>();
+
+       
+        IsActive.Subscribe(newValue => {
+            battleContorller.IsActive = newValue;
+        });
+        IsActive.Value = false;
     }
     private void OnEnable() {
         //Event Bus
 
-        onUpgradeItemInShop = new EventBinding<OnUpgradeItemInShop>(GetItemsFromShop);
-        EventBus<OnUpgradeItemInShop>.Register(onUpgradeItemInShop);
+        onUpgradeItemInShopBinding = new EventBinding<OnUpgradeItemInShop>(GetItemsFromShop);
+        EventBus<OnUpgradeItemInShop>.Register(onUpgradeItemInShopBinding);
+
+        OnSafeZoneBinding = new EventBinding<OnSafeZone>(OnSafeZoneState);
+        EventBus<OnSafeZone>.Register(OnSafeZoneBinding);
     }
     private void OnDisable() {
         Initialaized = false;
 
         //EventBus
-        EventBus<OnUpgradeItemInShop>.Deregister(onUpgradeItemInShop);
+        EventBus<OnUpgradeItemInShop>.Deregister(onUpgradeItemInShopBinding);
+        EventBus<OnSafeZone>.Deregister(OnSafeZoneBinding);
     }
     //EventBus
     void GetItemsFromShop(OnUpgradeItemInShop items) {
@@ -141,12 +159,13 @@ public class Hero : MonoBehaviour {
 
         //StateMachine
         stateMachine = new StateMachine();
-        cutSceneState = new CutSceneState(moveController, animator, battleContorller, heroAutoSkillController, inGameUIManager);
+        safeZoneState = new SafeZoneState(moveController, animator, battleContorller, heroAutoSkillController, pointerController);
         pausedState = new PausedState(moveController, animator, battleContorller, heroAutoSkillController);
         locomotion = new Locomotion(moveController, animator, battleContorller, heroAutoSkillController);
         jumpState = new JumpState(moveController, animator, battleContorller, heroAutoSkillController);
         landingState = new LandingState(moveController, animator, battleContorller, heroAutoSkillController);
         skillState = new SkillState(moveController, animator, battleContorller, heroAutoSkillController);
+
 
 
         //Movement
@@ -160,21 +179,22 @@ public class Hero : MonoBehaviour {
 
         //Any
         Any(pausedState, new FuncPredicate(() => paused));
-        Any(cutSceneState, new FuncPredicate(() => cutScene && !paused));
+        Any(safeZoneState, new FuncPredicate(() => safeZone && !paused));
         Any(locomotion, new FuncPredicate(() => !moveController.IsJumping && moveController.Grounded() && !battleContorller.InBattleState));
         Any(landingState, new FuncPredicate(() => !moveController.IsJumping && !moveController.Grounded()));
         stateMachine.SetState(locomotion);
         Initialaized = true;
+        IsActive.Value = true;
 
     }
 
 
     private void Update() {
-        if (!Initialaized) return;
+        if (!Initialaized || !IsActive.Value) return;
         stateMachine?.Update();
     }
     void Die() {
-       EventBus<OnPlayerDied>.Raise(new OnPlayerDied { hero = this });  
+        EventBus<OnPlayerDied>.Raise(new OnPlayerDied { hero = this });
     }
 
     void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
@@ -188,7 +208,23 @@ public class Hero : MonoBehaviour {
         paused = false;
         stateMachine.SetState(locomotion);
     }
-
+    public void ExitLevel() {
+        IsActive.Value = false;
+        paused = true;
+        battleContorller.Dispose();
+        heroAutoSkillController.Dispose();
+    }
+    [ContextMenu("Safe zone state")]
+    public void OnSafeZoneState() {
+        IsActive.Value = false;
+        safeZone = true;
+        stateMachine.SetState(safeZoneState);
+    }
+    [ContextMenu("Safe Zone Disable")]
+    public void OnDangerZoneState() {
+        IsActive.Value = true;  
+        safeZone = false;
+    }
     //Events 
     public void SetEventManager(EventManager eventManager) {
         this.eventManager = eventManager;
@@ -196,7 +232,5 @@ public class Hero : MonoBehaviour {
 
     }
     //UI UI Manager set up it itself 
-    public void SetUpUI(InGameUIManager gameUIManager) { 
-        this.inGameUIManager = gameUIManager;
-    }
+
 }

@@ -35,6 +35,9 @@ public class MeleAutocaster : AutoSkillStrategy {
     private void BuildNewWeapon() {
 
         //Weapon
+        if(weapon != null) 
+            Destroy(weapon);
+
         weapon = new Mele.MeleBuilder(prefab)
             .FromOrigin(Origin)
             .WithDamageTypes(damageTypesList.ToArray())
@@ -98,5 +101,9 @@ public class MeleAutocaster : AutoSkillStrategy {
 
     protected override void PlayOnCastSound() {
         RuntimeManager.PlayOneShot(OnCastSound, Origin.position);
+    }
+
+    public override void Dispose() {
+        
     }
 }

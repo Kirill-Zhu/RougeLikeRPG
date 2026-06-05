@@ -57,6 +57,7 @@ public class ExpBarUIContorller : MonoBehaviour, InGameUI {
     }
     void ChangeMaxExp(int value) {
         slider.maxValue = value;
+        slider.value = 0;
     }
 
     async void PopUpExpValue(int value) {

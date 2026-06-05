@@ -9,14 +9,16 @@ using Zenject;
 using Random = UnityEngine.Random;
 
 public class EnemiesManager : MonoBehaviour {
-
-
     Hero Hero;
+    EventManager eventManager;
     LevelStatistics LevelStatistics;
-    //SpawnStrategy
-    [SerializeField] List<SpawnStrategy> spawnStrategyList;
 
-    public EnemyStrategyhandler enemyTypes;
+    public bool Active { get; private set; }
+    [SerializeField] int currentWave = 0;
+    //SpawnStrategy
+    float timer;
+    [SerializeField] List<int> wavesTimeAncorsList;
+    public List<EnemyStrategyhandler> spawnhandlerList;
     public List<Entity> enemiesOnScene = new List<Entity>();
     [SerializeField] List<Transform> spawnPosList;
     public float NearToHeroDistance = 5;
@@ -32,28 +34,32 @@ public class EnemiesManager : MonoBehaviour {
     NativeArray<bool> UninterruptedAttackArray;
     NativeArray<float> previousVolocityNativeArray;
     NativeArray<float> returnVelocityNativeArray;
-    NativeArray<bool> returnBattleStatus;
+    NativeArray<bool> returnBattleStatusNativeArray;
     JobHandle jobHandle;
+    //Event Bus
 
     [Inject]
-    public void Construct(Hero hero, LevelStatistics stats) {
+    public void Construct(Hero hero, EventManager eventManager, LevelStatistics stats) {
         this.Hero = hero;
+        this.eventManager = eventManager;
         this.LevelStatistics = stats;
     }
-    private void Start() {
-
-        //--------------Spawn Enemies------------///
-        foreach (var spawnStrategy in spawnStrategyList)
-            spawnStrategy.Initialize(CreateByType);
-
-
-        //For test spawn
-        //for (int i = 0; i < 100; i++) {
-        //    spawnStrategyList[0].OnSpawnEntity.Invoke(spawnStrategyList[0].enemyStrategy);
-        //}
+    private void Awake() {
+        eventManager.SetUpEnemiesManager(this);
     }
-
-
+    public void StartNewSession() {
+        Active = true;
+        timer = 0;
+        currentWave = 0;
+        ChangeWave(currentWave);
+    }
+    void ChangeWave(int currentWave) {
+        spawnhandlerList[currentWave].InitializeStrategy(CreateByType);
+        EventBus<OnChangeWave>.Raise(new OnChangeWave { wave = currentWave });
+    }
+    public void IsActive(bool value) {
+        Active = value;
+    }
     public void CreateByType(EnemyStrategy strategy) {
         Type type = Type.GetType(strategy.TypeOfEnemy); //Create instance Of Type
 
@@ -112,7 +118,7 @@ public class EnemiesManager : MonoBehaviour {
         //if (attackRangeNativeArray.IsCreated) attackRangeNativeArray.Dispose();
         //if (speedNativeArray.IsCreated) speedNativeArray.Dispose();
         //if (UninterruptedAttackArray.IsCreated) UninterruptedAttackArray.Dispose()
-      
+
 
         //transformAccessArray = new TransformAccessArray(transforms.ToArray());
 
@@ -122,7 +128,7 @@ public class EnemiesManager : MonoBehaviour {
         //for (int i = 0; i < enemiesOnScene.Count; i++) {
         //    speedList.Add(enemiesOnScene[i].MoveSpeed);
         //}
-       
+
         //speedNativeArray = new NativeArray<float>(speedList.ToArray(), Allocator.Persistent);
 
         ////Attack 
@@ -147,6 +153,7 @@ public class EnemiesManager : MonoBehaviour {
         if (attackRangeNativeArray.IsCreated) attackRangeNativeArray.Dispose();
         if (speedNativeArray.IsCreated) speedNativeArray.Dispose();
         if (UninterruptedAttackArray.IsCreated) UninterruptedAttackArray.Dispose();
+        if (returnBattleStatusNativeArray.IsCreated) returnBattleStatusNativeArray.Dispose();
 
         //Speed
         var speedList = new List<float>();
@@ -167,21 +174,31 @@ public class EnemiesManager : MonoBehaviour {
         for (int i = 0; i < enemiesOnScene.Count; i++) {
             attackRangeList.Add(enemiesOnScene[i].AttackRange);
         }
-
+        //Return Battle Status
+        var returnBattleStatus = new List<bool>();
+        for (int i = 0; i < enemiesOnScene.Count; i++) {
+            returnBattleStatus.Add(enemiesOnScene[i].UninterruptedAttack);
+        }
         //Allocate NativeArrays
         transformAccessArray = new TransformAccessArray(transforms.ToArray());
         speedNativeArray = new NativeArray<float>(speedList.ToArray(), Allocator.Persistent);
         UninterruptedAttackArray = new NativeArray<bool>(uniterruptedList.ToArray(), Allocator.Persistent);
         attackRangeNativeArray = new NativeArray<float>(attackRangeList.ToArray(), Allocator.Persistent);
+        returnBattleStatusNativeArray = new NativeArray<bool>(returnBattleStatus.ToArray(), Allocator.Persistent);
     }
-   
+
     private void Update() {
 
-        //Spawn Strategy
-        if (enemiesOnScene.Count < 150) {  //Set limit enemies on scene
-            foreach (var spawnStrategy in spawnStrategyList)
-                spawnStrategy.OnUpdate(Time.deltaTime);
+        timer += Time.deltaTime;
+        //Wave controll
+        if (Active && timer > wavesTimeAncorsList[currentWave]) {
+            currentWave++;
+            ChangeWave(currentWave);
+        }
 
+        //Spawn Strategy
+        if (Active && enemiesOnScene.Count < 90) {  //Set limit enemies on scene
+            spawnhandlerList[currentWave].Update(Time.deltaTime);
         }
 
         //Move Job
@@ -199,7 +216,7 @@ public class EnemiesManager : MonoBehaviour {
         //----------------------------------------
         //Battle Status --------------------------
 
-        returnBattleStatus = new NativeArray<bool>(enemiesOnScene.Count, Allocator.TempJob);
+        returnBattleStatusNativeArray = new NativeArray<bool>(enemiesOnScene.Count, Allocator.TempJob);
         //----------------------------------------
         MoveEnemyJob moveJob = new MoveEnemyJob() {
             DeltaTime = Time.deltaTime,
@@ -211,7 +228,7 @@ public class EnemiesManager : MonoBehaviour {
             UniterruptedAttackArray = UninterruptedAttackArray,
             PrevoiusVelocityArray = previousVolocityNativeArray,
             VelocityNativeArray = returnVelocityNativeArray,
-            ReturnBattleStatusArray = returnBattleStatus
+            ReturnBattleStatusArray = returnBattleStatusNativeArray
 
         };
         jobHandle = moveJob.Schedule(transformAccessArray);
@@ -230,12 +247,12 @@ public class EnemiesManager : MonoBehaviour {
 
             for (int i = 0; i < enemiesOnScene.Count; i++) {
                 enemiesOnScene[i].VelocityMagnitude = returnVelocityNativeArray[i];                                      //-> Set VelocityMagnitude to Entities
-                enemiesOnScene[i].InBattle = returnBattleStatus[i];                                                      //-> Set BattleStatus to Entities
+                enemiesOnScene[i].InBattle = returnBattleStatusNativeArray[i];                                                      //-> Set BattleStatus to Entities
             }
 
             if (previousVolocityNativeArray.IsCreated) previousVolocityNativeArray.Dispose();
             if (returnVelocityNativeArray.IsCreated) returnVelocityNativeArray.Dispose();
-            if (returnBattleStatus.IsCreated) returnBattleStatus.Dispose();
+            if (returnBattleStatusNativeArray.IsCreated) returnBattleStatusNativeArray.Dispose();
         }
 
     }
@@ -254,7 +271,7 @@ public class EnemiesManager : MonoBehaviour {
 
         if (returnVelocityNativeArray.IsCreated) returnVelocityNativeArray.Dispose();
 
-        if (returnBattleStatus.IsCreated) returnBattleStatus.Dispose();
+        if (returnBattleStatusNativeArray.IsCreated) returnBattleStatusNativeArray.Dispose();
 
     }
     private void OnDisable() {
@@ -268,7 +285,7 @@ public class EnemiesManager : MonoBehaviour {
 
         if (returnVelocityNativeArray.IsCreated) returnVelocityNativeArray.Dispose();
 
-        if (returnBattleStatus.IsCreated) returnBattleStatus.Dispose();
+        if (returnBattleStatusNativeArray.IsCreated) returnBattleStatusNativeArray.Dispose();
     }
 }
 [BurstCompile]

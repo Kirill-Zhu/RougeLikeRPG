@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Mele 2
   m_EditorClassIdentifier: 
   damageTypes: 2
-  skillDescription: 'Gives fire Damage by 3
+  skillDescription: 'Gives fire Damage by 2
 
     Increase Attack Range by 0.1'
   physicsDamageDirectIncrease: 0
-  fireDamageDirectIncrease: 3
+  fireDamageDirectIncrease: 2
   coldDamageDirectIncrease: 0
   physicsPecrent: 0
   firePecrent: 0

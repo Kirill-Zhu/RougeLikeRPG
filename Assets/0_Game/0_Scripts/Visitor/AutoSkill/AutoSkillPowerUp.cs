@@ -4,6 +4,6 @@ public class AutoSkillPowerUp : PowerUp
 {
     [SerializeField] AutoSkillStrategy autoSkill;
     public void Visit(HeroAutoSkillController controller) {
-        controller.AddSkill(autoSkill);
+        controller.AddOrUpgradeSkill(autoSkill);
     }
 }

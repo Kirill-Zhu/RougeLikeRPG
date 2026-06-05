@@ -1,0 +1,392 @@
+fileFormatVersion: 2
+guid: cf0ee99c93faabf4cbd25e8da5198fc4
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_0
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 890
+        width: 262
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 128, y: 40, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e128ef0062a81b4ea85be4fcb5520ef
+      internalID: 1056840446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_1
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 412
+        width: 321
+        height: 588
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e69b8579bd865014e86f07e0c6b2138d
+      internalID: -759434921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_2
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 899
+        width: 275
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9e63991fde8774498b16234da8c4efd
+      internalID: -712051112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_4
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 42
+        width: 823
+        height: 945
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e318b0c626b2db6479fba7e65b488c7a
+      internalID: -1218605902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_5
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 657
+        width: 238
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: add75f9252dbaee4dbcafdf2643f14d5
+      internalID: -1399839944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_7
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 608
+        width: 316
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2a95d1eb5eddf4449786e95bb93b07a
+      internalID: 1844338781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 397
+        width: 316
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 594eb0e36da5b2f46a1de19c85bcc694
+      internalID: 1785038273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_12
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 395
+        width: 316
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01c501334aa10e8448063700291dc567
+      internalID: -120977294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 254
+        width: 921
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f49cc5dae30af04ebf44c06b29ee8b5
+      internalID: -32217294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_18
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 172
+        width: 924
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f37b513430faef4ca1be9eed8d7f25a
+      internalID: 931890736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_19
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 43
+        width: 922
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f131ee6f63760640ad7b966888b8e2b
+      internalID: -1675579297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ff4b56e1e564ad34091f7c9ac15b0b1a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_0: 1056840446
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_1: -759434921
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_10: 1785038273
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_11: 2036761254
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_12: -120977294
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_13: 1126934797
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_14: 395057303
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_15: -32217294
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_16: 331406053
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_17: -1624521441
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_18: 931890736
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_19: -1675579297
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_2: -712051112
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_3: -1192023672
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_4: -1218605902
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_5: -1399839944
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_6: 25452140
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_7: 1844338781
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_8: 466004393
+      ui-kit-for-rpg-game--ornate-medieval-fantasy-frame_9: -1413402969
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

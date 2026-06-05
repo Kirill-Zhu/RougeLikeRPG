@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -10,7 +11,7 @@ public interface InGameUI {
 }
 [RequireComponent(typeof(HealthComponentUI))]
 public class InGameUIManager : MonoBehaviour {
-
+    [Inject] EventManager eventManager;
     [Inject, SerializeField] Hero hero;
     [SerializeField] HealthComponentUI healthComponentUI;
     [SerializeField] HealthAndManaGlobesUI globes;
@@ -20,10 +21,15 @@ public class InGameUIManager : MonoBehaviour {
     [SerializeField] CoinControllerUI coinControllerUI;
     [SerializeField] AutoSkillUIController autoSkillController;
     [SerializeField] StartScreenAnimationController startScreenAnimationController;
+    [SerializeField] LevelStatisticsUIMenu levelStatisticsUI;
+    [SerializeField] DynamicTextUI dynamicTextUI;
 
     List<InGameUI> UIList = new List<InGameUI>();
 
     [SerializeField] PowerUpMenu powerUpMenu;
+
+    //Event Bus
+    EventBinding<OnSafeZone> OnSafeZoneBinding;
     private void Awake() {
         //Get
         healthComponentUI = GetComponent<HealthComponentUI>();
@@ -82,7 +88,17 @@ public class InGameUIManager : MonoBehaviour {
         //Additional Skills
     }
 
+    private void OnEnable() {
+        eventManager.SetUpImGameUIManager(this);
+
+        OnSafeZoneBinding = new EventBinding<OnSafeZone>(HideAllUI);
+        EventBus<OnSafeZone>.Register(OnSafeZoneBinding);
+    }
+    private void OnDisable() {
+        EventBus<OnSafeZone>.Deregister(OnSafeZoneBinding);
+    }
     async void OnStartNewGame(int startAnimDuration = 3) {
+      
         HideAllUI();
         startScreenAnimationController.ShowStartAniamtion();
         await UniTask.WaitForSeconds(startAnimDuration);
@@ -100,7 +116,12 @@ public class InGameUIManager : MonoBehaviour {
         foreach (var ui in UIList)
             ui.HideUI();
     }
-
+    public void ShowStatistics() {
+        levelStatisticsUI.ShowStatsMenu();
+    }
+    public void HideStatistics() {
+        levelStatisticsUI.HideStatsMenu();
+    }
     void UpdateValues() {
 
         //Initialize values

@@ -63,6 +63,7 @@ public class ShootStrategy : SkillsStrategy {
         if (activeProjectilisNativeArray.IsCreated)
             activeProjectilisNativeArray.Dispose();
 
+        activeObjectsArray = new bool[0];
     }
 
 

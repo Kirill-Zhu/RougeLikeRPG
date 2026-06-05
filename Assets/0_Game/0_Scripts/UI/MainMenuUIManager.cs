@@ -1,17 +1,15 @@
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using Zenject;
 using Button = UnityEngine.UIElements.Button;
 public class MainMenuUIManager : MonoBehaviour {
-    [Inject] ScenesManager scenesManager;
+    [Inject] EventManager eventManager;
     [SerializeField] List<UIDocument> UidocumentsList;
     [SerializeField] ChoseHeroController chooseHeroController;
     [SerializeField] ShopManager shopManager;
-
     //Main menu
     const string MainMenu = "MainMenu";
     const string ChooseHeroButton = "ChooseHeroButton";
@@ -185,6 +183,6 @@ public class MainMenuUIManager : MonoBehaviour {
         description.text = chooseHeroController.CurrentHeroStrategyData.SkillStrategyData[2].Description;
     }
     void ChoseHeroAndStartGame() {
-        scenesManager.StartGame();
+        eventManager.StartNewGame();
     }
 }

@@ -7,14 +7,17 @@ using UnityEngine.Events;
 public abstract class SkillsStrategy : ScriptableObject, IVisitable {
     public GameObject prefab;
     public string Description;
+    
     [Header("On Cast VFX")]
     public GameObject[] OnCastParticlePrefabArray;
     protected ParticleSystem[] onCastParticleSystemArray = new ParticleSystem[0];
     protected GameObject[] onCastParticleGameObjectsArray = new GameObject[0];
+    
     [Header("On Attack VFX")]
     public GameObject[] ParticlePrefabArray;
     protected ParticleSystem[] particleSystemArray = new ParticleSystem[0];
     protected GameObject[] particleGameObjectsArray = new GameObject[0];
+   
     [Header("Attack Options")]
     protected string interactionTagName = "Enemy";
     public float AttackRange = 1;
@@ -93,11 +96,11 @@ public abstract class SkillsStrategy : ScriptableObject, IVisitable {
         //}
     }
     protected virtual DamageType[] GetStartDamageTypes() => DamageTypesEnum switch {
-        DamageTypesEnum.Physics => new DamageType[] { new PhysicsDamageType(PhysicsDamage) },
-        DamageTypesEnum.Fire => new DamageType[] { new FireDamageType(FireDamage) },
-        DamageTypesEnum.Cold => new DamageType[] { new ColdDamageType(ColdDamage) },
-        DamageTypesEnum.Physics | DamageTypesEnum.Fire => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(FireDamage) },
-        DamageTypesEnum.Physics | DamageTypesEnum.Cold => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(ColdDamage) },
+        DamageTypesEnum.Physics => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(0), new ColdDamageType(0) },
+        DamageTypesEnum.Fire => new DamageType[] { new PhysicsDamageType(0), new FireDamageType(FireDamage), new ColdDamageType(0) },
+        DamageTypesEnum.Cold => new DamageType[] { new PhysicsDamageType(0), new FireDamageType(0), new ColdDamageType(ColdDamage) },
+        DamageTypesEnum.Physics | DamageTypesEnum.Fire => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(FireDamage), new ColdDamageType(0) },
+        DamageTypesEnum.Physics | DamageTypesEnum.Cold => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(0), new ColdDamageType(ColdDamage) },
 
         _ => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(FireDamage), new ColdDamageType(ColdDamage) },
     };

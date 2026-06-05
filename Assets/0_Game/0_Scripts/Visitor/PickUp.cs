@@ -6,8 +6,10 @@ public class PickUp : MonoBehaviour {
     EventReference pickUpSound;
     GameObject particle;
     const string tagInteractionName = "Player";
+    [SerializeField] Vector3 modelOffset;
     private void Awake() {
-        Instantiate(powerup.ModelPrefab, this.gameObject.transform);
+        var obj = Instantiate(powerup.ModelPrefab, this.gameObject.transform);
+        obj.transform.localPosition += modelOffset;
 
         if (powerup.particle != null) {
             particle = Instantiate(powerup.particle, null);

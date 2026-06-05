@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shield 3
   m_EditorClassIdentifier: 
   damageTypes: 0
-  skillDescription: Increase shield duration by0.5 but increase cooldown by 0.5
+  skillDescription: Increase shield duration by0.4 but increase cooldown by 0.5
   physicsDamageDirectIncrease: 0
   fireDamageDirectIncrease: 0
   coldDamageDirectIncrease: 0
@@ -21,6 +21,6 @@ MonoBehaviour:
   firePecrent: 0
   coldPecrent: 0
   recuceLiveDuration: 0
-  increaseLiveDuration: 0.5
+  increaseLiveDuration: 0.4
   reduceCoolDown: 0
   increaseCoolDown: 0.5

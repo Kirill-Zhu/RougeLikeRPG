@@ -31,7 +31,7 @@ MonoBehaviour:
   DropPfreabList:
   - {fileID: 4897015921897156567, guid: 92a4812b8e5094e43901951be46ba7a6, type: 3}
   damageTypesEnum: 5
-  physicsDamage: 3
+  physicsDamage: 5
   fireDamage: 0
   coldDamage: 0
   HealtData: {fileID: 11400000, guid: 5023f34099fea7543a181272f36610a3, type: 2}

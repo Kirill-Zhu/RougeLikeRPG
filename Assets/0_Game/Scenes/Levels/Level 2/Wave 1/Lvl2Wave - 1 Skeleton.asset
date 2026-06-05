@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Lvl2Wave - 1 Skeleton
   m_EditorClassIdentifier: 
   enemyStrategy: {fileID: 11400000, guid: 19cd050399262ac4b916a32904469490, type: 2}
-  spawnRate: 2
+  spawnRate: 4

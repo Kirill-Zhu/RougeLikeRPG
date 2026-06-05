@@ -103,6 +103,8 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
     }
     public void EarnDamageByType(PhysicsDamageType damageType) {
 
+        if(damageType.Value ==0) return;
+
         if (damageType.Value <= physicsDefence) {
             OnBlockDamage?.Invoke(damageType);
             return;
@@ -111,9 +113,10 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
         ChangeHealth(-damage);
         OnTakeDamage?.Invoke(damageType, damage);
         OnTakeDamageBus?.Invoke(damageType);
-        //Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-physicsDefence} ");
+        Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-physicsDefence} ");
     }
     public void EarnDamageByType(FireDamageType damageType) {
+        if (damageType.Value == 0) return;
         if (damageType.Value <= fireDefence) {
             OnBlockDamage?.Invoke(damageType);
             return;
@@ -123,9 +126,10 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
         ChangeHealth(-damage);
         OnTakeDamage?.Invoke(damageType, damage);
         OnTakeDamageBus?.Invoke(damageType);
-        // Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-fireDefence}");
+         Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-fireDefence}");
     }
     public void EarnDamageByType(ColdDamageType damageType) {
+        if (damageType.Value == 0) return;
         if (damageType.Value <= coldDefence) {
             OnBlockDamage?.Invoke(damageType);
             return;

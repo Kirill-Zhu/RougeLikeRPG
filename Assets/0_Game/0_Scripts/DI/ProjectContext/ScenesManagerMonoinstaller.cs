@@ -10,10 +10,12 @@ public class ScenesManagerMonoinstaller : MonoInstaller
     {
         ScenesManager scenesManagerObject = Container.InstantiatePrefabForComponent<ScenesManager>(scenesManager, Vector3.zero, Quaternion.identity, null);
         scenesManager = scenesManagerObject;
-        scenesManager.SetEventManager(eventManager);
+      
 
         Container.Bind<ScenesManager>().FromInstance(scenesManagerObject).AsSingle().NonLazy();
         scenesManagerObject.gameObject.SetActive(true);
+
+        eventManager.SetUpSceneManager(scenesManager);
     }
 
     public ScenesManager GetScenesManager() {

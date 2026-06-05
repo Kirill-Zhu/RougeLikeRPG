@@ -5,3 +5,6 @@ public class OnSpawnBoss : IEvent {
     public string Description;
     public Texture Label;
 }
+public class OnChangeWave: IEvent {
+    public int wave;
+}

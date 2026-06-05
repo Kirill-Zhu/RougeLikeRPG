@@ -59,4 +59,9 @@ public class LevelManager : MonoBehaviour {
         Time.timeScale = 1f;
         OnGameResume?.Invoke();
     }
+
+    [ContextMenu("Safe zone Raise Event")]
+    public void SetSafeZone() {
+        EventBus<OnSafeZone>.Raise(new OnSafeZone() { Hero = this.hero});
+    }
 }

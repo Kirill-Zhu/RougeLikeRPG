@@ -5,6 +5,9 @@ public class OnPlayerAlive : IEvent {
 
     public Hero hero;
 }
+public class OnSafeZone: IEvent {
+    public Hero Hero;
+}
 public class OnPlayerDied : IEvent {
     public Hero hero;
 }
@@ -23,10 +26,17 @@ public class OnCoinCollected : IEvent {
         GameData.AddCoins(value);
     }
 }
+public class OnLoadScene: IEvent {
+    public int SceneID;
+}
 
+// Cloud Data
 public class OnUserChangeName: IEvent {
     public string newName;
 }
 public class OnPlayerSignIn: IEvent {
     public string userName;
+}
+public class OnChangeData:IEvent {
+    public int Coins; 
 }
