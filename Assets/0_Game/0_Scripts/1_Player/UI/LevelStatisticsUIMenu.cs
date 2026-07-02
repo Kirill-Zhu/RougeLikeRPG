@@ -1,3 +1,6 @@
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -5,6 +8,9 @@ using Zenject;
 public class LevelStatisticsUIMenu : MonoBehaviour {
     [Inject] Hero hero;
     [Inject] EventManager eventManager;
+    [SerializeField] Vector2 startPos;
+    [SerializeField] Vector2 endPos;
+    [SerializeField] float lerpDuration = 2f;
     [SerializeField] LevelStatisticsData dataStats;
     [SerializeField] GameObject statisticsMenu;
     [SerializeField] TextMeshProUGUI physicsDamageTakenTextMesh;
@@ -27,11 +33,19 @@ public class LevelStatisticsUIMenu : MonoBehaviour {
     private void OnDisable() {
         EventBus<OnPlayerDied>.Deregister(onPlayerDied);
     }
-    public void ShowStatsMenu() {
+    [ContextMenu("Show menu")]
+    public async void ShowStatsMenu() {
         statisticsMenu.SetActive(true);
+        var rectTransform = statisticsMenu.GetComponent<RectTransform>();
+        rectTransform.anchoredPosition = startPos;
         UpdateStats();
+        await rectTransform.DOAnchorPos(endPos, lerpDuration).SetEase(Ease.InOutBack).SetUpdate(true).ToUniTask();
     }
-    public void HideStatsMenu() {
+    [ContextMenu("Hide menu")]
+    public async void HideStatsMenu() {
+        var rectTransform = statisticsMenu.GetComponent<RectTransform>();
+        rectTransform.anchoredPosition = endPos;
+        await rectTransform.DOAnchorPos(startPos, lerpDuration).SetEase(Ease.InOutBack).SetUpdate(true).ToUniTask();
         statisticsMenu.SetActive(false);
     }
 

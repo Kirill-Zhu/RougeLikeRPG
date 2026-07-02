@@ -74,7 +74,7 @@ public abstract class SkillsStrategy : ScriptableObject, IVisitable {
 
 
         if (damageTypeBuffer.TryGetValue(inType.GetType(), out var outDamage)) {
-            Debug.Log($"Modify damage type {inType}");
+            Debug.Log($"Modify damage type {inType} wit value {inType.Value}");
             damageTypeBuffer[inType.GetType()] = outDamage + inType.Value;
             Debug.Log($"now damage buffer damage is {damageTypeBuffer[inType.GetType()]}");
 

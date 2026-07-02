@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExplosionLvl 7
   m_EditorClassIdentifier: 
   prefab: {fileID: 3137097503443173940, guid: a9fb5745a1229284e93eb6d239f19b88, type: 3}
-  icon: {fileID: 21300000, guid: b8c27d98f6ad133479c6f5a30c5861de, type: 3}
+  icon: {fileID: 1055653538, guid: 80fa9dd1dad5ea44db923c72239beb33, type: 3}
   parentToHero: 0
   ParticlePrefabArray:
   - {fileID: 2538952908367699272, guid: 55a2d17987da2ce43917eb4d61a2add3, type: 3}

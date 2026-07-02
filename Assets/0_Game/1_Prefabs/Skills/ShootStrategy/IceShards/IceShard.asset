@@ -21,7 +21,7 @@ MonoBehaviour:
   PhysicsDamage: 1
   FireDamage: 0
   ColdDamage: 6
-  Icon: {fileID: 21300000, guid: 806f0f2ed8739e647be3316342077d44, type: 3}
+  Icon: {fileID: -2138656359, guid: 37650dc12a0b1484e86ee3c8e503211d, type: 3}
   BackSprite: {fileID: 21300000, guid: 5915cdc174101e540b3349e21ee2cd74, type: 3}
   DamageTypesEnum: 4
   damageTypesList: []

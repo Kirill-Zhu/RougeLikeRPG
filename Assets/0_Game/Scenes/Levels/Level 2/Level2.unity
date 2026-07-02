@@ -1194,7 +1194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWave: 0
-  wavesTimeAncorsList: 32000000960000002c010000
+  wavesTimeAncorsList: b4000000680100001c020000
   spawnhandlerList:
   - {fileID: 11400000, guid: ba47cb3cd416e864cb6d664af66044c5, type: 2}
   - {fileID: 11400000, guid: bfd9bc593fabb3149ad0331d323ef44f, type: 2}
@@ -3353,7 +3353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &465528582
 Transform:
   m_ObjectHideFlags: 0
@@ -5312,7 +5312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7640225999799738548, guid: 0675257d5552bb64c8c6c293fc38a243, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.52
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 7640225999799738548, guid: 0675257d5552bb64c8c6c293fc38a243, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5320,7 +5320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7640225999799738548, guid: 0675257d5552bb64c8c6c293fc38a243, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31.8
+      value: 61
       objectReference: {fileID: 0}
     - target: {fileID: 7640225999799738548, guid: 0675257d5552bb64c8c6c293fc38a243, type: 3}
       propertyPath: m_LocalRotation.w

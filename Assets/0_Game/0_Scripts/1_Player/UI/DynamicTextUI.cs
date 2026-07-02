@@ -6,6 +6,7 @@ using Zenject;
 public class DynamicTextUI : MonoBehaviour {
 
     [Inject] EventManager eventManager;
+    [SerializeField] GameObject textGameObject;
     [SerializeField] TextMeshProUGUI textMesh;
     float textLerpDuration = 1;
     int textLiveDuration = 3;
@@ -30,24 +31,27 @@ public class DynamicTextUI : MonoBehaviour {
         tween.Kill();
     }
     async void ShowText(OnSpawnBoss @event) {
-        textMesh.gameObject.SetActive(true);
+        textGameObject.gameObject.SetActive(true);
         textMesh.text = @event.Name;
-        textMesh.rectTransform.localScale = Vector3.zero;
-        tween = textMesh.rectTransform.DOScale(1, textLerpDuration).SetEase(Ease.InExpo);
+        var rectTransform = textGameObject.GetComponent<RectTransform>();
+        rectTransform.localScale = Vector3.zero;
+        tween = rectTransform.DOScale(1, textLerpDuration).SetEase(Ease.InExpo);
 
         await UniTask.WaitForSeconds(textLiveDuration);
         HideText();
     }
     async void ShowText(OnChangeWave @event) {
-        textMesh.gameObject.SetActive(true);
-        textMesh.text = "Wave " + @event.wave;
-        textMesh.rectTransform.localScale = Vector3.zero;
-        tween = textMesh.rectTransform.DOScale(1, textLerpDuration).SetEase(Ease.InExpo);
+        textGameObject.gameObject.SetActive(true);
+        textMesh.text = "Wave " + @event.wave.ToString();
+        
+        var rectTransform = textGameObject.GetComponent<RectTransform>();
+        rectTransform.localScale = Vector3.zero;
+        tween = rectTransform.DOScale(1, textLerpDuration).SetEase(Ease.InExpo);
 
         await UniTask.WaitForSeconds(textLiveDuration);
         HideText();
     }
     void HideText() {
-        textMesh.rectTransform.DOScale(0, textLerpDuration).SetEase(Ease.InExpo);
+        textGameObject.GetComponent<RectTransform>().DOScale(0, textLerpDuration).SetEase(Ease.InExpo);
     }
 }

@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/0_Game/Scenes/Levels/Level 3/Level 3.unity
     guid: 21a95c12c0b600c498a4ecaa78125370
+  - enabled: 0
+    path: Assets/00_Minigames/CheeseChase/CheeseChase.unity
+    guid: 0ee67a3c0b0210841b24d9a6ecd87db3
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 1efc677e0bbeaf148887e1328d937e54, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 14225cbb546ee8f40936a9e167f90e06, type: 3}

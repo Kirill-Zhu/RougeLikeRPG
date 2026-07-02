@@ -218,7 +218,7 @@ public class EnemiesManager : MonoBehaviour {
 
         returnBattleStatusNativeArray = new NativeArray<bool>(enemiesOnScene.Count, Allocator.TempJob);
         //----------------------------------------
-        MoveEnemyJob moveJob = new MoveEnemyJob() {
+        MoveAndBattleJob moveJob = new MoveAndBattleJob() {
             DeltaTime = Time.deltaTime,
             SpeedArray = speedNativeArray,
             MovePoint = Hero.transform.position,
@@ -289,7 +289,7 @@ public class EnemiesManager : MonoBehaviour {
     }
 }
 [BurstCompile]
-public struct MoveEnemyJob : IJobParallelForTransform {
+public struct MoveAndBattleJob : IJobParallelForTransform {
 
     [ReadOnly] public float DeltaTime;
     [ReadOnly] public NativeArray<float> SpeedArray;
@@ -315,16 +315,20 @@ public struct MoveEnemyJob : IJobParallelForTransform {
         Quaternion currentRotation = transform.rotation;
 
         if (Vector3.Distance(MovePoint, transform.position) < AttackRangeArray[index]) {
+            Debug.LogWarning("Enemy In Battle");
             ReturnBattleStatusArray[index] = true;                                                                                           //Set InBattleStatus true
             VelocityNativeArray[index] = 0;
             return;                                                                                                                          //Return if entity in attack range
         }
-        if (Vector3.Distance(MovePoint, transform.position) > AttackRangeArray[index]) {
+        if (Vector3.Distance(MovePoint, transform.position) >= AttackRangeArray[index] + 0.1f) {
             //To not evenry time reset attack status need this threshold of 1f
             if (ReturnBattleStatusArray[index] == true && UniterruptedAttackArray[index] == true) {
+                Debug.LogWarning("Enemy In Battle By Interrupted Attack");
                 ReturnBattleStatusArray[index] = true;
-            } else
+            } else {
+                Debug.LogWarning("Enemy Not In Battle");
                 ReturnBattleStatusArray[index] = false;
+            }
         }
 
         // Calculate the local forward direction in world space

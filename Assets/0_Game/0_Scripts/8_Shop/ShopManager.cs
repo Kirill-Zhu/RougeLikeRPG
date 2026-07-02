@@ -120,5 +120,6 @@ public class ShopManager : MonoBehaviour {
     }
 }
 public interface IItem {
-
+    public Sprite Icon { get; set; } 
+    public string Description { get; set; } 
 }

@@ -1,0 +1,1204 @@
+fileFormatVersion: 2
+guid: 27c677bfb37484148922ed947be84cb4
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bars Kit_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 712
+        width: 354
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cd2b1b4927548448ae682d7dcc61460
+      internalID: 210345975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_2
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 714
+        width: 375
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb3b7b49c34baab40af6a0aadc2f9e07
+      internalID: -1455593526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 593
+        width: 378
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 614515cc5ea53714faebbc2b5662c217
+      internalID: 1334502453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_10
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 650
+        width: 364
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e43abc8047dc18a478f5af0bb38902f9
+      internalID: -1670016830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 588
+        width: 381
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a2d73b930ec8174ea47726d63cd0ba8
+      internalID: 2115753352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_15
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 536
+        width: 365
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08d6e747a6920e4499a50c931615fac1
+      internalID: 1907575262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_21
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 534
+        width: 393
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad79246ce6ba8b142a8bc6c6a14f1e88
+      internalID: -1945064692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 570
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09c9786ecfe05c147ae8d0e94cb95550
+      internalID: 1407676699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_25
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 474
+        width: 772
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec1798aeea68ab44b8a452b968dc0f2d
+      internalID: 1912388049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 396
+        width: 370
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 254aba947e756174786797cf0e51bbed
+      internalID: -440921994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_28
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 427
+        width: 367
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef24c251e1587ff4fa710ec69b158277
+      internalID: -1427215374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_29
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 470
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34032fd841ad6484aa72e1d76bc9dc38
+      internalID: -1448078481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 141
+        width: 264
+        height: 291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71f87d890228ca84b814cce2a0ce142a
+      internalID: -45136834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_31
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 234
+        width: 278
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1dffc3858f74fd49902789c68ff95f7
+      internalID: 1101396617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_32
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 414
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b85b25edf53b5624883b4b85fe0ce142
+      internalID: 1904750551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_33
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 403
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ade991ec012df5844a3327c739221ff1
+      internalID: 930989621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_34
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 360
+        width: 206
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fe00f0c83e835c4abeb80baf9e5533e
+      internalID: -451396561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_35
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 390
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9718b5faa021f0d43aaf3dc302f5fa18
+      internalID: 1557370848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_37
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 315
+        width: 199
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aefd1fd42084644f9dc86ec2fdd3c23
+      internalID: 422653387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_38
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 252
+        width: 211
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e993c3a3427a3a544b648b1483d13d01
+      internalID: 1128528270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_39
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 276
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6391d8978fc59c4b93724cf19469bbd
+      internalID: 619938019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_42
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 209
+        width: 204
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cee61b02d4c525d40acfe0b0fec1ae23
+      internalID: 1439532886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_43
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 234
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a639de35b00599b478db3a57c52dca89
+      internalID: 1625557366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_44
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 228
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9e1b15b1c33aea4da18d07ce002944c
+      internalID: 1573802778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_47
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 156
+        width: 209
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01b1a400371824e428f3c7bf80259ef9
+      internalID: -121061879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_48
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 57
+        width: 289
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3883415c905420c4db85a2e5256666fe
+      internalID: 43176765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_49
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 138
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de0b17d0c43a6674281e3219b88d3327
+      internalID: 1307420716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_50
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 61
+        width: 24
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e566232af7492c408df90816b9400f2
+      internalID: -866598119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_51
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 60
+        width: 84
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0c7b8f2cfa61134bbb1d3ea9cffe0e2
+      internalID: -388009364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_52
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 58
+        width: 26
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32f0dded9a12ef0428cea4c06f6625f6
+      internalID: -1253326734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_53
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 48
+        width: 68
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91b5da41c288b0244953e5afddb52049
+      internalID: 1426898320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_58
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 60
+        width: 30
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddc6c223a60fab34a90bb8322380b756
+      internalID: 468025723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_60
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 60
+        width: 29
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03ccb3a73ae4c8b46bbc0474f172c6de
+      internalID: 653826834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_61
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 61
+        width: 19
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d02ca80acb73bf4cba63e4e813dc2d7
+      internalID: -712152498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_62
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 54
+        width: 23
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6dac9055566ab5446bb6f731cdc3e37a
+      internalID: -811315991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_63
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 61
+        width: 23
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 654a549ceae96054ca6455a777eb7601
+      internalID: 568465563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_64
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 60
+        width: 28
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97a75acd4d04aa94a8964edd7ef666a4
+      internalID: 742627116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_66
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 60
+        width: 27
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b29fd9997f689a4797157d557cd532a
+      internalID: -1423419741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_67
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 58
+        width: 36
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de616922321fa614ab2c0e2fbd51306d
+      internalID: 1169299427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_68
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 60
+        width: 31
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54fae84efb3b58c4485c9725b07c9cc8
+      internalID: -296689231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_72
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 0
+        width: 140
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a388a1d09c9cdee479b50a17af80fdae
+      internalID: 781883186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_77
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 2
+        width: 123
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 532b7bf217b0ed949b62633d2d46a684
+      internalID: 1681305335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_78
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 0
+        width: 167
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d3f1a72667d6dd4fbf391ac9102301a
+      internalID: -2085217704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_79
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 136
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6c7051fa0da3f541b4daefe7bc9b8bf
+      internalID: -1673812846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars Kit_81
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 0
+        width: 152
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5df648ff5b23e2141aac134d905211b9
+      internalID: -56582856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: dd1ebbcfeabf6c0478a155abaca8ef35
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Bars Kit_0: 210345975
+      Bars Kit_1: 662615981
+      Bars Kit_10: -1670016830
+      Bars Kit_11: 2146826776
+      Bars Kit_12: -1751849715
+      Bars Kit_13: 2115753352
+      Bars Kit_14: 1441615256
+      Bars Kit_15: 1907575262
+      Bars Kit_16: -761970556
+      Bars Kit_17: -283615674
+      Bars Kit_18: 1657389858
+      Bars Kit_19: 1349018001
+      Bars Kit_2: -1455593526
+      Bars Kit_20: 185051438
+      Bars Kit_21: -1945064692
+      Bars Kit_22: 1407676699
+      Bars Kit_23: -1403232942
+      Bars Kit_24: -172709508
+      Bars Kit_25: 1912388049
+      Bars Kit_26: -263865455
+      Bars Kit_27: -440921994
+      Bars Kit_28: -1427215374
+      Bars Kit_29: -1448078481
+      Bars Kit_3: -1113377595
+      Bars Kit_30: -45136834
+      Bars Kit_31: 1101396617
+      Bars Kit_32: 1904750551
+      Bars Kit_33: 930989621
+      Bars Kit_34: -451396561
+      Bars Kit_35: 1557370848
+      Bars Kit_36: -1960961754
+      Bars Kit_37: 422653387
+      Bars Kit_38: 1128528270
+      Bars Kit_39: 619938019
+      Bars Kit_4: 1154235100
+      Bars Kit_40: 2122200472
+      Bars Kit_41: 1102329503
+      Bars Kit_42: 1439532886
+      Bars Kit_43: 1625557366
+      Bars Kit_44: 1573802778
+      Bars Kit_45: -1396051990
+      Bars Kit_46: 919457548
+      Bars Kit_47: -121061879
+      Bars Kit_48: 43176765
+      Bars Kit_49: 1307420716
+      Bars Kit_5: 1334502453
+      Bars Kit_50: -866598119
+      Bars Kit_51: -388009364
+      Bars Kit_52: -1253326734
+      Bars Kit_53: 1426898320
+      Bars Kit_54: 1050390796
+      Bars Kit_55: -798685242
+      Bars Kit_56: 792854499
+      Bars Kit_57: -1804096288
+      Bars Kit_58: 468025723
+      Bars Kit_59: -1785216524
+      Bars Kit_6: -975872443
+      Bars Kit_60: 653826834
+      Bars Kit_61: -712152498
+      Bars Kit_62: -811315991
+      Bars Kit_63: 568465563
+      Bars Kit_64: 742627116
+      Bars Kit_65: -1211653581
+      Bars Kit_66: -1423419741
+      Bars Kit_67: 1169299427
+      Bars Kit_68: -296689231
+      Bars Kit_69: 1022096291
+      Bars Kit_7: -1808546902
+      Bars Kit_70: -1185670797
+      Bars Kit_71: 2046179786
+      Bars Kit_72: 781883186
+      Bars Kit_73: -2004632871
+      Bars Kit_74: 1473066036
+      Bars Kit_75: 1787959869
+      Bars Kit_76: 1017121533
+      Bars Kit_77: 1681305335
+      Bars Kit_78: -2085217704
+      Bars Kit_79: -1673812846
+      Bars Kit_8: -1337726128
+      Bars Kit_80: -876554855
+      Bars Kit_81: -56582856
+      Bars Kit_82: -676230109
+      Bars Kit_83: 1469142992
+      Bars Kit_9: 2140493409
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

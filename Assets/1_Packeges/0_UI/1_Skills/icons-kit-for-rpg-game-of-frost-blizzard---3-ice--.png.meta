@@ -1,0 +1,250 @@
+fileFormatVersion: 2
+guid: 37650dc12a0b1484e86ee3c8e503211d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_2
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 480
+        width: 453
+        height: 498
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 238, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 36.5, y: -249}
+        - {x: 180.5, y: -163}
+        - {x: 226.5, y: -59}
+        - {x: 226.5, y: 80}
+        - {x: 217.5, y: 128}
+        - {x: 41.5, y: 249}
+        - {x: -172.5, y: 249}
+        - {x: -226.5, y: 236}
+        - {x: -226.5, y: -249}
+      - - {x: 226.5, y: -133}
+        - {x: 221.5, y: -133}
+        - {x: 180.5, y: -179}
+      physicsShape:
+      - - {x: -110, y: -27}
+        - {x: 202, y: -210}
+        - {x: 52, y: 88}
+        - {x: -214, y: 240}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 079b8e3b59846004fb89570c774fd64c
+      internalID: -1826559188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_6
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 44
+        width: 405
+        height: 577
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: -199.5, y: -250.5}
+        - {x: -190.5, y: -281.5}
+        - {x: 187.5, y: -281.5}
+        - {x: 190.5, y: -278.5}
+        - {x: 190.5, y: 6.5}
+        - {x: 171.5, y: 112.5}
+        - {x: 35.5, y: 288.5}
+        - {x: -17.5, y: 288.5}
+        - {x: -63.5, y: 263.5}
+        - {x: -162.5, y: 110.5}
+        - {x: -201.18132, y: 22.5}
+        - {x: -202.5, y: 22.5}
+        - {x: -202.5, y: -222.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ebfed0d11728264c87a1f385dcdb868
+      internalID: -2138656359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_7
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 39
+        width: 438
+        height: 595
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 211, y: -232.5}
+        - {x: 211, y: 27.5}
+        - {x: 63, y: 290.5}
+        - {x: -52, y: 290.5}
+        - {x: -204, y: 99.5}
+        - {x: -204, y: -285.5}
+        - {x: 180, y: -285.5}
+      - - {x: -210, y: -293.5}
+        - {x: -215, y: -287.5}
+        - {x: -219, y: -287.5}
+        - {x: -219, y: -296.5}
+        - {x: -218, y: -297.5}
+        - {x: -210, y: -297.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 861b75a4bb44e3f4dab1b91dd6256696
+      internalID: -1381806560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c81453f03531a5346bfd86a4fa1cd57e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_0: -477718803
+      icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_1: 1846581398
+      icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_10: -188427257
+      icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_11: -1512457243
+      icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_2: -1826559188
+      icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_3: 1623919463
+      icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_4: 1539544185
+      icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_5: 1325734537
+      icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_6: -2138656359
+      icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_7: -1381806560
+      icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_8: 1320870401
+      icons-kit-for-rpg-game-of-frost-blizzard---3-ice--_9: 78195371
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

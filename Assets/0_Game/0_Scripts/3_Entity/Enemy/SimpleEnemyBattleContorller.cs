@@ -46,11 +46,12 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
     public event Action<int> OnAnimationStart;
     public event Action<float> OnChangeDurationSkill;
     public Func<bool> IsAttackingNow;
+    bool isAttacking;   
     //Animations
     int animationHash = Animator.StringToHash("Battle");
 
     //UniTask
-    CancellationTokenSource cts;
+    CancellationTokenSource cts = new CancellationTokenSource();
 
     public void Initialize(float attackDuration
         , WeaponTypeEnum weaponType
@@ -86,7 +87,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
 
         //Is Attack now
 
-        IsAttackingNow = () => skillDurationCooldown > 0 && this.uninterruptedAttack;
+
         //-------
 
 
@@ -159,9 +160,11 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         cts?.Cancel();
     }
     private void Awake() {
+        IsAttackingNow = () => isAttacking && uninterruptedAttack;
         OnChangeDurationSkill += skillDuration => skillDurationCooldown = skillDuration;
     }
     private void Update() {
+
 
         if (skillDurationCooldown > 0) skillDurationCooldown -= Time.deltaTime;
 
@@ -200,9 +203,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         if (skillDurationCooldown > 0) { return; }
         OnAttack?.Invoke();
         OnAnimationStart?.Invoke(animationHash);
-        OnChangeDurationSkill?.Invoke(damageDelay); //Here need give him time to start his attack
-
-
+        OnChangeDurationSkill?.Invoke(damageDelay+0.2f); //Here need give him time to start his attack
     }
     public void OnFixedUpdate() {
         TryAttack();
@@ -217,6 +218,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         cts?.Dispose();
         cts = new CancellationTokenSource();
         CancellationToken token = cts.Token;
+        isAttacking = true;
 
         try {
 
@@ -248,6 +250,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         } finally {
             cts.Dispose();
             cts = null;
+            isAttacking = false;
         }
 
 
@@ -258,6 +261,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         cts?.Dispose();
         cts = new CancellationTokenSource();
         CancellationToken token = cts.Token;
+        isAttacking = true;
         try {
             await UniTask.WaitForSeconds(damageDelay, false, PlayerLoopTiming.Update, token, true);
             OnChangeDurationSkill?.Invoke(attackCooldown);
@@ -338,6 +342,7 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         } finally {
             cts?.Cancel();
             cts = null;
+            isAttacking = false;
         }
 
 

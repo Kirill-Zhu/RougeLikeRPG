@@ -76,7 +76,12 @@ public class AutoSkillUIController : MonoBehaviour, InGameUI {
         fillObj.transform.parent = skillObj.transform;
 
         var fillImage = fillObj.AddComponent<Image>();
-        fillImage.rectTransform.sizeDelta = new Vector2(100 ,100);  
+        fillImage.rectTransform.sizeDelta = new Vector2(150 ,150);
+
+        var color = fillImage.color;
+        color.a = 0.6f;
+        fillImage.color = color;
+
         fillImage.sprite = fillSprite;
         fillImage.type = Image.Type.Filled;
         fillImage.fillMethod = Image.FillMethod.Radial360;

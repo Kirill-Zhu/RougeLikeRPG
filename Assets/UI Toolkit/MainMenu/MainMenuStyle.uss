@@ -1,6 +1,6 @@
 .Button:hover {
-    scale: 1 1;
-    background-image: url("project://database/Assets/1_Packeges/0_UI/GUI_Parts/Gui_parts/button_ready_on.png?fileID=21300000&guid=c9006339b2156b142934eac2999ef67c&type=3#button_ready_on");
+    scale: 1.2 1.2;
+    background-image: url("project://database/Assets/1_Packeges/0_UI/0_InGameUI/Buttons%20and%20panels.png?fileID=-679307135&guid=4a3562cf91f9be6408ed78aa63ac36fd&type=3#Buttons and panels_5");
     -unity-background-image-tint-color: rgb(255, 255, 255);
     background-color: rgba(181, 190, 219, 0);
     background-position-y: center 0;
@@ -8,8 +8,8 @@
 }
 
 .Button {
-    background-image: url("project://database/Assets/1_Packeges/0_UI/GUI_Parts/Gui_parts/button_ready_off.png?fileID=2800000&guid=a2e2a83536d4eef45ace93d156eab562&type=3#button_ready_off");
-    background-color: rgb(255, 255, 255);
+    background-image: url("project://database/Assets/1_Packeges/0_UI/0_InGameUI/Buttons%20and%20panels.png?fileID=1835021477&guid=4a3562cf91f9be6408ed78aa63ac36fd&type=3#Buttons and panels_0");
+    background-color: rgba(0, 0, 0, 0);
     -unity-background-image-tint-color: rgb(255, 255, 255);
     transition-property: background-image;
     transition-duration: 0s;
@@ -29,19 +29,20 @@
     translate: 0 0;
     top: -850px;
     justify-content: center;
-    -unity-text-align: upper-center;
+    -unity-text-align: middle-center;
     scale: 1 1;
-    width: 260px;
+    width: 328px;
     align-self: center;
-    color: rgb(195, 190, 190);
+    color: rgb(255, 255, 255);
     -unity-font-definition: url("project://database/Assets/1_Packeges/PixelBattleText/Fonts/Alphapix.ttf?fileID=12800000&guid=9ca52623ee8001b4ca7c29dc2ff6317d&type=3#Alphapix");
-    font-size: 38px;
+    font-size: 30px;
+    height: 100px;
 }
 
 .Button:focus {
-    scale: 1.1 1.1;
-    background-image: url("project://database/Assets/1_Packeges/0_UI/GUI_Parts/Gui_parts/button_ready_on.png?fileID=21300000&guid=c9006339b2156b142934eac2999ef67c&type=3#button_ready_on");
-    background-color: rgb(255, 255, 255);
+    scale: 1.2 1.2;
+    background-image: url("project://database/Assets/1_Packeges/0_UI/0_InGameUI/Buttons%20and%20panels.png?fileID=-679307135&guid=4a3562cf91f9be6408ed78aa63ac36fd&type=3#Buttons and panels_5");
+    background-color: rgba(255, 255, 255, 0);
     -unity-background-image-tint-color: rgb(255, 255, 255);
     transition-duration: 0.2s;
     transition-property: scale;

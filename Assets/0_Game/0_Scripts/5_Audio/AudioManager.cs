@@ -13,7 +13,6 @@ public class AudioManager : MonoBehaviour {
     [Header("One shots")]
     [SerializeField] EventReference coinSound;
     [SerializeField] EventReference changeWaveSound;
-
     //Dependencies
     [SerializeField] EventManager eventManager;
 

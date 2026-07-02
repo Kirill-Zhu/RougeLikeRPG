@@ -13,80 +13,80 @@
 
 
 
-Это  классический Rogue like RPG основанный на перепрохождении и прокачке персонажа после смертри. В игре реализованы несколько механик прокачки
+This is a classic roguelike RPG based on replayability and character progression after death. The game features several progression mechanics.
 
->### 1: Выбор персонажа который имеет свои особоенности(Рыцарь, маг и.т.д)
+>### 1: Character selection featuring unique traits for each class (Knight, Mage, etc.)
 
 <img width="632" height="578" alt="Mage" src="https://github.com/user-attachments/assets/0d167754-56e8-487b-92e5-acb1b3adf382" />
 <img width="699" height="596" alt="Foxy" src="https://github.com/user-attachments/assets/31c4fca5-1942-4997-81bf-1014827406ca" />
 
 -----------
 
->### 2: Прокачка непосредтвенно особенностей персонажа с каждым lvlUp
+>### 2: Upgrading character-specific traits with every level-up.
 
-> - У рыцаря "Удар мечом" "Щит" и " fireBall"   
-> - у мага -  "Энергетический щит " "Ледяная буря" "Ледяные осколки"
+> - The Knight features "Sword Slash", "Shield", and "Fireball".
+> - The Mage features "Energy Shield", "Blizzard", and "Ice Shards".
 
 <img width="1860" height="1001" alt="LvlUp" src="https://github.com/user-attachments/assets/d175545e-3d64-4cc4-94cc-2e97b491472b" />
   
-  Пример LvlUp во время раунда
+  Example of a mid-round Level Up.
 
 -----------
 
->3: Подбор на карте автокастеров которые не зависят от класса персонажа (Взрыв, отталкивание, выстрелы по горизонали и вертикали)
+>3: Picking up auto-casters on the map that are independent of the character class (Explosion, Repulsion, Horizontal and Vertical Shots).
 
->Можно собрать несколько автокастеров 
+>You can stack multiple auto-casters. 
 
 <img width="207" height="229" alt="AutacsterPickUp" src="https://github.com/user-attachments/assets/c008f02a-92e8-4e58-b1c4-f40ec753db64" />
 
-На карте выглядят как книги
+They look like books on the map.
 
 -----------
 
 
 
->Каждый *автокастер* иммет свой **тип урона**, **эффект**, **VFX** и **SFX**
+>Each auto-caster has its own damage type, effect, VFX, and SFX.
 
 <img width="427" height="196" alt="Autocaster VFX" src="https://github.com/user-attachments/assets/b101b00f-7b2c-4de6-8f26-3d6d966e3110" />
 
-Пример *автокастера* **"Green Blow"** 
-- наносит **физический урон** и **отталкивает** врагов
+Example of  **"Green Blow"**  *auto-caster*
+- Deals **Physical damage** и **Knock back** enemies
 
 
 <img width="323" height="91" alt="Auocaster UI" src="https://github.com/user-attachments/assets/12bbd958-3000-4b9f-9f6e-60d371358d1f" />
 
-Внизу есть UI показывающий кулдауны каждого из активных *автокастеров*
+At the bottom, there is a UI showing the cooldown of each active *auto-caster*
 
 
 
-## **Механики урона**
+## **Damage mechanics.**
 
->В игре реализованы 3 типа урона 
-### - **Физический** - белый
-### - **Огненный** - оранжевый
-### - **Ледяной** - синий
-> Каждый персонаж и кадая сущность имеет свои типы урона и свою защиту или уязывимость к кажому типу урон.
+>The game features 3 damage types.
+### - **Physical Damage** - white
+### - **Fire Damage** - orange
+### - **Ice Damage** - blue
+>Every character and entity has their own damage types, along with specific defense or vulnerability to each *damage type*.
 
 <img width="601" height="348" alt="Damage" src="https://github.com/user-attachments/assets/d60ffdb0-5e96-4923-8d58-ff8a06be9480" />
 
-Полученный  тип урона анимируется над головой противника и выделяется соответсвующим цветом 
+The damage type dealt animates above the enemy's head and is highlighted with a corresponding *color*.
 
 ------
 
->### Каждое оружие может быть прокачано определенным типом урона либо из *ящиков* c экипировкой добываемых на карте либо в *магазине*.
+>### Each weapon can be upgraded with a specific damage type either from *equipment crates* found on the map or at the *shop*.
 
 <img width="307" height="187" alt="Chest" src="https://github.com/user-attachments/assets/fdd9e7e4-436f-4485-b576-d667c9109108" />
 
-Ящик
+Equipment crate.
 
 <img width="534" height="630" alt="ChestCard" src="https://github.com/user-attachments/assets/baf1ba51-b722-4ed0-98f9-55a2763e5b12" />
 
-Итем из ящика
+Item from equipment crate.
 
 
-**Мгазин**
+**Shop**
 
-После каждой сессии игрок получает валюту в виде монет, которую он может потратить в магазине улучшив (Скорость бега, здоровье, ману, тип урона, сопротивления к урону).
+After each session, the player receives currency in the form of coins, which they can spend in the shop to upgrade their attributes (Movement Speed, Health, Mana, Damage Type, Damage Resistances).
 
 <img width="1063" height="578" alt="Shop" src="https://github.com/user-attachments/assets/11ece1a7-89f4-48c4-81f5-ce5a7fb9d2fa" />
 

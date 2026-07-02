@@ -7,7 +7,6 @@ public class SkillButtonsController : MonoBehaviour
     [SerializeField] Button westButton;
     [SerializeField] Button northButton;
     [SerializeField] Button eastButton;
-
     Gamepad virtualGamepad;
     private void Awake() {
         virtualGamepad = InputSystem.AddDevice<Gamepad>();
@@ -36,4 +35,5 @@ public class SkillButtonsController : MonoBehaviour
         var releaseState = new GamepadState();
         InputSystem.QueueStateEvent(virtualGamepad, releaseState);
     }
+   
 }
