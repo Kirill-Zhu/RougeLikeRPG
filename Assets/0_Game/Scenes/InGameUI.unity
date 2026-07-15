@@ -1890,7 +1890,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &561090936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3062,6 +3062,7 @@ RectTransform:
   - {fileID: 494162578}
   - {fileID: 876067651}
   - {fileID: 1436973976}
+  - {fileID: 1061904336}
   - {fileID: 1100413953}
   - {fileID: 2077956425}
   m_Father: {fileID: 1301248872}
@@ -3587,7 +3588,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -163.07, y: 0}
+  m_AnchoredPosition: {x: -127.07001, y: 3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &898688014
@@ -3610,7 +3611,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 79e5551477b914549a23d7b9b8a34ab5, type: 2}
+  m_Sprite: {fileID: 21300000, guid: 4025aacee5b59f34998924989459b869, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4243,6 +4244,54 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648d4992f28c57e4cb1e6842d21271de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1061904335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1061904336}
+  - component: {fileID: 1061904337}
+  m_Layer: 5
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1061904336
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061904335}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 779471680}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 50, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1061904337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061904335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbb18cd7309c344c9270d00fea56163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1100413952
@@ -5153,7 +5202,7 @@ MonoBehaviour:
   image: {fileID: 103860350}
   textMeshItemName: {fileID: 1258265898}
   textMeshDescription: {fileID: 1242315870}
-  takeButton: {fileID: 2010030917}
+  takeButton: {fileID: 2010030919}
 --- !u!222 &1248948254
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6587,9 +6636,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'confim
-
-'
+  m_text: Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 554d25ed6addaf34f9824d8cfe5a5d44, type: 2}
   m_sharedMaterial: {fileID: 5547366144680400538, guid: 554d25ed6addaf34f9824d8cfe5a5d44, type: 2}
@@ -9191,7 +9238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 79e5551477b914549a23d7b9b8a34ab5, type: 2}
+  m_Sprite: {fileID: 21300000, guid: 4025aacee5b59f34998924989459b869, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10149,6 +10196,7 @@ MonoBehaviour:
   startScreenAnimationController: {fileID: 2042108583}
   levelStatisticsUI: {fileID: 2042108582}
   dynamicTextUI: {fileID: 0}
+  inventoryUIController: {fileID: 1061904337}
   powerUpMenu: {fileID: 2042108581}
 --- !u!4 &2042108575
 Transform:
@@ -10497,7 +10545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2077956425
 RectTransform:
   m_ObjectHideFlags: 0

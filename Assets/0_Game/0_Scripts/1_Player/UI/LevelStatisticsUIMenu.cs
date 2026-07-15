@@ -25,13 +25,18 @@ public class LevelStatisticsUIMenu : MonoBehaviour {
 
 
     //Event bus
-    EventBinding<OnPlayerDied> onPlayerDied;
+    EventBinding<OnPlayerDied> onPlayerDiedBinding;
+    EventBinding<OnPlayerRessurect> onPlayeRessurectBinding;
     private void OnEnable() {
-        onPlayerDied = new EventBinding<OnPlayerDied>(ShowStatsMenu);
-        EventBus<OnPlayerDied>.Register(onPlayerDied);
+        onPlayerDiedBinding = new EventBinding<OnPlayerDied>(ShowStatsMenu);
+        EventBus<OnPlayerDied>.Register(onPlayerDiedBinding);
+
+        onPlayeRessurectBinding = new EventBinding<OnPlayerRessurect>(HideStatsMenu);
+        EventBus<OnPlayerRessurect>.Register(onPlayeRessurectBinding);
     }
     private void OnDisable() {
-        EventBus<OnPlayerDied>.Deregister(onPlayerDied);
+        EventBus<OnPlayerDied>.Deregister(onPlayerDiedBinding);
+        EventBus<OnPlayerRessurect>.Deregister(onPlayeRessurectBinding);
     }
     [ContextMenu("Show menu")]
     public async void ShowStatsMenu() {

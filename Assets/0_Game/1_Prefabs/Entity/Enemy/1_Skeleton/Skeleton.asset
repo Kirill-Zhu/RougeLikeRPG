@@ -29,7 +29,7 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 2714323086112425801, guid: 2fdb79a332014a8458c4aad1013911ca, type: 3}
   WeaponType: 0
   DropPfreabList:
-  - {fileID: 4897015921897156567, guid: 92a4812b8e5094e43901951be46ba7a6, type: 3}
+  - {fileID: 4897015921897156567, guid: ba23fb9f3c545b14e855f55556f5c092, type: 3}
   damageTypesEnum: 5
   physicsDamage: 5
   fireDamage: 0

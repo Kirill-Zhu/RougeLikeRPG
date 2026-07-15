@@ -139,7 +139,7 @@ public class AuthentificationManager : MonoBehaviour
         eventsInitialized = true;
         AuthenticationService.Instance.SignedIn += async () => {
             SignInCOnfirmAsync();
-            authenticateionUIcontroller.ClosePage();
+            authenticateionUIcontroller.ClosePageUniTask();
              var name = await AuthenticationService.Instance.GetPlayerNameAsync();
             Debug.Log($"User Name is {AuthenticationService.Instance.PlayerName}");
         };

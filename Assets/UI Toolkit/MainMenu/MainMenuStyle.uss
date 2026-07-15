@@ -1,50 +1,44 @@
-.Button:hover {
-    scale: 1.2 1.2;
-    background-image: url("project://database/Assets/1_Packeges/0_UI/0_InGameUI/Buttons%20and%20panels.png?fileID=-679307135&guid=4a3562cf91f9be6408ed78aa63ac36fd&type=3#Buttons and panels_5");
-    -unity-background-image-tint-color: rgb(255, 255, 255);
-    background-color: rgba(181, 190, 219, 0);
-    background-position-y: center 0;
-    background-position-x: center 0;
-}
-
 .Button {
-    background-image: url("project://database/Assets/1_Packeges/0_UI/0_InGameUI/Buttons%20and%20panels.png?fileID=1835021477&guid=4a3562cf91f9be6408ed78aa63ac36fd&type=3#Buttons and panels_0");
+    background-image: url("project://database/Assets/1_Packeges/0_UI/0_InGameUI/Buttons%20and%20panels.png?fileID=-679307135&guid=4a3562cf91f9be6408ed78aa63ac36fd&type=3#Buttons and panels_5");
     background-color: rgba(0, 0, 0, 0);
+    -unity-font-definition: url("project://database/Assets/1_Packeges/11_Fonts/seagram_tfb/Seagram%20tfb.ttf?fileID=12800000&guid=45d636bc4ac35fa489ca1240074943f9&type=3#Seagram tfb");
+    color: rgb(0, 0, 0);
+    font-size: 21px;
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: rgb(94, 93, 85);
     -unity-background-image-tint-color: rgb(255, 255, 255);
-    transition-property: background-image;
-    transition-duration: 0s;
-    transition-timing-function: ease;
-    transition-delay: 0s;
-    background-size: 100% 100%;
-    background-repeat: space space;
-    border-left-color: rgb(0, 0, 0);
-    border-left-width: 0;
-    border-right-color: rgb(0, 0, 0);
-    border-top-color: rgb(0, 0, 0);
-    border-bottom-color: rgb(0, 0, 0);
+    flex-shrink: 1;
     border-top-width: 0;
     border-right-width: 0;
     border-bottom-width: 0;
-    transform-origin: top;
-    translate: 0 0;
-    top: -850px;
-    justify-content: center;
-    -unity-text-align: middle-center;
-    scale: 1 1;
-    width: 328px;
-    align-self: center;
-    color: rgb(255, 255, 255);
-    -unity-font-definition: url("project://database/Assets/1_Packeges/PixelBattleText/Fonts/Alphapix.ttf?fileID=12800000&guid=9ca52623ee8001b4ca7c29dc2ff6317d&type=3#Alphapix");
-    font-size: 30px;
-    height: 100px;
+    border-left-width: 0;
+}
+
+.Button:hover {
+    background-image: url("project://database/Assets/1_Packeges/0_UI/0_InGameUI/Buttons%20and%20panels.png?fileID=578348471&guid=4a3562cf91f9be6408ed78aa63ac36fd&type=3#Buttons and panels_6");
+    background-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    -unity-slice-scale: 1px;
+    scale: 1.1 1.1;
+    transition-duration: 0.1s;
+    transition-property: scale;
+}
+
+.Panel {
+}
+
+.Text {
+    -unity-font-definition: url("project://database/Assets/1_Packeges/11_Fonts/seagram_tfb/Seagram%20tfb.ttf?fileID=12800000&guid=45d636bc4ac35fa489ca1240074943f9&type=3#Seagram tfb");
+    font-size: 28px;
+    -unity-text-outline-color: rgb(168, 159, 122);
+    -unity-text-outline-width: 1px;
 }
 
 .Button:focus {
-    scale: 1.2 1.2;
-    background-image: url("project://database/Assets/1_Packeges/0_UI/0_InGameUI/Buttons%20and%20panels.png?fileID=-679307135&guid=4a3562cf91f9be6408ed78aa63ac36fd&type=3#Buttons and panels_5");
-    background-color: rgba(255, 255, 255, 0);
-    -unity-background-image-tint-color: rgb(255, 255, 255);
-    transition-duration: 0.2s;
+    background-image: url("project://database/Assets/1_Packeges/0_UI/0_InGameUI/Buttons%20and%20panels.png?fileID=578348471&guid=4a3562cf91f9be6408ed78aa63ac36fd&type=3#Buttons and panels_6");
+    background-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    -unity-slice-scale: 1px;
+    transition-duration: 0.1s;
     transition-property: scale;
-    color: rgb(255, 255, 255);
 }

@@ -23,6 +23,7 @@ public class InGameUIManager : MonoBehaviour {
     [SerializeField] StartScreenAnimationController startScreenAnimationController;
     [SerializeField] LevelStatisticsUIMenu levelStatisticsUI;
     [SerializeField] DynamicTextUI dynamicTextUI;
+    [SerializeField] InventoryUIController inventoryUIController;
 
     List<InGameUI> UIList = new List<InGameUI>();
 
@@ -49,7 +50,8 @@ public class InGameUIManager : MonoBehaviour {
         autoSkillController.Initialize(hero.HeroAutoSkillContorller);
         expBarUIContorller.Initialize(hero);
         coinControllerUI.Initialaize(hero);
-        powerUpMenu.Initialize(hero);
+        powerUpMenu.Initialize(hero, inventoryUIController);
+        inventoryUIController.Initialize(hero);
 
         UIList.Add(globes);
         UIList.Add(skillStrategyUIController);

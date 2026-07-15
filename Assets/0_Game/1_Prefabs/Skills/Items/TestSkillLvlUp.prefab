@@ -15,7 +15,7 @@ GameObject:
   m_Layer: 0
   m_Name: TestSkillLvlUp
   m_TagString: Untagged
-  m_Icon: {fileID: 2800000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
+  m_Icon: {fileID: 2800000, guid: 6fe7cf84d48a17c4ba5263e29405c5bb, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -95,3 +95,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerup: {fileID: 11400000, guid: 64948492ee2aae34bb40d148b41186f6, type: 2}
+  modelOffset: {x: 0, y: 0, z: 0}

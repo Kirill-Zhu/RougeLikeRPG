@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Map Assets
+  m_EditorClassIdentifier: 
+  m_GroupName: Map Assets
+  m_GUID: 680a3cd057d77a34abd1ec9a661d0c2c
+  m_SerializeEntries:
+  - m_GUID: 5a6c2f22ce643c34a851273ff2d6527b
+    m_Address: Map/Portal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 1bc47e7b4597a6045a782fc212a86497, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4d0f185fcd8931e458f3ac3979c3a17d, type: 2}
+    - {fileID: 11400000, guid: 0ccd19476df95604297c8f97e6920a99, type: 2}

@@ -31,6 +31,9 @@ public class AdsManager : MonoBehaviour {
     LevelPlayBannerAd bannerAd;
     LevelPlayInterstitialAd interstitialAd;
     LevelPlayRewardedAd rewardedAd;
+
+    //Event Bus
+    EventBinding<OnPlayerRessurect> onPlayerRessurectBinding;
     private void Start() {
 
         LevelPlay.ValidateIntegration();
@@ -40,7 +43,13 @@ public class AdsManager : MonoBehaviour {
 
 
     }
-
+    private void OnEnable() {
+        onPlayerRessurectBinding = new EventBinding<OnPlayerRessurect>(LoadRewardedAd);
+        EventBus<OnPlayerRessurect>.Register(onPlayerRessurectBinding);
+    }
+    private void OnDisable() {
+        EventBus<OnPlayerRessurect>.Deregister(onPlayerRessurectBinding);
+    }
     private void SdkInitializationFailedEvent(LevelPlayInitError error) {
       
         Debug.Log("Initialization failed");
@@ -159,6 +168,7 @@ public class AdsManager : MonoBehaviour {
         string rewardedName = adReward.Name;
         int rewardAount = adReward.Amount;
         Coints += rewardAount;
+        EventBus<OnPlayerRessurect>.Raise(new OnPlayerRessurect());
         Debug.Log($"#MYGAME Get reward : Reward Name : {rewardedName}, Amount {rewardAount}");
     }
     void RewardedOnAdClosedEvent(LevelPlayAdInfo adInfo) { }

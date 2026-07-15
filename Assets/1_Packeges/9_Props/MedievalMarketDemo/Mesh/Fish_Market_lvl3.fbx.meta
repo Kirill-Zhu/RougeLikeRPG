@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 468fb9e8843e7bf41b2c733d8e4a9370
+AssetOrigin:
+  serializedVersion: 1
+  productId: 336926
+  packageName: Medieval Markets Pack Demo
+  packageVersion: 1.0
+  assetPath: Assets/MedievalMarketDemo/Mesh/Fish_Market_lvl3.fbx
+  uploadId: 820794
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,8 +15,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: VertexPaint
-    second: {fileID: -876546973899608171, guid: c3650a1a696f42f40b1359a83447f2c8,
-      type: 3}
+    second: {fileID: -876546973899608171, guid: c3650a1a696f42f40b1359a83447f2c8, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -22,8 +28,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -113,10 +117,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 336926
-  packageName: Medieval Markets Pack Demo
-  packageVersion: 1.0
-  assetPath: Assets/MedievalMarketDemo/Mesh/Fish_Market_lvl3.fbx
-  uploadId: 820794

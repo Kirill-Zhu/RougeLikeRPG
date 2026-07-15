@@ -8,7 +8,11 @@ public class PowerUpCard : MonoBehaviour {
     [SerializeField] Image image;
     [SerializeField] TextMeshProUGUI textMeshItemName;
     [SerializeField] TextMeshProUGUI textMeshDescription;
-    [SerializeField] GameObject takeButton;
+    [SerializeField] Button takeButton;
+    InventoryUIController inventoryUIController;
+    public void Initialize(InventoryUIController inventoryUIController) {
+        this.inventoryUIController = inventoryUIController;
+    }
     public void RiseUpCard(Sprite label, string desctiption, string name) {
         //Animation
         transform.rotation = Quaternion.Euler(0, 90, 0);
@@ -20,5 +24,7 @@ public class PowerUpCard : MonoBehaviour {
         image.sprite = label;
         textMeshItemName.text = name;
         textMeshDescription.text = desctiption;
+
+        inventoryUIController.PutItemIntoEmptySlot(image.rectTransform.position, label);
     }
 }

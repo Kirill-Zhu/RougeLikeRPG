@@ -13,6 +13,7 @@ public class AuthenticationUIController : MonoBehaviour {
     const string SignOut = "SignOut";
     const string SignUp = "SignUp";
     const string Confim = "Confim";
+    const string Skip = "Skip";
     const string InputNameField = "InputNameField";
     const string InputPasswordField = "InputPasswordField";
     const string ErrorMessage = "ErrorMessage";
@@ -20,6 +21,7 @@ public class AuthenticationUIController : MonoBehaviour {
     [HideInInspector] public UnityEvent OnSignUpButtonClicked = new UnityEvent();
     [HideInInspector] public UnityEvent OnSignInButtonClicked = new UnityEvent();
     [HideInInspector] public UnityEvent OnConfimButtonClikded = new UnityEvent();
+    [HideInInspector] public UnityEvent OnSkipMenu = new UnityEvent();
     Label errorMessageLabel;
     //Event BUs
 
@@ -31,7 +33,7 @@ public class AuthenticationUIController : MonoBehaviour {
 
         await UniTask.WaitUntil(() => AuthenticationService.Instance.IsSignedIn);
         if (AuthenticationService.Instance.IsSignedIn)
-            ClosePage();
+            ClosePageUniTask();
     }
 
 
@@ -40,6 +42,7 @@ public class AuthenticationUIController : MonoBehaviour {
         var signUpButton = authenticationUIDocument.rootVisualElement.Q<Button>(SignUp);
         var sighOutButton = authenticationUIDocument.rootVisualElement.Q<Button>(SignOut);
         var confimButton = authenticationUIDocument.rootVisualElement.Q<Button>(Confim);
+        var skipButton = authenticationUIDocument.rootVisualElement.Q<Button>(Skip);
 
         var inputName = authenticationUIDocument.rootVisualElement.Q<TextField>(InputNameField);
         var inputPassword = authenticationUIDocument.rootVisualElement.Q<TextField>(InputPasswordField);
@@ -51,6 +54,8 @@ public class AuthenticationUIController : MonoBehaviour {
         inputPassword.RegisterValueChangedCallback(OnPasswordChanged);
         signUpButton.clicked += SignUpVoid;
         signInButton.clicked += SignInVoid;
+
+        skipButton.clicked += ClosePage;
 
         //confimButton.clicked += ConfimChanges;
     }
@@ -79,12 +84,16 @@ public class AuthenticationUIController : MonoBehaviour {
         authenticationUIDocument.rootVisualElement.Q<VisualElement>(AuthenticationMenu).style.display = DisplayStyle.Flex;
     }
     [ContextMenu("Close page")]
-    public async Task ClosePage() {
+    public async Task ClosePageUniTask() {
 
         var menu = authenticationUIDocument.rootVisualElement.Q<VisualElement>(AuthenticationMenu);
 
         await UniTask.WaitUntil(()=> menu != null);
             
+        menu.style.display = DisplayStyle.None;
+    }
+    public void ClosePage() {
+        var menu = authenticationUIDocument.rootVisualElement.Q<VisualElement>(AuthenticationMenu);
         menu.style.display = DisplayStyle.None;
     }
     public void ShowError(string errorMsg) {

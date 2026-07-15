@@ -69,7 +69,9 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
             OnDie?.Invoke();
         }
     }
-
+    public void SetCurrentHealth(int value) {
+        health = value;
+    }
     //Visitor
     public void Accept(IVistor visitor) {
         visitor.Visit(this);

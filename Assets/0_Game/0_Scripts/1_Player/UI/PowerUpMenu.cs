@@ -4,9 +4,12 @@ public class PowerUpMenu : MonoBehaviour {
     [SerializeField] PowerUpCard powerUpCard;
     Hero hero;
     UnityEvent OnChooseCard;
-    public void Initialize(Hero hero) {
+
+    public void Initialize(Hero hero, InventoryUIController inventoryUiController) {
         this.hero = hero;   
-        hero.OnPickUppowerUp.AddListener(RiseUpPowerUpCard);
+        powerUpCard.Initialize(inventoryUiController);
+
+        hero.OnPickUpItemPowerUp.AddListener(RiseUpPowerUpCard);
         OnChooseCard = hero.OnChooseLelvelUpCard;
     }
 

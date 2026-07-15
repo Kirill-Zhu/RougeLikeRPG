@@ -1,12 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainMenu/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=2043b5dbf64955b47bdad19ba104270c&amp;type=3#MainMenuStyle" />
     <Style src="project://database/Assets/UI%20Toolkit/HeroItems.uss?fileID=7433441132597879392&amp;guid=c67c984d3084f1d41aee4440e0907ff4&amp;type=3#HeroItems" />
-    <ui:VisualElement name="ChoseHeroMenu" view-data-key="ChoseHeroMenu" style="flex-grow: 1; flex-direction: row; right: 157px; left: 663px; width: 945px; bottom: 85px; height: 0; min-height: 0; max-height: 149px; top: 37px;">
-        <ui:Button text="NEXT" name="NextHero" class="Button" style="top: 0; left: 182px; right: 216px;" />
-        <ui:Button text="PREVIOUS" name="PreviousHero" class="Button" style="top: 0; left: -563px;" />
+    <ui:VisualElement name="ChoseHeroMenu" view-data-key="ChoseHeroMenu" style="flex-grow: 1; flex-direction: row; right: 157px; left: 663px; width: 945px; bottom: 85px; height: 0; min-height: 0; max-height: 149px; top: 37px; position: absolute;">
+        <ui:Button text="PREVIOUS" name="PreviousHero" class="Button" style="top: 60px; left: -200px; position: absolute; width: 300px; height: 80px;" />
+        <ui:Button text="NEXT" name="NextHero" class="Button" style="top: 60px; left: 220px; right: auto; position: absolute; width: 300px; height: 80px;" />
     </ui:VisualElement>
-    <ui:VisualElement name="StartGameMenu" view-data-key="StartGameMenu" style="flex-grow: 1; flex-direction: row; right: 157px; left: 312px; width: 945px; bottom: 85px; height: 0; min-height: 0; max-height: 149px; top: 619px; justify-content: center;">
-        <ui:Button text="START GAME" name="StartGame" class="Button" style="top: 0;" />
+    <ui:VisualElement name="StartGameMenu" view-data-key="ChoseHeroMenu" style="flex-grow: 1; flex-direction: row; right: 157px; left: 663px; width: 945px; bottom: 85px; height: 0; min-height: 0; max-height: 149px; top: 37px; position: absolute;">
+        <ui:Button text="START " name="StartGame" class="Button" style="top: 750px; position: absolute; left: auto; width: 300px; height: 80px;" />
     </ui:VisualElement>
     <ui:VisualElement name="HeroDesk" style="flex-grow: 1; width: 499px; background-image: url(&quot;project://database/Assets/1_Packeges/0_UI/0_InGameUI/Panels%202.png?fileID=1335056889&amp;guid=5774220451504ad49bb26afc89f176cf&amp;type=3#Panels 2_0&quot;); translate: 1536px -137px; transform-origin: right; max-height: 793px; left: -273px; max-width: 609px; min-width: 364px; position: absolute; top: 336px; -unity-background-image-tint-color: rgba(255, 255, 255, 0);">
         <ui:VisualElement name="backGround" style="flex-grow: 1; position: absolute; background-image: url(&quot;project://database/Assets/1_Packeges/0_UI/0_InGameUI/Upscaled/Panels%20NO%20BACK.png?fileID=1808742990&amp;guid=6a3bc0b221f4bba409250b04b21b4505&amp;type=3#Panels NO BACK_0&quot;); height: 1201px; width: 715px; top: -196px; left: -57px; -unity-background-image-tint-color: rgb(255, 255, 255); background-size: 113% 98%; background-position-x: center 0; min-width: 528px; min-height: 152px; max-height: 1084px; max-width: 776px; background-position-y: center 0; -unity-background-scale-mode: stretch-to-fill;" />

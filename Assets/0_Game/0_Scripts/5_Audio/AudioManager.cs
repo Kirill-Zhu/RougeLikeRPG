@@ -17,35 +17,39 @@ public class AudioManager : MonoBehaviour {
     [SerializeField] EventManager eventManager;
 
     //->Event Bus
-    EventBinding<OnUpgradeItemInShop> onUpgradeItemInShop;
-    EventBinding<OnChangeWave> onChangeWave;
-    EventBinding<OnSpawnBoss> onSpawnBoss;
-    EventBinding<OnPlayerDied> onPlayerDied;
+    EventBinding<OnUpgradeItemInShop> onUpgradeItemInShopBinding;
+    EventBinding<OnChangeWave> onChangeWaveBinding;
+    EventBinding<OnSpawnBoss> onSpawnBossBinding;
+    EventBinding<OnPlayerDied> onPlayerDiedBinding;
+    EventBinding<OnPlayerRessurect> onPlayerRessurectBinding;
 
 
 
     private void OnEnable() {
         //Shop
-        onUpgradeItemInShop = new EventBinding<OnUpgradeItemInShop>(PlayCoinSound);
-        EventBus<OnUpgradeItemInShop>.Register(onUpgradeItemInShop);
+        onUpgradeItemInShopBinding = new EventBinding<OnUpgradeItemInShop>(PlayCoinSound);
+        EventBus<OnUpgradeItemInShop>.Register(onUpgradeItemInShopBinding);
         //Wave
-        onChangeWave = new EventBinding<OnChangeWave>(PlayChangeWaveSound);
-        EventBus<OnChangeWave>.Register(onChangeWave);
+        onChangeWaveBinding = new EventBinding<OnChangeWave>(PlayChangeWaveSound);
+        EventBus<OnChangeWave>.Register(onChangeWaveBinding);
         //Boss
-        onSpawnBoss = new EventBinding<OnSpawnBoss>(StartBossFightMusic);
-        EventBus<OnSpawnBoss>.Register(onSpawnBoss);
+        onSpawnBossBinding = new EventBinding<OnSpawnBoss>(StartBossFightMusic);
+        EventBus<OnSpawnBoss>.Register(onSpawnBossBinding);
 
         // Player Die
-        onPlayerDied = new EventBinding<OnPlayerDied>(StartDieMenuMusic);
-        EventBus<OnPlayerDied>.Register(onPlayerDied);
-
+        onPlayerDiedBinding = new EventBinding<OnPlayerDied>(StartDieMenuMusic);
+        EventBus<OnPlayerDied>.Register(onPlayerDiedBinding);
+        //Player Ressurect
+        onPlayerRessurectBinding = new EventBinding<OnPlayerRessurect>(StartPlayStandartMusic);
+        EventBus<OnPlayerRessurect>.Register(onPlayerRessurectBinding);
 
     }
     private void OnDisable() {
-        EventBus<OnUpgradeItemInShop>.Deregister(onUpgradeItemInShop);
-        EventBus<OnChangeWave>.Deregister(onChangeWave);
-        EventBus<OnSpawnBoss>.Deregister(onSpawnBoss);
-        EventBus<OnPlayerDied>.Deregister(onPlayerDied);
+        EventBus<OnUpgradeItemInShop>.Deregister(onUpgradeItemInShopBinding);
+        EventBus<OnChangeWave>.Deregister(onChangeWaveBinding);
+        EventBus<OnSpawnBoss>.Deregister(onSpawnBossBinding);
+        EventBus<OnPlayerDied>.Deregister(onPlayerDiedBinding);
+        EventBus<OnPlayerRessurect>.Deregister(onPlayerRessurectBinding);
     }
 
     void OnLoadAppPlay() {

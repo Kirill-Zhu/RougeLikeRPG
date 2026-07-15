@@ -1,5 +1,6 @@
 using MyStateMachine;
 using R3;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 public class Hero : MonoBehaviour {
@@ -11,7 +12,7 @@ public class Hero : MonoBehaviour {
 
     [HideInInspector] public UnityEvent OnHeroChange;///Invokes Every time when need change UI
     [HideInInspector] public UnityEvent<int, int> OnGetExp;
-    [HideInInspector] public UnityEvent<Sprite, string, string> OnPickUppowerUp;
+    [HideInInspector] public UnityEvent<Sprite, string, string> OnPickUpItemPowerUp;
     [HideInInspector] public UnityEvent<int> OnLevelUp;
     [HideInInspector] public UnityEvent OnChooseLelvelUpCard;
 
@@ -79,6 +80,7 @@ public class Hero : MonoBehaviour {
     //-> EventBus
     EventBinding<OnUpgradeItemInShop> onUpgradeItemInShopBinding;
     EventBinding<OnSafeZone> OnSafeZoneBinding;
+    EventBinding<OnPlayerRessurect> OnPlayerRessurectBinding;
     //<-EventBus
     public bool Paused => paused;
     bool paused = false;
@@ -114,13 +116,20 @@ public class Hero : MonoBehaviour {
 
         OnSafeZoneBinding = new EventBinding<OnSafeZone>(OnSafeZoneState);
         EventBus<OnSafeZone>.Register(OnSafeZoneBinding);
+
+        OnPlayerRessurectBinding = new EventBinding<OnPlayerRessurect>(RessurectHero);
+        EventBus<OnPlayerRessurect>.Register(OnPlayerRessurectBinding);
     }
+
+    
+
     private void OnDisable() {
         Initialaized = false;
 
         //EventBus
         EventBus<OnUpgradeItemInShop>.Deregister(onUpgradeItemInShopBinding);
         EventBus<OnSafeZone>.Deregister(OnSafeZoneBinding);
+        EventBus<OnPlayerRessurect>.Deregister(OnPlayerRessurectBinding);
     }
     //EventBus
     void GetItemsFromShop(OnUpgradeItemInShop items) {
@@ -144,7 +153,7 @@ public class Hero : MonoBehaviour {
         manaComponent.Initialize(heroData.ManaConponentData);
         //Battle
 
-        battleContorller.Initialize(manaComponent, heroData.SkillStrategyData, OnPickUppowerUp, audioManager);
+        battleContorller.Initialize(manaComponent, heroData.SkillStrategyData, OnPickUpItemPowerUp, audioManager);
 
         //Exp
         expComponent.Initialize(OnLevelUp, OnGetExp);
@@ -224,6 +233,10 @@ public class Hero : MonoBehaviour {
     public void OnDangerZoneState() {
         IsActive.Value = true;  
         safeZone = false;
+    }
+    private void RessurectHero(OnPlayerRessurect ressurect) {
+        healthComponent.SetCurrentHealth(healthComponent.MaxHealth);
+        stateMachine.SetState(locomotion);
     }
     //Events 
     public void SetEventManager(EventManager eventManager) {

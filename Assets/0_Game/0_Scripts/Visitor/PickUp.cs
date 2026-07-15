@@ -1,15 +1,20 @@
+using Cysharp.Threading.Tasks;
 using FMODUnity;
 using UnityEngine;
 
 public class PickUp : MonoBehaviour {
     public PowerUp powerup;
+    [SerializeField] Vector3 modelOffset;
     EventReference pickUpSound;
     GameObject particle;
     const string tagInteractionName = "Player";
-    [SerializeField] Vector3 modelOffset;
-    private void Awake() {
-        var obj = Instantiate(powerup.ModelPrefab, this.gameObject.transform);
-        obj.transform.localPosition += modelOffset;
+
+    //Refactor then
+    GameObject modelPrefb;
+    private async void OnEnable() {
+        modelPrefb = Instantiate(powerup.ModelPrefab, this.gameObject.transform);
+        modelPrefb.transform.localPosition += modelOffset;
+        modelPrefb.SetActive(true);
 
         if (powerup.particle != null) {
             particle = Instantiate(powerup.particle, null);
@@ -19,6 +24,10 @@ public class PickUp : MonoBehaviour {
 
         //Sound 
         pickUpSound = powerup.PickUpSound;
+
+        //Level Generator disables it, so i need to enable it manually
+        await UniTask.Delay(100);
+        modelPrefb.SetActive(true);
     }
     private void OnTriggerEnter(Collider other) {
 

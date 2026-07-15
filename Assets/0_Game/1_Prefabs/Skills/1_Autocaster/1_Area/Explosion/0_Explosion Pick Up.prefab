@@ -67,4 +67,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerup: {fileID: 11400000, guid: 96cae41aa9e347547910c8cea610991b, type: 2}
-  modelOffset: {x: 0, y: 0, z: 0}
+  modelOffset: {x: 0, y: 1, z: 0}

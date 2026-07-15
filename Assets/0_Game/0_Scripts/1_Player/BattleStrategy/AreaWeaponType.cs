@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AreaWeaponType : WeaponType {
+    public int ExplosionDamageMultiplier = 0;
+    public bool DealDamagePerSec = true;
     public Transform Origin;
     public bool DestroyAfterUse = true;
     public float LiveDuration;
@@ -10,6 +13,22 @@ public class AreaWeaponType : WeaponType {
     float tickTimer;
     HashSet<HealthComponent> victimsList = new HashSet<HealthComponent>();
     protected override void OnTriggerEnter(Collider other) {
+
+        //Explosion Damage
+        if (ExplosionDamageMultiplier > 0) {
+            if (other.TryGetComponent<HealthComponent>(out HealthComponent health) && other.CompareTag(interactionTagName)) {
+                foreach (var damageType in baseDamage) {
+                    
+                    DamageType damageTypeTemp = new DamageType(damageType.Value * ExplosionDamageMultiplier);
+                    health.TakeDamage(damageType);
+                }
+            }
+        }
+        //----------------------
+
+        //Damage Per sec
+        if (!DealDamagePerSec) return;
+
         if (interactionTagName == null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
                 foreach (var damageType in baseDamage)
@@ -39,6 +58,8 @@ public class AreaWeaponType : WeaponType {
                     victimsList.Remove(health);
             }
         }
+       
+        
     }
 
     private void OnEnable() {
