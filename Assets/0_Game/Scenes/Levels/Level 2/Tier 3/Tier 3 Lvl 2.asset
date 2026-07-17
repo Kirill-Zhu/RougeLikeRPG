@@ -15,5 +15,5 @@ MonoBehaviour:
   currentWave: 0
   strategies:
   - {fileID: 11400000, guid: 01a3e9b46e4c8e84787886ce82ab642c, type: 2}
-  - {fileID: 11400000, guid: 8176ae450bb74904f80caaa733c7ae4f, type: 2}
   - {fileID: 11400000, guid: 3713eb96125e3834798e1a89003bc2fd, type: 2}
+  - {fileID: 11400000, guid: afe67a09b0fe2a0408167a24a7a034cd, type: 2}

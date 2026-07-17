@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -12,9 +13,15 @@ public class PowerUpCard : MonoBehaviour {
     InventoryUIController inventoryUIController;
     public void Initialize(InventoryUIController inventoryUIController) {
         this.inventoryUIController = inventoryUIController;
+
+        //Events
+        takeButton.onClick.AddListener(() => {
+            inventoryUIController.PutItemIntoEmptySlot(image.rectTransform.position, image.sprite);
+        });
     }
     public void RiseUpCard(Sprite label, string desctiption, string name) {
         //Animation
+
         transform.rotation = Quaternion.Euler(0, 90, 0);
         transform.DORotate(new Vector3(0, 0, 0), 1f, RotateMode.FastBeyond360)
                .SetEase(Ease.Linear)
@@ -24,7 +31,7 @@ public class PowerUpCard : MonoBehaviour {
         image.sprite = label;
         textMeshItemName.text = name;
         textMeshDescription.text = desctiption;
-
-        inventoryUIController.PutItemIntoEmptySlot(image.rectTransform.position, label);
     }
 }
+
+        

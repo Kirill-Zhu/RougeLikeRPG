@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWave: 0
   strategies:
-  - {fileID: 11400000, guid: 02149af3035df71499d221940900a64f, type: 2}
   - {fileID: 11400000, guid: a03b7364f74ac4f4c842e8e57ce28953, type: 2}
+  - {fileID: 11400000, guid: 03d014062499af54eaa4e90cb07e4812, type: 2}

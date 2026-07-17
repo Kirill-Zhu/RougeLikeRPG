@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour {
     public UnityEvent OnGameResume;
 
     //Event Bus 
+    EventBinding<OnPlayerEndLevel> onPlayerEndLevelBinding;
     EventBinding<OnPlayerDied> onPlayerDied;
     EventBinding<OnPlayerRessurect> onPlayeRessurectBinding;
 
@@ -36,6 +37,9 @@ public class LevelManager : MonoBehaviour {
     }
 
     private void OnEnable() {
+        onPlayerEndLevelBinding = new EventBinding<OnPlayerEndLevel>(PauseGame);
+        EventBus<OnPlayerEndLevel>.Register(onPlayerEndLevelBinding);
+
         onPlayerDied = new EventBinding<OnPlayerDied>(PauseGame);
         EventBus<OnPlayerDied>.Register(onPlayerDied);
 
@@ -44,6 +48,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     private void OnDisable() {
+        EventBus<OnPlayerEndLevel>.Deregister(onPlayerEndLevelBinding);
         EventBus<OnPlayerDied>.Deregister(onPlayerDied);
         EventBus<OnPlayerRessurect>.Deregister(onPlayeRessurectBinding);
     }

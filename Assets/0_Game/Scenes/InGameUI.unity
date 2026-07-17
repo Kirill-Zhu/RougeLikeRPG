@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 60770279}
   - component: {fileID: 60770278}
   m_Layer: 5
-  m_Name: RewardedVideo
+  m_Name: ReviveButton(RewardedVideo)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8751,7 +8751,7 @@ GameObject:
   - component: {fileID: 1694520278}
   - component: {fileID: 1694520277}
   m_Layer: 5
-  m_Name: DeadText
+  m_Name: TopText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9419,7 +9419,7 @@ GameObject:
   - component: {fileID: 1882891268}
   - component: {fileID: 1882891267}
   m_Layer: 5
-  m_Name: ConfimButton
+  m_Name: GoMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10365,6 +10365,9 @@ MonoBehaviour:
   lerpDuration: 2
   dataStats: {fileID: 11400000, guid: 07f65331817ccbe428f73774f8d1ad21, type: 2}
   statisticsMenu: {fileID: 1265780568}
+  toMenuButton: {fileID: 1882891268}
+  reviveButton: {fileID: 60770278}
+  topText: {fileID: 1694520277}
   physicsDamageTakenTextMesh: {fileID: 1496190218}
   fireDamageTakenTextMesh: {fileID: 1167860392}
   coldDamageTakenTextMesh: {fileID: 24416438}

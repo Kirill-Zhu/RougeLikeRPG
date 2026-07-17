@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -158,5 +159,9 @@ public class SimpleCahracterController : MonoBehaviour, IVisitable, IUpgradable 
     #endregion
     public void Accept(IVistor visitor) {
         visitor.Visit(this);
+    }
+
+    internal void AddMoveSpeed(float moveSpeedBonus) {
+        speed += moveSpeedBonus;
     }
 }

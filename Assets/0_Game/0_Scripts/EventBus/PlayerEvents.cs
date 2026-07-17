@@ -12,6 +12,9 @@ public class OnSafeZone : IEvent {
 public class OnPlayerDied : IEvent {
     public Hero hero;
 }
+public class OnPlayerEndLevel : IEvent {
+    public Hero hero;
+}
 public class OnUpgradeItemInShop : IEvent {
     public readonly int Cost;
     public OnUpgradeItemInShop(int cost) {

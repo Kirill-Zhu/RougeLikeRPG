@@ -21,13 +21,14 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
     public event UnityAction<DamageType, int> OnTakeDamage;
     public event Action<DamageType> OnTakeDamageBus;
     public event UnityAction<DamageType> OnBlockDamage;
+    public event UnityAction<int> OnChangeMaxHealth;
     public event UnityAction OnDie;
     CancellationTokenSource cts; //Use on destroy to kill dotween animations in popUpStrategy
     CancellationToken token;
     bool isDead = false;
     //Upgrades
     List<Item> itemsList = new List<Item>();
-   
+
     public void Initialize(HealtComponentData healtData) {
         //CTS
         cts = new CancellationTokenSource();
@@ -57,7 +58,7 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
         Destroy(popUpHandler);
     }
     public void ChangeHealth(int value) {
-        if(isDead) return;
+        if (isDead) return;
         health += value;
         if (health > maxHealth)
             health = maxHealth;
@@ -105,7 +106,7 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
     }
     public void EarnDamageByType(PhysicsDamageType damageType) {
 
-        if(damageType.Value ==0) return;
+        if (damageType.Value == 0) return;
 
         if (damageType.Value <= physicsDefence) {
             OnBlockDamage?.Invoke(damageType);
@@ -115,7 +116,7 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
         ChangeHealth(-damage);
         OnTakeDamage?.Invoke(damageType, damage);
         OnTakeDamageBus?.Invoke(damageType);
-        Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-physicsDefence} ");
+        Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value - physicsDefence} ");
     }
     public void EarnDamageByType(FireDamageType damageType) {
         if (damageType.Value == 0) return;
@@ -128,7 +129,7 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
         ChangeHealth(-damage);
         OnTakeDamage?.Invoke(damageType, damage);
         OnTakeDamageBus?.Invoke(damageType);
-         Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-fireDefence}");
+        Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value - fireDefence}");
     }
     public void EarnDamageByType(ColdDamageType damageType) {
         if (damageType.Value == 0) return;
@@ -208,6 +209,23 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
             maxHealth += item.AddMaxHealth;
         }
         health = maxHealth;
+    }
+    #endregion
+
+    #region InGameUpgrage
+    public void AddMaxHealth(int maxHealthBonus) {
+        maxHealth += maxHealthBonus;
+        health += maxHealthBonus;
+        OnChangeMaxHealth?.Invoke(maxHealthBonus);
+    }
+    public void AddPhysicsDefence(int physicsDefenceBonus) {
+        physicsDefence += physicsDefenceBonus;
+    }
+    public void AddFireDefenceBouns(int fireDefenceBonus) {
+        fireDefence += fireDefenceBonus;
+    }
+    public void AddColdDefenceBonus(int coldDefenceBonus) {
+        coldDefence += coldDefenceBonus;
     }
     #endregion
 }

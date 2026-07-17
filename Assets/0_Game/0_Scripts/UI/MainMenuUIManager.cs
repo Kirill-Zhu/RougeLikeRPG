@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UIElements;
 using Zenject;
 using Button = UnityEngine.UIElements.Button;
@@ -22,9 +23,11 @@ public class MainMenuUIManager : MonoBehaviour {
     const string PrevHero = "PreviousHero";
     const string StartGame = "StartGame";
     const string Shop = "Shop";
+    const string Language = "Language";
     private void Awake() {
         Initialize();
-       OpenMainMenu();
+        OpenMainMenu();
+        CloseChooseHeroMenu();
     }
 
     private async void Start() {
@@ -36,20 +39,16 @@ public class MainMenuUIManager : MonoBehaviour {
         //Main menu
         var choseHeroButton = UidocumentsList[0].rootVisualElement.Q<Button>(ChooseHeroButton);
         var shopButton = UidocumentsList[0].rootVisualElement.Q<Button>(Shop);
+        var languageButton = UidocumentsList[0].rootVisualElement.Q<Button>(Language);
         //Events
         choseHeroButton.clicked += OpenChooseHeroMenu;
         shopButton.clicked += OpenShop;
+        languageButton.clicked += ChangeLanguage;
 
         //Chose Hero Menu
         var nextHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(NextHero);
         var prevHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(PrevHero);
         var startButton = UidocumentsList[1].rootVisualElement.Q<Button>(StartGame);
-
-        //Events
-        nextHeroButton.clicked += ChooseNextHero;
-        prevHeroButton.clicked += ChoosePrevHero;
-        startButton.clicked += ChoseHeroAndStartGame;
-
     }
     public void OpenAuthentificationMenu() {
 
@@ -60,7 +59,7 @@ public class MainMenuUIManager : MonoBehaviour {
         var choseHeroButton = UidocumentsList[0].rootVisualElement.Q<Button>(ChooseHeroButton);
         choseHeroButton.Focus();
         EventSystem.current.SetSelectedGameObject(gameObject);
-   
+
 
         //-----Chose Hero Menu
         var choseHeroMenu = UidocumentsList[1].rootVisualElement.Q<VisualElement>(ChooseHeroMenu);
@@ -75,32 +74,39 @@ public class MainMenuUIManager : MonoBehaviour {
         //Shop
         CloseShop();
 
-        //-----Main Menu
-        var mainMenu = UidocumentsList[0].rootVisualElement.Q<VisualElement>(MainMenu);
-        mainMenu.style.display = DisplayStyle.None;
+        ////-----Main Menu
+        //var mainMenu = UidocumentsList[0].rootVisualElement.Q<VisualElement>(MainMenu);
+        //mainMenu.style.display = DisplayStyle.None;
 
         //-----Chose Hero Menu
         var choseHeroMenu = UidocumentsList[1].rootVisualElement.Q<VisualElement>(ChooseHeroMenu);
         var startGameMenu = UidocumentsList[1].rootVisualElement.Q<VisualElement>(StartGameMenu);
         var heroDesk = UidocumentsList[1].rootVisualElement.Q<VisualElement>(HeroDesk);
+
         var nextHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(NextHero);
-      
+        var prevHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(PrevHero);
+        var startButton = UidocumentsList[1].rootVisualElement.Q<Button>(StartGame);
+
         //Visability
         choseHeroMenu.style.display = DisplayStyle.Flex;
         startGameMenu.style.display = DisplayStyle.Flex;
         heroDesk.style.display = DisplayStyle.Flex;
         nextHeroButton.Focus();
 
-        
+        //Events
+        nextHeroButton.clicked += ChooseNextHero;
+        prevHeroButton.clicked += ChoosePrevHero;
+        startButton.clicked += ChoseHeroAndStartGame;
 
         ChangeHeroDescriptionDesk();
     }
     void CloseChooseHeroMenu() {
         //-----Main Menu
-        var mainMenu = UidocumentsList[0].rootVisualElement.Q<VisualElement>(MainMenu);
-        mainMenu.style.display = DisplayStyle.Flex;
+        //var mainMenu = UidocumentsList[0].rootVisualElement.Q<VisualElement>(MainMenu);
+        //mainMenu.style.display = DisplayStyle.Flex;
 
         //-----Chose Hero Menu
+        var heroDesk = UidocumentsList[1].rootVisualElement.Q<VisualElement>(HeroDesk);
         var choseHeroMenu = UidocumentsList[1].rootVisualElement.Q<VisualElement>(ChooseHeroMenu);
         var startGameMenu = UidocumentsList[1].rootVisualElement.Q<VisualElement>(StartGameMenu);
         var nextHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(NextHero);
@@ -111,6 +117,7 @@ public class MainMenuUIManager : MonoBehaviour {
         //Visability
         choseHeroMenu.style.display = DisplayStyle.None;
         startGameMenu.style.display = DisplayStyle.None;
+        heroDesk.style.display = DisplayStyle.None;
 
         //Events
         nextHeroButton.clicked -= ChooseNextHero;
@@ -148,7 +155,7 @@ public class MainMenuUIManager : MonoBehaviour {
 
         //StoryTell
         var heroStory = UidocumentsList[1].rootVisualElement.Q<Label>("HeroStory");
-        heroStory.text = chooseHeroController.CurrentHeroStrategyData.Story;
+        heroStory.text = chooseHeroController.CurrentHeroStrategyData.GetStory();
 
         //Health
         var healthValue = UidocumentsList[1].rootVisualElement.Q<Label>("HealthValue");
@@ -185,4 +192,19 @@ public class MainMenuUIManager : MonoBehaviour {
     void ChoseHeroAndStartGame() {
         eventManager.StartNewGame();
     }
+    #region Localization
+    void ChangeLanguage() {
+        int locale = PlayerPrefs.GetInt("Locale");
+        if(locale == 0) {
+            int localeId = 1;
+            PlayerPrefs.SetInt("Locale", localeId);
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
+        }
+        if (locale == 1) {
+            int localeId = 0;
+            PlayerPrefs.SetInt("Locale", localeId);
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
+        }
+    }
+    #endregion
 }

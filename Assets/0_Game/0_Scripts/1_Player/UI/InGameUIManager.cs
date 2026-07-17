@@ -41,9 +41,12 @@ public class InGameUIManager : MonoBehaviour {
 
         //Events
         hero.OnHeroChange.AddListener(UpdateValues);
+        
         hero.HealthComponent.OnTakeDamage += healthComponentUI.PopUpDamagePoints;
         hero.HealthComponent.OnGetCurrentHealth += globes.SetCurrentHealth;
+        hero.HealthComponent.OnChangeMaxHealth += globes.AddMaxHealth;
         hero.ManaComponent.OnGetCurrentMana += globes.SetCurrentMana;
+
         hero.OnLevelUp.AddListener(RiseLevelUpMenu);
 
         //Initialize 
@@ -119,7 +122,7 @@ public class InGameUIManager : MonoBehaviour {
             ui.HideUI();
     }
     public void ShowStatistics() {
-        levelStatisticsUI.ShowStatsMenu();
+        levelStatisticsUI.ShowDieMenu();
     }
     public void HideStatistics() {
         levelStatisticsUI.HideStatsMenu();

@@ -22,7 +22,13 @@ public class SkillPowerUp : PowerUp, IItem {
     public int ShootPhysicsDamage;
     public int ShootFireDamage;
     public int ShootColdDamage;
-
+    [Header("Move Controller")]
+    public float moveSpeedBonus = 0;
+    [Header("Healt Component")]
+    public int maxHeathBonus = 0;
+    public int physicsDefenceBonus  = 0;  
+    public int fireDefenceBonus = 0;    
+    public int coldDefenceBonus = 0;    
     //IItem
     public Sprite Icon { get => Label; set { } }
     public string Description { get => "Test"; set { } }
@@ -45,7 +51,15 @@ public class SkillPowerUp : PowerUp, IItem {
         shootStrategy.AddOrModifyDamageType(shootDamageTypesArray);
         shootStrategy.UpdateValues();
     }
-
+    public void Visit(SimpleCahracterController heroMoveController) {
+        heroMoveController.AddMoveSpeed(moveSpeedBonus);
+    }
+    public void Visit(HealthComponent healthComponent) {
+        healthComponent.AddMaxHealth(maxHeathBonus);
+        healthComponent.AddPhysicsDefence(physicsDefenceBonus);
+        healthComponent.AddFireDefenceBouns(fireDefenceBonus);
+        healthComponent.AddColdDefenceBonus(coldDefenceBonus);
+    }
     protected virtual DamageType[] GetDamageTypes(int PhysicsDamage, int FireDamage, int ColdDamage) => DamageTypesEnum switch {
         DamageTypesEnum.Physics => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(0), new ColdDamageType(0) },
         DamageTypesEnum.Fire => new DamageType[] { new PhysicsDamageType(0), new FireDamageType(FireDamage), new ColdDamageType(0) },

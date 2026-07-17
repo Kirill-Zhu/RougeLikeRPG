@@ -1,9 +1,22 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainMenu/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=2043b5dbf64955b47bdad19ba104270c&amp;type=3#MainMenuStyle" />
-    <ui:VisualElement name="MainMenu" focusable="false" style="flex-grow: 1; width: 674px; translate: 65px 272px; scale: 1.5 1.5; top: 95px; position: absolute; height: 714px; left: 524px; right: 722px;">
+    <ui:VisualElement name="MainMenu" focusable="false" style="flex-grow: 1; width: 674px; translate: 65px 272px; scale: 1.5 1.5; top: 120px; position: absolute; height: 714px; left: -89px; right: 1336px;">
         <ui:VisualElement name="BackGround" picking-mode="Ignore" focusable="false" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/1_Packeges/0_UI/0_InGameUI/Upscaled/Panels%20NO%20BACK%201.png?fileID=-1478116786&amp;guid=3bde6ff83f88194469085e7b145e0e6c&amp;type=3#Panels NO BACK 1_0&quot;); -unity-slice-scale: 1px; width: 484px; transform-origin: center; translate: -159px 0; position: absolute; top: -132px; height: 720px; overflow: visible; display: flex; visibility: visible; background-size: 101% 100%; background-position-y: center 0; scale: -1 1; left: 224px;" />
-        <ui:Button text="CHOOSE HERO" view-data-key="Start" name="ChooseHeroButton" double-click-selects-word="true" enabled="true" selectable="true" class="Button" style="top: 98px; position: absolute; left: 155px; width: 300px; height: 60px;" />
-        <ui:Button text="SHOP" view-data-key="Shop" name="Shop" double-click-selects-word="true" enabled="true" selectable="true" class="Button" style="position: absolute; top: 228px; left: 155px; width: 300px; height: 60px;" />
-        <ui:Button text="EXIT&#10;" name="Exit" selectable="true" view-data-key="Exit" parse-escape-sequences="true" class="Button" style="position: absolute; top: 355px; left: 155px; width: 300px; height: 60px;" />
+        <ui:Button text="CHOOSE HERO" view-data-key="Start" name="ChooseHeroButton" double-click-selects-word="true" enabled="true" selectable="true" class="Button" style="top: 98px; position: absolute; left: 155px; width: 300px; height: 60px;">
+            <Bindings>
+                <UnityEngine.Localization.LocalizedString property="text" table="GUID:050fb9c0ec9bf3148b66409019667b84" entry="Id(42875920384)" />
+            </Bindings>
+        </ui:Button>
+        <ui:Button text="SHOP" view-data-key="Shop" name="Shop" double-click-selects-word="true" enabled="true" selectable="true" class="Button" style="position: absolute; top: 228px; left: 155px; width: 300px; height: 60px;">
+            <Bindings>
+                <UnityEngine.Localization.LocalizedString property="text" table="GUID:050fb9c0ec9bf3148b66409019667b84" entry="Id(286359461888)" />
+            </Bindings>
+        </ui:Button>
+        <ui:Button text="Language" view-data-key="Language" name="Language" double-click-selects-word="true" enabled="true" selectable="true" class="Button" style="position: absolute; top: 293px; left: 155px; width: 300px; height: 60px;" />
+        <ui:Button text="EXIT&#10;" name="Exit" selectable="true" view-data-key="Exit" parse-escape-sequences="true" class="Button" style="position: absolute; top: 355px; left: 155px; width: 300px; height: 60px;">
+            <Bindings>
+                <UnityEngine.Localization.LocalizedString property="text" table="GUID:050fb9c0ec9bf3148b66409019667b84" entry="Id(358304358400)" />
+            </Bindings>
+        </ui:Button>
     </ui:VisualElement>
 </ui:UXML>

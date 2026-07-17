@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2808897765519138825}
   - component: {fileID: 1350225887409225638}
   m_Layer: 0
-  m_Name: TestSkillLvlUp
+  m_Name: GlovesOfPower
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: 6fe7cf84d48a17c4ba5263e29405c5bb, type: 3}
   m_NavMeshLayer: 0

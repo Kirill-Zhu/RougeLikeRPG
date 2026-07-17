@@ -12,7 +12,6 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 public class HealthAndManaGlobesUI : MonoBehaviour, InGameUI {
 
@@ -111,7 +110,11 @@ public class HealthAndManaGlobesUI : MonoBehaviour, InGameUI {
         healthPoint = (float)maxHealthPoint;
         UpdateHealthGlobe();
     }
-
+    public void AddMaxHealth(int value) {
+        maxHealthPoint += (float)value;
+        healthPoint += (float)value;
+        UpdateHealthGlobe();
+    }
     public void SetCurrentHealth(int value) {
         healthPoint = value;
         UpdateHealthGlobe();
@@ -129,8 +132,10 @@ public class HealthAndManaGlobesUI : MonoBehaviour, InGameUI {
 
     private void UpdateHealthGlobe() {
         float ratio = healthPoint / maxHealthPoint;
-        currentHealthGlobe.rectTransform.localPosition = new Vector3(0, currentHealthGlobe.rectTransform.rect.height * ratio - currentHealthGlobe.rectTransform.rect.height, 0);
-        healthText.text = healthPoint.ToString("0") + "/" + maxHealthPoint.ToString("0");
+        if(currentHealthBar!=null&& healthText !=null){
+            currentHealthGlobe.rectTransform.localPosition = new Vector3(0, currentHealthGlobe.rectTransform.rect.height * ratio - currentHealthGlobe.rectTransform.rect.height, 0);
+            healthText.text = healthPoint.ToString("0") + "/" + maxHealthPoint.ToString("0");
+        } 
     }
 
     public void TakeDamage(float Damage) {
@@ -155,6 +160,7 @@ public class HealthAndManaGlobesUI : MonoBehaviour, InGameUI {
 
         UpdateGraphics();
     }
+
 
     //==============================================================
     // Mana Logic
@@ -232,5 +238,5 @@ public class HealthAndManaGlobesUI : MonoBehaviour, InGameUI {
         yield return null;
     }
 
-  
+
 }

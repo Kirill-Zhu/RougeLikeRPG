@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace CheeseChase {
@@ -131,6 +132,10 @@ namespace CheeseChase {
             Vector3 cameraRight = mainCamera.transform.right.WithY(0);
             Vector3 dir = cameraForward * inputDirection.y + cameraRight * inputDirection.x;
             return dir;
+        }
+
+        internal void AddMoveSpeed(float value) {
+            speed += value;
         }
     }
 }

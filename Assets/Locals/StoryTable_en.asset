@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: StoryTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 7cca4967698928649be4e6f67747471b, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 36253114368
+    m_Localized: Sirius the fox knight defeated the dragon, but the kingdom never
+      knew the truth.In battle, Sirius was actually terrified. The dragon opened
+      its jaws, and the fox dropped his sword out of fear. His huge tail puffed up,
+      and a stray spark ignited his red fur.Panicking, Sirius dashed wildly around
+      the cave. Trying to follow the fiery blur with his eyes, the dragon twisted
+      his own neck into a knot and snapped it.Sirius put out his tail, stepped out
+      to the crowd, and smiled humbly. Cunning and pure luck had won the day.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 103848517632
+    m_Localized: Mage Frost put an army of orcs to flight, and the Academy praised
+      his mastery. But Frost knew the embarrassing truth.He didn't summon a blizzard;
+      he just had a terrible cold. Surrounded by orcs, the mage wanted to read a
+      fireball scroll but sneezed monstrously instead.A powerful wave of freezing
+      snow blasted from his nose, turning the battlefield into a rink. The orcs slipped,
+      crashed into each other, and rolled down the mountain.Frost wiped his nose
+      and accepted the glory. A bad cold is the best defense.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -30,9 +30,9 @@ public class SpawnStrategy : ScriptableObject {
         }
 
         cooldownTimer = 0;
-        OnSpawnEntity.Invoke(enemyStrategy,posArray);
+        OnSpawnEntity?.Invoke(enemyStrategy,posArray);
     }
     public void Spawn() {
-        OnSpawnEntity.Invoke(enemyStrategy, posArray);
+        OnSpawnEntity?.Invoke(enemyStrategy, posArray);
     }
 }

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b566fb3f4d327b14f812fba1f89c11e7, type: 3}
+  m_Name: BootsOfSpeed
+  m_EditorClassIdentifier: 
+  Label: {fileID: 1526158135, guid: f6032353940da3148b7b07c38722b6cc, type: 3}
+  Descritpion: 'Increase move speed by : 1'
+  ModelPrefab: {fileID: 7702758211444969477, guid: 24f7ce2ec705ad04d8a1d58421027437, type: 3}
+  particle: {fileID: 7671860363676289284, guid: a7c111b73cef9f9419100bf050c8226f, type: 3}
+  PickUpSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  itemName: Boots of speed
+  DamageTypesEnum: -1
+  MelePhysicsDamage: 0
+  MeleFireDamage: 0
+  MeleColdDamage: 0
+  ShieldPhysicsDamage: 0
+  ShieldFireDamage: 0
+  ShieldColdDamage: 0
+  ShootPhysicsDamage: 0
+  ShootFireDamage: 0
+  ShootColdDamage: 0
+  moveSpeedBonus: 1
+  maxHeathBonus: 0
+  physicsDefenceBonus: 0
+  fireDefenceBonus: 0
+  coldDefenceBonus: 0

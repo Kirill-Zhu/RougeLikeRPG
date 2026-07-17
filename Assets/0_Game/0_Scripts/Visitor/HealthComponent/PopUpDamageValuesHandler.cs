@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
-using System.Threading;
 using DG.Tweening;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 
@@ -30,21 +30,21 @@ public class PopUpDamageValuesHandler : ScriptableObject {
         }
     }
     private void OnDestroy() {
-        foreach(var obj in textMesh)
+        foreach (var obj in textMesh)
             Destroy(obj);
     }
     [ContextMenu("Pop Up Damage")]
     public async void PupUpDamage(DamageType damageType, int recievedDamage) {
-     
+
         foreach (var textMesh in textMesh) {
-            if (!textMesh.gameObject.activeInHierarchy) { 
-                
+            if (!textMesh.gameObject.activeInHierarchy) {
+
                 textMesh.transform.position = origin.position + Vector3.up;
                 textMesh.transform.rotation = Quaternion.identity;
                 textMesh.gameObject.SetActive(true);
                 textMesh.text = recievedDamage.ToString();
                 textMesh.color = damageType;
-              
+
                 Vector3 endPos = origin.up * damageType;
                 await textMesh.transform.DOMoveY(endPos.y, 1);
                 DeactiveTextMesh(textMesh);
@@ -56,7 +56,7 @@ public class PopUpDamageValuesHandler : ScriptableObject {
                 break;
             }
         }
-       
+
     }
 
     public async void PopUpBlock(DamageType damageType) {
@@ -84,7 +84,12 @@ public class PopUpDamageValuesHandler : ScriptableObject {
     }
 
     void DeactiveTextMesh(TextMeshProUGUI textMesh) {
-        textMesh.gameObject.SetActive(false);
-        canvas.transform.localPosition = Vector3.zero;
+
+        //Because of old link may cause null ref error
+        if (textMesh != null && canvas != null) {
+            textMesh.gameObject.SetActive(false);
+            canvas.transform.localPosition = Vector3.zero;
+        }
+
     }
 }

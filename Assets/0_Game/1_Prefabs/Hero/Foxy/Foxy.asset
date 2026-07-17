@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Foxy
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 5a6c82e686e33944791541e0af9eede1, type: 3}
+  Name: Foxy
   Story: "\u041B\u0438\u0441\u0430-\u0440\u044B\u0446\u0430\u0440\u044C \u0432 \u0441\u0438\u044F\u044E\u0449\u0438\u0445
     \u0434\u043E\u0441\u043F\u0435\u0445\u0430\u0445 \u043E\u0445\u0440\u0430\u043D\u044F\u043B\u0430
     \u043B\u0435\u0441\u043D\u043E\u0439 \u0442\u0440\u043E\u043D. \u0425\u0432\u043E\u0441\u0442
