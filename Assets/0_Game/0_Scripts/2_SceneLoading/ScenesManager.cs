@@ -1,29 +1,33 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Zenject;
 
 public class ScenesManager : MonoBehaviour {
 
-    [SerializeField]public static int storyTaleSceneID = 1;
-    [SerializeField]public static int mainMenuSceneID = 2;
-    [SerializeField]public static int InGameUISceneID = 3;
-    [SerializeField]public static int Level2SceneID = 4;
+
+    [SerializeField] public static int storyTaleSceneID = 1;
+    [SerializeField] public static int mainMenuSceneID = 2;
+    [SerializeField] public static int InGameUISceneID = 3;
+    [SerializeField] public static int tutorialSceneID = 4;
+    [SerializeField] public static int CatacombsEntry = 5;
+    [SerializeField] public static int CatacombsSaints = 6;
+    [SerializeField] public static int CatacombsCoffins = 7;    
+
 
     int prevLevelID = 0;
 
     private void Awake() {
         UnityEngine.SceneManagement.SceneManager.LoadScene(storyTaleSceneID);
-    
+
     }
 
     public void StartGame() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(Level2SceneID);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(CatacombsEntry);
         UnityEngine.SceneManagement.SceneManager.LoadScene(InGameUISceneID, UnityEngine.SceneManagement.LoadSceneMode.Additive);
-        prevLevelID = Level2SceneID;
+        prevLevelID = CatacombsEntry;
     }
-    public async UniTask LoadLevelAsync(int sceneID) { 
-        if(SceneManager.GetActiveScene().buildIndex == prevLevelID) 
+    public async UniTask LoadLevelAsync(int sceneID) {
+        if (SceneManager.GetActiveScene().buildIndex == prevLevelID)
             await UnloadScene(prevLevelID);
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneID);
@@ -39,5 +43,5 @@ public class ScenesManager : MonoBehaviour {
 
         await UniTask.WaitUntil(() => asyncOperation.isDone);
     }
-   
+
 }

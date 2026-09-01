@@ -12,9 +12,16 @@ public class PickUp : MonoBehaviour {
     //Refactor then
     GameObject modelPrefb;
     private async void OnEnable() {
+       
+        //Sound 
+        pickUpSound = powerup.PickUpSound;
+
+        //Level Generator disables it, so i need to enable it manually
+        await UniTask.Delay(100);
         modelPrefb = Instantiate(powerup.ModelPrefab, this.gameObject.transform);
-        modelPrefb.transform.localPosition += modelOffset;
         modelPrefb.SetActive(true);
+        modelPrefb.transform.localPosition += modelOffset;
+
 
         if (powerup.particle != null) {
             particle = Instantiate(powerup.particle, null);
@@ -22,12 +29,6 @@ public class PickUp : MonoBehaviour {
             particle.gameObject.SetActive(false);
         }
 
-        //Sound 
-        pickUpSound = powerup.PickUpSound;
-
-        //Level Generator disables it, so i need to enable it manually
-        await UniTask.Delay(100);
-        modelPrefb.SetActive(true);
     }
     private void OnTriggerEnter(Collider other) {
 

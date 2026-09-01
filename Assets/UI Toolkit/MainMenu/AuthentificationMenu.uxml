@@ -14,7 +14,7 @@
                 <UnityEngine.Localization.LocalizedString property="label" table="GUID:050fb9c0ec9bf3148b66409019667b84" entry="Id(30772507090944)" />
             </Bindings>
         </ui:TextField>
-        <ui:Label text="Error Text" name="ErrorMessage" style="top: 482px; width: 829px; height: 95px; justify-content: center; position: absolute; left: 560px; color: rgb(255, 5, 0); font-size: 22px; -unity-text-align: upper-center; -unity-font-definition: url(&quot;project://database/Assets/1_Packeges/PixelBattleText/Fonts/Alphapix.ttf?fileID=12800000&amp;guid=9ca52623ee8001b4ca7c29dc2ff6317d&amp;type=3#Alphapix&quot;);" />
+        <ui:Label text="Error Text " name="ErrorMessage" emoji-fallback-support="true" style="top: 482px; width: 829px; height: 95px; justify-content: center; position: absolute; left: 560px; color: rgb(255, 5, 0); font-size: 22px; -unity-text-align: upper-center; -unity-font-definition: url(&quot;project://database/Assets/1_Packeges/PixelBattleText/Fonts/Alphapix.ttf?fileID=12800000&amp;guid=9ca52623ee8001b4ca7c29dc2ff6317d&amp;type=3#Alphapix&quot;); white-space: pre-wrap;" />
         <ui:Button text="SignIn" name="SignIn" selectable="true" class="Button" style="background-size: 100% 100%; min-width: auto; min-height: auto; max-width: none; max-height: none; top: 519px; translate: -444px 74px; position: absolute; left: 967px; right: 646px; bottom: 457px; height: 100px; width: 300px;">
             <Bindings>
                 <UnityEngine.Localization.LocalizedString property="text" table="GUID:050fb9c0ec9bf3148b66409019667b84" entry="Id(30412249931776)" />

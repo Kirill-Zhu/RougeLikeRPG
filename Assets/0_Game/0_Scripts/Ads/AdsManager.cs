@@ -13,10 +13,28 @@ public class AdsManager : MonoBehaviour {
 
     [Header("Conin UI")]
     [SerializeField] TextMeshProUGUI coninsText;
+
+    //EventBus
+    EventBinding<OnPlayerStartLevel> OnPlayerStartLevelBinding;
+    EventBinding<OnPlayerRessurect> OnPlayerRessurectBinding;
+    private void OnEnable() {
+
+        //EventBus
+        OnPlayerStartLevelBinding = new EventBinding<OnPlayerStartLevel>(LoadRewardedAd);
+        EventBus<OnPlayerStartLevel>.Register(OnPlayerStartLevelBinding);
+
+        OnPlayerRessurectBinding = new EventBinding<OnPlayerRessurect>(LoadRewardedAd);
+        EventBus<OnPlayerRessurect>.Register(OnPlayerRessurectBinding);
+    }
+    private void OnDisable() {
+        //EventBus
+        EventBus<OnPlayerStartLevel>.Deregister(OnPlayerStartLevelBinding);
+        EventBus<OnPlayerRessurect>.Deregister(OnPlayerRessurectBinding);
+    }
     public int Coints {
         get => PlayerPrefs.GetInt("PLAYER_COINS", 0);
 
-            set {
+        set {
 
             PlayerPrefs.SetInt("PLAYER_COINS", value);
             PlayerPrefs.Save();
@@ -31,9 +49,6 @@ public class AdsManager : MonoBehaviour {
     LevelPlayBannerAd bannerAd;
     LevelPlayInterstitialAd interstitialAd;
     LevelPlayRewardedAd rewardedAd;
-
-    //Event Bus
-    EventBinding<OnPlayerRessurect> onPlayerRessurectBinding;
     private void Start() {
 
         LevelPlay.ValidateIntegration();
@@ -43,15 +58,9 @@ public class AdsManager : MonoBehaviour {
 
 
     }
-    private void OnEnable() {
-        onPlayerRessurectBinding = new EventBinding<OnPlayerRessurect>(LoadRewardedAd);
-        EventBus<OnPlayerRessurect>.Register(onPlayerRessurectBinding);
-    }
-    private void OnDisable() {
-        EventBus<OnPlayerRessurect>.Deregister(onPlayerRessurectBinding);
-    }
+
     private void SdkInitializationFailedEvent(LevelPlayInitError error) {
-      
+
         Debug.Log("Initialization failed");
     }
 
@@ -155,7 +164,7 @@ public class AdsManager : MonoBehaviour {
     public void ShowRewardedAd() {
         if (rewardedAd.IsAdReady()) {
             rewardedAd.ShowAd();
-            Debug.Log("#MYGAME rewarded loaded");
+            Debug.Log("#MYGAME rewarded Showed");
         }
     }
     void RewardedOnAdLoadedEvent(LevelPlayAdInfo adInfo) { }
@@ -168,8 +177,8 @@ public class AdsManager : MonoBehaviour {
         string rewardedName = adReward.Name;
         int rewardAount = adReward.Amount;
         Coints += rewardAount;
-        EventBus<OnPlayerRessurect>.Raise(new OnPlayerRessurect());
         Debug.Log($"#MYGAME Get reward : Reward Name : {rewardedName}, Amount {rewardAount}");
+        EventBus<OnPlayerRessurect>.Raise(new OnPlayerRessurect());
     }
     void RewardedOnAdClosedEvent(LevelPlayAdInfo adInfo) { }
     void RewardedOnAdClickedEvent(LevelPlayAdInfo adInfo) { }

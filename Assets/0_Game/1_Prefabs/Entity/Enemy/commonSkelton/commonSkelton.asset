@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26eff6f8e1950074c9c29ee91d958e9b, type: 3}
   m_Name: commonSkelton
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: 6dfd8368a76aac641b7a8cc0e7d12e48, type: 3}
   TypeOfEnemy: Dummy
   prefab: {fileID: 1571042049591659991, guid: 5b3e000a611913c4fa677e0c2912fecc, type: 3}
-  Icon: {fileID: 21300000, guid: 4ca665255adc0204585931b317f67500, type: 3}
   MoveSpeed: 2.5
   AttackRange: 2
   AttackCooldown: 3

@@ -62,6 +62,7 @@ public class LevelStatisticsUIMenu : MonoBehaviour {
         UpdateStats();
         await rectTransform.DOAnchorPos(endPos, lerpDuration).SetEase(Ease.InOutBack).SetUpdate(true).ToUniTask();
     }
+    [ContextMenu("Show End lvl menu")]
     public async void ShowEndLevelMenu() {
         statisticsMenu.SetActive(true);
         topText.text = endLevelText;

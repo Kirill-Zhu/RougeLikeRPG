@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpecilalSkeletonHealth
   m_EditorClassIdentifier: 
   popUpDamageValuesHandler: {fileID: 11400000, guid: a92e35349c7924548b8af946aab035cd, type: 2}
-  MaxHealth: 30
+  MaxHealth: 70
   PhysicsDefence: 2
   FireDefence: 3
-  ColdDefence: 1
+  ColdDefence: 3

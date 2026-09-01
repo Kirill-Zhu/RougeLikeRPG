@@ -71,7 +71,7 @@ public class ShootStrategy : SkillsStrategy {
         initialization = true;
         //Dispose 
         foreach (var projectile in projectiles) {
-            Destroy(projectile.gameObject);
+            if(projectile != null) Destroy(projectile.gameObject);
             await UniTask.WaitForFixedUpdate();
         }
 

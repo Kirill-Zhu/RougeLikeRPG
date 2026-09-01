@@ -5,10 +5,11 @@
 ## Описание
 >Made by Kirill Zhuravlev
 -----------------
-### Стек : Zenject, R3, Addressables, DoTween, UnitTask, IronSource/LevelPlay, UnityCloud, FMOD
+### Stack : Zenject, R3, Addressables, DoTween, UnitTask, IronSource/LevelPlay, UnityCloud, FMOD
 
-### Платфомы : Windows :house:, Linux :penguin:, Android :robot:
-### Управление  Keyboard :keyboard:, GamePad :joystick:, Touch :raised_hand_with_fingers_splayed:
+### Platforms : Windows :house:, Linux :penguin:, Android :robot:
+### Controls:  Keyboard :keyboard:, GamePad :joystick:, Touch :raised_hand_with_fingers_splayed:
+### Localization :flags: : ENG , RUS
 ------------------
 
 
@@ -16,18 +17,21 @@
 This is a classic roguelike RPG based on replayability and character progression after death. The game features several progression mechanics.
 
 >### 1: Character selection featuring unique traits for each class (Knight, Mage, etc.)
+<img src = "Recordings/Image%20Sequence_004_0000.jpg" width = "500">
 
-<img width="632" height="578" alt="Mage" src="https://github.com/user-attachments/assets/0d167754-56e8-487b-92e5-acb1b3adf382" />
-<img width="699" height="596" alt="Foxy" src="https://github.com/user-attachments/assets/31c4fca5-1942-4997-81bf-1014827406ca" />
 
 -----------
+>### 2: Complete levels to unlock new locations. 
+>### Every Location is procedurally generated with speciffic seed.
 
->### 2: Upgrading character-specific traits with every level-up.
+<img src = "Recordings/Image%20Sequence_005_0000.jpg" width = "500">
+
+>### 3: Upgrading character-specific traits with every level-up.
 
 > - The Knight features "Sword Slash", "Shield", and "Fireball".
 > - The Mage features "Energy Shield", "Blizzard", and "Ice Shards".
 
-<img width="1860" height="1001" alt="LvlUp" src="https://github.com/user-attachments/assets/d175545e-3d64-4cc4-94cc-2e97b491472b" />
+<img width="500"  alt="LvlUp" src="Recordings/Image%20Sequence_013_0000.jpg">
   
   Example of a mid-round Level Up.
 
@@ -37,7 +41,7 @@ This is a classic roguelike RPG based on replayability and character progression
 
 >You can stack multiple auto-casters. 
 
-<img width="207" height="229" alt="AutacsterPickUp" src="https://github.com/user-attachments/assets/c008f02a-92e8-4e58-b1c4-f40ec753db64" />
+<img width="200" alt="AutacsterPickUp" src="https://github.com/user-attachments/assets/c008f02a-92e8-4e58-b1c4-f40ec753db64" />
 
 They look like books on the map.
 
@@ -79,7 +83,7 @@ The damage type dealt animates above the enemy's head and is highlighted with a 
 
 Equipment crate.
 
-<img width="534" height="630" alt="ChestCard" src="https://github.com/user-attachments/assets/baf1ba51-b722-4ed0-98f9-55a2763e5b12" />
+<img width="500" alt="ChestCard" src="Recordings/Image%20Sequence_035_0000.jpg" />
 
 Item from equipment crate.
 
@@ -88,6 +92,6 @@ Item from equipment crate.
 
 After each session, the player receives currency in the form of coins, which they can spend in the shop to upgrade their attributes (Movement Speed, Health, Mana, Damage Type, Damage Resistances).
 
-<img width="1063" height="578" alt="Shop" src="https://github.com/user-attachments/assets/11ece1a7-89f4-48c4-81f5-ce5a7fb9d2fa" />
+<img width="500" alt="Shop" src="https://github.com/user-attachments/assets/11ece1a7-89f4-48c4-81f5-ce5a7fb9d2fa" />
 
 

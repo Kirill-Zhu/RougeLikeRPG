@@ -28,6 +28,17 @@ public class MazeGenerator : MonoBehaviour {
         GenerateDungeon();
 
     }
+
+    public void Initialize(int progressKey) {
+        var endLevelController = roomCollection.bossRoom.GetComponentInChildren<EndLevelController>();
+        if (endLevelController != null) { 
+            endLevelController.SetProgressKey(progressKey);
+        
+        } else {
+            Debug.LogWarning($"{this.name} boss Room doesen't have {nameof(EndLevelController)}");
+        }
+
+    }
     public Transform PlayerSpawnPointTransform() {
         foreach (Transform child in roomCollection.startRoom.GetComponentsInChildren<Transform>()) {
             if (child.name.Contains("SpawnPoint")) {
@@ -37,6 +48,7 @@ public class MazeGenerator : MonoBehaviour {
         Debug.LogError("No Spawn Point in start room");
         return null;
     }
+    
 
     [ContextMenu("Generate")]
     public async void GenerateDungeon() {
@@ -71,8 +83,12 @@ public class MazeGenerator : MonoBehaviour {
         // 3. Пытаемся пристыковать комнату босса к самой последней оставшейся двери
         if (availableDoors.Count > 0) {
             var doorTransform = availableDoors[Random.Range(0, availableDoors.Count)];
-            await TryPlaceRoom(roomCollection.bossRoom, doorTransform);
-            availableDoors.Remove(doorTransform);
+            if (await TryPlaceRoom(roomCollection.bossRoom, doorTransform))
+                availableDoors.Remove(doorTransform);
+            else {// If boss room was not placed - regenarate
+                GenerateDungeon();
+            }
+            
         }
         if (availableDoors != null && availableDoors.Count > 0) {
 

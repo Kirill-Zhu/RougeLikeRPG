@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -23,6 +22,12 @@ public class SimpleCahracterController : MonoBehaviour, IVisitable, IUpgradable 
     [SerializeField] float jumpForce = 10;
     [SerializeField] float landingSpeed = -3f;
     public bool IsJumping { get; private set; }
+    [Header("Strafe settings")]
+    public bool IsStrafing { get; private set; }
+    public float StrafeDuration { get; private set; } = 1f;
+    float strafeDurationTimer = 1;
+    float strafeCooldown = 1;
+    float strafeCooldownTimer = 0;
     public Vector3 InputDirection => moveDirection;
     Vector2 moveDirection;
     Camera mainCamera;
@@ -44,13 +49,13 @@ public class SimpleCahracterController : MonoBehaviour, IVisitable, IUpgradable 
     private void Awake() {
         mainCamera = Camera.main;
         controller = GetComponent<CharacterController>();
-
         startSpeed = speed;
     }
     private void Start() {
         //Listen Events
         input.Move += SubscribeMoveInputs;
-        input.Jump += SubscribeJumpingButton;
+        // input.Jump += SubscribeJumpingButton;
+        input.Jump += SubscribeStrafeButton;
         input.EnablePlayerActions();
 
 
@@ -63,6 +68,10 @@ public class SimpleCahracterController : MonoBehaviour, IVisitable, IUpgradable 
     private void Update() {
         if (input.Direction == Vector3.zero && joystick != null)
             moveDirection = joystick.Direction;
+
+        if ((strafeCooldownTimer > 0)) {
+            strafeCooldownTimer -= Time.deltaTime;
+        }
     }
     void SubscribeJumpingButton(bool isJumpButtonPressd) {
         switch (isJumpButtonPressd) {
@@ -72,6 +81,21 @@ public class SimpleCahracterController : MonoBehaviour, IVisitable, IUpgradable 
             case false:
                 Land();
                 break;
+        }
+    }
+    void SubscribeStrafeButton(bool isStrafeButtonPressd) {
+
+        switch (isStrafeButtonPressd) {
+
+            case true: {
+                    HandleStrafe();
+                    break;
+                }
+            case false: {
+                    IsStrafing = false;
+                    break;
+                }
+
         }
     }
 
@@ -108,6 +132,12 @@ public class SimpleCahracterController : MonoBehaviour, IVisitable, IUpgradable 
     public void RefreshJumpTimer() {
         jumpTimer = jumpTime;
     }
+    public void RefreshStrafeTimer() {
+        strafeDurationTimer = StrafeDuration;
+    }
+    public void RefreshStrafeCooldownTimer() {
+        strafeCooldownTimer = strafeCooldown;
+    }
     public void HandleJumping() {
         jumpTimer -= Time.deltaTime;
         if (jumpTimer <= 0) {
@@ -127,6 +157,25 @@ public class SimpleCahracterController : MonoBehaviour, IVisitable, IUpgradable 
         return controller.isGrounded;
         // return Physics.CheckSphere(transform.position, 1, 1 << LayerMask.NameToLayer("Default"));
     }
+
+    //Strafe
+    public void HandleStrafe() {
+        //Cooldown
+        if (strafeCooldownTimer > 0) {
+            IsStrafing = false;
+            return;
+        }
+        //StrafeDuration
+        IsStrafing = true;
+        strafeDurationTimer -= Time.deltaTime;
+        Debug.Log("Handle Strafe");
+        if (strafeDurationTimer <= 0) {
+            IsStrafing = false;
+            return;
+        }
+       
+        Move(CalculateDirection(), 0, 2);
+    }
     private void OnDrawGizmosSelected() {
         //Ground Check
         if (Grounded()) {
@@ -137,7 +186,7 @@ public class SimpleCahracterController : MonoBehaviour, IVisitable, IUpgradable 
 
     private void OnDestroy() {
         input.Move -= SubscribeMoveInputs;
-        input.Jump -= SubscribeJumpingButton;
+        input.Jump -= SubscribeStrafeButton;
     }
     #region UPGRADE STRATEGY
 

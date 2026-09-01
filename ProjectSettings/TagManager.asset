@@ -19,9 +19,9 @@ TagManager:
   - Dead
   - PickUp
   - MiniMap
-  - 
-  - 
-  - 
+  - Enemy
+  - IgnoreEnemies
+  - Cloak
   - 
   - 
   - 

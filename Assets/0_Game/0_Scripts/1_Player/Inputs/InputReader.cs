@@ -10,6 +10,7 @@ public interface IInputReader {
 public class InputReader : ScriptableObject, PlayerInput.IPlayerActions, IInputReader {
     public event UnityAction<Vector2> Move = delegate { };
     public event UnityAction<bool> Jump = delegate { };
+    public event UnityAction<bool> Strage = delegate { };   
     public event UnityAction<int> UseSkill = delegate { };
     public event UnityAction<bool> IsUsingSkill = delegate { };
     public bool IsMeleAttack = false;
@@ -45,8 +46,6 @@ public class InputReader : ScriptableObject, PlayerInput.IPlayerActions, IInputR
     }
 
     public void OnButtonNorth(InputAction.CallbackContext context) {
-
-       
 
         if (context.phase == InputActionPhase.Started)
             IsUsingSkill.Invoke(true);

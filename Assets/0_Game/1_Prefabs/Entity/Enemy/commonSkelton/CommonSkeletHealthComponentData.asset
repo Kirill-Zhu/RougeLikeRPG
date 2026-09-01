@@ -15,5 +15,5 @@ MonoBehaviour:
   popUpDamageValuesHandler: {fileID: 11400000, guid: a92e35349c7924548b8af946aab035cd, type: 2}
   MaxHealth: 8
   PhysicsDefence: 0
-  FireDefence: 3
+  FireDefence: 1
   ColdDefence: 1

@@ -12,7 +12,11 @@
                 <UnityEngine.Localization.LocalizedString property="text" table="GUID:050fb9c0ec9bf3148b66409019667b84" entry="Id(286359461888)" />
             </Bindings>
         </ui:Button>
-        <ui:Button text="Language" view-data-key="Language" name="Language" double-click-selects-word="true" enabled="true" selectable="true" class="Button" style="position: absolute; top: 293px; left: 155px; width: 300px; height: 60px;" />
+        <ui:Button text="Language" view-data-key="Language" name="Language" double-click-selects-word="true" enabled="true" selectable="true" class="Button" style="position: absolute; top: 293px; left: 155px; width: 300px; height: 60px;">
+            <Bindings>
+                <UnityEngine.Localization.LocalizedString property="text" table="GUID:050fb9c0ec9bf3148b66409019667b84" entry="Id(15114498733989888)" />
+            </Bindings>
+        </ui:Button>
         <ui:Button text="EXIT&#10;" name="Exit" selectable="true" view-data-key="Exit" parse-escape-sequences="true" class="Button" style="position: absolute; top: 355px; left: 155px; width: 300px; height: 60px;">
             <Bindings>
                 <UnityEngine.Localization.LocalizedString property="text" table="GUID:050fb9c0ec9bf3148b66409019667b84" entry="Id(358304358400)" />

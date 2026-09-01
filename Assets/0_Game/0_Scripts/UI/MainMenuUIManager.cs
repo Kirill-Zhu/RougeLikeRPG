@@ -7,8 +7,9 @@ using UnityEngine.UIElements;
 using Zenject;
 using Button = UnityEngine.UIElements.Button;
 public class MainMenuUIManager : MonoBehaviour {
-    [Inject] EventManager eventManager;
+    
     [SerializeField] List<UIDocument> UidocumentsList;
+    [SerializeField] UIDocument catacombsUIDocument;
     [SerializeField] ChoseHeroController chooseHeroController;
     [SerializeField] ShopManager shopManager;
     //Main menu
@@ -21,19 +22,47 @@ public class MainMenuUIManager : MonoBehaviour {
     const string HeroDesk = "HeroDesk";
     const string NextHero = "NextHero";
     const string PrevHero = "PreviousHero";
-    const string StartGame = "StartGame";
+    const string WorldMap = "WorldMap";
+    const string MapButton = "MapButton";
+    const string StartTutorial = "StartTutorial";
+    const string CatacombsMap = "CatacombsMap";
     const string Shop = "Shop";
     const string Language = "Language";
+    const string Back = "Back";
+
+    #region CatacombsRooms
+    const string Entry = "Entry";
+    const string Saints = "Saints";
+    const string Coffins = "Coffins";
+    #endregion
+    int choosedSceneIndex = 5;
+
+    #region DIZENJECT
+    EventManager eventManager;
+    LocalizationManager localizationManager;
+    [Inject]
+    void Construct(EventManager eventManager, LocalizationManager localizetionManager) {
+        this.eventManager = eventManager;
+        this.localizationManager = localizetionManager;
+    }
+    #endregion
     private void Awake() {
-        Initialize();
         OpenMainMenu();
+
+
         CloseChooseHeroMenu();
+        CloseWorldMapMenu();
+        CloseCatacombsMap();
     }
 
     private async void Start() {
 
         await UniTask.Delay(100);
         EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
+    }
+
+    private void Update() {
+
     }
     void Initialize() {
         //Main menu
@@ -43,12 +72,9 @@ public class MainMenuUIManager : MonoBehaviour {
         //Events
         choseHeroButton.clicked += OpenChooseHeroMenu;
         shopButton.clicked += OpenShop;
-        languageButton.clicked += ChangeLanguage;
+        languageButton.clicked += ToogleLanguage;
+        //Map
 
-        //Chose Hero Menu
-        var nextHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(NextHero);
-        var prevHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(PrevHero);
-        var startButton = UidocumentsList[1].rootVisualElement.Q<Button>(StartGame);
     }
     public void OpenAuthentificationMenu() {
 
@@ -56,18 +82,33 @@ public class MainMenuUIManager : MonoBehaviour {
     //Main menu
     void OpenMainMenu() {
         //-----Main Menu
+        var mainMenu = UidocumentsList[0].rootVisualElement.Q<VisualElement>(MainMenu);
         var choseHeroButton = UidocumentsList[0].rootVisualElement.Q<Button>(ChooseHeroButton);
+        var shopButton = UidocumentsList[0].rootVisualElement.Q<Button>(Shop);
+        var languageButton = UidocumentsList[0].rootVisualElement.Q<Button>(Language);
         choseHeroButton.Focus();
         EventSystem.current.SetSelectedGameObject(gameObject);
 
+        mainMenu.style.display = DisplayStyle.Flex;
+        choseHeroButton.clicked += OpenChooseHeroMenu;
+        shopButton.clicked += OpenShop;
+        languageButton.clicked += ToogleLanguage;
 
-        //-----Chose Hero Menu
-        var choseHeroMenu = UidocumentsList[1].rootVisualElement.Q<VisualElement>(ChooseHeroMenu);
-        var startGameMenu = UidocumentsList[1].rootVisualElement.Q<VisualElement>(StartGameMenu);
-        var heroDesk = UidocumentsList[1].rootVisualElement.Q<VisualElement>(HeroDesk);
-        choseHeroMenu.style.display = DisplayStyle.None;
-        startGameMenu.style.display = DisplayStyle.None;
-        heroDesk.style.display = DisplayStyle.None;
+
+    }
+    void CloseMainMenu() {
+        //-----Main Menu
+        var mainMenu = UidocumentsList[0].rootVisualElement.Q<VisualElement>(MainMenu);
+        var choseHeroButton = UidocumentsList[0].rootVisualElement.Q<Button>(ChooseHeroButton);
+        var shopButton = UidocumentsList[0].rootVisualElement.Q<Button>(Shop);
+        var languageButton = UidocumentsList[0].rootVisualElement.Q<Button>(Language);
+        choseHeroButton.Focus();
+        EventSystem.current.SetSelectedGameObject(gameObject);
+
+        mainMenu.style.display = DisplayStyle.None;
+        choseHeroButton.clicked -= OpenChooseHeroMenu;
+        shopButton.clicked -= OpenShop;
+        languageButton.clicked -= ToogleLanguage;
     }
     //Chose Hero menu
     void OpenChooseHeroMenu() {
@@ -85,7 +126,7 @@ public class MainMenuUIManager : MonoBehaviour {
 
         var nextHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(NextHero);
         var prevHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(PrevHero);
-        var startButton = UidocumentsList[1].rootVisualElement.Q<Button>(StartGame);
+        var mapButton = UidocumentsList[1].rootVisualElement.Q<Button>(MapButton);
 
         //Visability
         choseHeroMenu.style.display = DisplayStyle.Flex;
@@ -96,10 +137,120 @@ public class MainMenuUIManager : MonoBehaviour {
         //Events
         nextHeroButton.clicked += ChooseNextHero;
         prevHeroButton.clicked += ChoosePrevHero;
-        startButton.clicked += ChoseHeroAndStartGame;
+        //mapButton.clicked += ChoseHeroAndStartGame;
+        mapButton.clicked += OpenWorldMapMenu;
+
 
         ChangeHeroDescriptionDesk();
     }
+    //World Map
+    private void OpenWorldMapMenu() {
+        CloseChooseHeroMenu();
+        CloseMainMenu();
+        var worldMap = UidocumentsList[2].rootVisualElement.Q<VisualElement>(WorldMap);
+        var catacombs = UidocumentsList[2].rootVisualElement.Q<Button>(CatacombsMap);
+        var startTutorial = UidocumentsList[2].rootVisualElement.Q<Button>(StartTutorial);
+        var backButton = UidocumentsList[2].rootVisualElement.Q<Button>(Back);
+
+
+        worldMap.style.display = DisplayStyle.Flex;
+
+        //Events
+        backButton.clicked += CloseWorldMapMenu;
+        backButton.clicked += OpenChooseHeroMenu;
+
+        catacombs.clicked += OpenCatacombsMap;
+        startTutorial.clicked += StartTutorialScene;
+    }
+
+    void CloseWorldMapMenu() {
+        var worldMap = UidocumentsList[2].rootVisualElement.Q<VisualElement>(WorldMap);
+        var startGame = UidocumentsList[2].rootVisualElement.Q<Button>(CatacombsMap);
+        var backButton = UidocumentsList[2].rootVisualElement.Q<Button>(Back);
+
+        worldMap.style.display = DisplayStyle.None;
+
+        //Events
+        backButton.clicked -= CloseWorldMapMenu;
+        backButton.clicked -= OpenChooseHeroMenu;
+
+        startGame.clicked -= StartCatacombsEntry;
+    }
+
+    //------------
+
+    #region Locations
+    //Catacombs
+    void OpenCatacombsMap() {
+        CloseWorldMapMenu();
+
+        var catacombsMap = catacombsUIDocument.rootVisualElement.Q<VisualElement>("CatacombsMap");
+        catacombsMap.style.display = DisplayStyle.Flex;
+
+        var backButton = catacombsUIDocument.rootVisualElement.Q<Button>(Back);
+
+        //Rooms
+        var entryRoom = catacombsUIDocument.rootVisualElement.Q<Button>(Entry);
+        var saintsRoom = catacombsUIDocument.rootVisualElement.Q<Button>(Saints);
+        var coffinsRoom = catacombsUIDocument.rootVisualElement.Q<Button>(Coffins);
+
+        //Events
+
+        backButton.clicked += CloseCatacombsMap;
+        backButton.clicked += OpenWorldMapMenu;
+
+
+        entryRoom.clicked += StartCatacombsEntry;
+        int progress = GameData.GetProgressKey();
+        Debug.Log($"Progress is {progress}");
+        switch (progress) {
+            case 1: {
+                    saintsRoom.clicked += StartCatacombsSaints;
+                    saintsRoom.style.unityBackgroundImageTintColor = Color.green;
+                    break;
+                }
+            case 2: {
+                    saintsRoom.clicked += StartCatacombsSaints;
+                    saintsRoom.style.unityBackgroundImageTintColor = Color.green;
+
+                    coffinsRoom.clicked += StartCatacombsCoffins;
+                    coffinsRoom.style.unityBackgroundImageTintColor = Color.green;
+                    break;
+
+                }
+        }
+    }
+    void CloseCatacombsMap() {
+        var catacombsMap = catacombsUIDocument.rootVisualElement.Q<VisualElement>("CatacombsMap");
+        catacombsMap.style.display = DisplayStyle.None;
+
+        //Buttons
+        var backButton = catacombsUIDocument.rootVisualElement.Q<Button>(Back);
+        //Rooms
+        var entryRoom = catacombsUIDocument.rootVisualElement.Q<Button>(Entry);
+        var saintsRoom = catacombsUIDocument.rootVisualElement.Q<Button>(Saints);
+        var coffinsRoom = catacombsUIDocument.rootVisualElement.Q<Button>(Coffins);
+        //Events
+        backButton.clicked -= CloseCatacombsMap;
+        backButton.clicked -= OpenWorldMapMenu;
+
+        entryRoom.clicked -= StartCatacombsEntry;
+        int progress = GameData.GetProgressKey();
+        switch (progress) {
+            case 1: {
+                    saintsRoom.clicked -= StartCatacombsSaints;
+                    break;
+                }
+            case 2: {
+
+                    saintsRoom.clicked -= StartCatacombsSaints;
+                    coffinsRoom.clicked -= StartCatacombsCoffins;
+                    break;
+
+                }
+        }
+    }
+    //--------------------
     void CloseChooseHeroMenu() {
         //-----Main Menu
         //var mainMenu = UidocumentsList[0].rootVisualElement.Q<VisualElement>(MainMenu);
@@ -111,7 +262,7 @@ public class MainMenuUIManager : MonoBehaviour {
         var startGameMenu = UidocumentsList[1].rootVisualElement.Q<VisualElement>(StartGameMenu);
         var nextHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(NextHero);
         var prevHeroButton = UidocumentsList[1].rootVisualElement.Q<Button>(PrevHero);
-        var startButton = UidocumentsList[1].rootVisualElement.Q<Button>(StartGame);
+        var mapButton = UidocumentsList[1].rootVisualElement.Q<Button>(MapButton);
 
 
         //Visability
@@ -122,11 +273,13 @@ public class MainMenuUIManager : MonoBehaviour {
         //Events
         nextHeroButton.clicked -= ChooseNextHero;
         prevHeroButton.clicked -= ChoosePrevHero;
-        startButton.clicked -= ChoseHeroAndStartGame;
+        mapButton.clicked -= OpenWorldMapMenu;
 
         //Focus
 
     }
+    #endregion
+
     //Shop
     void OpenShop() {
         CloseChooseHeroMenu();
@@ -189,22 +342,23 @@ public class MainMenuUIManager : MonoBehaviour {
         description = UidocumentsList[1].rootVisualElement.Q<Label>("SkillLabel3");
         description.text = chooseHeroController.CurrentHeroStrategyData.SkillStrategyData[2].Description;
     }
-    void ChoseHeroAndStartGame() {
-        eventManager.StartNewGame();
+    void StartTutorialScene() {
+        eventManager.StartTutorial();
     }
+    void StartCatacombsEntry() {
+        eventManager.StartCatacombsEntry();
+    }
+    void StartCatacombsSaints() {
+        eventManager.StartCatacombsSaints();
+    }
+    void StartCatacombsCoffins() {
+        eventManager.StartCatacombsCoffins();
+    }
+
     #region Localization
-    void ChangeLanguage() {
-        int locale = PlayerPrefs.GetInt("Locale");
-        if(locale == 0) {
-            int localeId = 1;
-            PlayerPrefs.SetInt("Locale", localeId);
-            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
-        }
-        if (locale == 1) {
-            int localeId = 0;
-            PlayerPrefs.SetInt("Locale", localeId);
-            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
-        }
+    void ToogleLanguage() {
+        localizationManager.ToogleLanguage();
     }
     #endregion
 }
+

@@ -26,8 +26,31 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
     CancellationTokenSource cts; //Use on destroy to kill dotween animations in popUpStrategy
     CancellationToken token;
     bool isDead = false;
+
+    //EventBus
+    EventBinding<OnPlayerRessurect> onPlayerRessurect;
+    //Damage BUffering
+    DamageBuffer damageBuffer;
     //Upgrades
     List<Item> itemsList = new List<Item>();
+    private void OnEnable() {
+        if (popUpStrategy != null && popUpHandler == null) {
+            popUpHandler = Instantiate(popUpStrategy);
+            popUpHandler.Initialize(transform, token);
+            OnTakeDamage += popUpHandler.PupUpDamage;
+            OnBlockDamage += popUpHandler.PopUpBlock;
+        }
+
+        onPlayerRessurect = new EventBinding<OnPlayerRessurect>(Ressurect);
+        EventBus<OnPlayerRessurect>.Register(onPlayerRessurect);
+    }
+    private void OnDisable() {
+        EventBus<OnPlayerRessurect>.Deregister(onPlayerRessurect);
+    }
+    private void Ressurect() {
+        health = maxHealth;
+        isDead = false;
+    }
 
     public void Initialize(HealtComponentData healtData) {
         //CTS
@@ -51,6 +74,11 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
 
         isDead = false;
     }
+    public void InitializeDamageBuffer(DamageBuffer damageBuffer) {
+        Debug.Log("Initialize damage buffer");
+        this.damageBuffer = damageBuffer;
+    }
+    
     private void OnDestroy() {
         cts.Cancel();
         OnTakeDamage -= popUpHandler.PupUpDamage;
@@ -100,8 +128,13 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
 
         MethodInfo visitMethod = GetType().GetMethod("EarnDamageByType", new Type[] { o.GetType() });
         if (visitMethod != null && visitMethod != GetType().GetMethod("EarnDamageByType", new Type[] { typeof(object) })) {
+            if (damageBuffer != null) { 
+                damageBuffer.RegisterDamage(visitMethod,  o , this);
+                return;
+            }
+             Debug.Log($"EarnDamageByType : {o.GetType().Name} ");
             visitMethod?.Invoke(this, new object[] { o });
-            // Debug.Log($"EarnDamageByType : {o.GetType().Name} ");
+           
         }
     }
     public void EarnDamageByType(PhysicsDamageType damageType) {
@@ -116,7 +149,7 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
         ChangeHealth(-damage);
         OnTakeDamage?.Invoke(damageType, damage);
         OnTakeDamageBus?.Invoke(damageType);
-        Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value - physicsDefence} ");
+       // Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value - physicsDefence} ");
     }
     public void EarnDamageByType(FireDamageType damageType) {
         if (damageType.Value == 0) return;
@@ -129,7 +162,7 @@ public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
         ChangeHealth(-damage);
         OnTakeDamage?.Invoke(damageType, damage);
         OnTakeDamageBus?.Invoke(damageType);
-        Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value - fireDefence}");
+       // Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value - fireDefence}");
     }
     public void EarnDamageByType(ColdDamageType damageType) {
         if (damageType.Value == 0) return;

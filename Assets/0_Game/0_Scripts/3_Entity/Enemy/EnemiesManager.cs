@@ -13,6 +13,7 @@ public class EnemiesManager : MonoBehaviour {
     Hero Hero;
     EventManager eventManager;
     LevelStatistics LevelStatistics;
+    [SerializeField] int maxEnemiesOnScene;
     [Header("Testing")]
     [SerializeField] Transform[] posList;
     public bool Active { get; private set; }
@@ -28,6 +29,10 @@ public class EnemiesManager : MonoBehaviour {
     public float NearHeroSpeedModifier = 0.8f;
     public string interactionTagName = "Player";
     float[] velArray = new float[100];
+
+    //Damage Buffer
+    
+    [SerializeField] DamageBuffer damageBuffer;
 
     //Job
 
@@ -55,6 +60,9 @@ public class EnemiesManager : MonoBehaviour {
         //for (int i = 0; i < 100; i++) {
         //    roomsSpawnhandlerList[0].strategies[0].Spawn();
         //}
+
+        //Testting
+      // StartSession();
     }
     public void StartNewSession() {
         Active = true;
@@ -109,7 +117,7 @@ public class EnemiesManager : MonoBehaviour {
            .Build(type);
 
         var component = obj.GetComponent(type);
-
+       
         //Set pos
         obj.transform.position = spawnPosList[Random.Range(0, spawnPosList.Count)].position.WithY(0);
 
@@ -120,7 +128,6 @@ public class EnemiesManager : MonoBehaviour {
             enemiesOnScene.Add(entity);
             entity.InitializeEvents(DestroyEnemy);
             transforms.Add(component.transform);
-
             RefreshAllocations();
         }
 
@@ -152,7 +159,9 @@ public class EnemiesManager : MonoBehaviour {
            .Build(type);
 
         var component = obj.GetComponent(type);
-
+        //Health
+        var health = obj.gameObject.GetComponent<HealthComponent>();
+        health.InitializeDamageBuffer(damageBuffer);
         //Set pos
         obj.transform.position = positionsArray[Random.Range(0, positionsArray.Length)].position.WithY(0);
 

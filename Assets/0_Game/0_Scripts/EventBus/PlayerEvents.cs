@@ -1,6 +1,9 @@
 public interface IEvent { }
-public class OnPlayerAlive : IEvent {
 
+public class OnPlayerStartLevel : IEvent {
+    public string levelName;
+} 
+public class OnPlayerAlive : IEvent {
     public Hero hero;
 }
 public class OnPlayerRessurect : IEvent {

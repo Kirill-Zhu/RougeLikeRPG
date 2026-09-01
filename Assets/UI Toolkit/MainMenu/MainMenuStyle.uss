@@ -1,4 +1,5 @@
 .Button {
+    -unity-material: url("project://database/Assets/0_Game/Materials/ShinyButton.mat");
     background-image: url("project://database/Assets/1_Packeges/0_UI/0_InGameUI/Buttons%20and%20panels.png?fileID=-679307135&guid=4a3562cf91f9be6408ed78aa63ac36fd&type=3#Buttons and panels_5");
     background-color: rgba(0, 0, 0, 0);
     -unity-font-definition: url("project://database/Assets/1_Packeges/11_Fonts/seagram_tfb/Seagram%20tfb.ttf?fileID=12800000&guid=45d636bc4ac35fa489ca1240074943f9&type=3#Seagram tfb");

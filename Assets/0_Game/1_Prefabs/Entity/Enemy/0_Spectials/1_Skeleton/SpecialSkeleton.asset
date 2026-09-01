@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26eff6f8e1950074c9c29ee91d958e9b, type: 3}
   m_Name: SpecialSkeleton
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: c3c6efed9763e434397bdc87d94e65d7, type: 3}
   TypeOfEnemy: Dummy
   prefab: {fileID: 3535418252865595971, guid: 21339225f3956964f89886c2c22645d9, type: 3}
-  Icon: {fileID: 21300000, guid: 4ca665255adc0204585931b317f67500, type: 3}
   MoveSpeed: 2.5
   AttackRange: 2
-  AttackCooldown: 4
-  DamageDelay: 0.4
+  AttackCooldown: 3
+  DamageDelay: 0.8
   UninterruptedAttack: 0
   ProjectileSpeed: 1
   ProjectilieLiveDureation: 1
@@ -31,11 +31,11 @@ MonoBehaviour:
   DropPfreabList:
   - {fileID: 3150355104182411398, guid: 0675257d5552bb64c8c6c293fc38a243, type: 3}
   damageTypesEnum: 5
-  physicsDamage: 5
+  physicsDamage: 7
   fireDamage: 0
   coldDamage: 0
   HealtData: {fileID: 11400000, guid: 604b5271533bd794daca82080724d18d, type: 2}
-  OnAttackParticelPrefab: {fileID: 7611201976539897820, guid: 80d6404ce7a73f0419a8ec717901cdc1, type: 3}
+  OnAttackParticelPrefab: {fileID: 7611201976539897820, guid: a5aede0ad3bff984e81db9ad36c12fc8, type: 3}
   OnAttack:
     Guid:
       Data1: 236452331

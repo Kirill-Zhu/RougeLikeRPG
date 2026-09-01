@@ -14,7 +14,7 @@
         </ui:Button>
     </ui:VisualElement>
     <ui:VisualElement name="StartGameMenu" view-data-key="ChoseHeroMenu" style="flex-grow: 1; flex-direction: row; right: 195px; left: auto; width: 945px; bottom: auto; height: 133px; min-height: 0; max-height: 149px; top: 44px; position: absolute;">
-        <ui:Button text="START " name="StartGame" class="Button" style="top: 750px; position: absolute; left: auto; width: 300px; height: 80px;">
+        <ui:Button text="START " name="MapButton" class="Button" style="top: 750px; position: absolute; left: auto; width: 300px; height: 80px;">
             <Bindings>
                 <UnityEngine.Localization.LocalizedString property="text" table="GUID:050fb9c0ec9bf3148b66409019667b84" entry="Id(31813566898176)" />
             </Bindings>

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks.Triggers;
 using MyStateMachine;
 using R3;
 using System;
@@ -62,6 +63,9 @@ public class Hero : MonoBehaviour {
     [Header("UI Properties")]
     [SerializeField] PointerController pointerController;
     Vector2 missionTarget = new Vector3(30, 0, 40);
+
+    //Renderer
+    HeroRendererController heroRendererController;
     //
     //State Machine
     [SerializeField] Animator animator;
@@ -70,6 +74,7 @@ public class Hero : MonoBehaviour {
     PausedState pausedState;
     Locomotion locomotion;
     JumpState jumpState;
+    StrafeState strafeState;
     LandingState landingState;
     SkillState skillState;
 
@@ -101,7 +106,7 @@ public class Hero : MonoBehaviour {
         upgradeContorller = GetComponent<HeroUpgradeContorller>();
         coinsComponent = GetComponent<CoinsComponent>();
         audioManager = GetComponent<HeroAudioManager>();
-
+        heroRendererController = GetComponent<HeroRendererController>();    
        
         IsActive.Subscribe(newValue => {
             battleContorller.IsActive = newValue;
@@ -163,6 +168,8 @@ public class Hero : MonoBehaviour {
 
         //Pick Up
         coinsComponent.Initialaize(this);
+        //Renderer
+        heroRendererController.Initialize(model.GetComponent<HeroModelHandler>());
 
         OnHeroChange?.Invoke();
 
@@ -171,26 +178,28 @@ public class Hero : MonoBehaviour {
         safeZoneState = new SafeZoneState(moveController, animator, battleContorller, heroAutoSkillController, pointerController);
         pausedState = new PausedState(moveController, animator, battleContorller, heroAutoSkillController);
         locomotion = new Locomotion(moveController, animator, battleContorller, heroAutoSkillController);
-        jumpState = new JumpState(moveController, animator, battleContorller, heroAutoSkillController);
-        landingState = new LandingState(moveController, animator, battleContorller, heroAutoSkillController);
+       // jumpState = new JumpState(moveController, animator, battleContorller, heroAutoSkillController);
+       // landingState = new LandingState(moveController, animator, battleContorller, heroAutoSkillController);
         skillState = new SkillState(moveController, animator, battleContorller, heroAutoSkillController);
-
+        strafeState = new StrafeState(moveController, animator, battleContorller, heroAutoSkillController, heroRendererController) ;
 
 
         //Movement
-        At(locomotion, jumpState, new FuncPredicate(() => moveController.IsJumping));
-        At(landingState, locomotion, new FuncPredicate(() => !moveController.IsJumping && moveController.Grounded()));
-        At(skillState, jumpState, new FuncPredicate(() => moveController.IsJumping && !battleContorller.InBattleState));
+       // At(locomotion, jumpState, new FuncPredicate(() => moveController.IsJumping));
+      //  At(landingState, locomotion, new FuncPredicate(() => !moveController.IsJumping && moveController.Grounded()));
+        At(locomotion, strafeState, new FuncPredicate(() => moveController.IsStrafing));
+        At(skillState, strafeState, new FuncPredicate(() => moveController.IsStrafing && !battleContorller.InBattleState));
+       // At(skillState, jumpState, new FuncPredicate(() => moveController.IsJumping && !battleContorller.InBattleState));
         At(pausedState, locomotion, new FuncPredicate(() => true));
-
+        At(pausedState, skillState, new FuncPredicate(() => battleContorller.InBattleState));
         //Skills
         At(locomotion, skillState, new FuncPredicate(() => moveController.Grounded() && battleContorller.InBattleState));
 
         //Any
         Any(pausedState, new FuncPredicate(() => paused));
         Any(safeZoneState, new FuncPredicate(() => safeZone && !paused));
-        Any(locomotion, new FuncPredicate(() => !moveController.IsJumping && moveController.Grounded() && !battleContorller.InBattleState));
-        Any(landingState, new FuncPredicate(() => !moveController.IsJumping && !moveController.Grounded()));
+        Any(locomotion, new FuncPredicate(() => !moveController.IsStrafing && !battleContorller.InBattleState));
+       // Any(landingState, new FuncPredicate(() => !moveController.IsStrafing && !moveController.Grounded()));
         stateMachine.SetState(locomotion);
         Initialaized = true;
         IsActive.Value = true;
@@ -235,7 +244,6 @@ public class Hero : MonoBehaviour {
         safeZone = false;
     }
     private void RessurectHero(OnPlayerRessurect ressurect) {
-        healthComponent.SetCurrentHealth(healthComponent.MaxHealth);
         stateMachine.SetState(locomotion);
     }
     //Events 

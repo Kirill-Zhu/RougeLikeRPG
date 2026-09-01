@@ -42,6 +42,7 @@ public class AuthentificationManager : MonoBehaviour
     private void Start() {
 
         //Events
+        OnErrorMessage.AddListener(authenticateionUIcontroller.ShowError);
        
         authenticateionUIcontroller.OnChangePassword.AddListener(value => password = value);
         authenticateionUIcontroller.OnSignInButtonClicked.AddListener(SignInTest);
@@ -104,10 +105,10 @@ public class AuthentificationManager : MonoBehaviour
         }
     }
     public async void SignUpWithWithUsernameAndPassword(string username, string password) {
-        Debug.Log("Try To sign Up");
         if (!UserNameIsLegit(username)) return;
         if (!PasswordIsLegit(password)) return;
 
+        Debug.Log("Try To sign Up");
 
         try {
             await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(username, password);
@@ -165,6 +166,7 @@ public class AuthentificationManager : MonoBehaviour
     bool PasswordIsLegit(string value) {
         if(value.Length < 8) {
             OnErrorMessage.Invoke("Password must be minimum 8 characters");
+
             return false;
         }
         if (value.Length > 30) {

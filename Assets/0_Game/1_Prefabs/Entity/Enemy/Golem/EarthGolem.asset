@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26eff6f8e1950074c9c29ee91d958e9b, type: 3}
   m_Name: EarthGolem
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: b144cb7a7b9129b4b94e2ee3dfc9b4a7, type: 3}
   TypeOfEnemy: Dummy
   prefab: {fileID: 9137032837993464747, guid: 6b55454e0f7280246a9f4b48b029fe80, type: 3}
-  Icon: {fileID: 21300000, guid: 4ca665255adc0204585931b317f67500, type: 3}
   MoveSpeed: 1
   AttackRange: 8
   AttackCooldown: 15

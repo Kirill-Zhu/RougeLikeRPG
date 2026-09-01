@@ -4,9 +4,9 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Strategy/Enemy/NewEnemyType", fileName = "NewEnemyType")]
 public class EnemyStrategy : ScriptableObject {
+    public Sprite Icon;
     public string TypeOfEnemy;
     public GameObject prefab;
-    public Sprite Icon;
     public float MoveSpeed;
     public float AttackRange;
     public float AttackCooldown;

@@ -18,6 +18,7 @@ public class LevelStatistics : MonoBehaviour {
 
     //Event Bus
     EventBinding<OnPlayerDied> onPlayerDied;
+    EventBinding<OnPlayerEndLevel> onPlayerEndLevel;
     private void Awake() {
         data.ClearData();
         hero.HealthComponent.OnTakeDamage += PlayerTookDamage;
@@ -27,9 +28,13 @@ public class LevelStatistics : MonoBehaviour {
         onPlayerDied = new EventBinding<OnPlayerDied>(UpdateData);
         EventBus<OnPlayerDied>.Register(onPlayerDied);
 
+        onPlayerEndLevel = new EventBinding<OnPlayerEndLevel>(UpdateData);
+        EventBus<OnPlayerEndLevel>.Register(onPlayerEndLevel);
+
     }
     private void OnDisable() {
         EventBus<OnPlayerDied>.Deregister(onPlayerDied);
+        EventBus<OnPlayerEndLevel>.Deregister(onPlayerEndLevel);
     }
     [ContextMenu("Update Data")]
 

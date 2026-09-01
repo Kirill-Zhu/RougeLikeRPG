@@ -23,13 +23,54 @@ public class EventManager : MonoBehaviour {
         await volumeManager.FadeOut();
         scenesManager.LoadMainMenu();
     }
-    public async void StartNewGame() {
+    public async void StartCatacombsEntry() {
         Time.timeScale = 1;
         if (gameUIManager != null) {
             gameUIManager.HideStatistics();
             gameUIManager.HideAllUI();
         }
-        await scenesManager.LoadLevelAsync(ScenesManager.Level2SceneID);
+        await scenesManager.LoadLevelAsync(ScenesManager.CatacombsEntry);
+        audioManager.StartPlayStandartMusic();
+        await UniTask.Delay(3000);
+        volumeManager.FadeIn();
+        hero.IsActive.Value = true;
+        enemiesManager.StartNewSession();
+    }
+    public async void StartCatacombsSaints() {
+        Time.timeScale = 1;
+        if (gameUIManager != null) {
+            gameUIManager.HideStatistics();
+            gameUIManager.HideAllUI();
+        }
+        await scenesManager.LoadLevelAsync(ScenesManager.CatacombsSaints);
+        audioManager.StartPlayStandartMusic();
+        await UniTask.Delay(3000);
+        volumeManager.FadeIn();
+        hero.IsActive.Value = true;
+        enemiesManager.StartNewSession();
+    }
+    public async void StartCatacombsCoffins() {
+        Time.timeScale = 1;
+        if (gameUIManager != null) {
+            gameUIManager.HideStatistics();
+            gameUIManager.HideAllUI();
+        }
+        await scenesManager.LoadLevelAsync(ScenesManager.CatacombsCoffins);
+        audioManager.StartPlayStandartMusic();
+        await UniTask.Delay(3000);
+        volumeManager.FadeIn();
+        hero.IsActive.Value = true;
+        enemiesManager.StartNewSession();
+    }
+    public async void StartTutorial() {
+        Time.timeScale = 1;
+
+        if (gameUIManager != null) {
+            gameUIManager.HideStatistics();
+            gameUIManager.HideAllUI();
+        }
+
+        await scenesManager.LoadLevelAsync(ScenesManager.tutorialSceneID);
         audioManager.StartPlayStandartMusic();
         await UniTask.Delay(3000);
         volumeManager.FadeIn();

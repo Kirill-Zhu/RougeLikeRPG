@@ -18,7 +18,7 @@ public class DamageType {
             return Color.white;
         }
         if (damageType.GetType() == typeof(FireDamageType)) {
-            return Color.yellow;
+            return Color.red;
         }
         if (damageType.GetType() == typeof(ColdDamageType)) {
             return Color.cyan;

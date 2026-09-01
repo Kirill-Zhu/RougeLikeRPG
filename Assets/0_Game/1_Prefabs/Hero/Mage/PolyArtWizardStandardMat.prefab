@@ -660,6 +660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4463868907105534}
   - component: {fileID: 95538263452871118}
+  - component: {fileID: -5853990890178733333}
   m_Layer: 0
   m_Name: PolyArtWizardStandardMat
   m_TagString: Untagged
@@ -707,6 +708,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-5853990890178733333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248815240492774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d22fdcce547144aa6a08e3c12de282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  models:
+  - {fileID: 1322346569522534}
+  - {fileID: 1335278543749856}
+  strafeMaterialArray: {fileID: 2100000, guid: d31de14cef9a845eda8a2fe52a7f1e2f, type: 2}
 --- !u!1 &1251583507443948
 GameObject:
   m_ObjectHideFlags: 0

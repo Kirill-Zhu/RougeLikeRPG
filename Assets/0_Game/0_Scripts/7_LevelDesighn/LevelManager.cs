@@ -1,8 +1,10 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 public class LevelManager : MonoBehaviour {
 
+    [SerializeField] int levelProgressKey;
     [Header ("Test map Generator options")]
     [SerializeField] MazeGenerator mazeGenerator;
 
@@ -25,7 +27,7 @@ public class LevelManager : MonoBehaviour {
     private void Awake() {
         HeroSpawner.hero = hero;
         ActivateScene();
-
+        mazeGenerator.Initialize(levelProgressKey);
         //Events
         OnGamePause.AddListener(hero.OnGamePaused);
         OnGameResume.AddListener(hero.OnGameResume);
@@ -37,6 +39,9 @@ public class LevelManager : MonoBehaviour {
     }
 
     private void OnEnable() {
+
+
+        //EventBus
         onPlayerEndLevelBinding = new EventBinding<OnPlayerEndLevel>(PauseGame);
         EventBus<OnPlayerEndLevel>.Register(onPlayerEndLevelBinding);
 
@@ -45,8 +50,14 @@ public class LevelManager : MonoBehaviour {
 
         onPlayeRessurectBinding = new EventBinding<OnPlayerRessurect>(ResumeGame);
         EventBus<OnPlayerRessurect>.Register(onPlayeRessurectBinding);
-    }
 
+    }
+    private async void Start() {
+
+        await UniTask.WaitForSeconds(1);
+        //EventBus Raise Events
+        EventBus<OnPlayerStartLevel>.Raise(new OnPlayerStartLevel() { levelName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name });
+    }
     private void OnDisable() {
         EventBus<OnPlayerEndLevel>.Deregister(onPlayerEndLevelBinding);
         EventBus<OnPlayerDied>.Deregister(onPlayerDied);
@@ -62,7 +73,11 @@ public class LevelManager : MonoBehaviour {
         hero.OnPickUpItemPowerUp.RemoveAllListeners();
     }
     public void ActivateScene() {
-        HeroSpawner.SpawnHero(mazeGenerator.PlayerSpawnPointTransform());
+        if (HeroSpawner.SpawnPoint == null) {
+            HeroSpawner.SpawnHero(mazeGenerator.PlayerSpawnPointTransform());
+        } else
+            HeroSpawner.SpawnHero();
+
         heroData = heroStrategy.HeroStrategyData;
         hero.Initialize(heroData);
     }

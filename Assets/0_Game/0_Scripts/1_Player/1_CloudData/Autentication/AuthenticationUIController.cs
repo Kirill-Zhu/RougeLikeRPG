@@ -30,6 +30,8 @@ public class AuthenticationUIController : MonoBehaviour {
         Initialize();
     }
     private async void OnEnable() {
+        //Events
+        
 
         await UniTask.WaitUntil(() => AuthenticationService.Instance.IsSignedIn);
         if (AuthenticationService.Instance.IsSignedIn)

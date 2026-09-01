@@ -296,6 +296,8 @@ GameObject:
   - component: {fileID: -4851204089305757902}
   - component: {fileID: 622142874731739280}
   - component: {fileID: 8763447173879935270}
+  - component: {fileID: -5163500905093638455}
+  - component: {fileID: 4251220097369663010}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Player
@@ -367,7 +369,7 @@ MonoBehaviour:
   OnGetExp:
     m_PersistentCalls:
       m_Calls: []
-  OnPickUppowerUp:
+  OnPickUpItemPowerUp:
     m_PersistentCalls:
       m_Calls: []
   OnLevelUp:
@@ -378,6 +380,7 @@ MonoBehaviour:
       m_Calls: []
   healthData: {fileID: 11400000, guid: 4e4c4d9d376a95840bc50dd8c43e467f, type: 2}
   pointerController: {fileID: 5312829155033693740}
+  heroRendererController: {fileID: 4251220097369663010}
   animator: {fileID: 4656518056047123800}
   audioManager: {fileID: 8763447173879935270}
   initialization: 1
@@ -579,3 +582,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5241381a7ff7134db63afd12657e47f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5163500905093638455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351574590332836233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da6c51194ab84042bc718fd8ead8aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startDialogueEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  nextSentenceDialogueEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  endDialogueEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4251220097369663010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351574590332836233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cbc770ce97abc4438042534c164376e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standartHeroMaterial: {fileID: 0}
+  strafeHeroMaterial: {fileID: 0}
+  heroGraphics: {fileID: 0}
