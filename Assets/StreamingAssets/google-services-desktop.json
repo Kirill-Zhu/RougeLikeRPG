@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "578594479747",
+    "project_id": "rouguelikerpg",
+    "storage_bucket": "rouguelikerpg.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578594479747:android:4c9216091165cadeeb05b6",
+        "android_client_info": {
+          "package_name": "com.KiZhuGames.RogueLikeRPG"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBahmD5-kHKsF6GCaUHs5xYCLoi_s-ywng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

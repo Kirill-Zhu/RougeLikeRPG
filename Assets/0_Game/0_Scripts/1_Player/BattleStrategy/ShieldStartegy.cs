@@ -9,20 +9,38 @@ using UnityEngine.Events;
 public class ShieldStartegy : SkillsStrategy, IVistor {
     public float LiveDuration = 5;
     private bool onCoolDown = false;
-
     //Visitor
     CancellationTokenSource cts = new CancellationTokenSource();
     CancellationToken token;
     public override int CurrentAnimationHash { get => Animator.StringToHash(AnimationName); set => throw new NotImplementedException(); }
 
-   
+    public override bool Initialized() {
+        return true;
+    }
 
     public override void Dispose() {
        //Destroy all projectiles
     }
-    public override void Initialize(Transform origin) {
+
+    public override bool Evauate(float distanceToHero) {
+        throw new NotImplementedException();
+    }
+
+    public override void Initialize(Transform origin, HeroAudioManager audioManager, string interactionTagName) {
+        //Tag
+        this.interactionTagName = interactionTagName;
+
         Origin = origin;
         damageTypesList = GetStartDamageTypes().ToList();
+        
+    
+
+        foreach (var damageType in damageTypesList) 
+            SetOrAddDamageTypeWithValues(damageType);
+
+        //Audio 
+        this.audioManager = audioManager;
+      
     }
     public override void OnUpdate(float deltaTime) {
         if (!onCoolDown) return;
@@ -55,6 +73,14 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
         //Change Mana
         OnManaChange.Invoke(-ManaCost);
 
+        //Audio
+        PlayCastSound();
+      
+
+    }
+
+    public override bool TryUseSkill(Action<int, float> OnAnimation) {
+        return false;
     }
 
     public override void UpdateValues() {
@@ -95,5 +121,19 @@ public class ShieldStartegy : SkillsStrategy, IVistor {
         Debug.Log($"VIsited {healthComponent.GetType().Name} : damge types array count is : {damageTypesList.Count}");
     }
 
+    protected override void BuildNewVFX() {
+        throw new NotImplementedException();
+    }
 
+    protected override void PlayOnCastVFX() {
+        throw new NotImplementedException();
+    }
+
+    protected override void PlayOnAttackVFX() {
+        throw new NotImplementedException();
+    }
+
+    protected override void PlayCastSound() {
+        audioManager.PlayOneShot(SkillSound, Origin.position);
+    }
 }

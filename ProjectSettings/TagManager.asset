@@ -18,10 +18,10 @@ TagManager:
   - PostProcess
   - Dead
   - PickUp
-  - 
-  - 
-  - 
-  - 
+  - MiniMap
+  - Enemy
+  - IgnoreEnemies
+  - Cloak
   - 
   - 
   - 

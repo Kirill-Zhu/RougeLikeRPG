@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -5,12 +6,14 @@ using UnityEngine;
 
 [RequireComponent(typeof(HealthComponent), typeof(SimpleEnemyBattleContorller))]
 public class Entity : MonoBehaviour, IDamagable {
-    //Dorps
+    //Drops
     public List<GameObject> DropObjectsList;  // Simple Drop On Die
-
+    
+    //General 
     protected Rigidbody rb;  //Still dont use it directly
     protected Collider colider; // one "l" because Component has its own collider field
     public Sprite Icon;
+    public LevelStatistics LevelStatistics;
     //Move
     public float MoveSpeed = 0;
     public float VelocityMagnitude;
@@ -18,7 +21,9 @@ public class Entity : MonoBehaviour, IDamagable {
     //Battle
     protected SimpleEnemyBattleContorller battleContorller;
     public GameObject WeaponPrefab;           //(Collider for mele or graphics for projectile)
+    public bool UninterruptedAttack = false;
     public bool InBattle;
+    public bool IsAttackingNow;
     public float AttackRange = 1;
     public float AttackDuration = 1;
     public float DamageDelay;
@@ -38,8 +43,17 @@ public class Entity : MonoBehaviour, IDamagable {
     //Health
     public HealtComponentData healthData;
     HealthComponent healthComponent;
+
+    //VFX
+    public GameObject OnAttackParticlePrefab;
+
+    //Eevents
     Action<Entity> OnDieEvent = delegate { };
 
+    //Sound
+    [Header("Audio")]
+    public EventReference OnAttackSound;
+    public EventReference OnDieSound;
     protected bool isDead = false;
     protected virtual void Awake() {
         rb = GetComponent<Rigidbody>();
@@ -49,12 +63,29 @@ public class Entity : MonoBehaviour, IDamagable {
 
 
         battleContorller = GetComponent<SimpleEnemyBattleContorller>();
-
-        //Events
-        healthComponent.OnDie += Die;
     }
     private void Start() {
-        battleContorller.Initialize(AttackDuration, WeaponType, AttackRange, DamageDelay, DamageTypes, WeaponPrefab, InteractionTagName, ProjectilieSpeed, ProjectileLiveDuration, ShootShape, SpreadAngle, ProjectilesCountByShoot, SelfDirectedProjectile, AimTransform);
+        battleContorller.Initialize(AttackDuration
+            , WeaponType
+            , AttackRange
+            , DamageDelay
+            , DamageTypes
+            , WeaponPrefab
+            ,UninterruptedAttack
+            , InteractionTagName
+            , ProjectilieSpeed
+            , ProjectileLiveDuration
+            , ShootShape
+            , SpreadAngle
+            , ProjectilesCountByShoot
+            , SelfDirectedProjectile
+            , AimTransform
+            , OnAttackParticlePrefab 
+            ,OnAttackSound);
+        //-----------------------------
+        //Events
+        healthComponent.OnTakeDamage += LevelStatistics.PlayerDealtDamage;
+        healthComponent.OnDie += Die;
     }
 
     public virtual void Die() {
@@ -71,17 +102,23 @@ public class Entity : MonoBehaviour, IDamagable {
             }
         }
 
+
+        //Sound
+        RuntimeManager.PlayOneShot(OnDieSound, this.gameObject.transform.position);
+      
         Destroy(this.gameObject, 2);
     }
     public virtual void TakeDamage(int damage) {
-        Debug.Log($"{GetType().Name} took damage {damage}");
+       // Debug.Log($"{GetType().Name} took damage {damage}");
     }
+    
     public virtual void InitializeEvents(Action<Entity> OnDestroEvent) {
         OnDieEvent += OnDestroEvent;
     }
     private void OnDestroy() {
         OnDieEvent = null;
         healthComponent.OnDie -= Die;
+        healthComponent.OnTakeDamage -= LevelStatistics.PlayerDealtDamage;
     }
     //public class EnemyBuilder {
     //    GameObject prefab;
@@ -116,7 +153,7 @@ public class Entity : MonoBehaviour, IDamagable {
     public class TypeBuilder {
         readonly GameObject prefab;
         readonly HealtComponentData healthData;
-
+        readonly LevelStatistics levelStatistics;
         Sprite icon;
 
         float moveSpeed;
@@ -125,6 +162,8 @@ public class Entity : MonoBehaviour, IDamagable {
         float attackDuration;
         float damageDelay;
         GameObject weaponPrefab;
+        public bool uninterruptedAttack = false;
+
         WeaponTypeEnum weaponType;
         DamageType[] damageTypes;
         //Projectile
@@ -135,11 +174,17 @@ public class Entity : MonoBehaviour, IDamagable {
         int projectilesCountByShoot = 1;
         bool selfDirectedProjectile = false;
         Transform aimTransform;
+        //VFX
+        GameObject onAttackParticlePrefab;
+        //Sound 
+        EventReference OnAttackSound;
+        EventReference OnDieSound;
         string interactionTagName;
         List<GameObject> dropObjectsList;
-        public TypeBuilder(GameObject prefab, HealtComponentData healthData) {
+        public TypeBuilder(GameObject prefab, HealtComponentData healthData, LevelStatistics stats) {
             this.prefab = prefab;
             this.healthData = healthData;
+            this.levelStatistics = stats;
         }
         public TypeBuilder WithIcon(Sprite icon) { this.icon = icon; return this; }
         public TypeBuilder WithMoveSpeed(float moveSpeed) { this.moveSpeed = moveSpeed; return this; }
@@ -147,6 +192,7 @@ public class Entity : MonoBehaviour, IDamagable {
         public TypeBuilder WithAttackDuration(float attackDuration) { this.attackDuration = attackDuration; return this; }
         public TypeBuilder WithDamageDelay(float damageDelay) { this.damageDelay = damageDelay; return this; }
         public TypeBuilder WithWeaponPrefab(GameObject weaponPrefb) { this.weaponPrefab = weaponPrefb; return this; }
+        public TypeBuilder WithUninterruptedAttack(bool value) { this.uninterruptedAttack = value; return this; }
         public TypeBuilder WithWeaponType(WeaponTypeEnum weaponType) { this.weaponType = weaponType; return this; }
         public TypeBuilder WithDamageTypes(DamageType[] damageTypes) { this.damageTypes = damageTypes; return this; }
         public TypeBuilder WithInteractionTag(string tagName) { this.interactionTagName = tagName; return this; }
@@ -158,7 +204,8 @@ public class Entity : MonoBehaviour, IDamagable {
         public TypeBuilder SelfDirecredProjectile(bool isSeldDirected) { this.selfDirectedProjectile = isSeldDirected; return this; }
         public TypeBuilder SetProjectileAim(Transform aimTransform) { this.aimTransform = aimTransform; return this; }
         public TypeBuilder WithDropObject(List<GameObject> dropPrefabList) { this.dropObjectsList = dropPrefabList; return this; }
-
+        public TypeBuilder WithOnAttackParticle(GameObject onAttackParticlePrefab) { this.onAttackParticlePrefab = onAttackParticlePrefab; return this; }    
+        public TypeBuilder WithSounds(EventReference OnAttackSound, EventReference OnDieSound) { this.OnAttackSound = OnAttackSound; this.OnDieSound = OnDieSound; return this; }
         public GameObject Build(Type type) {
 
             var obj = Instantiate(prefab);
@@ -171,6 +218,12 @@ public class Entity : MonoBehaviour, IDamagable {
             FieldInfo field = component.GetType().GetField("Icon");
             if (field != null) {
                 field.SetValue(component, icon);
+
+            }
+            //Set levelStatiscics
+            field = component.GetType().GetField("LevelStatistics");
+            if (field != null) {
+                field.SetValue(component, levelStatistics);
 
             }
             //Set Move Speed
@@ -211,6 +264,13 @@ public class Entity : MonoBehaviour, IDamagable {
                 // Debug.Log($"{component.GetType().Name} has field {field.GetValue(component)}");
 
             }
+            //Set Uniterrupted attack
+            field = component.GetType().GetField("UninterruptedAttack");
+            if (field != null) {
+                field.SetValue(component, uninterruptedAttack);
+                // Debug.Log($"{component.GetType().Name} has field {field.GetValue(component)}");
+
+            }
             //Set Damage Types
             field = component.GetType().GetField("DamageTypes");
             if (field != null) {
@@ -223,6 +283,7 @@ public class Entity : MonoBehaviour, IDamagable {
                 field.SetValue(component, interactionTagName);
 
             }
+            #region Projectile
             //Set projectileLiveDuration
             field = component.GetType().GetField("ProjectilieSpeed");
             if (field != null) {
@@ -267,11 +328,29 @@ public class Entity : MonoBehaviour, IDamagable {
                 field.SetValue(component, aimTransform);
 
             }
+            #endregion
             //Set Drop Object
             field = component.GetType().GetField("DropObjectsList");
             if (field != null) {
                 field.SetValue(component, dropObjectsList);
             }
+
+            //VFX
+            field = component.GetType().GetField("OnAttackParticlePrefab");
+            if (field != null) {
+                field.SetValue(component, onAttackParticlePrefab);
+            }
+            #region Sound
+            field = component.GetType().GetField("OnAttackSound");
+            if (field != null) {
+                field.SetValue(component, OnAttackSound);
+            }
+
+            field = component.GetType().GetField("OnDieSound");
+            if (field != null) {
+                field.SetValue(component, OnDieSound);
+            }
+            #endregion
             return obj;
         }
     }

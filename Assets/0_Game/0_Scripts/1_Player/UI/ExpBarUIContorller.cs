@@ -1,13 +1,12 @@
-using UnityEngine;
-using Zenject;
-using UnityEngine.UI;
-using TMPro;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
-public class ExpBarUIContorller : MonoBehaviour {
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ExpBarUIContorller : MonoBehaviour, InGameUI {
 
     [SerializeField] List<TextMeshProUGUI> popUpExpTextMeshList;
     [SerializeField] Slider slider;
@@ -28,12 +27,37 @@ public class ExpBarUIContorller : MonoBehaviour {
     private void Awake() {
         startAnimationPos = popUpExpTextMeshList[0].rectTransform.position;
     }
+    #region InGameUI
+    [Header("Sho Hide Animaiton settings")]
+    [SerializeField] Vector2 showPos;
+    [SerializeField] Vector2 hidePos;
+    [SerializeField] RectTransform transformToMove;
+    Sequence sequence;
+    [ContextMenu("Show UI")]
+    public void ShowUI() {
+        if (sequence != null)
+            sequence.Kill();
+
+        sequence = DOTween.Sequence();
+        sequence.Append(transformToMove.DOAnchorPos(showPos, InGameUI.duration)).SetEase(Ease.InFlash);
+
+    }
+    [ContextMenu("hide Ui")]
+    public void HideUI() {
+        if (sequence != null)
+            sequence.Kill();
+
+        sequence = DOTween.Sequence();
+        sequence.Append(transformToMove.DOAnchorPos(hidePos, InGameUI.duration)).SetEase(Ease.InFlash);
+    }
+    #endregion
     void SetCurrentExp(int value, int currentExp) {
         slider.value = currentExp;
         PopUpExpValue(value);
     }
-    void ChangeMaxExp(int value) { 
-      slider.maxValue = value;
+    void ChangeMaxExp(int value) {
+        slider.maxValue = value;
+        slider.value = 0;
     }
 
     async void PopUpExpValue(int value) {
@@ -46,14 +70,14 @@ public class ExpBarUIContorller : MonoBehaviour {
 
             textMesh.gameObject.SetActive(true);
             textMesh.text = value.ToString();
-            textMesh.rectTransform.position = startAnimationPos;    
-            task = textMesh.rectTransform.DOLocalMoveX(textMesh.rectTransform.localPosition.x +40, 1).ToUniTask();
-            
-            await task;   
+            textMesh.rectTransform.position = startAnimationPos;
+            task = textMesh.rectTransform.DOLocalMoveX(textMesh.rectTransform.localPosition.x + 40, 1).ToUniTask(TweenCancelBehaviour.Kill);
+
+            await task;
             textMesh.gameObject.SetActive(false);
             break;
         }
-     
+
 
     }
 }

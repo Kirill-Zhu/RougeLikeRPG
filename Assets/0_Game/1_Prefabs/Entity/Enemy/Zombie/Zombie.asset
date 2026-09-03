@@ -12,25 +12,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26eff6f8e1950074c9c29ee91d958e9b, type: 3}
   m_Name: Zombie
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: 6edcc14779b1663408cb150234b79580, type: 3}
   TypeOfEnemy: Dummy
   prefab: {fileID: 6930373436760084395, guid: 005cf90f64708ca4f9d77b3b21c5beb4, type: 3}
-  Icon: {fileID: 21300000, guid: 4ca665255adc0204585931b317f67500, type: 3}
   MoveSpeed: 1
   AttackRange: 3
-  AttackDuration: 6
+  AttackCooldown: 5
   DamageDelay: 1
+  UninterruptedAttack: 0
   ProjectileSpeed: 0
   ProjectilieLiveDureation: 3
   ShootShape: 0
   SpreadAngle: 0
   ProjecitlesCountByShoot: 0
+  SelfDirecrtedProjectile: 0
   WeaponPrefab: {fileID: 2714323086112425801, guid: 906c42f36cdfc5d4483ad698e1fd1ea0, type: 3}
   WeaponType: 0
   DropPfreabList:
   - {fileID: 1083584670510959728, guid: efd17645001c6694797c6f257eefdbc1, type: 3}
   - {fileID: 4897015921897156567, guid: ba23fb9f3c545b14e855f55556f5c092, type: 3}
   damageTypesEnum: 1
-  physicsDamage: 5
+  physicsDamage: 8
   fireDamage: 0
   coldDamage: 0
   HealtData: {fileID: 11400000, guid: 16ec866530b899045ae2c5ce05914d0b, type: 2}
+  OnAttackParticelPrefab: {fileID: 8587560481101609250, guid: 883713f4af39a584dae74bf9612fae80, type: 3}
+  OnAttack:
+    Guid:
+      Data1: 339235173
+      Data2: 1086912080
+      Data3: -1600498779
+      Data4: -1999780148
+    Path: event:/Enemy/Zombie/ZombieAttack
+  OnDie:
+    Guid:
+      Data1: 494962349
+      Data2: 1194889059
+      Data3: 1118791051
+      Data4: -1653982547
+    Path: event:/Enemy/Zombie/ZombieDie

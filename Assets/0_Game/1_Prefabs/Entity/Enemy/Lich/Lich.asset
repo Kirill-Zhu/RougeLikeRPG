@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26eff6f8e1950074c9c29ee91d958e9b, type: 3}
   m_Name: Lich
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: a391dec97fbea9a41a0a38970363dd9e, type: 3}
   TypeOfEnemy: Dummy
   prefab: {fileID: 100048, guid: 5f47180cae2a83645b4f21cdecda1ddd, type: 3}
-  Icon: {fileID: 21300000, guid: 4ca665255adc0204585931b317f67500, type: 3}
   MoveSpeed: 1
   AttackRange: 9
-  AttackDuration: 6
+  AttackCooldown: 8
   DamageDelay: 0.4
+  UninterruptedAttack: 1
   ProjectileSpeed: 2
   ProjectilieLiveDureation: 4
   ShootShape: 0
   SpreadAngle: 0
   ProjecitlesCountByShoot: 1
+  SelfDirecrtedProjectile: 0
   WeaponPrefab: {fileID: 5766454499432765695, guid: 6be430e3fd5a6e44cbfcaa29e1e05072, type: 3}
   WeaponType: 1
   DropPfreabList:
@@ -31,5 +33,20 @@ MonoBehaviour:
   damageTypesEnum: 4
   physicsDamage: 0
   fireDamage: 0
-  coldDamage: 5
+  coldDamage: 7
   HealtData: {fileID: 11400000, guid: 3f6a27632abbc3e41b5800c53b47785a, type: 2}
+  OnAttackParticelPrefab: {fileID: 8974203713140315807, guid: bcfa32db22bb6e748a78b8d32a466ea7, type: 3}
+  OnAttack:
+    Guid:
+      Data1: -757387681
+      Data2: 1106342484
+      Data3: 1510137015
+      Data4: -2130334132
+    Path: event:/Enemy/Lich/Lich Attack
+  OnDie:
+    Guid:
+      Data1: 852890915
+      Data2: 1179512673
+      Data3: 800442046
+      Data4: -905335065
+    Path: event:/Enemy/Lich/LichDie

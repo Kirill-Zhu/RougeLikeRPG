@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using FMODUnity;
 using System.Linq;
 using UnityEngine;
 public enum ShootShape {
@@ -28,11 +29,15 @@ public class MeleAutocaster : AutoSkillStrategy {
 
         coolDownTimer = coolDown;
         UseSKill();
+        
     }
 
     private void BuildNewWeapon() {
 
         //Weapon
+        if(weapon != null) 
+            Destroy(weapon);
+
         weapon = new Mele.MeleBuilder(prefab)
             .FromOrigin(Origin)
             .WithDamageTypes(damageTypesList.ToArray())
@@ -90,6 +95,15 @@ public class MeleAutocaster : AutoSkillStrategy {
         await UniTask.WaitForSeconds(0.1f);
         weapon.gameObject.SetActive(false);
 
+        //Sound
+        PlayOnCastSound();
+    }
 
+    protected override void PlayOnCastSound() {
+        RuntimeManager.PlayOneShot(OnCastSound, Origin.position);
+    }
+
+    public override void Dispose() {
+        
     }
 }

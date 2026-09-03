@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c4634c292006c4d932a66bb9938e83, type: 3}
+  m_Name: Tier 1 Lvl 3
+  m_EditorClassIdentifier: 
+  currentWave: 0
+  strategies:
+  - {fileID: 11400000, guid: 7459b5ff463ae2041b916010a807fc90, type: 2}
+  - {fileID: 11400000, guid: 9f4672bf248a3ff42b8eefbc9246847a, type: 2}

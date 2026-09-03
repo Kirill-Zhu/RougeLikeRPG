@@ -12,25 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26eff6f8e1950074c9c29ee91d958e9b, type: 3}
   m_Name: ElCactus
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: 28fd6c5075d191f4198c65580efcd4db, type: 3}
   TypeOfEnemy: Dummy
   prefab: {fileID: 2505552555297439722, guid: ab0dadf68575d37499cca8e9bd5cf291, type: 3}
-  Icon: {fileID: 21300000, guid: 4ca665255adc0204585931b317f67500, type: 3}
   MoveSpeed: 1
   AttackRange: 10
-  AttackDuration: 6
+  AttackCooldown: 9
   DamageDelay: 0.4
+  UninterruptedAttack: 1
   ProjectileSpeed: 10.1
   ProjectilieLiveDureation: 3
   ShootShape: 1
-  SpreadAngle: 73.7
-  ProjecitlesCountByShoot: 5
+  SpreadAngle: 45
+  ProjecitlesCountByShoot: 3
   SelfDirecrtedProjectile: 0
   WeaponPrefab: {fileID: 5766454499432765695, guid: 9852de15adb32534f9eec53a5e735c7d, type: 3}
   WeaponType: 1
   DropPfreabList:
   - {fileID: 4897015921897156567, guid: 92a4812b8e5094e43901951be46ba7a6, type: 3}
   damageTypesEnum: 1
-  physicsDamage: 3
+  physicsDamage: 4
   fireDamage: 0
   coldDamage: 0
   HealtData: {fileID: 11400000, guid: 16ec866530b899045ae2c5ce05914d0b, type: 2}
+  OnAttackParticelPrefab: {fileID: 358637981425055526, guid: d9d77f2d6c8d5e44799994bf3e23826f, type: 3}
+  OnAttack:
+    Guid:
+      Data1: -1878332770
+      Data2: 1309136397
+      Data3: -1571023725
+      Data4: -2005180865
+    Path: event:/Enemy/ElCactus/ElCactusAttack
+  OnDie:
+    Guid:
+      Data1: 409975811
+      Data2: 1081322157
+      Data3: 1069423778
+      Data4: 1439232318
+    Path: event:/Enemy/ElCactus/ElCactusDie

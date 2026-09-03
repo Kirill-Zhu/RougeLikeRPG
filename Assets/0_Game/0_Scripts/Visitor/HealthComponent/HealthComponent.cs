@@ -1,13 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
-public class HealthComponent : MonoBehaviour, IVisitable {
+public class HealthComponent : MonoBehaviour, IVisitable, IUpgradable {
 
     [Header("Initialize Properties")]
     [SerializeField] PopUpDamageValuesHandler popUpStrategy;
-     PopUpDamageValuesHandler popUpHandler;
+    PopUpDamageValuesHandler popUpHandler;
+    int startMaxHealth;
     public int MaxHealth => maxHealth;
     [SerializeField] int maxHealth = 100;
     public int Health => health;
@@ -17,10 +19,39 @@ public class HealthComponent : MonoBehaviour, IVisitable {
     [SerializeField] int coldDefence = 1;
     public event UnityAction<int> OnGetCurrentHealth;   // For health globes
     public event UnityAction<DamageType, int> OnTakeDamage;
+    public event Action<DamageType> OnTakeDamageBus;
     public event UnityAction<DamageType> OnBlockDamage;
+    public event UnityAction<int> OnChangeMaxHealth;
     public event UnityAction OnDie;
     CancellationTokenSource cts; //Use on destroy to kill dotween animations in popUpStrategy
     CancellationToken token;
+    bool isDead = false;
+
+    //EventBus
+    EventBinding<OnPlayerRessurect> onPlayerRessurect;
+    //Damage BUffering
+    DamageBuffer damageBuffer;
+    //Upgrades
+    List<Item> itemsList = new List<Item>();
+    private void OnEnable() {
+        if (popUpStrategy != null && popUpHandler == null) {
+            popUpHandler = Instantiate(popUpStrategy);
+            popUpHandler.Initialize(transform, token);
+            OnTakeDamage += popUpHandler.PupUpDamage;
+            OnBlockDamage += popUpHandler.PopUpBlock;
+        }
+
+        onPlayerRessurect = new EventBinding<OnPlayerRessurect>(Ressurect);
+        EventBus<OnPlayerRessurect>.Register(onPlayerRessurect);
+    }
+    private void OnDisable() {
+        EventBus<OnPlayerRessurect>.Deregister(onPlayerRessurect);
+    }
+    private void Ressurect() {
+        health = maxHealth;
+        isDead = false;
+    }
+
     public void Initialize(HealtComponentData healtData) {
         //CTS
         cts = new CancellationTokenSource();
@@ -28,6 +59,7 @@ public class HealthComponent : MonoBehaviour, IVisitable {
 
         popUpStrategy = healtData.popUpDamageValuesHandler;
         maxHealth = healtData.MaxHealth;
+        startMaxHealth = maxHealth;
         health = maxHealth;
         physicsDefence = healtData.PhysicsDefence;
         fireDefence = healtData.FireDefence;
@@ -39,7 +71,14 @@ public class HealthComponent : MonoBehaviour, IVisitable {
             OnTakeDamage += popUpHandler.PupUpDamage;
             OnBlockDamage += popUpHandler.PopUpBlock;
         }
+
+        isDead = false;
     }
+    public void InitializeDamageBuffer(DamageBuffer damageBuffer) {
+        Debug.Log("Initialize damage buffer");
+        this.damageBuffer = damageBuffer;
+    }
+    
     private void OnDestroy() {
         cts.Cancel();
         OnTakeDamage -= popUpHandler.PupUpDamage;
@@ -47,15 +86,21 @@ public class HealthComponent : MonoBehaviour, IVisitable {
         Destroy(popUpHandler);
     }
     public void ChangeHealth(int value) {
+        if (isDead) return;
         health += value;
         if (health > maxHealth)
             health = maxHealth;
 
         // OnHealthChange?.Invoke(value);
         OnGetCurrentHealth?.Invoke(health);
-        if (health <= 0) OnDie?.Invoke();
+        if (health <= 0) {
+            isDead = true;
+            OnDie?.Invoke();
+        }
     }
-
+    public void SetCurrentHealth(int value) {
+        health = value;
+    }
     //Visitor
     public void Accept(IVistor visitor) {
         visitor.Visit(this);
@@ -83,11 +128,18 @@ public class HealthComponent : MonoBehaviour, IVisitable {
 
         MethodInfo visitMethod = GetType().GetMethod("EarnDamageByType", new Type[] { o.GetType() });
         if (visitMethod != null && visitMethod != GetType().GetMethod("EarnDamageByType", new Type[] { typeof(object) })) {
+            if (damageBuffer != null) { 
+                damageBuffer.RegisterDamage(visitMethod,  o , this);
+                return;
+            }
+             Debug.Log($"EarnDamageByType : {o.GetType().Name} ");
             visitMethod?.Invoke(this, new object[] { o });
-            // Debug.Log($"EarnDamageByType : {o.GetType().Name} ");
+           
         }
     }
     public void EarnDamageByType(PhysicsDamageType damageType) {
+
+        if (damageType.Value == 0) return;
 
         if (damageType.Value <= physicsDefence) {
             OnBlockDamage?.Invoke(damageType);
@@ -96,9 +148,11 @@ public class HealthComponent : MonoBehaviour, IVisitable {
         var damage = damageType.Value - physicsDefence;
         ChangeHealth(-damage);
         OnTakeDamage?.Invoke(damageType, damage);
-         Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-physicsDefence} ");
+        OnTakeDamageBus?.Invoke(damageType);
+       // Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value - physicsDefence} ");
     }
     public void EarnDamageByType(FireDamageType damageType) {
+        if (damageType.Value == 0) return;
         if (damageType.Value <= fireDefence) {
             OnBlockDamage?.Invoke(damageType);
             return;
@@ -107,9 +161,11 @@ public class HealthComponent : MonoBehaviour, IVisitable {
         var damage = damageType.Value - fireDefence;
         ChangeHealth(-damage);
         OnTakeDamage?.Invoke(damageType, damage);
-        // Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-fireDefence}");
+        OnTakeDamageBus?.Invoke(damageType);
+       // Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value - fireDefence}");
     }
     public void EarnDamageByType(ColdDamageType damageType) {
+        if (damageType.Value == 0) return;
         if (damageType.Value <= coldDefence) {
             OnBlockDamage?.Invoke(damageType);
             return;
@@ -118,6 +174,7 @@ public class HealthComponent : MonoBehaviour, IVisitable {
         var damage = damageType.Value - coldDefence;
         ChangeHealth(-damage);
         OnTakeDamage?.Invoke(damageType, damage);
+        OnTakeDamageBus?.Invoke(damageType);
         // Debug.Log($"{this.gameObject.name} get {damageType.GetType()} damage {damageType.Value-coldDefence} ");
     }
 
@@ -169,5 +226,39 @@ public class HealthComponent : MonoBehaviour, IVisitable {
         coldDefence -= type.Value;
     }
     #endregion
+    #region UPGRADE STRATEGY
+    public void AddItem(Item item) {
+        if (item is HeatlhItem)
+            itemsList.Add(item as HeatlhItem);
+    }
 
+    public void ClearItems() {
+        itemsList.Clear();
+    }
+
+    public void RefreshItemUpgrades() {
+        maxHealth = startMaxHealth;
+        foreach (HeatlhItem item in itemsList) {
+            maxHealth += item.AddMaxHealth;
+        }
+        health = maxHealth;
+    }
+    #endregion
+
+    #region InGameUpgrage
+    public void AddMaxHealth(int maxHealthBonus) {
+        maxHealth += maxHealthBonus;
+        health += maxHealthBonus;
+        OnChangeMaxHealth?.Invoke(maxHealthBonus);
+    }
+    public void AddPhysicsDefence(int physicsDefenceBonus) {
+        physicsDefence += physicsDefenceBonus;
+    }
+    public void AddFireDefenceBouns(int fireDefenceBonus) {
+        fireDefence += fireDefenceBonus;
+    }
+    public void AddColdDefenceBonus(int coldDefenceBonus) {
+        coldDefence += coldDefenceBonus;
+    }
+    #endregion
 }

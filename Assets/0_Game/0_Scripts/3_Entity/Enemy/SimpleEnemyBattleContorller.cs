@@ -1,11 +1,13 @@
 using Cysharp.Threading.Tasks;
+using FMODUnity;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 public class SimpleEnemyBattleContorller : MonoBehaviour {
     //Initialize Values
-    float attackDuration;
+    float attackCooldown;
+    bool uninterruptedAttack;
     float damageDelay;
     WeaponTypeEnum weaponType;
 
@@ -26,30 +28,69 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
     float liveDuration = 1;
     public event Action OnAttack;
     event Action OnExitBattleState;
+
+    //For Area
+    public List<AreaWeaponType> areaWeaponList = new List<AreaWeaponType>();
+    float areaLiveDuration = 3;
+
     //-------------------
+
+    //VFX
+    [SerializeField] GameObject onAttackParticlePrefab;
+    [SerializeField] ParticleSystem onAttackVFX;
+
+    //Sound
+    EventReference onAttackSound;
 
     [SerializeField] float skillDurationCooldown;
     public event Action<int> OnAnimationStart;
     public event Action<float> OnChangeDurationSkill;
-
-
+    public Func<bool> IsAttackingNow;
+    bool isAttacking;   
     //Animations
     int animationHash = Animator.StringToHash("Battle");
 
     //UniTask
-    CancellationTokenSource cts;
+    CancellationTokenSource cts = new CancellationTokenSource();
 
-    public void Initialize(float attackDuration, WeaponTypeEnum weaponType, float attackRange, float damageDelay, DamageType[] damageTypes, GameObject prefab, string interactionTag = null, float projectileSpeed = 2, float ProjectileliveDuration = 2, int shootShape = 0, float spreadAngle = 70, int projectilesCount = 1, bool isProjectileSelfDirected = false, Transform aimTransform = null) {
-        this.attackDuration = attackDuration;
+    public void Initialize(float attackDuration
+        , WeaponTypeEnum weaponType
+        , float attackRange
+        , float damageDelay
+        , DamageType[] damageTypes
+        , GameObject prefab
+        , bool uninterruptedAttack
+        , string interactionTag = null
+        , float projectileSpeed = 2
+        , float ProjectileliveDuration = 2
+        , int shootShape = 0
+        , float spreadAngle = 70
+        , int projectilesCount = 1
+        , bool isProjectileSelfDirected = false
+        , Transform aimTransform = null
+        , GameObject onAttackParticlePrefab = null
+        , EventReference onAttackSound = new EventReference()) {
+
+        this.attackCooldown = attackDuration;
         this.weaponType = weaponType;
         this.attackRange = attackRange;
         this.damageDelay = damageDelay;
+        this.uninterruptedAttack = uninterruptedAttack;
         this.interacitonTag = interactionTag;
         this.shootShape = (ShootShape)shootShape;
         this.spreadAngle = spreadAngle;
         this.projectilesCountByShoot = projectilesCount;
         this.selfDirected = isProjectileSelfDirected;
         this.aimTransform = aimTransform;
+        this.onAttackParticlePrefab = onAttackParticlePrefab;
+        this.onAttackSound = onAttackSound;
+
+        //Is Attack now
+
+
+        //-------
+
+
         //Mele
         if (weaponType == WeaponTypeEnum.mele) {
             var mele = new Mele.MeleBuilder(prefab)
@@ -88,18 +129,43 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
                 projecitle.gameObject.SetActive(false);
                 this.liveDuration = ProjectileliveDuration;
             }
-
             //Events
             OnAttack += ShootProjectile;
         }
+        if (weaponType == WeaponTypeEnum.area) {
+            weaponPoolList = new List<WeaponType>();
+
+            var area = new AreaWeaponType.Builder(prefab)
+                .FromOrigin(transform)
+                .WithDamageTypes(damageTypes)
+                .WithLiveDuration(areaLiveDuration)
+                .WithInteractionTag(interactionTag)
+                .FollowCaster(false)
+                .DestroyAfterUse(false)
+                .Build();
+
+            areaWeaponList.Add(area);
+            area.gameObject.SetActive(false);
+
+            //Events
+            OnAttack += CastArea;
+        }
+
+        //VFX
+        var vfxObj = Instantiate(this.onAttackParticlePrefab, null);
+        vfxObj.TryGetComponent<ParticleSystem>(out ParticleSystem particle);
+        onAttackVFX = particle;
     }
     public void OnDie() {
         cts?.Cancel();
     }
     private void Awake() {
+        IsAttackingNow = () => isAttacking && uninterruptedAttack;
         OnChangeDurationSkill += skillDuration => skillDurationCooldown = skillDuration;
     }
     private void Update() {
+
+
         if (skillDurationCooldown > 0) skillDurationCooldown -= Time.deltaTime;
 
         if (skillDurationCooldown <= 0)
@@ -122,15 +188,22 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         }
     }
     private void OnDestroy() {
-        foreach (var projectile in projectileList)
-            Destroy(projectile.gameObject);
+        cts?.Cancel();
+        foreach (var projectile in projectileList) {
+            if (projectile != null)
+                Destroy(projectile.gameObject);
+        }
+
+        //VFX
+        if (onAttackVFX != null)
+            Destroy(onAttackVFX.gameObject);
     }
 
     public void TryAttack() {
         if (skillDurationCooldown > 0) { return; }
         OnAttack?.Invoke();
         OnAnimationStart?.Invoke(animationHash);
-        OnChangeDurationSkill?.Invoke(damageDelay); //Here need give him time to start his attack
+        OnChangeDurationSkill?.Invoke(damageDelay+0.2f); //Here need give him time to start his attack
     }
     public void OnFixedUpdate() {
         TryAttack();
@@ -145,14 +218,26 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         cts?.Dispose();
         cts = new CancellationTokenSource();
         CancellationToken token = cts.Token;
+        isAttacking = true;
 
         try {
 
             await UniTask.WaitForSeconds(damageDelay, false, PlayerLoopTiming.Update, token, true);
             foreach (var mele in weaponPoolList) {
                 mele.gameObject.SetActive(true);
-                OnChangeDurationSkill?.Invoke(attackDuration);         //if attack was done, set coolDown
+                OnChangeDurationSkill?.Invoke(attackCooldown);         //if attack was done, set coolDown
             }
+
+            //VFX
+            if (onAttackVFX != null) {
+                onAttackVFX.gameObject.transform.position = transform.position + Vector3.up;
+                onAttackVFX.gameObject.transform.rotation = Quaternion.LookRotation(aimTransform.position.WithY(0) - transform.position.WithY(0));
+                onAttackVFX.Play();
+            }
+
+            //Sound 
+            RuntimeManager.PlayOneShot(onAttackSound, transform.position);
+
 
             await UniTask.WaitForSeconds(0.05f, false, PlayerLoopTiming.Update, token, true);
             foreach (var mele in weaponPoolList) {
@@ -165,7 +250,10 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         } finally {
             cts.Dispose();
             cts = null;
+            isAttacking = false;
         }
+
+
     }
     async void ShootProjectile() {
         //UniTask
@@ -173,21 +261,19 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         cts?.Dispose();
         cts = new CancellationTokenSource();
         CancellationToken token = cts.Token;
+        isAttacking = true;
         try {
             await UniTask.WaitForSeconds(damageDelay, false, PlayerLoopTiming.Update, token, true);
-            OnChangeDurationSkill?.Invoke(attackDuration);
+            OnChangeDurationSkill?.Invoke(attackCooldown);
+            //VFX
+            if (onAttackVFX != null) {
+                onAttackVFX.gameObject.transform.position = transform.position;
+                onAttackVFX.gameObject.transform.rotation = Quaternion.LookRotation(aimTransform.position.WithY(0) - transform.position.WithY(0));
+                onAttackVFX.Play();
+            }
 
-            //Old Vers
-            //foreach (var projectile in projectileList) {  
-            //    if (projectile.gameObject.activeSelf) continue;
-
-            //    projectile.gameObject.SetActive(true);
-            //    projectile.LiveDuration = liveDuration;
-            //    projectile.gameObject.transform.rotation = transform.rotation;
-            //    projectile.gameObject.transform.position = transform.position;
-
-            //    break;
-            //}
+            //Sound 
+            RuntimeManager.PlayOneShot(onAttackSound, transform.position);
 
             switch (shootShape) {
                 case ShootShape.Forward: {
@@ -256,9 +342,51 @@ public class SimpleEnemyBattleContorller : MonoBehaviour {
         } finally {
             cts?.Cancel();
             cts = null;
+            isAttacking = false;
         }
 
+
     }
+    async void CastArea() {
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = new CancellationTokenSource();
+        CancellationToken token = cts.Token;
+        Vector3 castPos = aimTransform.position.WithY(0);
+        //Sound 
+        RuntimeManager.PlayOneShot(onAttackSound, transform.position);
+
+        //VFX (First Cast VFX)
+        if (onAttackVFX != null) {
+            onAttackVFX.gameObject.transform.position = castPos;
+            onAttackVFX.Play();
+        }
+
+        //Sound 
+        RuntimeManager.PlayOneShot(onAttackSound, transform.position);
+
+        try {
+
+            await UniTask.WaitForSeconds(damageDelay, false, PlayerLoopTiming.Update, token, true);
+            foreach (var area in areaWeaponList) {
+                area.gameObject.SetActive(true);
+                area.transform.position = castPos;
+                OnChangeDurationSkill?.Invoke(attackCooldown);         //if attack was done, set coolDown
+            }
+
+            await UniTask.WaitForSeconds(areaLiveDuration, false, PlayerLoopTiming.Update, token, true);
+            foreach (var area in areaWeaponList) {
+                area.gameObject.SetActive(false);
+            }
+
+        } catch (OperationCanceledException) {
 
 
+        } finally {
+            cts.Dispose();
+            cts = null;
+        }
+
+
+    }
 }

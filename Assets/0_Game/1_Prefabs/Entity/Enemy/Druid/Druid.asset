@@ -12,25 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26eff6f8e1950074c9c29ee91d958e9b, type: 3}
   m_Name: Druid
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: b5596e48b888fc2408c2ba8bdb0ca69f, type: 3}
   TypeOfEnemy: Dummy
   prefab: {fileID: 5291185265577459654, guid: 48d0a1887b6ab1f469877bb09799d2a0, type: 3}
-  Icon: {fileID: 21300000, guid: 4ca665255adc0204585931b317f67500, type: 3}
   MoveSpeed: 1
   AttackRange: 9
-  AttackDuration: 6
-  DamageDelay: 0.4
+  AttackCooldown: 12
+  DamageDelay: 1.2
+  UninterruptedAttack: 0
   ProjectileSpeed: 2
   ProjectilieLiveDureation: 4
   ShootShape: 0
   SpreadAngle: 0
   ProjecitlesCountByShoot: 1
-  SelfDirecrtedProjectile: 0
-  WeaponPrefab: {fileID: 5766454499432765695, guid: 6be430e3fd5a6e44cbfcaa29e1e05072, type: 3}
+  SelfDirecrtedProjectile: 1
+  WeaponPrefab: {fileID: 4230533699123781479, guid: aaac9b2a5e6b0e6418d4da52efb4be44, type: 3}
   WeaponType: 1
   DropPfreabList:
   - {fileID: 4897015921897156567, guid: ba23fb9f3c545b14e855f55556f5c092, type: 3}
-  damageTypesEnum: 4
-  physicsDamage: 0
+  damageTypesEnum: 1
+  physicsDamage: 11
   fireDamage: 0
-  coldDamage: 5
+  coldDamage: 0
   HealtData: {fileID: 11400000, guid: f82da5d204a66d241838586975e85a5e, type: 2}
+  OnAttackParticelPrefab: {fileID: 4752457369876416285, guid: b962c87824753e44b875c10832b607cc, type: 3}
+  OnAttack:
+    Guid:
+      Data1: -1236208845
+      Data2: 1204004085
+      Data3: 734057373
+      Data4: 1115294858
+    Path: event:/Enemy/Druid/Druid Attack
+  OnDie:
+    Guid:
+      Data1: 1691391007
+      Data2: 1118781488
+      Data3: -2011444053
+      Data4: -1982484364
+    Path: event:/Enemy/Druid/Druid Die

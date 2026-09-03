@@ -12,24 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eaac55a81fb2ff4a934213c3a5c441c, type: 3}
   m_Name: FireBall
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1931694588739526134, guid: 45050c79404988944a25404f054f250e, type: 3}
+  prefab: {fileID: 2972392977303283589, guid: 34b61504a9345704896a43c3a224988a, type: 3}
+  Description: throws fireball with fire damage
+  OnCastParticlePrefabArray: []
   ParticlePrefabArray: []
+  AttackRange: 11
   ManaCost: 10
-  PhysicsDamage: 0
-  FireDamage: 5
+  PhysicsDamage: 2
+  FireDamage: 11
   ColdDamage: 0
-  Icon: {fileID: 21300000, guid: 04841b8a9cae96b42aa2a2689b689515, type: 3}
+  Icon: {fileID: -1318158582, guid: f055fa24789a28e42a2c46eb5a5030f8, type: 3}
   BackSprite: {fileID: 21300000, guid: 5915cdc174101e540b3349e21ee2cd74, type: 3}
   DamageTypesEnum: 3
   damageTypesList: []
   HealthComponent: {fileID: 0}
+  WithCooldown: 1
   CoolDown: 5
   AnimationName: Shoot
-  SkillDuration: 0
-  shootShape: 0
-  spreadAngle: 0
+  SkillDuration: 0.3
+  SkillSound:
+    Guid:
+      Data1: -1086670638
+      Data2: 1307545207
+      Data3: -1065622376
+      Data4: -333665370
+    Path: event:/Skills/Shoot/FireBall
+  shootShape: 1
+  spreadAngle: 360
   projectilesCountByShoot: 1
   damage: 1
-  speed: 7
-  animationName: Shoot
-  LiveDuration: 5
+  speed: 3
+  LiveDuration: 2

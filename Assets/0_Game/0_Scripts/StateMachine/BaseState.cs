@@ -7,7 +7,7 @@ namespace MyStateMachine {
         protected readonly Animator animator;
         protected readonly HeroBattleController heroBattleController;
         protected readonly HeroAutoSkillController heroAutoSkillController;
-        protected readonly float duration = 0.1f;
+        protected readonly float crossFadeAnimationDuration = 0.1f;
         public readonly int Locomotion = Animator.StringToHash("Locomotion");
         public readonly int Jump = Animator.StringToHash("Jump");
         public readonly int MeleAttack1 = Animator.StringToHash("Attack1");
@@ -19,7 +19,7 @@ namespace MyStateMachine {
             this.heroAutoSkillController = heroAutoSkillController;
         }
         public virtual void OnEnter() {
-          // Debug.Log($"Enter : {this.GetType().Name} state");
+           Debug.Log($"Enter : {this.GetType().Name} state");
         }
 
         public virtual void OnExit() {

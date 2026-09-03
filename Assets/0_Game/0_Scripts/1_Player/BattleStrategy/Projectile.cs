@@ -9,16 +9,13 @@ public class Projectile : WeaponType {
 
         if (interactionTagName == null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
-                foreach (var damageType in damageTypes)
-                    health.TakeDamage(damageType);
+               DoDamage(health);
             }
         }
 
         if (interactionTagName != null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health) && other.CompareTag(interactionTagName)) {
-                foreach (var damageType in damageTypes)
-                    health.TakeDamage(damageType);
-
+                DoDamage(health);
             }
         }
     }
@@ -50,7 +47,7 @@ public class Projectile : WeaponType {
             var projectile = obj.AddComponent<Projectile>();
             projectile.enabled = true;
             projectile.Speed = speed;
-            projectile.damageTypes = damageTypes;
+            projectile.baseDamage = damageTypes;
             projectile.interactionTagName = interactionTagName;
             projectile.LiveDuration = liveDuration;
             projectile.SelfDirected = seifDirected;

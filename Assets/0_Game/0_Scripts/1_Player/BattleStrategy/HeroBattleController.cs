@@ -1,12 +1,13 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 public class HeroBattleController : MonoBehaviour, IVisitable {
     [SerializeField] HealthComponent healthComponent;
     public SkillsStrategy[] SkillsStrategy => skillStrategy;
     [SerializeField] SkillsStrategy[] skillStrategy = new SkillsStrategy[3];
-    public UnityEvent<Sprite, string> OnPickUpPowerUp;
-
+    public UnityEvent<Sprite, string, string> OnPickUpPowerUp;
+    const string interactionTagName = "Enemy";
 
     [SerializeField] InputReader inputs;
     public event Action<int, float> OnAnimationStart;
@@ -18,19 +19,18 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
     private float enqueTime = 0.2f;                                                                            //Wait this time to set Battle State after Input and then cancel if conditions are not approach
     private float cancelTimer = default;
     ManaComponent manaComponent;
+    public bool IsActive = false;
+    public void Initialize(ManaComponent manaComponent, SkillsStrategy[] skillsStrategy, UnityEvent<Sprite, string, string> @OnPickUpPowerUpEvent, HeroAudioManager audioManager) {
 
-    public void Initialize(ManaComponent manaComponent, SkillsStrategy[] skillsStrategy, UnityEvent<Sprite, string> @OnPickUpPowerUpEvent) {
         this.manaComponent = manaComponent;
 
-        //Initialize Events
         OnPickUpPowerUp = @OnPickUpPowerUpEvent;
-        OnManaChange += manaComponent.ChangeMana;
         //Debug.Log($"Initialize : {GetType().Name}");
 
-        //--Remove Previous Startefies
-        if (skillStrategy != null)
-            foreach (var skill in skillsStrategy)
-                skill.Dispose();
+        //--Remove Previous Startfies
+        //if (skillStrategy != null)
+        //    foreach (var skill in skillsStrategy)
+        //        skill.Dispose();
 
         //--------------Create new Sctiptable Objects
 
@@ -40,39 +40,42 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
 
         //--------------initialize it
         foreach (var skillStrategy in skillStrategy)                                              //initializeAll strategies
-            skillStrategy.Initialize(this.transform);
+            skillStrategy.Initialize(this.transform, audioManager, interactionTagName);
 
         AddSkillDependecies();
         //Events
+
+        StartCoroutine(CheckForInitialization());
+    }
+    IEnumerator CheckForInitialization() {
+        foreach (var skill in skillStrategy) {
+            if (!skill.Initialized()) {
+                yield return null;
+            }
+        }
+        //Initialize Events
         inputs.IsUsingSkill += usingSkill => {
             if (usingSkill == true) {
                 InBattleState = true;
                 cancelTimer = 0.3f;                                                                            //Reset eqnque TImer
             }
         };
-        inputs.UseSkill += index => FitstInputIndex = index;
+
+
+        OnManaChange = null;
+        OnManaChange += manaComponent.ChangeMana;
+        inputs.UseSkill += SetSkillIndex;
         OnSkillDurationChange += duration => SkillDurationTimer = duration;
 
-    }
-    private void Awake() {
-        //foreach (var skillStrategy in skillStrategy)                                              //initializeAll strategies
-        //    skillStrategy.Initialize(this.transform);
+        Debug.Log($"{GetType().Name} is initialized");
 
-        //AddSkillDependecies();
-        ////Events
-        //inputs.IsUsingSkill += usingSkill => {
-        //    if (usingSkill == true) {
-        //        InBattleState = true;
-        //        cancelTimer = 0.3f;                                                                            //Reset eqnque TImer
-        //    }
-        //};
-        //inputs.UseSkill += index => FitstInputIndex = index;
-        //OnSkillDurationChange += duration => SkillDurationTimer = duration;
+        yield break;
     }
 
     private void Update() {
+        if(!IsActive) return;
         if ((cancelTimer > 0)) cancelTimer -= Time.deltaTime;
-        if (cancelTimer <= 0 && SkillDurationTimer <= 0) InBattleState = false;                                 // reset rnque battle state if state machine conditions doesent match requerements
+        if (cancelTimer <= 0 && SkillDurationTimer <= 0) InBattleState = false;                                 // reset enque battle state if state machine conditions doesent match requerements
 
         OnUpdate();
     }
@@ -88,12 +91,16 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
             InBattleState = false;
     }
     public void UseSkill(int index) {
+
         if (SkillDurationTimer > enqueTime || manaComponent.CurrentMana - skillStrategy[index].ManaCost < 0) return;
         SkillDurationTimer = 1;//Wait unitl ohter skill complete
 
         skillStrategy[index].TryUseSkill(OnSkillDurationChange, OnAnimationStart, OnManaChange);
     }
-
+    void SetSkillIndex(int index) {
+        Debug.Log("Set index");
+        FitstInputIndex = index;
+    }
     void AddSkillDependecies() {
         foreach (var strategy in skillStrategy) {
             strategy.HealthComponent = healthComponent;
@@ -112,13 +119,25 @@ public class HeroBattleController : MonoBehaviour, IVisitable {
     }
 
     private void OnDestroy() {
+        Dispose();
+    }
+    private void OnDisable() {
+        Dispose();
+    }
+    public void Dispose() {
         UnSubscribeInputs();
         OnSkillDurationChange -= duration => SkillDurationTimer = duration;
-    }
+        OnAnimationStart = null;
+        OnManaChange = null;
+        inputs.UseSkill -= SetSkillIndex;
 
+        foreach (var strategy in skillStrategy) {
+            strategy.Dispose();
+        }
+    }
     //Visitor
-    public void PickUpPowerUp(Sprite label, string description) {
-        OnPickUpPowerUp.Invoke(label, description);
+    public void PickUpPowerUp(Sprite label, string description, string name) {
+        OnPickUpPowerUp.Invoke(label, description, name);
     }
     public void Accept(IVistor visitor) {
         visitor.Visit(this);

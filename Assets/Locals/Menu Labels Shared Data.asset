@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Menu Labels Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Menu Labels
+  m_TableCollectionNameGuidString: 050fb9c0ec9bf3148b66409019667b84
+  m_Entries:
+  - m_Id: 42875920384
+    m_Key: "mainMenu.ChooseHero\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 286359461888
+    m_Key: mainMenu.Shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 358304358400
+    m_Key: mainMenu.Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30412249931776
+    m_Key: AuthentificationMenu.SignIn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30530466390016
+    m_Key: AuthentificationMenu.SignUp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30617888268288
+    m_Key: AuthentificationMenu.Skip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30718681587712
+    m_Key: AuthentificationMenu.Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30772507090944
+    m_Key: AuthentificationMenu.Password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31669488361472
+    m_Key: ChooseHeroMenu.Next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31748030898176
+    m_Key: ChooseHeroMenu.Previous
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31813566898176
+    m_Key: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15114498733989888
+    m_Key: "Language\t"
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 2162380233389900003
+  references:
+    version: 2
+    RefIds:
+    - rid: 2162380233389900003
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1784310875407

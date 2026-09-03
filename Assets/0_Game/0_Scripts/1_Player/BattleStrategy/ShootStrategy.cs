@@ -8,12 +8,11 @@ using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Jobs;
-using static UnityEngine.UI.Image;
 [CreateAssetMenu(menuName = "SkillStrategy/Shoot", fileName = "Shoot")]
 public class ShootStrategy : SkillsStrategy {
 
     //Shoot Shape
-    public override int CurrentAnimationHash { get => Animator.StringToHash(animationName); set => throw new System.NotImplementedException(); }
+    public override int CurrentAnimationHash { get => Animator.StringToHash(AnimationName); set => throw new System.NotImplementedException(); }
     public ShootShape shootShape = ShootShape.Forward;
     [Range(0, 360)] public float spreadAngle;
     float angleStep;
@@ -21,29 +20,36 @@ public class ShootStrategy : SkillsStrategy {
     public int projectilesCountByShoot = 1;
     public int damage;
     public float speed;
-    public string animationName;
-    public const string interactionTagName = "Enemy";
     public float LiveDuration = 10;
-    bool initialization;
     List<Projectile> projectiles = new List<Projectile>();
     List<Transform> objectsToMove = new List<Transform>();
     TransformAccessArray transformAccessArray = new TransformAccessArray();
     bool[] activeObjectsArray = new bool[0];
     NativeArray<bool> activeProjectilisNativeArray = new NativeArray<bool>();
     JobHandle jobHandle;
-    public override void Initialize(Transform origin) {
+    public override bool Initialized() {
+        return !initialization;
+    }
+    public override void Initialize(Transform origin, HeroAudioManager audioManager, string interactionTagName) {
         initialization = true;
         //Add Damage Types it deals(set the values at definitons)
         damageTypesList = GetStartDamageTypes().ToList();
-      
+        //Tag
+        this.interactionTagName = interactionTagName;
         foreach (var damageType in damageTypesList)
-            damageTypeBuffer.Add(damageType.GetType(), damageType.Value);
+            SetOrAddDamageTypeWithValues(damageType);
 
         BuildNewProjectiles(origin);
+
+        //Audio
+        this.audioManager = audioManager;
+
     }
     public async override void Dispose() {
         foreach (var projectile in projectiles) {
-            Destroy(projectile.gameObject);
+            if (projectile != null)
+                Destroy(projectile.gameObject);
+
             await UniTask.WaitForFixedUpdate();
         }
         damageTypesList.Clear();
@@ -57,17 +63,18 @@ public class ShootStrategy : SkillsStrategy {
         if (activeProjectilisNativeArray.IsCreated)
             activeProjectilisNativeArray.Dispose();
 
+        activeObjectsArray = new bool[0];
     }
 
-   
+
     public async override void UpdateValues() {
         initialization = true;
         //Dispose 
         foreach (var projectile in projectiles) {
-            Destroy(projectile.gameObject);
+            if(projectile != null) Destroy(projectile.gameObject);
             await UniTask.WaitForFixedUpdate();
         }
-           
+
         projectiles.Clear();
         objectsToMove.Clear();
         // Dispose of the TransformAccessArray to prevent memory leaks
@@ -114,7 +121,8 @@ public class ShootStrategy : SkillsStrategy {
 
         transformAccessArray = new TransformAccessArray(objectsToMove.ToArray());
         Debug.Log($"Initialize {GetType().Name}");
-
+        //VFX
+        BuildNewVFX();
         initialization = false;
     }
     public override void OnUpdate(float deltaTime) {
@@ -155,7 +163,8 @@ public class ShootStrategy : SkillsStrategy {
         //Dispose 
 
         foreach (var projectile in projectiles)
-            Destroy(projectile.gameObject);
+            if (projectile != null)
+                Destroy(projectile.gameObject);
 
         projectiles.Clear();
         objectsToMove.Clear();
@@ -168,7 +177,8 @@ public class ShootStrategy : SkillsStrategy {
     }
 
     public override void TryUseSkill(Action<float> OnChangeSkillDuration, Action<int, float> OnAnimation, UnityAction<int> OnManaChange) {
-
+        if (initialization) return;
+        Debug.Log("shoot");
         OnChangeSkillDuration.Invoke(SkillDuration);
 
         if (coolDownTimer > 0) return;
@@ -180,7 +190,11 @@ public class ShootStrategy : SkillsStrategy {
 
     void ShootProjectile() {
 
+        //Audio
+        PlayCastSound();
 
+
+        //Shape
         switch (shootShape) {
             case ShootShape.Forward: {
                     for (int i = 0; i < projectilesCountByShoot; i++) {
@@ -254,6 +268,49 @@ public class ShootStrategy : SkillsStrategy {
 
     }
 
+    public override bool TryUseSkill(Action<int, float> OnAnimation) {
+        Debug.Log("shoot");
+        if (coolDownTimer > 0) return false;
+        OnAnimation?.Invoke(CurrentAnimationHash, SkillDuration);
+        ShootProjectile();
+        return true;
+    }
+
+    public override bool Evauate(float distanceToHero) {
+        if (distanceToHero <= AttackRange && coolDownTimer <= 0) return true;
+
+        return false;
+    }
+
+    protected override void BuildNewVFX() {
+        particleSystemArray = new ParticleSystem[ParticlePrefabArray.Length];
+        particleGameObjectsArray = new GameObject[ParticlePrefabArray.Length];
+
+        for (int i = 0; i < ParticlePrefabArray.Length; i++) {
+            //Instantiate prefabs
+            var vfx = Instantiate(ParticlePrefabArray[i], Origin);
+            vfx.SetActive(true);
+            vfx.transform.rotation = Origin.rotation;
+
+
+            particleGameObjectsArray[i] = vfx;
+
+            //handle particle system
+            particleSystemArray[i] = vfx.GetComponent<ParticleSystem>();
+        }
+    }
+
+    protected override void PlayOnCastVFX() {
+        throw new NotImplementedException();
+    }
+
+    protected override void PlayOnAttackVFX() {
+        throw new NotImplementedException();
+    }
+
+    protected override void PlayCastSound() {
+        audioManager.PlayOneShot(SkillSound, Origin.position);
+    }
 
     [BurstCompile]
     public struct MoveJob : IJobParallelForTransform {

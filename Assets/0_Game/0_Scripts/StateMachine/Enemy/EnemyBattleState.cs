@@ -11,6 +11,7 @@ namespace Enemies.MyStateMachine {
 
         public override void OnEnter() {
             //animator.CrossFade(battleHash, duration);
+            Debug.LogWarning("Enter Battle");
             battleContoller.TryAttack();
             battleContoller.OnAnimationStart += OnAnimation;
         }

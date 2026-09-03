@@ -7,6 +7,7 @@ namespace Enemies.MyStateMachine {
         }
 
         public override void OnEnter() {
+            Debug.LogWarning("EnterLocomotion");
             animator.CrossFade(locomotionHash, duration);
         }
 

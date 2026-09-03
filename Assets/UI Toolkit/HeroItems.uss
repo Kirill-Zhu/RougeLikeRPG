@@ -1,0 +1,7 @@
+.HeroItem {
+}
+
+.HeroItemLabel {
+    -unity-font-definition: url("project://database/Assets/1_Packeges/PixelBattleText/Fonts/Alphapix.ttf?fileID=12800000&guid=9ca52623ee8001b4ca7c29dc2ff6317d&type=3#Alphapix");
+    font-size: 23px;
+}

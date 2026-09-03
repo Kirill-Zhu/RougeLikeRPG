@@ -1,41 +1,67 @@
+using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
-using System.Collections.Generic;
+
+public interface InGameUI {
+    public const int duration = 1;
+    public void ShowUI();
+    public void HideUI();
+}
 [RequireComponent(typeof(HealthComponentUI))]
 public class InGameUIManager : MonoBehaviour {
-
+    [Inject] EventManager eventManager;
     [Inject, SerializeField] Hero hero;
-    [SerializeField] List<GameObject> startScreenObjects;
     [SerializeField] HealthComponentUI healthComponentUI;
     [SerializeField] HealthAndManaGlobesUI globes;
     [SerializeField] SkillStrategyUIController skillStrategyUIController;
     [SerializeField] LevelUpMenu levelUpMenu;
     [SerializeField] ExpBarUIContorller expBarUIContorller;
+    [SerializeField] CoinControllerUI coinControllerUI;
     [SerializeField] AutoSkillUIController autoSkillController;
+    [SerializeField] StartScreenAnimationController startScreenAnimationController;
+    [SerializeField] LevelStatisticsUIMenu levelStatisticsUI;
+    [SerializeField] DynamicTextUI dynamicTextUI;
+    [SerializeField] InventoryUIController inventoryUIController;
+
+    List<InGameUI> UIList = new List<InGameUI>();
+
     [SerializeField] PowerUpMenu powerUpMenu;
+
+    //Event Bus
+    EventBinding<OnSafeZone> OnSafeZoneBinding;
     private void Awake() {
-
-
         //Get
         healthComponentUI = GetComponent<HealthComponentUI>();
         autoSkillController = GetComponent<AutoSkillUIController>();
         expBarUIContorller = GetComponent<ExpBarUIContorller>();
+        coinControllerUI = GetComponent<CoinControllerUI>();
         powerUpMenu = GetComponent<PowerUpMenu>();
 
         //Events
         hero.OnHeroChange.AddListener(UpdateValues);
+        
         hero.HealthComponent.OnTakeDamage += healthComponentUI.PopUpDamagePoints;
         hero.HealthComponent.OnGetCurrentHealth += globes.SetCurrentHealth;
+        hero.HealthComponent.OnChangeMaxHealth += globes.AddMaxHealth;
         hero.ManaComponent.OnGetCurrentMana += globes.SetCurrentMana;
+
         hero.OnLevelUp.AddListener(RiseLevelUpMenu);
+
         //Initialize 
         autoSkillController.Initialize(hero.HeroAutoSkillContorller);
         expBarUIContorller.Initialize(hero);
-        powerUpMenu.Initialize(hero);
+        coinControllerUI.Initialaize(hero);
+        powerUpMenu.Initialize(hero, inventoryUIController);
+        inventoryUIController.Initialize(hero);
 
-        //Destroy Start Screen Ojbects
-        foreach(var obj in startScreenObjects) 
-            Destroy(obj, 3);
+        UIList.Add(globes);
+        UIList.Add(skillStrategyUIController);
+        UIList.Add(expBarUIContorller);
+        UIList.Add(coinControllerUI);
+        UIList.Add(autoSkillController);
+
     }
 
     private void Start() {
@@ -52,6 +78,8 @@ public class InGameUIManager : MonoBehaviour {
         hero.HeroBattleController.SkillsStrategy[2].OnCoolDownFillAmountValue += skillStrategyUIController.OnCoolDownCallEastSkill;
 
         //Additional Skills
+
+        OnStartNewGame();
     }
     private void OnDestroy() {
         hero.HealthComponent.OnTakeDamage -= healthComponentUI.PopUpDamagePoints;
@@ -65,6 +93,40 @@ public class InGameUIManager : MonoBehaviour {
         //Additional Skills
     }
 
+    private void OnEnable() {
+        eventManager.SetUpImGameUIManager(this);
+
+        OnSafeZoneBinding = new EventBinding<OnSafeZone>(HideAllUI);
+        EventBus<OnSafeZone>.Register(OnSafeZoneBinding);
+    }
+    private void OnDisable() {
+        EventBus<OnSafeZone>.Deregister(OnSafeZoneBinding);
+    }
+    async void OnStartNewGame(int startAnimDuration = 3) {
+      
+        HideAllUI();
+        startScreenAnimationController.ShowStartAniamtion();
+        await UniTask.WaitForSeconds(startAnimDuration);
+        startScreenAnimationController.HideStartAniamtion();
+        ShowAllUI();
+    }
+
+    [ContextMenu("Show All UI")]
+    public void ShowAllUI() {
+        foreach (var ui in UIList)
+            ui.ShowUI();
+    }
+    [ContextMenu("Hide All UI")]
+    public void HideAllUI() {
+        foreach (var ui in UIList)
+            ui.HideUI();
+    }
+    public void ShowStatistics() {
+        levelStatisticsUI.ShowDieMenu();
+    }
+    public void HideStatistics() {
+        levelStatisticsUI.HideStatsMenu();
+    }
     void UpdateValues() {
 
         //Initialize values

@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/0_Game/Scenes/Testing/ADTest.unity
+    guid: 55ca70cb04244db4486b119085ecc04b
   - enabled: 1
     path: Assets/0_Game/Scenes/0_InitializeScene.unity
     guid: 59f8567357f0f444a865fc65460205f8
+  - enabled: 1
+    path: Assets/0_Game/Scenes/StoryTaleScene.unity
+    guid: ab5a73bd4835f6d4284f012c4d75fced
   - enabled: 1
     path: Assets/0_Game/Scenes/MainMenu.unity
     guid: a57b48053e997c74e8382e09c925bdd7
@@ -15,8 +21,34 @@ EditorBuildSettings:
     path: Assets/0_Game/Scenes/InGameUI.unity
     guid: d53837bd614433f4b92d8098d3e20784
   - enabled: 1
-    path: Assets/0_Game/Scenes/Levels/Level2/Level2.unity
+    path: Assets/0_Game/Scenes/0_Tutorial/Level 1.unity
+    guid: de13ecf611e7d1a4f8cc5559cd8220b7
+  - enabled: 1
+    path: Assets/0_Game/Scenes/1_Catacombs/1_Entry/(Ctacombs)Entry.unity
+    guid: 0dbfdc2b1a9bda94e8d07d7748285c0e
+  - enabled: 1
+    path: Assets/0_Game/Scenes/1_Catacombs/2_Saints/(Ctacombs)Saints.unity
+    guid: 91c81577e83fa9b49a787a88d3508e6c
+  - enabled: 1
+    path: Assets/0_Game/Scenes/1_Catacombs/3_Coffins/(Ctacombs)Coffins.unity
+    guid: 4add4f07fd493a643932159709cde1a8
+  - enabled: 0
+    path: Assets/0_Game/Scenes/1_Catacombs/1_Entry/Level2.unity
     guid: 7d6a138dfa649ca4a9ccade66a0765c5
+  - enabled: 0
+    path: Assets/0_Game/Scenes/BakedenemiesTest.unity
+    guid: 604e2a7556430cf4f86a3dcf6364833e
+  - enabled: 0
+    path: Assets/0_Game/Scenes/Levels/Level 3/Level 3.unity
+    guid: 21a95c12c0b600c498a4ecaa78125370
+  - enabled: 0
+    path: Assets/00_Minigames/CheeseChase/CheeseChase.unity
+    guid: 0ee67a3c0b0210841b24d9a6ecd87db3
+  - enabled: 0
+    path: Assets/0_Game/Scenes/MapGenerationTest.unity
+    guid: 8a02bf0b74b473b4593245d168860ada
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.addressableassets: {fileID: 11400000, guid: 1efc677e0bbeaf148887e1328d937e54, type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 14225cbb546ee8f40936a9e167f90e06, type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: def8808571ae85b4ca2b766e785aa9bd, type: 2}
   m_UseUCBPForAssetBundles: 0

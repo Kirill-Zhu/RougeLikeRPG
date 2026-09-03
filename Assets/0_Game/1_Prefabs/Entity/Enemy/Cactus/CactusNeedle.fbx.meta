@@ -3,7 +3,17 @@ guid: 3e70f0c8fcda5534eb10b4c7b471597b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ferro03_Mat
+    second: {fileID: 2100000, guid: 1abc9fc89b8aad24fabad0e01879f713, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gold_01_Mat
+    second: {fileID: 2100000, guid: 6afb9431aacae4f429d3d9b41f9c9177, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -34,7 +44,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 0.01
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1

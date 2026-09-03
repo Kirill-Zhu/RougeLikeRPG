@@ -1,21 +1,44 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AreaWeaponType : WeaponType {
+    public int ExplosionDamageMultiplier = 0;
+    public bool DealDamagePerSec = true;
+    public Transform Origin;
+    public bool DestroyAfterUse = true;
     public float LiveDuration;
-    float timer;
+    public bool FollowCaster;
+    float liveTimer;
+    float tickTimer;
     HashSet<HealthComponent> victimsList = new HashSet<HealthComponent>();
     protected override void OnTriggerEnter(Collider other) {
+
+        //Explosion Damage
+        if (ExplosionDamageMultiplier > 0) {
+            if (other.TryGetComponent<HealthComponent>(out HealthComponent health) && other.CompareTag(interactionTagName)) {
+                foreach (var damageType in baseDamage) {
+                    
+                    DamageType damageTypeTemp = new DamageType(damageType.Value * ExplosionDamageMultiplier);
+                    health.TakeDamage(damageType);
+                }
+            }
+        }
+        //----------------------
+
+        //Damage Per sec
+        if (!DealDamagePerSec) return;
+
         if (interactionTagName == null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
-                foreach (var damageType in damageTypes)
+                foreach (var damageType in baseDamage)
                     victimsList.Add(health);
             }
         }
 
         if (interactionTagName != null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health) && other.CompareTag(interactionTagName)) {
-                foreach (var damageType in damageTypes)
+                foreach (var damageType in baseDamage)
                     victimsList.Add(health);
             }
         }
@@ -24,65 +47,90 @@ public class AreaWeaponType : WeaponType {
     private void OnTriggerExit(Collider other) {
         if (interactionTagName == null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
-                foreach (var damageType in damageTypes)
+                foreach (var damageType in baseDamage)
                     victimsList.Remove(health);
             }
         }
 
         if (interactionTagName != null) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health) && other.CompareTag(interactionTagName)) {
-                foreach (var damageType in damageTypes)
+                foreach (var damageType in baseDamage)
                     victimsList.Remove(health);
             }
         }
+       
+        
     }
 
+    private void OnEnable() {
+        liveTimer = LiveDuration;
+        if (Origin != null)
+            transform.position = Origin.position;
+    }
+    private void OnDisable() {
+        victimsList.Clear();
+    }
 
     private void Update() {
-        LiveDuration -= Time.deltaTime;
-        if (LiveDuration < 0) Destroy(this.gameObject);
-        if (timer < 1) {
-            timer += Time.deltaTime;
+        liveTimer -= Time.deltaTime;
+
+        if (liveTimer < 0) {
+            gameObject.SetActive(false);
+
+        } else if (liveTimer < 0 && DestroyAfterUse) {
+            Destroy(this.gameObject);
+        }
+        //Tick timer
+        if (tickTimer < 1) {
+            tickTimer += Time.deltaTime;
             return;
         }
-        timer = 0;
+        tickTimer = 0;
 
         foreach (var victim in victimsList) {
-            foreach(var damageType in damageTypes)
+            foreach (var damageType in baseDamage)
                 victim.TakeDamage(damageType);
-
-           // Debug.Log($"{victim.name} tooke damae {damageTypes[0].GetType()} {damageTypes[0].Value} ");
+            // Debug.Log($"{victim.name} tooke damae {damageTypes[0].GetType()} {damageTypes[0].Value} ");
         }
+
     }
-    public class AreaWeaponTypeBuilder {
+    public class Builder {
         readonly GameObject prefab;
         Transform origin;
-
-        int damagePerSec = 1;
         DamageType[] damageTypes;
         string interactionTagName;
         float liveDuration = 5;
-        public AreaWeaponTypeBuilder(GameObject prefab) {
+        bool followHero = true;
+        bool destroyAfterUse = false;
+        public Builder(GameObject prefab) {
             this.prefab = prefab;
         }
-        public AreaWeaponTypeBuilder FromOrigin(Transform origin) { this.origin = origin; return this; }
+        public Builder FromOrigin(Transform origin) { this.origin = origin; return this; }
 
-        public AreaWeaponTypeBuilder WithDamageTypes(params DamageType[] damageTypes) {
+        public Builder WithDamageTypes(params DamageType[] damageTypes) {
             this.damageTypes = damageTypes;
             return this;
         }
-        public AreaWeaponTypeBuilder WithInteractionTag(string tagNane) { this.interactionTagName = tagNane; return this; }
-        public AreaWeaponTypeBuilder WithLiveDuration(float duration) {
+        public Builder WithInteractionTag(string tagNane) { this.interactionTagName = tagNane; return this; }
+        public Builder WithLiveDuration(float duration) {
             liveDuration = duration; return this;
         }
+        public Builder FollowCaster(bool value) { this.followHero = value; return this; }
+        public Builder DestroyAfterUse(bool destroy) {
+            this.destroyAfterUse = destroy; return this;
+        }
         public AreaWeaponType Build() {
-            var obj = Instantiate(prefab, origin.position, origin.rotation, null);
+            Transform parent;
+            var obj = Instantiate(prefab, origin.position, origin.rotation, parent = followHero ? origin : null);
 
             var areaWepon = obj.AddComponent<AreaWeaponType>();
             areaWepon.enabled = true;
-            areaWepon.damageTypes = damageTypes;
+            areaWepon.Origin = origin;
+            areaWepon.baseDamage = damageTypes;
             areaWepon.interactionTagName = interactionTagName;
             areaWepon.LiveDuration = liveDuration;
+            areaWepon.FollowCaster = followHero;
+            areaWepon.DestroyAfterUse = destroyAfterUse;
             return areaWepon;
         }
 

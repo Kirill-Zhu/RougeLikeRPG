@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: InGameUI Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: InGameUI
+  m_TableCollectionNameGuidString: 0271312bf8705da47a30b542d319a4e8
+  m_Entries:
+  - m_Id: 14184943616
+    m_Key: Top Stats Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3180737662976
+    m_Key: "Rewive butotn\t\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3347448664064
+    m_Key: Menu button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3456085331968
+    m_Key: "Damage Taken\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3523458437120
+    m_Key: Physics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3588772139008
+    m_Key: "Fire\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3659047702528
+    m_Key: Cold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3756422664192
+    m_Key: Damage Dealt
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 161304473843532050
+  references:
+    version: 2
+    RefIds:
+    - rid: 161304473843532050
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1787829570652

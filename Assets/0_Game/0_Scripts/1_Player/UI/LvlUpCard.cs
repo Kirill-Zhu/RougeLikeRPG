@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
 using System.Reflection;
@@ -13,34 +14,33 @@ public class LvlUpCard : MonoBehaviour, IVistor {
     SkillsStrategy skillStrategy;
     LevelUpStrategy skillLvlUp;
 
-
+    float animationDuration = 1;
     Button button;
     UnityEvent OnChooseCard;
 
     private void Awake() {
-
         button = GetComponent<Button>();
         button.onClick.AddListener(Choose);
+       
     }
     public void Initialize(UnityEvent OnCardsChooseEvent) {
         OnChooseCard = OnCardsChooseEvent;
     }
 
-    public void Rise(SkillsStrategy skillStrategy, LevelUpStrategy skillLvlUp) {
-        //Animation
-        transform.rotation = Quaternion.Euler(0, 90, 0);
-        transform.DORotate(new Vector3(0, 0, 0), 1f, RotateMode.FastBeyond360)
-               .SetEase(Ease.Linear)
-               .SetUpdate(true);
-        //-------------------------
-
+    public async void Rise(SkillsStrategy skillStrategy, LevelUpStrategy skillLvlUp) {
+        button.enabled = false;
         this.skillStrategy = skillStrategy;
         this.icon.sprite = skillStrategy.Icon;
         back.sprite = skillStrategy.BackSprite;
-
-        this.skillLvlUp = skillLvlUp;
         textMesh.text = skillLvlUp.GetDescription();
-
+        this.skillLvlUp = skillLvlUp;
+        //Animation
+        transform.rotation = Quaternion.Euler(0, 90, 0);
+        await transform.DORotate(new Vector3(0, 0, 0), animationDuration, RotateMode.FastBeyond360)
+               .SetEase(Ease.Linear)
+               .SetUpdate(true).ToUniTask();
+        //-------------------------
+        button.enabled = true;
     }
     [ContextMenu("Choose")]
     public void Choose() {
@@ -70,5 +70,10 @@ public class LvlUpCard : MonoBehaviour, IVistor {
         var skill = skillLvlUp as ShootSkillLevelUp;
         shootStrategy = skill.UpgradeSkill(shootStrategy);
         shootStrategy.UpdateValues();
+    }
+    public void Visit(AreaStrategy areaStrategy) { 
+    var skill = skillLvlUp as AreaSkillLevelUp;
+        areaStrategy = skill.UpgradeSkill(areaStrategy);
+        areaStrategy.UpdateValues();
     }
 }

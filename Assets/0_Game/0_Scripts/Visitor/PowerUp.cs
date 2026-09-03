@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Reflection;
 using UnityEngine;
@@ -11,7 +12,9 @@ public abstract class PowerUp : ScriptableObject, IVistor {
 
     public GameObject ModelPrefab;
     public GameObject particle;
-    
+
+
+    public EventReference PickUpSound;
     public void Visit(object o) {
         MethodInfo visitMethod = GetType().GetMethod("Visit", new Type[] { o.GetType() });
         if (visitMethod != null && visitMethod != GetType().GetMethod("Visit", new Type[] { typeof(object) })) {

@@ -1,12 +1,20 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(CharacterController))]
-public class SimpleCahracterController : MonoBehaviour {
+public interface IUpgradable {
+    public void ClearItems();
+    public void AddItem(Item item);
+    public void RefreshItemUpgrades();
+}
+[RequireComponent(typeof(SimpleCahracterController))]
+public class SimpleCahracterController : MonoBehaviour, IVisitable, IUpgradable {
 
     [SerializeField] CharacterControllerData data;
     [SerializeField] InputReader input;
     [SerializeField] CharacterController controller;
     [Header("Move Settings")]
+    float startSpeed;
     [SerializeField] float speed = 4;
     [Header("Jumping settings")]
     [SerializeField] float jumpTime = 1;
@@ -14,26 +22,58 @@ public class SimpleCahracterController : MonoBehaviour {
     [SerializeField] float jumpForce = 10;
     [SerializeField] float landingSpeed = -3f;
     public bool IsJumping { get; private set; }
-    public Vector3 InputDirection=>moveDirection;
+    [Header("Strafe settings")]
+    public bool IsStrafing { get; private set; }
+    public float StrafeDuration { get; private set; } = 1f;
+    float strafeDurationTimer = 1;
+    float strafeCooldown = 1;
+    float strafeCooldownTimer = 0;
+    public Vector3 InputDirection => moveDirection;
     Vector2 moveDirection;
     Camera mainCamera;
+    #region ANDROID
+    DynamicJoystick joystick;
 
-    public void Initialize(CharacterControllerData  data) {
+    //Upgrades 
+    List<MoveItem> itemsList = new List<MoveItem>();
+    public void SetUpAndoridJoystick(DynamicJoystick joystick) {
+        this.joystick = joystick;
+    }
+    #endregion
+    public void Initialize(CharacterControllerData data) {
         this.data = data;
+    }
+    void SubscribeAndroidInputs(PointerEventData eventData) {
+        moveDirection = joystick.Direction;
     }
     private void Awake() {
         mainCamera = Camera.main;
         controller = GetComponent<CharacterController>();
-
-        //Initialize!!!!
+        startSpeed = speed;
     }
     private void Start() {
         //Listen Events
         input.Move += SubscribeMoveInputs;
-        input.Jump += SubscribeJumpingButton;
+        // input.Jump += SubscribeJumpingButton;
+        input.Jump += SubscribeStrafeButton;
         input.EnablePlayerActions();
+
+
+        //Android
+        //joystick.OnMoveJoystick.AddListener((dir) => moveDirection = dir);
+        //joystick.OnMoveJoystick.AddListener((_) => HandleMovement());
+        //joystick.OnPointerUpEvent.AddListener(() => moveDirection = Vector2.zero);
     }
-    void SubscribeJumpingButton(bool isJumpButtonPressd ) {
+    //TestUpdate
+    private void Update() {
+        if (input.Direction == Vector3.zero && joystick != null)
+            moveDirection = joystick.Direction;
+
+        if ((strafeCooldownTimer > 0)) {
+            strafeCooldownTimer -= Time.deltaTime;
+        }
+    }
+    void SubscribeJumpingButton(bool isJumpButtonPressd) {
         switch (isJumpButtonPressd) {
             case true:
                 HandleJumping();
@@ -43,6 +83,22 @@ public class SimpleCahracterController : MonoBehaviour {
                 break;
         }
     }
+    void SubscribeStrafeButton(bool isStrafeButtonPressd) {
+
+        switch (isStrafeButtonPressd) {
+
+            case true: {
+                    HandleStrafe();
+                    break;
+                }
+            case false: {
+                    IsStrafing = false;
+                    break;
+                }
+
+        }
+    }
+
     void SubscribeMoveInputs(Vector2 moveInput) {
         moveDirection = moveInput;
     }
@@ -67,7 +123,7 @@ public class SimpleCahracterController : MonoBehaviour {
         }
     }
     private Vector3 CalculateDirection() {
-        if(mainCamera == null) {mainCamera = Camera.main; } 
+        if (mainCamera == null) { mainCamera = Camera.main; }
         Vector3 cameraForward = mainCamera.transform.forward.WithY(0);
         Vector3 cameraRight = mainCamera.transform.right.WithY(0);
         Vector3 dir = cameraForward * moveDirection.y + cameraRight * moveDirection.x;
@@ -75,6 +131,12 @@ public class SimpleCahracterController : MonoBehaviour {
     }
     public void RefreshJumpTimer() {
         jumpTimer = jumpTime;
+    }
+    public void RefreshStrafeTimer() {
+        strafeDurationTimer = StrafeDuration;
+    }
+    public void RefreshStrafeCooldownTimer() {
+        strafeCooldownTimer = strafeCooldown;
     }
     public void HandleJumping() {
         jumpTimer -= Time.deltaTime;
@@ -95,15 +157,60 @@ public class SimpleCahracterController : MonoBehaviour {
         return controller.isGrounded;
         // return Physics.CheckSphere(transform.position, 1, 1 << LayerMask.NameToLayer("Default"));
     }
+
+    //Strafe
+    public void HandleStrafe() {
+        //Cooldown
+        if (strafeCooldownTimer > 0) {
+            IsStrafing = false;
+            return;
+        }
+        //StrafeDuration
+        IsStrafing = true;
+        strafeDurationTimer -= Time.deltaTime;
+        Debug.Log("Handle Strafe");
+        if (strafeDurationTimer <= 0) {
+            IsStrafing = false;
+            return;
+        }
+       
+        Move(CalculateDirection(), 0, 2);
+    }
     private void OnDrawGizmosSelected() {
         //Ground Check
         if (Grounded()) {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(transform.position + new Vector3(0,-0.5f, 0), 0.1f);
+            Gizmos.DrawSphere(transform.position + new Vector3(0, -0.5f, 0), 0.1f);
         }
     }
+
     private void OnDestroy() {
         input.Move -= SubscribeMoveInputs;
-        input.Jump -= SubscribeJumpingButton;
+        input.Jump -= SubscribeStrafeButton;
+    }
+    #region UPGRADE STRATEGY
+
+    public void ClearItems() {
+        itemsList.Clear();
+    }
+    public void AddItem(Item item) {
+        if (item is MoveItem)
+            itemsList.Add(item as MoveItem);
+
+    }
+    public void RefreshItemUpgrades() {
+        speed = startSpeed;
+        foreach (MoveItem item in itemsList) {
+            speed += item.AddMoveSpeed;
+        }
+    }
+
+    #endregion
+    public void Accept(IVistor visitor) {
+        visitor.Visit(this);
+    }
+
+    internal void AddMoveSpeed(float moveSpeedBonus) {
+        speed += moveSpeedBonus;
     }
 }

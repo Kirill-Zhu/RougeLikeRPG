@@ -3,18 +3,27 @@ using UnityEngine;
 
 class Mele : WeaponType {
     protected override void OnTriggerEnter(Collider other) {
-
+        totalDamage = new DamageType[] { new PhysicsDamageType(0), new FireDamageType(0), new ColdDamageType(0) };
         if (interactionTagName == null) {
-            if (other.TryGetComponent<HealthComponent>(out HealthComponent health))
-                foreach (var damageType in damageTypes)
-                    health.TakeDamage(damageType);
+            if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
+               DoDamage(health);
+            }
         }
 
         if (interactionTagName != null && other.CompareTag(interactionTagName)) {
             if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
-                foreach (var damageType in damageTypes)
-                    health.TakeDamage(damageType);
+                DoDamage(health);
             }
+            //if (other.TryGetComponent<HealthComponent>(out HealthComponent health)) {
+            //    foreach (var damageType in damageTypes)
+            //        health.TakeDamage(damageType);
+
+            //    //Bonus damage
+            //    foreach (var bonusDamage in bonusDamageTypes) {
+            //        health.TakeDamage(bonusDamage);
+            //        Debug.Log($"Bonus damage is {bonusDamage.Value}");
+            //    }
+            //}
             if (pushPower != 0 && other.TryGetComponent<Rigidbody>(out var rb))
                 rb.linearVelocity = (rb.transform.position - transform.position) * pushPower;
         }
@@ -45,7 +54,7 @@ class Mele : WeaponType {
             var obj = Instantiate(prefab, origin.position + offset, origin.rotation, origin);
             var mele = obj.AddComponent<Mele>();
             mele.enabled = true;
-            mele.damageTypes = damageTypes;
+            mele.baseDamage = damageTypes;
             mele.pushPower = pushPower;
             mele.interactionTagName = interactionTagName;
             // Debug.Log($"new weapom has physics Damage {damageTypes[0].Value}");

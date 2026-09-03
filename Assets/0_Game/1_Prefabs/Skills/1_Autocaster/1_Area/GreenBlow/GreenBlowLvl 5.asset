@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7740aec0b8bc601469f4030db66b4ee9, type: 3}
+  m_Name: GreenBlowLvl 5
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3137097503443173940, guid: 09da3c117604e784e83be1ef3d512fd3, type: 3}
+  icon: {fileID: -308301308, guid: 80fa9dd1dad5ea44db923c72239beb33, type: 3}
+  parentToHero: 1
+  ParticlePrefabArray:
+  - {fileID: 6361997728236094490, guid: fd25cbdb7c54fa4478d443fd2bea4ef1, type: 3}
+  nextLevelStrategy: {fileID: 11400000, guid: 2b3ef6533ef882d43b3d2e790287620f, type: 2}
+  DamageTypesEnum: 1
+  PhysicsDamage: 11
+  FireDamage: 0
+  ColdDamage: 0
+  PushPower: 5
+  coolDown: 5
+  OnCastSound:
+    Guid:
+      Data1: 1637162704
+      Data2: 1103498194
+      Data3: 461189253
+      Data4: 913665740
+    Path: event:/Skills/Autocaster/Green Blow

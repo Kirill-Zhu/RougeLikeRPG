@@ -1,10 +1,12 @@
 using UnityEngine;
 [CreateAssetMenu(menuName = "Visitor/SkillLVlUp", fileName = "New Skill Lvl Up")]
-public class SkillPowerUp : PowerUp {
+public class SkillPowerUp : PowerUp, IItem {
+    [SerializeField] string itemName;
     [Header("Additional Damage Types")]
     [SerializeField] DamageTypesEnum DamageTypesEnum;
-    [SerializeField] DamageType[] damageTypesArray;
-
+    DamageType[] meleDamageTypesArray = new DamageType[3];
+    DamageType[] shieldDamageTypesArray = new DamageType[3];
+    DamageType[] shootDamageTypesArray = new DamageType[3];
 
     [Header("Mele strategy settings")]
     public int MelePhysicsDamage;
@@ -20,33 +22,50 @@ public class SkillPowerUp : PowerUp {
     public int ShootPhysicsDamage;
     public int ShootFireDamage;
     public int ShootColdDamage;
+    [Header("Move Controller")]
+    public float moveSpeedBonus = 0;
+    [Header("Healt Component")]
+    public int maxHeathBonus = 0;
+    public int physicsDefenceBonus  = 0;  
+    public int fireDefenceBonus = 0;    
+    public int coldDefenceBonus = 0;    
+    //IItem
+    public Sprite Icon { get => Label; set { } }
+    public string Description { get => "Test"; set { } }
 
-
-    private void Awake() {
-        damageTypesArray = GetDamageTypes(MelePhysicsDamage, MeleFireDamage, MeleColdDamage);
-    }
     public void Visit(HeroBattleController battleController) {
-        battleController.PickUpPowerUp(Label, Descritpion);
+        battleController.PickUpPowerUp(Label, Descritpion, itemName);
     }
     public void Visit(MeleStrategy meleStrategy) {
-        meleStrategy.AddOrModifyDamageType(damageTypesArray);
+        meleDamageTypesArray = GetDamageTypes(MelePhysicsDamage, MeleFireDamage, MeleColdDamage);
+        meleStrategy.AddOrModifyDamageType(meleDamageTypesArray);
         meleStrategy.UpdateValues();
     }
     public void Visit(ShieldStartegy shieldStrategy) {
-        shieldStrategy.AddOrModifyDamageType(damageTypesArray);
+        shieldDamageTypesArray = GetDamageTypes(ShieldPhysicsDamage, ShieldFireDamage, ShieldColdDamage);
+        shieldStrategy.AddOrModifyDamageType(shieldDamageTypesArray);
         shieldStrategy.UpdateValues();
     }
     public void Visit(ShootStrategy shootStrategy) {
-        shootStrategy.AddOrModifyDamageType(damageTypesArray);
+        shootDamageTypesArray = GetDamageTypes(ShootPhysicsDamage, ShootFireDamage, ShootColdDamage);
+        shootStrategy.AddOrModifyDamageType(shootDamageTypesArray);
         shootStrategy.UpdateValues();
     }
-
+    public void Visit(SimpleCahracterController heroMoveController) {
+        heroMoveController.AddMoveSpeed(moveSpeedBonus);
+    }
+    public void Visit(HealthComponent healthComponent) {
+        healthComponent.AddMaxHealth(maxHeathBonus);
+        healthComponent.AddPhysicsDefence(physicsDefenceBonus);
+        healthComponent.AddFireDefenceBouns(fireDefenceBonus);
+        healthComponent.AddColdDefenceBonus(coldDefenceBonus);
+    }
     protected virtual DamageType[] GetDamageTypes(int PhysicsDamage, int FireDamage, int ColdDamage) => DamageTypesEnum switch {
-        DamageTypesEnum.Physics => new DamageType[] { new PhysicsDamageType(PhysicsDamage) },
-        DamageTypesEnum.Fire => new DamageType[] { new FireDamageType(FireDamage) },
-        DamageTypesEnum.Cold => new DamageType[] { new ColdDamageType(ColdDamage) },
-        DamageTypesEnum.Physics | DamageTypesEnum.Fire => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(FireDamage) },
-        DamageTypesEnum.Physics | DamageTypesEnum.Cold => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(ColdDamage) },
+        DamageTypesEnum.Physics => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(0), new ColdDamageType(0) },
+        DamageTypesEnum.Fire => new DamageType[] { new PhysicsDamageType(0), new FireDamageType(FireDamage), new ColdDamageType(0) },
+        DamageTypesEnum.Cold => new DamageType[] { new PhysicsDamageType(0), new FireDamageType(0), new ColdDamageType(ColdDamage) },
+        DamageTypesEnum.Physics | DamageTypesEnum.Fire => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(FireDamage), new ColdDamageType(0) },
+        DamageTypesEnum.Physics | DamageTypesEnum.Cold => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(0), new ColdDamageType(ColdDamage) },
 
         _ => new DamageType[] { new PhysicsDamageType(PhysicsDamage), new FireDamageType(FireDamage), new ColdDamageType(ColdDamage) },
     };

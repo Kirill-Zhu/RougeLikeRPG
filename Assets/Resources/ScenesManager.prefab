@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60bcb21087b0d649ac2d2157b21846e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuSceneID: 1
-  InGameUISceneID: 2
-  TestLevleSceneID: 3
+  storyTaleSceneID: 1
+  mainMenuSceneID: 2
+  InGameUISceneID: 3
+  TestLevleSceneID: 4
